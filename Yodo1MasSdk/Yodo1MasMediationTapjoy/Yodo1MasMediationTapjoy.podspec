@@ -42,6 +42,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h's
   # s.frameworks = 'UIKit'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'TapjoySDK'#, '12.7.1'
+  s.dependency 'TapjoySDK'#,'12.7.1'
   
 end

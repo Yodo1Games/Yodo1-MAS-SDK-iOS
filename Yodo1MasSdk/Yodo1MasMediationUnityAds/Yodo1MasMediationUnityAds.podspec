@@ -43,6 +43,6 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit'
   
   s.dependency 'Yodo1MasCore'
-  s.dependency 'UnityAds' #, '3.5.1'
+  s.dependency 'UnityAds'#,'3.5.1'
   
 end

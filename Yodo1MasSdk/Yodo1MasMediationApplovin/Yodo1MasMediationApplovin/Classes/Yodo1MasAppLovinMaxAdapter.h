@@ -5,11 +5,11 @@
 //  Created by ZhouYuzhen on 2020/12/3.
 //
 
-#import "Yodo1MasAdapterBase.h"
+#import "Yodo1MasAppLovinAdapter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Yodo1MasAppLovinMaxAdapter : Yodo1MasAdapterBase
+@interface Yodo1MasAppLovinMaxAdapter : Yodo1MasAppLovinAdapter
 
 @end
 

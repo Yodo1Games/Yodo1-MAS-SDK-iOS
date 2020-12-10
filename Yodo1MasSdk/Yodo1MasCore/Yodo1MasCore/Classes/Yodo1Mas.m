@@ -54,61 +54,61 @@
             weakSelf.masInitConfig = data.mas_init_config;
             weakSelf.masNetworkConfig = data.ad_network_config;
             if (data.mas_init_config && data.ad_network_config) {
-                [weakSelf doInit:data.mas_init_config];
+                NSLog(@"获取广告数据成功 - %@", res.data);
+                [weakSelf doInitAdapter];
+                [weakSelf doInitAdvert];
             } else {
                 if (fail) {
-                    fail([NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : @"获取配置失败"}]);
+                    fail([NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : @"获取广告配置失败"}]);
                 }
             }
         } else {
             if (fail) {
-                fail([NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : @"获取配置失败"}]);
+                fail([NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : @"获取广告配置失败 - 解释配置数据失败"}]);
             }
+            NSLog(@"获取广告配置失败 - 解释配置数据失败");
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (fail) {
             fail(error);
         }
+        NSLog(@"获取广告配置失败 - %@", error.localizedDescription);
     }];
 }
 
-- (void)doInit:(Yodo1MasInitConfig *)config {
+- (void)doInitAdapter {
     NSDictionary *mediations = @{
-        @"AdMob" : @"Yodo1MasAdMobMaxAdapter",
-        @"AppLovin" : @"Yodo1MasAppLovinMaxAdapter",
-        @"IronSource" : @"Yodo1MasIronSourceMaxAdapter"
+        @"ADMOB_MEDIATION" : @"Yodo1MasAdMobMaxAdapter",
+        @"APPLOVIN_MEDIATION" : @"Yodo1MasAppLovinMaxAdapter",
+        @"IRONSOURCE_MEDIATION" : @"Yodo1MasIronSourceMaxAdapter"
     };
     
     NSDictionary *networks = @{
-        @"AdMob" : @"Yodo1MasAdMobAdapter",
-        @"AppLovin" : @"Yodo1MasAppLovinAdapter",
-        @"Facebook" : @"Yodo1MasFacebookAdapter",
-        @"InMobi" : @"Yodo1MasInMobiAdapter",
-        @"IronSource" : @"Yodo1MasIronSourceAdapter",
-        @"Tapjoy" : @"Yodo1MasTapjoyAdapter",
-        @"UnityAds" : @"Yodo1MasUnityAdsAdapter",
-        @"Vungle" : @"Yodo1MasVungleAdapter"
+        @"ADMOB_NETWORK" : @"Yodo1MasAdMobAdapter",
+        @"APPLOVIN_NETWORK" : @"Yodo1MasAppLovinAdapter",
+        @"FACEBOOK_NETWORK" : @"Yodo1MasFacebookAdapter",
+        @"INMOBI_NETWORK" : @"Yodo1MasInMobiAdapter",
+        @"IRONSOURCE_NETWORK" : @"Yodo1MasIronSourceAdapter",
+        @"TAPJOY_NETWORK" : @"Yodo1MasTapjoyAdapter",
+        @"UNITYADS_NETWORK" : @"Yodo1MasUnityAdsAdapter",
+        @"VUNGLE_NETWORK" : @"Yodo1MasVungleAdapter"
     };
     
-    if (config.mediation_list != nil && config.mediation_list.count > 0) {
-        for (Yodo1MasInitMediationInfo *info in config.mediation_list) {
+    if (self.masInitConfig.mediation_list != nil && self.masInitConfig.mediation_list.count > 0) {
+        for (Yodo1MasInitMediationInfo *info in self.masInitConfig.mediation_list) {
             NSString *key = info.name;
             NSString *value = mediations[key];
             [self doInitAdapter:key value:value appId:info.app_id appKey:info.app_key];
         }
     }
     
-    if (config.ad_network_list != nil && config.ad_network_list.count > 0) {
-        for (Yodo1MasInitNetworkInfo *info in config.ad_network_list) {
+    if (self.masInitConfig.ad_network_list != nil && self.masInitConfig.ad_network_list.count > 0) {
+        for (Yodo1MasInitNetworkInfo *info in self.masInitConfig.ad_network_list) {
             NSString *key = info.ad_network_name;
             NSString *value = networks[key];
             [self doInitAdapter:key value:value appId:info.ad_network_app_id appKey:info.ad_network_app_key];
         }
     }
-    
-    [self loadRewardAdvert];
-    [self loadInterstitialAdvert];
-    [self loadBannerAdvert];
 }
 
 - (void)doInitAdapter:(NSString *)key value:(NSString *)value appId:(NSString *)appId appKey:(NSString *)appKey {
@@ -116,66 +116,234 @@
         Class c = NSClassFromString(value);
         NSObject *o = c != nil ? [[c alloc] init] : nil;
         if (o != nil && [o isKindOfClass:[Yodo1MasAdapterBase class]]) {
-            
-            __weak __typeof(self)weakSelf = self;
-            
             Yodo1MasAdapterConfig *config = [[Yodo1MasAdapterConfig alloc] init];
             config.name = key;
             config.appId = appId;
             config.appKey = appKey;
-            __weak Yodo1MasAdapterBase *adapter = (Yodo1MasAdapterBase *)o;
+            Yodo1MasAdapterBase *adapter = (Yodo1MasAdapterBase *)o;
+            self.mediations[key] = adapter;
             [adapter initWithConfig:config successful:^(NSString *advertCode) {
-                weakSelf.mediations[appId] = adapter;
-                NSLog(@"Mediation初始化成功 - %@:%@", key, value);
+                NSLog(@"Adapter初始化成功 - %@:%@", key, value);
             } fail:^(NSString *advertCode, NSError *error) {
-                NSLog(@"Mediation初始化成功 - %@:%@, %@", key, value, error.description);
+                NSLog(@"Adapter初始化失败 - %@:%@, %@", key, value, error.description);
             }];
         } else {
             if (o == nil) {
-                NSLog(@"未找到指定Mediation - %@", value);
+                NSLog(@"未集成相应Adapter -  %@", value);
             } else {
-                NSLog(@"Mediation未继承Yodo1MasAdapterBase");
+                NSLog(@"Adapter未继承Yodo1MasAdapterBase - %@", key);
             }
         }
     } else {
-        NSLog(@"未找到指定Mediation - %@", value);
+        NSLog(@"初始化Adapter - 未找到指定Adapter,SDK版本过低: - %@", key);
     }
 }
 
+- (void)doInitAdvert {
+    if (self.masNetworkConfig.reward != nil) {
+        [self doInitAdvert:self.masNetworkConfig.reward type:Yodo1MasAdvertTypeReward];
+    }
+    if (self.masNetworkConfig.interstitial != nil) {
+        [self doInitAdvert:self.masNetworkConfig.interstitial type:Yodo1MasAdvertTypeInterstitial];
+    }
+    if (self.masNetworkConfig.banner != nil) {
+        [self doInitAdvert:self.masNetworkConfig.banner type:Yodo1MasAdvertTypeBanner];
+    }
+}
+
+- (void)doInitAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type {
+    if (config.mediation_list != nil && config.mediation_list.count > 0) {
+        for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
+            NSString *mediationName = mediation.mediation_name;
+            NSString *unitId = mediation.ad_unit_id;
+            if (mediationName != nil && unitId != nil && mediation.mediation_active) {
+                Yodo1MasAdapterBase *adapter = self.mediations[mediationName];
+                if (adapter != nil) {
+                    switch (type) {
+                        case Yodo1MasAdvertTypeReward: {
+                            adapter.rewardPlacementId = unitId;
+                            break;
+                        }
+                        case Yodo1MasAdvertTypeInterstitial: {
+                            adapter.interstitialPlacementId = unitId;
+                            break;
+                        }
+                        case Yodo1MasAdvertTypeBanner: {
+                            adapter.bannerPlacementId = unitId;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+- (BOOL)isAdvertLoaded:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type {
+    BOOL isLoaded = NO;
+    if (config != nil) {
+        if (config.mediation_list != nil && config.mediation_list.count > 0) {
+            for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
+                NSString *name = mediation.mediation_name;
+                if (name != nil && name.length > 0 && mediation.mediation_active) {
+                    Yodo1MasAdapterBase *adapter = self.mediations[name];
+                    if (adapter != nil) {
+                        isLoaded = [adapter isAdvertLoaded:type];
+                    }
+                }
+            }
+        }
+        
+        if (!isLoaded && config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
+            for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
+                NSString *name = waterfall.ad_network_name;
+                if (name != nil && name.length > 0) {
+                    Yodo1MasAdapterBase *adapter = self.mediations[name];
+                    if (adapter != nil) {
+                        isLoaded = [adapter isAdvertLoaded:type];
+                    }
+                }
+                if (isLoaded) break;
+            }
+        }
+    }
+    return isLoaded;
+}
+
+- (void)loadAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type {
+    if (config != nil) {
+        if (config.mediation_list != nil && config.mediation_list.count > 0) {
+            for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
+                NSString *name = mediation.mediation_name;
+                if (name != nil && name.length > 0) {
+                    Yodo1MasAdapterBase *adapter = self.mediations[name];
+                    if (adapter != nil) {
+                        [adapter loadAdvert:type];
+                    }
+                }
+            }
+        }
+        
+        if (config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
+            for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
+                NSString *name = waterfall.ad_network_name;
+                if (name != nil && name.length > 0) {
+                    Yodo1MasAdapterBase *adapter = self.mediations[name];
+                    if (adapter != nil) {
+                        [adapter loadAdvert:type];
+                    }
+                }
+            }
+        }
+    }
+}
+
+- (NSMutableArray<Yodo1MasAdapterBase *> *)getAdapters:(Yodo1MasNetworkAdvert *)config {
+    NSMutableArray<Yodo1MasAdapterBase *> *adapters = [NSMutableArray array];
+    if (config.mediation_list != nil && config.mediation_list.count > 0) {
+        for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
+            NSString *name = mediation.mediation_name;
+            if (name != nil && name.length > 0) {
+                Yodo1MasAdapterBase *adapter = self.mediations[name];
+                if (adapter != nil) {
+                    [adapters addObject:adapter];
+                }
+            }
+        }
+    }
+    
+    if (config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
+        for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
+            NSString *name = waterfall.ad_network_name;
+            if (name != nil && name.length > 0) {
+                Yodo1MasAdapterBase *adapter = self.mediations[name];
+                if (adapter != nil) {
+                    [adapters addObject:adapter];
+                }
+            }
+        }
+    }
+    return adapters;
+}
+
+- (void)showAdvert:(UIViewController *)controller config:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
+    if (config != nil) {
+        NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
+        __weak Yodo1MasAdvertCallback block = ^(Yodo1MasAdvertEvent event, NSError * _Nonnull error) {
+            switch (event) {
+                case Yodo1MasAdvertEventError: {
+                    [adapters removeObjectAtIndex:0];
+                    if (adapters.count > 0) {
+                        [adapters.firstObject showAdvert:controller type:type callback:block];
+                    } else {
+                        if (callback != nil) {
+                            callback(event, error);
+                        }
+                    }
+                    break;
+                }
+                default: {
+                    if (callback != nil) {
+                        callback(event, error);
+                    }
+                    break;
+                }
+            }
+        };
+        if (adapters.count > 0) {
+            [adapters.firstObject showAdvert:controller type:type callback:block];
+        } else {
+            if (callback != nil) {
+                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+            }
+        }
+    } else {
+        if (callback != nil) {
+            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        }
+    }
+}
+
+#pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded {
-    return NO;
+    return [self isAdvertLoaded:self.masNetworkConfig.reward type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)loadRewardAdvert {
-    
+    [self loadAdvert:self.masNetworkConfig.reward type:Yodo1MasAdvertTypeReward];
 }
 
-- (void)showRewardAdvert:(id<Yodo1MasAdvertRewardDelegate>)delegate {
-    
+- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.reward : nil;
+    [self showAdvert:controller config:config type:Yodo1MasAdvertTypeReward callback:callback];
 }
 
+#pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded {
-    return NO;
+    return [self isAdvertLoaded:self.masNetworkConfig.interstitial type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)loadInterstitialAdvert {
-    
+    [self loadAdvert:self.masNetworkConfig.interstitial type:Yodo1MasAdvertTypeInterstitial];
 }
 
-- (void)showInterstitialAdvert:(id<Yodo1MasAdvertInterstitialDelegate>)delegate {
-    
+- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.interstitial : nil;
+    [self showAdvert:controller config:config type:Yodo1MasAdvertTypeReward callback:callback];
 }
 
+#pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
-    return NO;
+    return [self isAdvertLoaded:self.masNetworkConfig.banner type:Yodo1MasAdvertTypeBanner];
 }
 
 - (void)loadBannerAdvert {
-    
+    [self loadAdvert:self.masNetworkConfig.banner type:Yodo1MasAdvertTypeBanner];
 }
 
-- (void)showBannerAdvert:(id<Yodo1MasAdvertBannerDelegate>)delegate {
-    
+- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.banner : nil;
+    [self showAdvert:controller config:config type:Yodo1MasAdvertTypeReward callback:callback];
 }
 
 @end

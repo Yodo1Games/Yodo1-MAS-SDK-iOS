@@ -6,6 +6,7 @@
 //
 
 #import "MainViewController.h"
+#import <Yodo1MasCore/Yodo1Mas.h>
 
 @interface MainViewController ()<UITextFieldDelegate>
 
@@ -26,8 +27,13 @@
     if (appId == nil || appId.length == 0) {
         return;
     }
-    
-    
+    __weak __typeof(self)weakSelf = self;
+    [[Yodo1Mas sharedInstance] initWithAppId:appId successful:^{
+        UIViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DemoViewController"];
+        [weakSelf showViewController:controller sender:nil];
+    } fail:^(NSError * _Nonnull error) {
+        NSLog(@"初始化错误 - %@", error.localizedDescription);
+    }];
 }
 
 #pragma mark - UITextFieldDelegate

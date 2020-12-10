@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Yodo1Mas.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,11 +23,45 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
 @interface Yodo1MasAdapterBase : NSObject
 
-- (NSString *)getAdvertCode;
-- (NSString *)getSDKVersion;
-- (NSString *)getMediationVersion;
+@property (nonatomic, copy, readonly) NSString *advertCode;
+@property (nonatomic, copy, readonly) NSString *sdkVersion;
+@property (nonatomic, copy, readonly) NSString *mediationVersion;
+
+@property (nonatomic, copy) NSString *rewardPlacementId;
+@property (nonatomic, copy) NSString *interstitialPlacementId;
+@property (nonatomic, copy) NSString *bannerPlacementId;
+
+@property (nonatomic, copy) Yodo1MasAdapterInitSuccessful initSuccessfulCallback;
+@property (nonatomic, copy) Yodo1MasAdapterInitFail initFailCallback;
+@property (nonatomic, copy) Yodo1MasAdvertCallback rewardCallback;
+@property (nonatomic, copy) Yodo1MasAdvertCallback interstitialCallback;
+@property (nonatomic, copy) Yodo1MasAdvertCallback bannerCallback;
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
+- (BOOL)isInitSDK;
+
+- (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type;
+- (void)loadAdvert:(Yodo1MasAdvertType)type;
+- (void)showAdvert:(UIViewController *)controller type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
+
+#pragma mark - 激励广告
+- (BOOL)isRewardAdvertLoaded;
+- (void)loadRewardAdvert;
+- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+
+#pragma mark - 插屏广告
+- (BOOL)isInterstitialAdvertLoaded;
+- (void)loadInterstitialAdvert;
+- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+
+#pragma mark - 插屏广告
+- (BOOL)isBannerAdvertLoaded;
+- (void)loadBannerAdvert;
+- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)dismissBannerAdvert;
+
++ (UIWindow *)getTopWindow;
++ (UIViewController *)getTopViewController;
 
 @end
 

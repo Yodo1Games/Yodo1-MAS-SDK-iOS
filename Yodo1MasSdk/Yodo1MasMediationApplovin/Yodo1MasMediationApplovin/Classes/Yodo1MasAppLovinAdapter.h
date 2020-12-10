@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Yodo1MasAppLovinAdapter : Yodo1MasAdapterBase
 
+@property (nonatomic, assign, readonly) BOOL isMax;
+
 @end
 
 NS_ASSUME_NONNULL_END

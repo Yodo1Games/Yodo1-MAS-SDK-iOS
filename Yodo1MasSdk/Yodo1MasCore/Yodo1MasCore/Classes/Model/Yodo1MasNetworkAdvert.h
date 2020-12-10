@@ -6,15 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Yodo1MasNetworkMediation.h"
 #import "Yodo1MasNetworkWaterfall.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Yodo1MasNetworkAdvert : NSObject
 
-@property(nonatomic, copy) NSString *mediation;
-@property(nonatomic, copy) NSString *mediation_unit_id;
-@property(nonatomic, assign) BOOL mediation_active;
+@property(nonatomic, strong) NSArray<Yodo1MasNetworkMediation *> *mediation_list;
 @property(nonatomic, strong) NSArray<Yodo1MasNetworkWaterfall *> *fallback_waterfall;
 
 @end

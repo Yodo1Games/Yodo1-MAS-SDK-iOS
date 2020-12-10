@@ -9,4 +9,12 @@
 
 @implementation Yodo1MasAdMobMaxAdapter
 
+- (NSString *)advertCode {
+    return @"AdMobMax";
+}
+
+- (BOOL)isMax {
+    return YES;
+}
+
 @end

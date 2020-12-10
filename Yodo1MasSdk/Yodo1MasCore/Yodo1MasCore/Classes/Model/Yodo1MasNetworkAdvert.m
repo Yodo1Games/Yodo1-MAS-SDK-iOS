@@ -10,7 +10,8 @@
 @implementation Yodo1MasNetworkAdvert
 
 + (nullable NSDictionary<NSString *, id> *)modelContainerPropertyGenericClass {
-    return @{@"fallback_waterfall" : [Yodo1MasNetworkWaterfall class]};
+    return @{@"mediation_list" : [Yodo1MasNetworkMediation class],
+             @"fallback_waterfall" : [Yodo1MasNetworkWaterfall class]};
 }
 
 @end

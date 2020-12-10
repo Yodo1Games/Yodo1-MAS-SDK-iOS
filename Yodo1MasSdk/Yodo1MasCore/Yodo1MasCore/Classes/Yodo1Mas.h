@@ -12,29 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^Yodo1MasInitSuccessful)();
 typedef void (^Yodo1MasInitFail)(NSError *);
 
-@protocol Yodo1MasAdvertDelegate <NSObject>
+typedef enum {
+    Yodo1MasAdvertTypeReward,
+    Yodo1MasAdvertTypeInterstitial,
+    Yodo1MasAdvertTypeBanner
+} Yodo1MasAdvertType;
 
-@optional
-- (void)onAdvertShowSuccessful;
-- (void)onAdvertShowFail;
-- (void)onAdvertClicked;
+typedef enum {
+    Yodo1MasAdvertEventOpened,
+    Yodo1MasAdvertEventClosed,
+    Yodo1MasAdvertEventError,
+    Yodo1MasAdvertEventRewardEarned
+} Yodo1MasAdvertEvent;
 
-@end
-
-@protocol Yodo1MasAdvertRewardDelegate<NSObject, Yodo1MasAdvertDelegate>
-
-@optional
-- (void)onAdvertRewardEarned;
-
-@end
-
-@protocol Yodo1MasAdvertInterstitialDelegate <NSObject, Yodo1MasAdvertDelegate>
-
-@end
-
-@protocol Yodo1MasAdvertBannerDelegate <NSObject, Yodo1MasAdvertDelegate>
-
-@end
+typedef void(^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent, NSError *);
 
 @interface Yodo1Mas : NSObject
 
@@ -49,13 +40,13 @@ typedef void (^Yodo1MasInitFail)(NSError *);
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;
 
 - (BOOL)isRewardAdvertLoaded;
-- (void)showRewardAdvert:(id<Yodo1MasAdvertRewardDelegate>)delegate;
+- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
 
 - (BOOL)isInterstitialAdvertLoaded;
-- (void)showInterstitialAdvert:(id<Yodo1MasAdvertInterstitialDelegate>)delegate;
+- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
 
 - (BOOL)isBannerAdvertLoaded;
-- (void)showBannerAdvert:(id<Yodo1MasAdvertBannerDelegate>)delegate;
+- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
 
 @end
 
