@@ -42,17 +42,28 @@
             if (successful != nil) {
                 successful(weakSelf.advertCode);
             }
+            [weakSelf updatePrivacy];
+            [weakSelf loadRewardAdvert];
+            [weakSelf loadInterstitialAdvert];
+            [weakSelf loadBannerAdvert];
         }];
     } else {
         if (successful != nil) {
             successful(self.advertCode);
         }
     }
-    
 }
 
 - (BOOL)isInitSDK {
     return self.sdkInit;
+}
+
+- (void)updatePrivacy {
+    if ([Yodo1Mas sharedInstance].isGDPRUserConsent) {
+        [IMSdk updateGDPRConsent:@{IM_GDPR_CONSENT_AVAILABLE : @"true", @"gdpr" : @1}];
+    } else {
+        [IMSdk updateGDPRConsent:@{IM_GDPR_CONSENT_AVAILABLE : @"false", @"gdpr" : @0}];
+    }
 }
 
 #pragma mark - 激励广告
@@ -75,26 +86,12 @@
 
 - (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showRewardAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isRewardAdvertLoaded]) {
-            if (controller == nil) {
-                controller == [Yodo1MasInMobiAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [self.rewardAd showFromViewController:controller];
-            } else {
-                if (callback != nil) {
-                    callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-                }
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        if (controller == nil) {
+            controller == [Yodo1MasInMobiAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [self.rewardAd showFromViewController:controller];
         }
     }
 }
@@ -119,26 +116,12 @@
 
 - (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showInterstitialAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isInterstitialAdvertLoaded]) {
-            if (controller == nil) {
-                controller == [Yodo1MasInMobiAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [self.interstitialAd showFromViewController:controller];
-            } else {
-                if (callback != nil) {
-                    callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-                }
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        if (controller == nil) {
+            controller == [Yodo1MasInMobiAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [self.interstitialAd showFromViewController:controller];
         }
     }
 }
@@ -176,25 +159,18 @@
 
 - (void)interstitialDidPresent:(IMInterstitial*)interstitial {
     if (interstitial == self.rewardAd) {
-        if (self.rewardCallback != nil) {
-            self.rewardCallback(Yodo1MasAdvertEventOpened, nil);
-        }
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
     } else {
-        if (self.interstitialCallback != nil) {
-            self.interstitialCallback(Yodo1MasAdvertEventOpened, nil);
-        }
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
     }
 }
 
-- (void)interstitial:(IMInterstitial*)interstitial didFailToPresentWithError:(IMRequestStatus*)error {
+- (void)interstitial:(IMInterstitial*)interstitial didFailToPresentWithError:(IMRequestStatus*)inMobiError {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:inMobiError.localizedDescription];
     if (interstitial == self.rewardAd) {
-        if (self.rewardCallback != nil) {
-            self.rewardCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-        }
+        [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
     } else {
-        if (self.interstitialCallback != nil) {
-            self.interstitialCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-        }
+        [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
     }
 }
 
@@ -204,13 +180,9 @@
 
 - (void)interstitialDidDismiss:(IMInterstitial*)interstitial {
     if (interstitial == self.rewardAd) {
-        if (self.rewardCallback != nil) {
-            self.rewardCallback(Yodo1MasAdvertEventClosed, nil);
-        }
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
     } else {
-        if (self.interstitialCallback != nil) {
-            self.interstitialCallback(Yodo1MasAdvertEventClosed, nil);
-        }
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
     }
 }
 
@@ -220,9 +192,7 @@
 
 - (void)interstitial:(IMInterstitial*)interstitial rewardActionCompletedWithRewards:(NSDictionary*)rewards {
     if (interstitial == self.rewardAd) {
-        if (self.rewardCallback != nil) {
-            self.rewardCallback(Yodo1MasAdvertEventRewardEarned, nil);
-        }
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
     }
 }
 

@@ -35,10 +35,19 @@
     if (successful != nil) {
         successful(self.advertCode);
     }
+    
+    [self updatePrivacy];
+    [self loadRewardAdvert];
+    [self loadInterstitialAdvert];
+    [self loadBannerAdvert];
 }
 
 - (BOOL)isInitSDK {
     return YES;
+}
+
+- (void)updatePrivacy {
+    [FBAdSettings setMixedAudience:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
 }
 
 #pragma mark - 激励广告
@@ -60,26 +69,12 @@
 
 - (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showRewardAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isRewardAdvertLoaded]) {
-            if (controller == nil) {
-                controller == [Yodo1MasFacebookAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [self.rewardAd showAdFromRootViewController:controller animated:YES];
-            } else {
-                if (callback != nil) {
-                    callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-                }
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        if (controller == nil) {
+            controller == [Yodo1MasFacebookAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [self.rewardAd showAdFromRootViewController:controller animated:YES];
         }
     }
 }
@@ -90,16 +85,13 @@
 }
 
 - (void)rewardedVideoAdDidClose:(FBRewardedVideoAd *)rewardedVideoAd {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
     [self loadRewardAdvert];
 }
 
-- (void)rewardedVideoAd:(FBRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-    }
+- (void)rewardedVideoAd:(FBRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)facebookError {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:facebookError.localizedDescription];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
     [self loadRewardAdvert];
 }
 
@@ -108,15 +100,11 @@
 }
 
 - (void)rewardedVideoAdWillLogImpression:(FBRewardedVideoAd *)rewardedVideoAd {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(FBRewardedVideoAd *)rewardedVideoAd {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventRewardEarned, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 插屏广告
@@ -139,26 +127,12 @@
 
 - (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showInterstitialAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isInterstitialAdvertLoaded]) {
-            if (controller == nil) {
-                controller == [Yodo1MasFacebookAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [self.interstitialAd showAdFromRootViewController:controller];
-            } else {
-                if (callback != nil) {
-                    callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-                }
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        if (controller == nil) {
+            controller == [Yodo1MasFacebookAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [self.interstitialAd showAdFromRootViewController:controller];
         }
     }
 }
@@ -169,23 +143,18 @@
 }
 
 - (void)interstitialAdDidClose:(FBInterstitialAd *)interstitialAd {
-    if (self.interstitialCallback != nil) {
-        self.interstitialCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
-- (void)interstitialAd:(FBInterstitialAd *)interstitialAd didFailWithError:(NSError *)error {
-    if (self.interstitialCallback != nil) {
-        self.interstitialCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-    }
+- (void)interstitialAd:(FBInterstitialAd *)interstitialAd didFailWithError:(NSError *)facebookError {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:facebookError.localizedDescription];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
 - (void)interstitialAdWillLogImpression:(FBInterstitialAd *)interstitialAd {
-    if (self.interstitialCallback != nil) {
-        self.interstitialCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
 }
 
 #pragma mark - 横幅广告
@@ -221,17 +190,14 @@
     
 }
 
-- (void)adView:(FBAdView *)adView didFailWithError:(NSError *)error {
-    if (self.bannerCallback != nil) {
-        self.bannerCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-    }
+- (void)adView:(FBAdView *)adView didFailWithError:(NSError *)facebookError {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:facebookError.localizedDescription];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
     [self loadBannerAdvert];
 }
 
 - (void)adViewWillLogImpression:(FBAdView *)adView {
-    if (self.bannerCallback != nil) {
-        self.bannerCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
 }
 
 @end

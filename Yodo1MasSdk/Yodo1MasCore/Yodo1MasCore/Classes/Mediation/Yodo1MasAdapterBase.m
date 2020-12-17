@@ -34,6 +34,10 @@
     return NO;
 }
 
+- (void)updatePrivacy {
+    
+}
+
 - (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type {
     switch (type) {
         case Yodo1MasAdvertTypeReward: {
@@ -81,6 +85,60 @@
             break;
         }
     }
+}
+
+- (BOOL)isCanShow:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
+    if ([self isInitSDK]) {
+        if ([self isAdvertLoaded:type]) {
+            return YES;
+        } else {
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertNoLoaded message:@"ad config is null"];
+            Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
+            callback(event);
+            return NO;
+        }
+    } else {
+        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertUninitialized message:@"ad config is null"];
+        Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
+        callback(event);
+        return NO;
+    }
+}
+
+- (void)callbackWtihEvent:(Yodo1MasAdvertEvent *)event {
+    if (event == nil) {
+        return;
+    }
+    switch (event.type) {
+        case Yodo1MasAdvertTypeReward: {
+            if (self.rewardCallback != nil) {
+                self.rewardCallback(event);
+            }
+            break;
+        }
+        case Yodo1MasAdvertTypeInterstitial: {
+            if (self.interstitialCallback != nil) {
+                self.interstitialCallback(event);
+            }
+            break;
+        }
+        case Yodo1MasAdvertTypeBanner: {
+            if (self.bannerCallback != nil) {
+                self.bannerCallback(event);
+            }
+            break;
+        }
+    }
+}
+
+- (void)callbackWithEvent:(Yodo1MasAdvertEventCode)code type:(Yodo1MasAdvertType)type {
+    Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:code type:type];
+    [self callbackWtihEvent:event];
+}
+
+- (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdvertType)type {
+    Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type error:error];
+    [self callbackWtihEvent:event];
 }
 
 #pragma mark - 激励广告

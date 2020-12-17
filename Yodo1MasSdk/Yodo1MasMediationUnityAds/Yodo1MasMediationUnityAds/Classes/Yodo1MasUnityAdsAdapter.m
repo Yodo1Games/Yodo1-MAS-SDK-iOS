@@ -43,6 +43,10 @@
     if (self.initSuccessfulCallback != nil) {
         self.initSuccessfulCallback(self.advertCode);
     }
+    [self updatePrivacy];
+    [self loadRewardAdvert];
+    [self loadInterstitialAdvert];
+    [self loadBannerAdvert];
 }
 
 - (void)initializationFailed:(UnityAdsInitializationError)error withMessage:(NSString *)message {
@@ -53,6 +57,13 @@
 
 - (BOOL)isInitSDK {
     return [UnityAds isInitialized];
+}
+
+- (void)updatePrivacy {
+    UADSMetaData *metaData = [[UADSMetaData alloc] init];
+    [metaData set:@"gdpr.consent" value:@([Yodo1Mas sharedInstance].isGDPRUserConsent)];
+    [metaData set:@"privacy.consent" value:@([Yodo1Mas sharedInstance].isCCPADoNotSell)];
+    [metaData commit];
 }
 
 @end

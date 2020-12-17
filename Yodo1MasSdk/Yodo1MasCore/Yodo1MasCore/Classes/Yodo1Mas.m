@@ -12,6 +12,10 @@
 #import "Yodo1MasInitData.h"
 #import "Yodo1MasAdapterBase.h"
 
+#define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
+#define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
+#define Yodo1MasCCPADoNotSell       @"Yodo1MasCCPADoNotSell"
+
 @interface Yodo1Mas()
 
 @property (nonatomic, strong) Yodo1MasInitConfig *masInitConfig;
@@ -35,6 +39,15 @@
     self = [super init];
     if (self) {
         _mediations = [NSMutableDictionary dictionary];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        id gdpr = [defaults objectForKey:Yodo1MasGDPRUserConsent];
+        _isGDPRUserConsent =  gdpr != nil ? [gdpr boolValue] : YES;
+        
+        id coppa = [defaults objectForKey:Yodo1MasCOPPAAgeRestricted];
+        _isCOPPAAgeRestricted = coppa != nil ? [coppa boolValue] : NO;
+        
+        id ccpa = [defaults objectForKey:Yodo1MasCCPADoNotSell];
+        _isCCPADoNotSell = ccpa != nil ? [ccpa boolValue] : NO;
     }
     return self;
 }
@@ -42,12 +55,22 @@
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
     
     __weak __typeof(self)weakSelf = self;
-    NSString *country = [NSLocale currentLocale].countryCode;
-    NSString *url = [NSString stringWithFormat:@"http://massdk.cb64eaf4841914d918c93a30369d6bbc6.cn-beijing.alicontainer.com/init/%@", appId];
+    
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSMutableString *url = [NSMutableString string];
+#ifdef DEBUG
+    [url appendString:@"http://massdk.cb64eaf4841914d918c93a30369d6bbc6.cn-beijing.alicontainer.com/init/"];
+    parameters[@"country"] = [NSLocale currentLocale].countryCode;
+#else
+    [url appendString:http:@"https://rivendell-dev.explorer.yodo1.com/init/"];
+#endif
+    [url appendString:appId];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager GET:url parameters:@{@"country": country} headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         Yodo1MasResponse *res = [Yodo1MasResponse yy_modelWithJSON:responseObject];
         if (res != nil && res.data != nil) {
             Yodo1MasInitData *data = [Yodo1MasInitData yy_modelWithJSON:res.data];
@@ -179,6 +202,39 @@
     }
 }
 
+- (void)setIsGDPRUserConsent:(BOOL)isGDPRUserConsent {
+    if (isGDPRUserConsent != _isGDPRUserConsent) {
+        _isGDPRUserConsent = isGDPRUserConsent;
+        [[NSUserDefaults standardUserDefaults] setBool:_isGDPRUserConsent forKey:Yodo1MasGDPRUserConsent];
+        
+        for (Yodo1MasAdapterBase *adapter in _mediations.allValues) {
+            [adapter updatePrivacy];
+        }
+    }
+}
+
+- (void)setIsCOPPAAgeRestricted:(BOOL)isCOPPAAgeRestricted {
+    if (isCOPPAAgeRestricted != _isCOPPAAgeRestricted) {
+        _isCOPPAAgeRestricted = isCOPPAAgeRestricted;
+        [[NSUserDefaults standardUserDefaults] setBool:_isCOPPAAgeRestricted forKey:Yodo1MasCOPPAAgeRestricted];
+        
+        for (Yodo1MasAdapterBase *adapter in _mediations.allValues) {
+            [adapter updatePrivacy];
+        }
+    }
+}
+
+- (void)setIsCCPADoNotSell:(BOOL)isCCPADoNotSell {
+    if (isCCPADoNotSell != _isCCPADoNotSell) {
+        _isCCPADoNotSell = isCCPADoNotSell;
+        [[NSUserDefaults standardUserDefaults] setBool:_isCCPADoNotSell forKey:Yodo1MasCCPADoNotSell];
+        
+        for (Yodo1MasAdapterBase *adapter in _mediations.allValues) {
+            [adapter updatePrivacy];
+        }
+    }
+}
+
 - (BOOL)isAdvertLoaded:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type {
     BOOL isLoaded = NO;
     if (config != nil) {
@@ -269,22 +325,29 @@
 - (void)showAdvert:(UIViewController *)controller config:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
     if (config != nil) {
         NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
-        __weak Yodo1MasAdvertCallback block = ^(Yodo1MasAdvertEvent event, NSError * _Nonnull error) {
-            switch (event) {
-                case Yodo1MasAdvertEventError: {
+        __weak Yodo1MasAdvertCallback block = ^(Yodo1MasAdvertEvent *event) {
+            switch (event.code) {
+                case Yodo1MasAdvertEventCodeOpened: {
+                    [adapters removeAllObjects];
+                    if (callback != nil) {
+                        callback(event);
+                    }
+                    break;
+                }
+                case Yodo1MasAdvertEventCodeError: {
                     [adapters removeObjectAtIndex:0];
                     if (adapters.count > 0) {
                         [adapters.firstObject showAdvert:controller type:type callback:block];
                     } else {
                         if (callback != nil) {
-                            callback(event, error);
+                            callback(event);
                         }
                     }
                     break;
                 }
                 default: {
                     if (callback != nil) {
-                        callback(event, error);
+                        callback(event);
                     }
                     break;
                 }
@@ -294,12 +357,16 @@
             [adapters.firstObject showAdvert:controller type:type callback:block];
         } else {
             if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertAadpterNull message:@"ad adapters is null"];
+                Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
+                callback(event);
             }
         }
     } else {
         if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertConfigNull message:@"ad config is null"];
+            Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
+            callback(event);
         }
     }
 }

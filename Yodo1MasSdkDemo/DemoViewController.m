@@ -10,6 +10,10 @@
 
 @interface DemoViewController ()
 
+@property (weak, nonatomic) IBOutlet UISwitch *gdprSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *coppaSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *ccpaSwitch;
+
 @end
 
 @implementation DemoViewController
@@ -20,21 +24,34 @@
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showRewardAdvert:self callback:^(Yodo1MasAdvertEvent event, NSError * _Nonnull error) {
-            
+    [[Yodo1Mas sharedInstance] showRewardAdvert:self callback:^(Yodo1MasAdvertEvent *event) {
+
     }];
 }
 
 - (IBAction)onInterstitialClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showInterstitialAdvert:self callback:^(Yodo1MasAdvertEvent event, NSError * _Nonnull error) {
-            
+    [[Yodo1Mas sharedInstance] showInterstitialAdvert:self callback:^(Yodo1MasAdvertEvent *event) {
+
     }];
 }
 
 - (IBAction)onBannerClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showBannerAdvert:self callback:^(Yodo1MasAdvertEvent event, NSError * _Nonnull error) {
-            
+    [[Yodo1Mas sharedInstance] showBannerAdvert:self callback:^(Yodo1MasAdvertEvent *event) {
+
     }];
 }
+
+- (IBAction)onGDPRChanged:(UISwitch *)sender {
+    
+}
+
+- (IBAction)onCOPPAChanged:(UISwitch *)sender {
+    
+}
+
+- (IBAction)onCCPAChanged:(UISwitch *)sender {
+    
+}
+
 
 @end

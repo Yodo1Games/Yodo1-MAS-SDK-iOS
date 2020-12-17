@@ -31,18 +31,22 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 @property (nonatomic, copy) NSString *interstitialPlacementId;
 @property (nonatomic, copy) NSString *bannerPlacementId;
 
-@property (nonatomic, copy) Yodo1MasAdapterInitSuccessful initSuccessfulCallback;
-@property (nonatomic, copy) Yodo1MasAdapterInitFail initFailCallback;
-@property (nonatomic, copy) Yodo1MasAdvertCallback rewardCallback;
-@property (nonatomic, copy) Yodo1MasAdvertCallback interstitialCallback;
-@property (nonatomic, copy) Yodo1MasAdvertCallback bannerCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdapterInitSuccessful initSuccessfulCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdapterInitFail initFailCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdvertCallback rewardCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdvertCallback interstitialCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdvertCallback bannerCallback;
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
 - (BOOL)isInitSDK;
+- (void)updatePrivacy;
 
 - (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type;
 - (void)loadAdvert:(Yodo1MasAdvertType)type;
 - (void)showAdvert:(UIViewController *)controller type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
+- (BOOL)isCanShow:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
+- (void)callbackWithEvent:(Yodo1MasAdvertEventCode)code type:(Yodo1MasAdvertType)type;
+- (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdvertType)type;
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded;

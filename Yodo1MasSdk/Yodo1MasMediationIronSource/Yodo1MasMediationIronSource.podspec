@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationIronSource'
-  s.version          = '1.0.0'
+  s.version          = '0.0.0.1-beta'
   s.summary          = 'Yodo1MasMediationIronSource'
   s.swift_version    = '5.0'
 
@@ -43,13 +43,13 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h's
   # s.frameworks = 'UIKit'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'IronSourceSDK'#,'~> 7.0.3.0'
-  s.dependency 'IronSourceAdMobAdapter'#,'~> 4.3.17.2'
-  s.dependency 'IronSourceAppLovinAdapter'#,'~> 4.3.20.1'
-  s.dependency 'IronSourceFacebookAdapter'#,'~> 4.3.21.1'
-  s.dependency 'IronSourceInMobiAdapter'#,'~> 4.3.8.2'
-  s.dependency 'IronSourceTapjoyAdapter'#,'~> 4.1.15.1'
-  s.dependency 'IronSourceUnityAdsAdapter'#,'~> 4.3.6.1'
-  s.dependency 'IronSourceVungleAdapter'#,'~> 4.3.8.1'
+  s.dependency 'IronSourceSDK','~> 7.0.4.0'
+  s.dependency 'IronSourceAdMobAdapter','~> 4.3.17.2'
+  s.dependency 'IronSourceAppLovinAdapter','~> 4.3.20.1'
+  s.dependency 'IronSourceFacebookAdapter','~> 4.3.21.1'
+  s.dependency 'IronSourceInMobiAdapter','~> 4.3.8.2'
+  s.dependency 'IronSourceTapjoyAdapter','~> 4.1.15.1'
+  s.dependency 'IronSourceUnityAdsAdapter','~> 4.3.6.1'
+  s.dependency 'IronSourceVungleAdapter','~> 4.3.8.1'
   
 end

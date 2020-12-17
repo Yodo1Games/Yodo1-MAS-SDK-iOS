@@ -38,6 +38,11 @@
         [IronSource setISDemandOnlyInterstitialDelegate:self];
         [IronSource setBannerDelegate:self];
         [IronSource initISDemandOnly:config.appKey adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER]];
+        
+        [self updatePrivacy];
+        [self loadRewardAdvert];
+        [self loadInterstitialAdvert];
+        [self loadBannerAdvert];
     } else {
         if (successful != nil) {
             successful(self.advertCode);
@@ -47,6 +52,11 @@
 
 - (BOOL)isInitSDK {
     return self.sdkInit;
+}
+
+- (void)updatePrivacy {
+    [IronSource setConsent:[Yodo1Mas sharedInstance].isGDPRUserConsent];
+    [IronSource setMetaDataWithKey:@"do_not_sell" value: [Yodo1Mas sharedInstance].isCCPADoNotSell ? @"YES" : @"NO"];
 }
 
 #pragma mark - 激励广告
@@ -63,26 +73,12 @@
 
 - (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showRewardAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isRewardAdvertLoaded]) {
-            if (controller == nil) {
-                controller = [Yodo1MasIronSourceAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
-            } else {
-                if (callback != nil) {
-                    callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-                }
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        if (controller == nil) {
+            controller = [Yodo1MasIronSourceAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
     }
 }
@@ -97,21 +93,16 @@
 }
 
 - (void)rewardedVideoDidOpen:(NSString *)instanceId {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedVideoDidClose:(NSString *)instanceId {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
 }
 
-- (void)rewardedVideoDidFailToShowWithError:(NSError *)error instanceId:(NSString *)instanceId {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-    }
+- (void)rewardedVideoDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:ironSourceError.localizedDescription];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedVideoDidClick:(NSString *)instanceId {
@@ -119,9 +110,7 @@
 }
 
 - (void)rewardedVideoAdRewarded:(NSString *)instanceId {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventRewardEarned, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 插屏广告
@@ -138,26 +127,12 @@
 
 - (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showInterstitialAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isInterstitialAdvertLoaded]) {
-            if (controller == nil) {
-                controller = [Yodo1MasIronSourceAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
-            } else {
-                if (callback != nil) {
-                    callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-                }
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        if (controller == nil) {
+            controller = [Yodo1MasIronSourceAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
     }
 }
@@ -172,21 +147,16 @@
 }
 
 - (void)interstitialDidOpen:(NSString *)instanceId {
-    if (self.interstitialCallback != nil) {
-        self.interstitialCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)interstitialDidClose:(NSString *)instanceId {
-    if (self.interstitialCallback != nil) {
-        self.interstitialCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
 }
 
-- (void)interstitialDidFailToShowWithError:(NSError *)error instanceId:(NSString *)instanceId {
-    if (self.interstitialCallback != nil) {
-        self.interstitialCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-    }
+- (void)interstitialDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:ironSourceError.localizedDescription];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)didClickInterstitial:(NSString *)instanceId {

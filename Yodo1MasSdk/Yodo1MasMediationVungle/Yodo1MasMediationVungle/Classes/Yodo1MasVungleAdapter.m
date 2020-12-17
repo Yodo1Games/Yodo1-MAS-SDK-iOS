@@ -36,6 +36,10 @@
             if (successful != nil) {
                 successful(self.advertCode);
             }
+            [self updatePrivacy];
+            [self loadRewardAdvert];
+            [self loadInterstitialAdvert];
+            [self loadBannerAdvert];
         } else {
             if (fail != nil) {
                 fail(self.advertCode, error);
@@ -47,6 +51,19 @@
 
 - (BOOL)isInitSDK {
     return [[VungleSDK sharedSDK] isInitialized];
+}
+
+- (void)updatePrivacy {
+    if ([Yodo1Mas sharedInstance].isCCPADoNotSell) {
+        [[VungleSDK sharedSDK] updateCCPAStatus:VungleCCPADenied];
+    } else {
+        [[VungleSDK sharedSDK] updateCCPAStatus:VungleCCPAAccepted];
+    }
+    if ([Yodo1Mas sharedInstance].isGDPRUserConsent) {
+        [[VungleSDK sharedSDK] updateConsentStatus:VungleConsentAccepted consentMessageVersion:@""];
+    } else {
+        [[VungleSDK sharedSDK] updateConsentStatus:VungleCCPADenied consentMessageVersion:@""];
+    }
 }
 
 @end

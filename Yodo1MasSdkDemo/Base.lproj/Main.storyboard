@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -103,6 +103,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzj-8R-cfZ">
                                 <rect key="frame" x="350" y="224" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onGDPRChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="vrl-7J-snW"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set COPPA Track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KA-Dl-Arx">
                                 <rect key="frame" x="15" y="280" width="132" height="21"/>
@@ -112,6 +115,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBX-Bt-WWG">
                                 <rect key="frame" x="350" y="275" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onCOPPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="hcM-nG-bl2"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set CCPA Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWd-xF-H4O">
                                 <rect key="frame" x="15" y="331" width="120.5" height="21"/>
@@ -121,6 +127,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eip-RV-By3">
                                 <rect key="frame" x="350" y="326" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onCCPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="grg-yo-5ym"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="74Y-kr-Sam"/>
@@ -152,6 +161,11 @@
                             <constraint firstItem="dzj-8R-cfZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DxG-0F-XML" secondAttribute="trailing" constant="20" id="wUE-kt-rsm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ccpaSwitch" destination="eip-RV-By3" id="Uyg-Vx-EVd"/>
+                        <outlet property="coppaSwitch" destination="qBX-Bt-WWG" id="4HD-iP-hgx"/>
+                        <outlet property="gdprSwitch" destination="dzj-8R-cfZ" id="1Bf-Px-sei"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iet-JB-DmV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

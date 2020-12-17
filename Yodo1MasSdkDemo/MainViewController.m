@@ -7,6 +7,7 @@
 
 #import "MainViewController.h"
 #import <Yodo1MasCore/Yodo1Mas.h>
+#import <Toast/Toast.h>
 
 @interface MainViewController ()<UITextFieldDelegate>
 
@@ -27,11 +28,23 @@
     if (appId == nil || appId.length == 0) {
         return;
     }
+    
+    self.inputField.enabled = NO;
+    self.enterButton.enabled = NO;
+    [self.enterButton setTitle:@"SDK初始化..." forState:UIControlStateNormal];
     __weak __typeof(self)weakSelf = self;
     [[Yodo1Mas sharedInstance] initWithAppId:appId successful:^{
+        weakSelf.inputField.enabled = YES;
+        weakSelf.enterButton.enabled = YES;
+        [weakSelf.enterButton setTitle:@"确定" forState:UIControlStateNormal];
+        
         UIViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DemoViewController"];
         [weakSelf showViewController:controller sender:nil];
     } fail:^(NSError * _Nonnull error) {
+        weakSelf.inputField.enabled = YES;
+        weakSelf.enterButton.enabled = YES;
+        [weakSelf.enterButton setTitle:@"确定" forState:UIControlStateNormal];
+        [weakSelf.view makeToast:@""];
         NSLog(@"初始化错误 - %@", error.localizedDescription);
     }];
 }

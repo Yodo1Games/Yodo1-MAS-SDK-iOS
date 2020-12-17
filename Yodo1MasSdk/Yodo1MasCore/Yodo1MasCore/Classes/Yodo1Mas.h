@@ -6,32 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Yodo1MasAdvertEvent.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^Yodo1MasInitSuccessful)();
+typedef void (^Yodo1MasInitSuccessful)(void);
 typedef void (^Yodo1MasInitFail)(NSError *);
-
-typedef enum {
-    Yodo1MasAdvertTypeReward,
-    Yodo1MasAdvertTypeInterstitial,
-    Yodo1MasAdvertTypeBanner
-} Yodo1MasAdvertType;
-
-typedef enum {
-    Yodo1MasAdvertEventOpened,
-    Yodo1MasAdvertEventClosed,
-    Yodo1MasAdvertEventError,
-    Yodo1MasAdvertEventRewardEarned
-} Yodo1MasAdvertEvent;
-
-typedef void(^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent, NSError *);
+typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 
 @interface Yodo1Mas : NSObject
 
-@property(nonatomic, assign) BOOL coppaRestricted;
-@property(nonatomic, assign) BOOL gdprReject;
-@property(nonatomic, assign) BOOL ccpaReject;
+@property (nonatomic, assign) BOOL isGDPRUserConsent;
+@property (nonatomic, assign) BOOL isCOPPAAgeRestricted;
+@property (nonatomic, assign) BOOL isCCPADoNotSell;
 
 + (Yodo1Mas *)sharedInstance;
 + (instancetype)new NS_UNAVAILABLE;

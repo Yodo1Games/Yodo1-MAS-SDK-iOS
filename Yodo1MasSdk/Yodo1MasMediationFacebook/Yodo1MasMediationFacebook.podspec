@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationFacebook'
-  s.version          = '1.0.0'
+  s.version          = '0.0.0.1-beta'
   s.summary          = 'Yodo1MasMediationFacebook'
   s.swift_version    = '5.0'
 
@@ -42,6 +42,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h's
   # s.frameworks = 'UIKit'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'FBAudienceNetwork'#,'6.2.0'
+  s.dependency 'FBAudienceNetwork','~> 6.2.0'
   
 end

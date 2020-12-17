@@ -46,6 +46,10 @@
             if (successful != nil) {
                 successful(weakSelf.advertCode);
             }
+            [weakSelf updatePrivacy];
+            [weakSelf loadRewardAdvert];
+            [weakSelf loadInterstitialAdvert];
+            [weakSelf loadBannerAdvert];
         }];
     } else {
         if (successful != nil) {
@@ -62,6 +66,13 @@
         GADAdapterStatus *status = adapters[NSStringFromClass([GADMobileAds class])];
         return status != nil && status.state == GADAdapterInitializationStateReady;
     }
+}
+
+- (void)updatePrivacy {
+    [[NSUserDefaults standardUserDefaults] setBool:[Yodo1Mas sharedInstance].isGDPRUserConsent forKey:@"gad_npa"];
+    [[GADMobileAds sharedInstance].requestConfiguration tagForChildDirectedTreatment:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
+    [[GADMobileAds sharedInstance].requestConfiguration tagForUnderAgeOfConsent:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
+    [[NSUserDefaults standardUserDefaults] setBool:[Yodo1Mas sharedInstance].isCCPADoNotSell forKey:@"gad_rdp"];
 }
 
 
@@ -87,53 +98,36 @@
 
 - (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showRewardAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isRewardAdvertLoaded]) {
-            if (controller == nil) {
-                controller = [Yodo1MasAdMobAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [self.rewardAd presentFromRootViewController:controller delegate:self];
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        if (controller == nil) {
+            controller = [Yodo1MasAdMobAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [self.rewardAd presentFromRootViewController:controller delegate:self];
         }
     }
 }
 
 #pragma mark - GADRewardedAdDelegate
 - (void)rewardedAd:(nonnull GADRewardedAd *)rewardedAd
-didFailToPresentWithError:(nonnull NSError *)error {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventError, error);
-    }
+didFailToPresentWithError:(nonnull NSError *)adMobError {
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:adMobError.localizedDescription];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
     [self loadRewardAdvert];
 }
 
 - (void)rewardedAdDidPresent:(nonnull GADRewardedAd *)rewardedAd {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedAdDidDismiss:(nonnull GADRewardedAd *)rewardedAd {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
     [self loadRewardAdvert];
 }
 
 - (void)rewardedAd:(nonnull GADRewardedAd *)rewardedAd
  userDidEarnReward:(nonnull GADAdReward *)reward {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventRewardEarned, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 插屏广告
@@ -156,44 +150,29 @@ didFailToPresentWithError:(nonnull NSError *)error {
 - (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [super showInterstitialAdvert:controller callback:callback];
     
-    if ([self isInitSDK]) {
-        if ([self isInterstitialAdvertLoaded]) {
-            if (controller == nil) {
-                controller = [Yodo1MasAdMobAdapter getTopViewController];
-            }
-            if (controller != nil) {
-                [self.interstitialAd presentFromRootViewController:controller];
-            }
-        } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        if (controller == nil) {
+            controller = [Yodo1MasAdMobAdapter getTopViewController];
         }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+        if (controller != nil) {
+            [self.interstitialAd presentFromRootViewController:controller];
         }
     }
 }
 
 #pragma mark - GADInterstitialDelegate
 - (void)interstitialWillPresentScreen:(nonnull GADInterstitial *)ad {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)interstitialDidFailToPresentScreen:(nonnull GADInterstitial *)ad {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-    }
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:@"show interstitial ad failed"];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
 - (void)interstitialDidDismissScreen:(nonnull GADInterstitial *)ad {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
@@ -217,25 +196,15 @@ didFailToPresentWithError:(nonnull NSError *)error {
 
 - (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
     [self showBannerAdvert:controller callback:callback];
-    if ([self isInitSDK]) {
-        if ([self isBannerAdvertLoaded]) {
-            if (controller != nil) {
-                self.bannerView.rootViewController = controller;
-                self.bannerView.frame = CGRectMake(0, controller.view.bounds.size.height - 50, controller.view.bounds.size.width, 50);
-                [controller.view addSubview:self.bannerView];
-            } else {
-                UIWindow *window = [Yodo1MasAdMobAdapter getTopWindow];
-                self.bannerView.frame = CGRectMake(0, window.bounds.size.height - 50, window.bounds.size.width, 50);
-                [window addSubview:self.bannerView];
-            }
+    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        if (controller != nil) {
+            self.bannerView.rootViewController = controller;
+            self.bannerView.frame = CGRectMake(0, controller.view.bounds.size.height - 50, controller.view.bounds.size.width, 50);
+            [controller.view addSubview:self.bannerView];
         } else {
-            if (callback != nil) {
-                callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
-            }
-        }
-    } else {
-        if (callback != nil) {
-            callback(Yodo1MasAdvertEventError, [NSError errorWithDomain:@"" code:0 userInfo:@{}]);
+            UIWindow *window = [Yodo1MasAdMobAdapter getTopWindow];
+            self.bannerView.frame = CGRectMake(0, window.bounds.size.height - 50, window.bounds.size.width, 50);
+            [window addSubview:self.bannerView];
         }
     }
 }
@@ -258,15 +227,11 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)error {
 }
 
 - (void)adViewWillPresentScreen:(nonnull GADBannerView *)bannerView {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventOpened, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
 }
 
 - (void)adViewDidDismissScreen:(nonnull GADBannerView *)bannerView {
-    if (self.rewardCallback != nil) {
-        self.rewardCallback(Yodo1MasAdvertEventClosed, nil);
-    }
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeBanner];
     [self loadBannerAdvert];
 }
 

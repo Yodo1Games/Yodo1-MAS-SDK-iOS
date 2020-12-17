@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasCore'
-  s.version          = '1.0.0'
+  s.version          = '0.0.0.1-beta'
   s.summary          = 'Yodo1MasCore'
   s.swift_version    = '5.0'
 
@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
   }
   # s.resources = 'Yodo1MasCore/Assets/*.strings', 'Yodo1MasCore/Assets/*.xcassets'
 
-  s.public_header_files = 'Yodo1MasCore/Classes/Yodo1Mas.h'
+  s.public_header_files = 'Yodo1MasCore/Classes/**/*.h'
   # s.frameworks = 'UIKit'
   s.dependency 'AFNetworking'
   s.dependency 'YYModel'

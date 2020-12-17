@@ -41,16 +41,37 @@
     }
 }
 
-- (BOOL)isInitSDK {
-    return [Tapjoy isConnected];
-}
-
 - (void)onTapjoyConnectSuccess:(NSNotification *)notification {
-    
+    [self updatePrivacy];
+    [self loadRewardAdvert];
+    [self loadInterstitialAdvert];
+    [self loadBannerAdvert];
 }
 
 - (void)onTapjoyConnectFail:(NSNotification *)notification {
     
+}
+
+- (BOOL)isInitSDK {
+    return [Tapjoy isConnected];
+}
+
+- (void)updatePrivacy {
+    TJPrivacyPolicy *policy = [TJPrivacyPolicy sharedInstance];
+    if ([Yodo1Mas sharedInstance].isGDPRUserConsent) {
+        [policy setUserConsent:@"1"];
+        [policy setSubjectToGDPR:YES];
+    } else {
+        [policy setUserConsent:@"0"];
+        [policy setSubjectToGDPR:NO];
+    }
+    [policy setBelowConsentAge:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
+    
+    if ([Yodo1Mas sharedInstance].isCCPADoNotSell) {
+        [policy setUSPrivacy:@"1-N-"];
+    } else {
+        [policy setUSPrivacy:@"1-Y-"];
+    }
 }
 
 @end

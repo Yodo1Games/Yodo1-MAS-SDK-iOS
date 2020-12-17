@@ -4,7 +4,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 inhibit_all_warnings!
 target "Yodo1MasSdkDemo" do
-  
+
+pod 'Toast'
 pod 'Yodo1MasMediationAdMob', :path => 'Yodo1MasSdk/Yodo1MasMediationAdMob'
 pod 'Yodo1MasMediationApplovin', :path => 'Yodo1MasSdk/Yodo1MasMediationApplovin'
 pod 'Yodo1MasMediationIronSource', :path => 'Yodo1MasSdk/Yodo1MasMediationIronSource'

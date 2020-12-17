@@ -606,6 +606,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 661A33E8D196735B0B43D8F0 /* Pods-Yodo1MasSdkDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -627,6 +628,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9285BF1EEB32E6592C17577A /* Pods-Yodo1MasSdkDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
