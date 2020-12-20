@@ -30,7 +30,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="uVM-nA-3eL"/>
                                 </constraints>
-                                <state key="normal" title="确定"/>
+                                <state key="normal" title="Confirm"/>
                                 <connections>
                                     <action selector="onEnterClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RMg-80-opI"/>
                                 </connections>
@@ -70,7 +70,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="iqG-0y-ifq"/>
                                 </constraints>
-                                <state key="normal" title="显示激励广告"/>
+                                <state key="normal" title="Show Rewarded Ad"/>
                                 <connections>
                                     <action selector="onRewardClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="yLr-dU-SlO"/>
                                 </connections>
@@ -80,7 +80,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="HSu-sl-Ccz"/>
                                 </constraints>
-                                <state key="normal" title="显示插屏广告"/>
+                                <state key="normal" title="Show Interstitial Ad"/>
                                 <connections>
                                     <action selector="onInterstitialClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="fez-Dw-MnP"/>
                                 </connections>
@@ -90,13 +90,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="5dl-nI-nUy"/>
                                 </constraints>
-                                <state key="normal" title="显示横幅广告"/>
+                                <state key="normal" title="Show Banner Ad"/>
                                 <connections>
                                     <action selector="onBannerClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="dmo-RH-swx"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set GDPR Track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxG-0F-XML">
-                                <rect key="frame" x="15" y="229" width="121.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set GDPR User Consent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxG-0F-XML">
+                                <rect key="frame" x="15" y="229" width="183.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -107,8 +107,8 @@
                                     <action selector="onGDPRChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="vrl-7J-snW"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set COPPA Track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KA-Dl-Arx">
-                                <rect key="frame" x="15" y="280" width="132" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set COPPA Age Restricted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KA-Dl-Arx">
+                                <rect key="frame" x="15" y="280" width="201.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -119,8 +119,8 @@
                                     <action selector="onCOPPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="hcM-nG-bl2"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set CCPA Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWd-xF-H4O">
-                                <rect key="frame" x="15" y="331" width="120.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set CCPA Do Not Sell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWd-xF-H4O">
+                                <rect key="frame" x="15" y="331" width="163.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

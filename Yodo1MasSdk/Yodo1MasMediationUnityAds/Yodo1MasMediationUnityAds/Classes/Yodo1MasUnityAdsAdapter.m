@@ -8,7 +8,9 @@
 #import "Yodo1MasUnityAdsAdapter.h"
 @import UnityAds;
 
-@interface Yodo1MasUnityAdsAdapter()<UnityAdsInitializationDelegate>
+#define TAG @"[Yodo1MasUnityAdsAdapter]"
+
+@interface Yodo1MasUnityAdsAdapter()<UnityAdsInitializationDelegate, UnityAdsLoadDelegate, UnityAdsDelegate>
 
 @end
 
@@ -30,6 +32,8 @@
     [super initWithConfig:config successful:successful fail:fail];
     
     if (![self isInitSDK]) {
+        [UnityAds removeDelegate:self];
+        [UnityAds addDelegate:self];
         [UnityAds initialize:config.appId initializationDelegate:self];
     } else {
         if (successful != nil) {
@@ -64,6 +68,140 @@
     [metaData set:@"gdpr.consent" value:@([Yodo1Mas sharedInstance].isGDPRUserConsent)];
     [metaData set:@"privacy.consent" value:@([Yodo1Mas sharedInstance].isCCPADoNotSell)];
     [metaData commit];
+}
+
+#pragma mark - 激励广告
+- (BOOL)isRewardAdvertLoaded {
+    return self.rewardPlacementId != nil && [UnityAds isReady:self.rewardPlacementId];
+}
+
+- (void)loadRewardAdvert {
+    if (![self isInitSDK]) return;
+    if (self.rewardPlacementId != nil && self.rewardPlacementId.length > 0) {
+        [UnityAds load:self.rewardPlacementId loadDelegate:self];
+    }
+}
+
+- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    [super showRewardAdvert:controller callback:callback];
+    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        if (controller == nil) {
+            controller = [Yodo1MasUnityAdsAdapter getTopViewController];
+        }
+        if (controller != nil) {
+            [UnityAds show:controller placementId:self.rewardPlacementId];
+        }
+    }
+}
+
+#pragma mark - 插屏广告
+- (BOOL)isInterstitialAdvertLoaded {
+    return self.interstitialPlacementId != nil && [UnityAds isReady:self.interstitialPlacementId];
+}
+
+- (void)loadInterstitialAdvert {
+    if (![self isInitSDK]) return;
+    if (self.interstitialPlacementId != nil && self.interstitialPlacementId.length > 0) {
+        [UnityAds load:self.interstitialPlacementId loadDelegate:self];
+    }
+}
+
+- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    [super showInterstitialAdvert:controller callback:callback];
+    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        if (controller == nil) {
+            controller = [Yodo1MasUnityAdsAdapter getTopViewController];
+        }
+        if (controller != nil) {
+            [UnityAds show:controller placementId:self.interstitialPlacementId];
+        }
+    }
+}
+
+#pragma mark - 横幅广告
+- (BOOL)isBannerAdvertLoaded {
+    return NO;
+}
+
+- (void)loadBannerAdvert {
+    
+}
+
+- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:controller callback:callback];
+    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        
+    }
+}
+
+#pragma mark - UnityAdsLoadDelegate
+- (void)unityAdsAdLoaded:(NSString *)placementId {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsAdLoaded:, placementId: %@}", TAG, placementId];
+    NSLog(message);
+}
+
+- (void)unityAdsAdFailedToLoad:(NSString *)placementId {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsAdFailedToLoad:, placementId: %@}", TAG, placementId];
+    NSLog(message);
+    
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+        [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+    } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+        [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+    }
+}
+
+#pragma mark - UnityAdsDelegate
+- (void)unityAdsReady:(NSString *)placementId {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsReady:, placementId: %@}", TAG, placementId];
+    NSLog(message);
+}
+
+- (void)unityAdsDidError:(UnityAdsError)adError withMessage:(NSString *)adMessage {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsDidError:withMessage:, error: %@, message: %@}", TAG, @(adError), adMessage];
+    NSLog(message);
+    
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+}
+
+- (void)unityAdsDidStart:(NSString *)placementId {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsDidStart:, placementId: %@}", TAG, placementId];
+    NSLog(message);
+    
+    if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
+    } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
+    }
+}
+
+- (void)unityAdsDidFinish:(NSString *)placementId
+          withFinishState:(UnityAdsFinishState)state {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsDidFinish:, placementId: %@, state: %@}", TAG, placementId, @(state)];
+    NSLog(message);
+    
+    switch (state) {
+        case kUnityAdsFinishStateError: {
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
+            if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+                [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+            } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+                [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+            }
+            break;
+        }
+        default: {
+            if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+                [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
+            } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+                [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
+            }
+            break;
+        }
+    }
 }
 
 @end

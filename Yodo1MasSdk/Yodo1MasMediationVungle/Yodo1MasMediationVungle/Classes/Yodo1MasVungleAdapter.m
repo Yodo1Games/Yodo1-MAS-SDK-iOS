@@ -8,6 +8,8 @@
 #import "Yodo1MasVungleAdapter.h"
 #import <VungleSDK/VungleSDK.h>
 
+#define TAG @"[Yodo1MasVungleAdapter]"
+
 @interface Yodo1MasVungleAdapter()
 
 @end
@@ -63,6 +65,92 @@
         [[VungleSDK sharedSDK] updateConsentStatus:VungleConsentAccepted consentMessageVersion:@""];
     } else {
         [[VungleSDK sharedSDK] updateConsentStatus:VungleCCPADenied consentMessageVersion:@""];
+    }
+}
+
+#pragma mark - 激励广告
+- (BOOL)isRewardAdvertLoaded {
+    return self.rewardPlacementId != nil && [[VungleSDK sharedSDK] isAdCachedForPlacementID:self.rewardPlacementId];
+}
+
+- (void)loadRewardAdvert {
+    if (![self isInitSDK]) return;
+    if (self.rewardPlacementId != nil && self.rewardPlacementId.length > 0) {
+        
+        NSError *error = nil;
+        BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:self.rewardPlacementId error:&error];
+        if (!request || error != nil) {
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:[NSString stringWithFormat:@"%@: {method: loadRewardAdvert, load failed}", TAG]];
+            [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+        }
+    }
+}
+
+- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:controller callback:callback];
+    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        if (controller == nil) {
+            controller == [Yodo1MasVungleAdapter getTopViewController];
+        }
+        if (controller != nil) {
+            NSError *error = nil;
+            BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:self.rewardPlacementId error:&error];
+            if (!show || error != nil) {
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:[NSString stringWithFormat:@"%@: {method: showRewardAdvert:callback:, show failed}", TAG]];
+                [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+            }
+        }
+    }
+}
+
+#pragma mark - 插屏广告
+- (BOOL)isInterstitialAdvertLoaded {
+    return self.interstitialPlacementId != nil && [[VungleSDK sharedSDK] isAdCachedForPlacementID:self.interstitialPlacementId];
+}
+
+- (void)loadInterstitialAdvert {
+    if (![self isInitSDK]) return;
+    if (self.interstitialPlacementId != nil && self.interstitialPlacementId.length > 0) {
+        
+        NSError *error = nil;
+        BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:self.interstitialPlacementId error:&error];
+        if (!request || error != nil) {
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:[NSString stringWithFormat:@"%@: {method: loadInterstitialAdvert, load failed}", TAG]];
+            [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+        }
+    }
+}
+
+- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    [super showInterstitialAdvert:controller callback:callback];
+    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        if (controller == nil) {
+            controller == [Yodo1MasVungleAdapter getTopViewController];
+        }
+        if (controller != nil) {
+            NSError *error = nil;
+            BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:self.interstitialPlacementId error:&error];
+            if (!show || error != nil) {
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:[NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:callback:, show failed}", TAG]];
+                [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+            }
+        }
+    }
+}
+
+#pragma mark - 横幅广告
+- (BOOL)isBannerAdvertLoaded {
+    return NO;
+}
+
+- (void)loadBannerAdvert {
+    
+}
+
+- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:controller callback:callback];
+    if ([self isCanShow:controller callback:callback]) {
+        
     }
 }
 
