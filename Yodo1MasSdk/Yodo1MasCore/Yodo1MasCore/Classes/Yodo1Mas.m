@@ -60,10 +60,10 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
 #ifdef DEBUG
-    [url appendString:@"http://massdk.cb64eaf4841914d918c93a30369d6bbc6.cn-beijing.alicontainer.com/init/"];
+    [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
     parameters[@"country"] = [NSLocale currentLocale].countryCode;
 #else
-    [url appendString:http:@"https://rivendell-dev.explorer.yodo1.com/init/"];
+    [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
 #endif
     [url appendString:appId];
     
