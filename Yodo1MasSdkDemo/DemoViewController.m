@@ -30,7 +30,7 @@
     __weak __typeof(self)weakSelf = self;
     [[Yodo1Mas sharedInstance] showRewardAdvert:self callback:^(Yodo1MasAdvertEvent *event) {
         if (event.code == Yodo1MasAdvertEventCodeError) {
-            [weakSelf.view makeToast:event.error.localizedDescription];
+            [weakSelf.view makeToast:event.error.userInfo[NSLocalizedDescriptionKey]];
         }
     }];
 }
@@ -39,7 +39,7 @@
     __weak __typeof(self)weakSelf = self;
     [[Yodo1Mas sharedInstance] showInterstitialAdvert:self callback:^(Yodo1MasAdvertEvent *event) {
         if (event.code == Yodo1MasAdvertEventCodeError) {
-            [weakSelf.view makeToast:event.error.localizedDescription];
+            [weakSelf.view makeToast:event.error.userInfo[NSLocalizedDescriptionKey]];
         }
     }];
 }
@@ -48,7 +48,7 @@
     __weak __typeof(self)weakSelf = self;
     [[Yodo1Mas sharedInstance] showBannerAdvert:self callback:^(Yodo1MasAdvertEvent *event) {
         if (event.code == Yodo1MasAdvertEventCodeError) {
-            [weakSelf.view makeToast:event.error.localizedDescription];
+            [weakSelf.view makeToast:event.error.userInfo[NSLocalizedDescriptionKey]];
         }
     }];
 }

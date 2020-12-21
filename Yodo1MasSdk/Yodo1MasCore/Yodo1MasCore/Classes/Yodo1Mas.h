@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^Yodo1MasInitSuccessful)(void);
-typedef void (^Yodo1MasInitFail)(NSError *);
+typedef void (^Yodo1MasInitFail)(Yodo1MasError *);
 typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 
 @interface Yodo1Mas : NSObject

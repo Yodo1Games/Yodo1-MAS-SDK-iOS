@@ -80,20 +80,23 @@
                 NSLog(@"获取广告数据成功 - %@", res.data);
                 [weakSelf doInitAdapter];
                 [weakSelf doInitAdvert];
+                if (successful) {
+                    successful();
+                }
             } else {
                 if (fail) {
-                    fail([NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : @"获取广告配置失败"}]);
+                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"get config failed"]);
                 }
             }
         } else {
             if (fail) {
-                fail([NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : @"获取广告配置失败 - 解释配置数据失败"}]);
+                fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:@"get config failed"]);
             }
             NSLog(@"获取广告配置失败 - 解释配置数据失败");
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (fail) {
-            fail(error);
+            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:error.localizedDescription]);
         }
         NSLog(@"获取广告配置失败 - %@", error.localizedDescription);
     }];
