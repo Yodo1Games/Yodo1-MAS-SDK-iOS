@@ -182,7 +182,7 @@
         for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
             NSString *mediationName = mediation.mediation_name;
             NSString *unitId = mediation.ad_unit_id;
-            if (mediationName != nil && unitId != nil && mediation.mediation_active) {
+            if (mediationName != nil && unitId != nil) {
                 Yodo1MasAdapterBase *adapter = self.mediations[mediationName];
                 if (adapter != nil) {
                     switch (type) {
@@ -244,7 +244,7 @@
         if (config.mediation_list != nil && config.mediation_list.count > 0) {
             for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
                 NSString *name = mediation.mediation_name;
-                if (name != nil && name.length > 0 && mediation.mediation_active) {
+                if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
                         isLoaded = [adapter isAdvertLoaded:type];
@@ -325,51 +325,131 @@
     return adapters;
 }
 
-- (void)showAdvert:(UIViewController *)controller config:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
+- (void)showAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type {
     if (config != nil) {
         NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
         __weak Yodo1MasAdvertCallback block = ^(Yodo1MasAdvertEvent *event) {
             switch (event.code) {
                 case Yodo1MasAdvertEventCodeOpened: {
                     [adapters removeAllObjects];
-                    if (callback != nil) {
-                        callback(event);
-                    }
+                    [self callbackWithEvent:event];
                     break;
                 }
                 case Yodo1MasAdvertEventCodeError: {
                     [adapters removeObjectAtIndex:0];
                     if (adapters.count > 0) {
-                        [adapters.firstObject showAdvert:controller type:type callback:block];
+                        [adapters.firstObject showAdvert:type callback:block];
                     } else {
-                        if (callback != nil) {
-                            callback(event);
-                        }
+                        [self callbackWithEvent:event];
                     }
                     break;
                 }
                 default: {
-                    if (callback != nil) {
-                        callback(event);
-                    }
+                    [self callbackWithEvent:event];
                     break;
                 }
             }
         };
         if (adapters.count > 0) {
-            [adapters.firstObject showAdvert:controller type:type callback:block];
+            [adapters.firstObject showAdvert:type callback:block];
         } else {
-            if (callback != nil) {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertAadpterNull message:@"ad adapters is null"];
-                Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
-                callback(event);
-            }
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertAadpterNull message:@"ad adapters is null"];
+            Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
+            [self callbackWithEvent:event];
         }
     } else {
-        if (callback != nil) {
-            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertConfigNull message:@"ad config is null"];
-            Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
-            callback(event);
+        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertConfigNull message:@"ad config is null"];
+        Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
+        [self callbackWithEvent:event];
+    }
+}
+
+- (void)callbackWithEvent:(Yodo1MasAdvertEvent *)event {
+    switch (event.type) {
+        case Yodo1MasAdvertTypeReward: {
+            id<Yodo1MasRewardAdvertDelegate> delegate = self.rewardAdvertDelegate;
+            if (delegate != nil) {
+                switch (event.code) {
+                    case Yodo1MasAdvertEventCodeOpened: {
+                        if ([delegate respondsToSelector:@selector(onAdvertOpened:)]) {
+                            [delegate onAdvertOpened:event];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeClosed: {
+                        if ([delegate respondsToSelector:@selector(onAdvertClosed:)]) {
+                            [delegate onAdvertClosed:event];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeError: {
+                        if ([delegate respondsToSelector:@selector(onAdvertError:error:)]) {
+                            [delegate onAdvertError:event error:event.error];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeRewardEarned: {
+                        if ([delegate respondsToSelector:@selector(onAdvertRewardEarned:)]) {
+                            [delegate onAdvertRewardEarned:event];
+                        }
+                        break;
+                    }
+                }
+            }
+            break;
+        }
+
+        case Yodo1MasAdvertTypeInterstitial: {
+            id delegate = self.interstitialAdvertDelegate;
+            if (delegate != nil) {
+                switch (event.code) {
+                    case Yodo1MasAdvertEventCodeOpened: {
+                        if ([delegate respondsToSelector:@selector(onAdvertOpened:)]) {
+                            [delegate onAdvertOpened:event];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeClosed: {
+                        if ([delegate respondsToSelector:@selector(onAdvertClosed:)]) {
+                            [delegate onAdvertClosed:event];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeError: {
+                        if ([delegate respondsToSelector:@selector(onAdvertError:error:)]) {
+                            [delegate onAdvertError:event error:event.error];
+                        }
+                        break;
+                    }
+                }
+            }
+            break;
+        }
+        case Yodo1MasAdvertTypeBanner: {
+            id delegate = self.bannerAdvertDelegate;
+            if (delegate != nil) {
+                switch (event.code) {
+                    case Yodo1MasAdvertEventCodeOpened: {
+                        if ([delegate respondsToSelector:@selector(onAdvertOpened:)]) {
+                            [delegate onAdvertOpened:event];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeClosed: {
+                        if ([delegate respondsToSelector:@selector(onAdvertClosed:)]) {
+                            [delegate onAdvertClosed:event];
+                        }
+                        break;
+                    }
+                    case Yodo1MasAdvertEventCodeError: {
+                        if ([delegate respondsToSelector:@selector(onAdvertError:error:)]) {
+                            [delegate onAdvertError:event error:event.error];
+                        }
+                        break;
+                    }
+                }
+            }
+            break;
         }
     }
 }
@@ -383,9 +463,9 @@
     [self loadAdvert:self.masNetworkConfig.reward type:Yodo1MasAdvertTypeReward];
 }
 
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+- (void)showRewardAdvert {
     Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.reward : nil;
-    [self showAdvert:controller config:config type:Yodo1MasAdvertTypeReward callback:callback];
+    [self showAdvert:config type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 插屏广告
@@ -397,9 +477,9 @@
     [self loadAdvert:self.masNetworkConfig.interstitial type:Yodo1MasAdvertTypeInterstitial];
 }
 
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+- (void)showInterstitialAdvert {
     Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.interstitial : nil;
-    [self showAdvert:controller config:config type:Yodo1MasAdvertTypeReward callback:callback];
+    [self showAdvert:config type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 横幅广告
@@ -411,9 +491,13 @@
     [self loadAdvert:self.masNetworkConfig.banner type:Yodo1MasAdvertTypeBanner];
 }
 
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+- (void)showBannerAdvert {
     Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.banner : nil;
-    [self showAdvert:controller config:config type:Yodo1MasAdvertTypeReward callback:callback];
+    [self showAdvert:config type:Yodo1MasAdvertTypeReward];
+}
+
+- (void)showBannerAdvert:(Yodo1MasBannerAlign)align {
+    
 }
 
 @end

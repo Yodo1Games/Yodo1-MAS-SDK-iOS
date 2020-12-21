@@ -86,12 +86,12 @@
     }
 }
 
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:controller callback:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
-        if (controller == nil) {
-            controller == [Yodo1MasVungleAdapter getTopViewController];
-        }
+        
+        UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
+        
         if (controller != nil) {
             NSError *error = nil;
             BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:self.rewardPlacementId error:&error];
@@ -121,12 +121,12 @@
     }
 }
 
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:controller callback:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showInterstitialAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
-        if (controller == nil) {
-            controller == [Yodo1MasVungleAdapter getTopViewController];
-        }
+        
+        UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
+        
         if (controller != nil) {
             NSError *error = nil;
             BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:self.interstitialPlacementId error:&error];
@@ -147,9 +147,9 @@
     
 }
 
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:controller callback:callback];
-    if ([self isCanShow:controller callback:callback]) {
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:callback];
+    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         
     }
 }

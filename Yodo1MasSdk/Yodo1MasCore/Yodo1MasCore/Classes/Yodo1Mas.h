@@ -14,11 +14,38 @@ typedef void (^Yodo1MasInitSuccessful)(void);
 typedef void (^Yodo1MasInitFail)(Yodo1MasError *);
 typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 
+@protocol Yodo1MasAdvertDelegate <NSObject>
+
+@optional
+- (void)onAdvertOpened:(Yodo1MasAdvertEvent *)event;
+- (void)onAdvertClosed:(Yodo1MasAdvertEvent *)event;
+- (void)onAdvertError:(Yodo1MasAdvertEvent *)event error:(Yodo1MasError *)error;
+
+@end
+
+@protocol Yodo1MasRewardAdvertDelegate <NSObject, Yodo1MasAdvertDelegate>
+
+@optional
+- (void)onAdvertRewardEarned:(Yodo1MasAdvertEvent *)event;
+
+@end
+
+@protocol Yodo1MasInterstitialAdvertDelegate <NSObject, Yodo1MasAdvertDelegate>
+
+@end
+
+@protocol Yodo1MasBannerAdvertDelegate <NSObject, Yodo1MasAdvertDelegate>
+
+@end
+
 @interface Yodo1Mas : NSObject
 
 @property (nonatomic, assign) BOOL isGDPRUserConsent;
 @property (nonatomic, assign) BOOL isCOPPAAgeRestricted;
 @property (nonatomic, assign) BOOL isCCPADoNotSell;
+@property (nonatomic, weak) id<Yodo1MasRewardAdvertDelegate> rewardAdvertDelegate;
+@property (nonatomic, weak) id<Yodo1MasInterstitialAdvertDelegate> interstitialAdvertDelegate;
+@property (nonatomic, weak) id<Yodo1MasBannerAdvertDelegate> bannerAdvertDelegate;
 
 + (Yodo1Mas *)sharedInstance;
 + (instancetype)new NS_UNAVAILABLE;
@@ -27,13 +54,14 @@ typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;
 
 - (BOOL)isRewardAdvertLoaded;
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)showRewardAdvert;
 
 - (BOOL)isInterstitialAdvertLoaded;
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)showInterstitialAdvert;
 
 - (BOOL)isBannerAdvertLoaded;
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)showBannerAdvert;
+- (void)showBannerAdvert:(Yodo1MasBannerAlign)align;
 
 @end
 
