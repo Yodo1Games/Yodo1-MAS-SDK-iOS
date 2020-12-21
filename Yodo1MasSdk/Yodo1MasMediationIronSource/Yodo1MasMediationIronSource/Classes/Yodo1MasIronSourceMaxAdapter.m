@@ -62,12 +62,12 @@
     if (![self isInitSDK]) return;
 }
 
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:controller callback:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showRewardAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
-        if (controller == nil) {
-            controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
-        }
+        
+        UIViewController *controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
+        
         if (controller != nil) {
             [IronSource showRewardedVideoWithViewController:controller];
         }
@@ -118,12 +118,10 @@
     [IronSource loadInterstitial];
 }
 
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:controller callback:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showInterstitialAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
-        if (controller == nil) {
-            controller == [Yodo1MasIronSourceMaxAdapter getTopViewController];
-        }
+        UIViewController *controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
         if (controller != nil) {
             [IronSource showInterstitialWithViewController:controller];
         }
@@ -170,8 +168,8 @@
     
 }
 
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:controller callback:callback];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:callback];
 }
 
 #pragma mark - ISBannerDelegate

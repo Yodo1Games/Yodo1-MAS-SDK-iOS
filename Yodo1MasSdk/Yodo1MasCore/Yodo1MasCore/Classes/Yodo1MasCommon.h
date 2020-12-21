@@ -34,4 +34,13 @@ typedef enum {
     Yodo1MasErrorCodeAdvertShowFail = -2006
 } Yodo1MasErrorCode;
 
+typedef enum {
+    Yodo1MasBannerAlignLeft = 1,
+    Yodo1MasBannerAlignHorizontalCenter = 1 << 1,
+    Yodo1MasBannerAlignRight = 1 << 2,
+    Yodo1MasBannerAlignTop = 1 << 3,
+    Yodo1MasBannerAlignVerticalCenter = 1 << 4,
+    Yodo1MasBannerAlignBottom = 1 << 5
+} Yodo1MasBannerAlign;
+
 #endif /* Yodo1MasCommon_h */

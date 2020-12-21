@@ -70,18 +70,18 @@
     }
 }
 
-- (void)showAdvert:(UIViewController *)controller type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
+- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
     switch (type) {
         case Yodo1MasAdvertTypeReward: {
-            [self showRewardAdvert:controller callback:callback];
+            [self showRewardAdvert:callback];
             break;
         }
         case Yodo1MasAdvertTypeInterstitial: {
-            [self showInterstitialAdvert:controller callback:callback];
+            [self showInterstitialAdvert:callback];
             break;
         }
         case Yodo1MasAdvertTypeBanner: {
-            [self showBannerAdvert:controller callback:callback];
+            [self showBannerAdvert:callback];
             break;
         }
     }
@@ -150,7 +150,7 @@
     
 }
 
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
     _rewardCallback = callback;
 }
 
@@ -163,7 +163,7 @@
     
 }
 
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
     _interstitialCallback = callback;
 }
 
@@ -177,7 +177,7 @@
     
 }
 
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
     _bannerCallback = callback;
 }
 

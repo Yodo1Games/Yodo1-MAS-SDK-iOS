@@ -67,12 +67,12 @@
     }
 }
 
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:controller callback:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showRewardAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
-        if (controller == nil) {
-            controller == [Yodo1MasFacebookAdapter getTopViewController];
-        }
+        
+        UIViewController * controller = [Yodo1MasFacebookAdapter getTopViewController];
+        
         if (controller != nil) {
             [self.rewardAd showAdFromRootViewController:controller animated:YES];
         }
@@ -125,12 +125,12 @@
     }
 }
 
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:controller callback:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showInterstitialAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
-        if (controller == nil) {
-            controller == [Yodo1MasFacebookAdapter getTopViewController];
-        }
+        
+        UIViewController *controller = [Yodo1MasFacebookAdapter getTopViewController];
+        
         if (controller != nil) {
             [self.interstitialAd showAdFromRootViewController:controller];
         }
@@ -173,8 +173,8 @@
     }
 }
 
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:controller callback:callback];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showBannerAdvert:callback];
 }
 
 #pragma mark - FBAdViewDelegate

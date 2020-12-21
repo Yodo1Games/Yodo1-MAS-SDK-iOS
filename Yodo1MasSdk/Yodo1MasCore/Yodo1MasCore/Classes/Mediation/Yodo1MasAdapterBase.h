@@ -43,7 +43,7 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
 - (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type;
 - (void)loadAdvert:(Yodo1MasAdvertType)type;
-- (void)showAdvert:(UIViewController *)controller type:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
+- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
 - (BOOL)isCanShow:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
 - (void)callbackWithEvent:(Yodo1MasAdvertEventCode)code type:(Yodo1MasAdvertType)type;
 - (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdvertType)type;
@@ -51,17 +51,17 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded;
 - (void)loadRewardAdvert;
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback;
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded;
 - (void)loadInterstitialAdvert;
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback;
 
 #pragma mark - 插屏广告
 - (BOOL)isBannerAdvertLoaded;
 - (void)loadBannerAdvert;
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback;
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback;
 - (void)dismissBannerAdvert;
 
 + (UIWindow *)getTopWindow;

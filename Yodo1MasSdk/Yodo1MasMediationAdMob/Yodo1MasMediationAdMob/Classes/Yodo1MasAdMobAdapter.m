@@ -96,12 +96,10 @@
     }
 }
 
-- (void)showRewardAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:controller callback:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showRewardAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
-        if (controller == nil) {
-            controller = [Yodo1MasAdMobAdapter getTopViewController];
-        }
+        UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         if (controller != nil) {
             [self.rewardAd presentFromRootViewController:controller delegate:self];
         }
@@ -147,13 +145,13 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
     }
 }
 
-- (void)showInterstitialAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:controller callback:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
+    [super showInterstitialAdvert:callback];
     
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
-        if (controller == nil) {
-            controller = [Yodo1MasAdMobAdapter getTopViewController];
-        }
+        
+        UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
+        
         if (controller != nil) {
             [self.interstitialAd presentFromRootViewController:controller];
         }
@@ -194,9 +192,10 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
     }
 }
 
-- (void)showBannerAdvert:(UIViewController *)controller callback:(Yodo1MasAdvertCallback)callback {
-    [self showBannerAdvert:controller callback:callback];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
+    [self showBannerAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         if (controller != nil) {
             self.bannerView.rootViewController = controller;
             self.bannerView.frame = CGRectMake(0, controller.view.bounds.size.height - 50, controller.view.bounds.size.width, 50);
