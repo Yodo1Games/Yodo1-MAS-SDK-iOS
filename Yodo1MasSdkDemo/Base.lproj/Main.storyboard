@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="请输入AppId" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qov-rk-RX4">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1yLpy8IMte" borderStyle="bezel" placeholder="请输入AppId" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qov-rk-RX4">
                                 <rect key="frame" x="15" y="64" width="384" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="QBq-8G-CPp"/>
@@ -95,38 +95,48 @@
                                     <action selector="onBannerClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="dmo-RH-swx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtV-Lj-H0F">
+                                <rect key="frame" x="15" y="214" width="384" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="xT3-sH-UYd"/>
+                                </constraints>
+                                <state key="normal" title="AppLovin Mediation Debugger"/>
+                                <connections>
+                                    <action selector="onAppLovinMediationDebuggerClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="iWN-RT-OLD"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set GDPR User Consent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxG-0F-XML">
-                                <rect key="frame" x="15" y="229" width="183.5" height="21"/>
+                                <rect key="frame" x="15" y="275" width="183.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzj-8R-cfZ">
-                                <rect key="frame" x="350" y="224" width="51" height="31"/>
+                                <rect key="frame" x="350" y="270" width="51" height="31"/>
                                 <connections>
                                     <action selector="onGDPRChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="vrl-7J-snW"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set COPPA Age Restricted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KA-Dl-Arx">
-                                <rect key="frame" x="15" y="280" width="201.5" height="21"/>
+                                <rect key="frame" x="15" y="324" width="201.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBX-Bt-WWG">
-                                <rect key="frame" x="350" y="275" width="51" height="31"/>
+                                <rect key="frame" x="350" y="319" width="51" height="31"/>
                                 <connections>
                                     <action selector="onCOPPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="hcM-nG-bl2"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set CCPA Do Not Sell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWd-xF-H4O">
-                                <rect key="frame" x="15" y="331" width="163.5" height="21"/>
+                                <rect key="frame" x="15" y="375" width="163.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eip-RV-By3">
-                                <rect key="frame" x="350" y="326" width="51" height="31"/>
+                                <rect key="frame" x="350" y="370" width="51" height="31"/>
                                 <connections>
                                     <action selector="onCCPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="grg-yo-5ym"/>
                                 </connections>
@@ -135,30 +145,33 @@
                         <viewLayoutGuide key="safeArea" id="74Y-kr-Sam"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="rWd-xF-H4O" firstAttribute="top" secondItem="DxG-0F-XML" secondAttribute="bottom" constant="79" id="0eh-bb-6Xu"/>
+                            <constraint firstItem="DtV-Lj-H0F" firstAttribute="trailing" secondItem="dzj-8R-cfZ" secondAttribute="trailing" id="27K-yL-tk6"/>
+                            <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="9KA-Dl-Arx" secondAttribute="leading" id="2r2-mn-qdM"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="centerY" secondItem="9KA-Dl-Arx" secondAttribute="centerY" id="3Ax-xn-yao"/>
+                            <constraint firstItem="DxG-0F-XML" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DtV-Lj-H0F" secondAttribute="leading" id="4zk-KG-qTz"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rWd-xF-H4O" secondAttribute="trailing" constant="20" id="60Z-eA-Q8J"/>
                             <constraint firstItem="2BR-Fg-cfL" firstAttribute="top" secondItem="vP8-eW-RuD" secondAttribute="bottom" constant="15" id="7ei-f7-2ks"/>
                             <constraint firstItem="vP8-eW-RuD" firstAttribute="top" secondItem="KII-W4-NV3" secondAttribute="bottom" constant="15" id="862-ee-404"/>
                             <constraint firstItem="vP8-eW-RuD" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="8ep-QM-MFR"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="KII-W4-NV3" secondAttribute="trailing" constant="15" id="9eK-2i-MbB"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="eip-RV-By3" secondAttribute="trailing" constant="15" id="AUQ-Ii-79E"/>
-                            <constraint firstItem="dzj-8R-cfZ" firstAttribute="centerY" secondItem="DxG-0F-XML" secondAttribute="centerY" id="FIs-7v-bb4"/>
                             <constraint firstItem="KII-W4-NV3" firstAttribute="top" secondItem="74Y-kr-Sam" secondAttribute="top" constant="20" id="GJ4-mR-ouX"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="qBX-Bt-WWG" secondAttribute="trailing" constant="15" id="Hmk-B0-QwD"/>
-                            <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="KkL-2L-hpB"/>
+                            <constraint firstItem="DtV-Lj-H0F" firstAttribute="top" secondItem="2BR-Fg-cfL" secondAttribute="bottom" constant="15" id="KZv-by-iaj"/>
                             <constraint firstItem="rWd-xF-H4O" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="LME-7i-Cee"/>
-                            <constraint firstItem="DxG-0F-XML" firstAttribute="top" secondItem="2BR-Fg-cfL" secondAttribute="bottom" constant="30" id="Mbu-HN-ZZ8"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9KA-Dl-Arx" secondAttribute="trailing" constant="20" id="PjG-Q0-CTX"/>
+                            <constraint firstItem="dzj-8R-cfZ" firstAttribute="leading" secondItem="DxG-0F-XML" secondAttribute="trailing" constant="151.5" id="Rh5-i2-QnM"/>
                             <constraint firstItem="9KA-Dl-Arx" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="SF5-6H-7BH"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="centerY" secondItem="rWd-xF-H4O" secondAttribute="centerY" id="aly-z6-kAn"/>
-                            <constraint firstItem="9KA-Dl-Arx" firstAttribute="top" secondItem="DxG-0F-XML" secondAttribute="bottom" constant="30" id="cgD-Tp-DaI"/>
+                            <constraint firstItem="DxG-0F-XML" firstAttribute="top" secondItem="DtV-Lj-H0F" secondAttribute="bottom" constant="26" id="dDz-eb-XET"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="2BR-Fg-cfL" secondAttribute="trailing" constant="15" id="dw0-3Z-C77"/>
                             <constraint firstAttribute="trailing" secondItem="vP8-eW-RuD" secondAttribute="trailing" constant="15" id="ei5-wL-pGc"/>
                             <constraint firstItem="KII-W4-NV3" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="gyr-6Q-A52"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="dzj-8R-cfZ" secondAttribute="trailing" constant="15" id="ihZ-9n-bGc"/>
                             <constraint firstItem="2BR-Fg-cfL" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="j3z-DK-BSo"/>
                             <constraint firstItem="rWd-xF-H4O" firstAttribute="top" secondItem="9KA-Dl-Arx" secondAttribute="bottom" constant="30" id="veC-zF-h96"/>
-                            <constraint firstItem="dzj-8R-cfZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DxG-0F-XML" secondAttribute="trailing" constant="20" id="wUE-kt-rsm"/>
+                            <constraint firstItem="qBX-Bt-WWG" firstAttribute="top" secondItem="dzj-8R-cfZ" secondAttribute="bottom" constant="18" id="vv3-YL-fVN"/>
                         </constraints>
                     </view>
                     <connections>

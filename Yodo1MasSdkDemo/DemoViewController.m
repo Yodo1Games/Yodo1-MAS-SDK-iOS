@@ -8,6 +8,7 @@
 #import "DemoViewController.h"
 #import <Yodo1MasCore/Yodo1Mas.h>
 #import <Toast/Toast.h>
+#import <AppLovinSDK/AppLovinSDK.h>
 
 @interface DemoViewController ()
 
@@ -51,6 +52,10 @@
             [weakSelf.view makeToast:event.error.userInfo[NSLocalizedDescriptionKey]];
         }
     }];
+}
+
+- (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
+    [[ALSdk shared] showMediationDebugger];
 }
 
 - (IBAction)onGDPRChanged:(UISwitch *)sender {
