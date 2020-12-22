@@ -163,11 +163,11 @@
 
 - (void)didDisplayAd:(MAAd *)ad {
     Yodo1MasAdvertType type;
-    if (ad.adUnitIdentifier == self.rewardPlacementId) {
+    if (ad.format == MAAdFormat.rewarded) {
         type = Yodo1MasAdvertTypeReward;
-    } else if (ad.adUnitIdentifier == self.interstitialPlacementId) {
+    } else if (ad.format == MAAdFormat.interstitial) {
         type = Yodo1MasAdvertTypeInterstitial;
-    } else if (ad.adUnitIdentifier == self.bannerPlacementId) {
+    } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdvertTypeBanner;
     }
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:type];
@@ -175,16 +175,15 @@
 
 - (void)didHideAd:(MAAd *)ad {
     Yodo1MasAdvertType type;
-    if (ad.adUnitIdentifier == self.rewardPlacementId) {
+    if (ad.format == MAAdFormat.rewarded) {
         type = Yodo1MasAdvertTypeReward;
-        [self loadRewardAdvert];
-    } else if (ad.adUnitIdentifier == self.interstitialPlacementId) {
+    } else if (ad.format == MAAdFormat.interstitial) {
         type = Yodo1MasAdvertTypeInterstitial;
-        [self loadInterstitialAdvert];
-    } else if (ad.adUnitIdentifier == self.bannerPlacementId) {
+    } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdvertTypeBanner;
-        [self loadBannerAdvert];
     }
+    
+    [self loadAdvert:type];
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:type];
 }
 
@@ -194,16 +193,15 @@
 
 - (void)didFailToDisplayAd:(MAAd *)ad withErrorCode:(NSInteger)errorCode {
     Yodo1MasAdvertType type;
-    if (ad.adUnitIdentifier == self.rewardPlacementId) {
+    if (ad.format == MAAdFormat.rewarded) {
         type = Yodo1MasAdvertTypeReward;
-    } else if (ad.adUnitIdentifier == self.interstitialPlacementId) {
+    } else if (ad.format == MAAdFormat.interstitial) {
         type = Yodo1MasAdvertTypeInterstitial;
-    } else if (ad.adUnitIdentifier == self.bannerPlacementId) {
+    } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdvertTypeBanner;
     }
     
     [self loadAdvert:type];
-
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:[NSString stringWithFormat:@"Applovin %@", @(errorCode)]];
     [self callbackWithError:error type:type];
 }
@@ -214,7 +212,7 @@
 }
 
 - (void)didCompleteRewardedVideoForAd:(MAAd *)ad {
-    [self loadRewardAdvert];
+//    [self loadRewardAdvert];
 }
 
 - (void)didRewardUserForAd:(MAAd *)ad withReward:(MAReward *)reward {
