@@ -6,7 +6,7 @@
 //
 
 #import "Yodo1MasAdMobAdapter.h"
-@import GoogleMobileAds;
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #define TAG @"[Yodo1MasAdMobAdapter]"
 

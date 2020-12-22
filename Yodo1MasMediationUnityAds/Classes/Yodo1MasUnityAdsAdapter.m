@@ -6,7 +6,7 @@
 //
 
 #import "Yodo1MasUnityAdsAdapter.h"
-@import UnityAds;
+#import <UnityAds/UnityAds.h>
 
 #define TAG @"[Yodo1MasUnityAdsAdapter]"
 

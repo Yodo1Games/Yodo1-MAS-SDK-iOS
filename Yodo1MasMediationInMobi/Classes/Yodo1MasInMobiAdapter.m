@@ -26,7 +26,7 @@
 }
 
 - (NSString *)sdkVersion {
-    [IMSdk getVersion];
+    return [IMSdk getVersion];
 }
 
 - (NSString *)mediationVersion {
