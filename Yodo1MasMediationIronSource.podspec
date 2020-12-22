@@ -42,7 +42,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore'
+  s.dependency 'Yodo1MasCore', '>= 0.0.0.1-beta'
   s.dependency 'IronSourceSDK','~> 7.0.4.0'
   s.dependency 'IronSourceAdMobAdapter','~> 4.3.17.2'
   s.dependency 'IronSourceAppLovinAdapter','~> 4.3.20.1'
