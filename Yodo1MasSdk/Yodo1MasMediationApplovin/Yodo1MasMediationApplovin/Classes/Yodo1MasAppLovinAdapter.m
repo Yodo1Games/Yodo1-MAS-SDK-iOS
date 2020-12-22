@@ -8,6 +8,8 @@
 #import "Yodo1MasAppLovinAdapter.h"
 @import  AppLovinSDK;
 
+#define TAG @"[Yodo1MasAppLovinAdapter]"
+
 @interface Yodo1MasAppLovinAdapter()<MARewardedAdDelegate, MAAdViewAdDelegate>
 
 @property (nonatomic, strong) ALSdk *sdk;
@@ -41,13 +43,18 @@
         }
         __weak __typeof(self)weakSelf = self;
         [self.sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
-            if (successful != nil) {
-                successful(weakSelf.advertCode);
-            }
+            
+            NSString *message = [NSString stringWithFormat:@"%@: {method:ALSdkInitializationCompletionHandler}"];
+            NSLog(message);
+            
             [weakSelf updatePrivacy];
             [weakSelf loadRewardAdvert];
             [weakSelf loadInterstitialAdvert];
             [weakSelf loadBannerAdvert];
+            
+            if (successful != nil) {
+                successful(weakSelf.advertCode);
+            }
         }];
     } else {
         if (successful != nil) {
@@ -57,10 +64,12 @@
 }
 
 - (BOOL)isInitSDK {
+    [super isInitSDK];
     return self.sdk != nil;
 }
 
 - (void)updatePrivacy {
+    [super updatePrivacy];
     [ALPrivacySettings setHasUserConsent:[Yodo1Mas sharedInstance].isGDPRUserConsent];
     [ALPrivacySettings setIsAgeRestrictedUser:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
     [ALPrivacySettings setDoNotSell:[Yodo1Mas sharedInstance].isCCPADoNotSell];
@@ -68,10 +77,12 @@
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded {
+    [super isRewardAdvertLoaded];
     return self.rewardAd != nil && self.rewardAd.isReady;
 }
 
 - (void)loadRewardAdvert {
+    [super loadRewardAdvert];
     if (![self isInitSDK]) return;
     if (self.rewardAd == nil && self.rewardPlacementId != nil) {
         self.rewardAd = [MARewardedAd sharedWithAdUnitIdentifier:self.rewardPlacementId];
@@ -79,6 +90,8 @@
     }
     
     if (self.rewardAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAdvert, loading reward ad...}"];
+        NSLog(message);
         [self.rewardAd loadAd];
     }
 }
@@ -86,16 +99,20 @@
 - (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
     [super showRewardAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAdvert, show reward ad...}"];
+        NSLog(message);
         [self.rewardAd showAd];
     }
 }
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded {
+    [super isInterstitialAdvertLoaded];
     return self.interstitialAd != nil && self.interstitialAd.isReady;
 }
 
 - (void)loadInterstitialAdvert {
+    [super loadInterstitialAdvert];
     if (![self isInitSDK]) return;
     if (self.interstitialAd == nil && self.interstitialPlacementId != nil) {
         self.interstitialAd = [[MAInterstitialAd alloc] initWithAdUnitIdentifier:self.interstitialPlacementId];
@@ -103,6 +120,8 @@
     }
     
     if (self.interstitialAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAdvert, loading interstitial ad...}"];
+        NSLog(message);
         [self.interstitialAd loadAd];
     }
 }
@@ -110,22 +129,28 @@
 - (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
     [super showInterstitialAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAdvert, show interstitial ad...}"];
+        NSLog(message);
         [self.interstitialAd showAd];
     }
 }
 
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
+    [super isBannerAdvertLoaded];
     return self.bannerView != nil;
 }
 
 - (void)loadBannerAdvert {
+    [super loadBannerAdvert];
     if (![self isInitSDK]) return;
     if (self.bannerView == nil && self.bannerPlacementId != nil) {
         self.bannerView = [[MAAdView alloc] initWithAdUnitIdentifier:self.bannerPlacementId];
         self.bannerView.delegate = self;
     }
     if (self.bannerView != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert, loading banner ad...}"];
+        NSLog(message);
         [self.bannerView loadAd];
     }
 }
@@ -134,6 +159,8 @@
     [super showBannerAdvert:callback];
     
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:, show banner ad...}"];
+        NSLog(message);
         UIViewController *controller = [Yodo1MasAppLovinAdapter getTopViewController];
         if (controller != nil) {
             self.bannerView.frame = CGRectMake(0, controller.view.bounds.size.height - 50, controller.view.bounds.size.width, 50);
@@ -147,6 +174,7 @@
 }
 
 - (void)dismissBannerAdvert {
+    [super dismissBannerAdvert];
     if (self.bannerView != nil) {
         [self.bannerView removeFromSuperview];
     }
@@ -154,11 +182,24 @@
 
 #pragma mark - MAAdDelegate
 - (void)didLoadAd:(MAAd *)ad {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
 }
 
 - (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withErrorCode:(NSInteger)errorCode {
+    Yodo1MasAdvertType type;
+    if (adUnitIdentifier == self.rewardPlacementId) {
+        type = Yodo1MasAdvertTypeReward;
+    } else if (adUnitIdentifier == self.interstitialPlacementId) {
+        type = Yodo1MasAdvertTypeInterstitial;
+    } else if (adUnitIdentifier == self.bannerPlacementId) {
+        type = Yodo1MasAdvertTypeBanner;
+    }
     
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@, error: %@}", adUnitIdentifier, @(errorCode)];
+    NSLog(message);
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    [self callbackWithError:error type:type];
 }
 
 - (void)didDisplayAd:(MAAd *)ad {
@@ -170,7 +211,11 @@
     } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdvertTypeBanner;
     }
+    
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didDisplayAd:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:type];
+    [self loadAdvertDelayed:type];
 }
 
 - (void)didHideAd:(MAAd *)ad {
@@ -184,11 +229,14 @@
     }
     
     [self loadAdvert:type];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didHideAd:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:type];
 }
 
 - (void)didClickAd:(MAAd *)ad {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didClickAd:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
 }
 
 - (void)didFailToDisplayAd:(MAAd *)ad withErrorCode:(NSInteger)errorCode {
@@ -201,30 +249,41 @@
         type = Yodo1MasAdvertTypeBanner;
     }
     
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didFailToDisplayAd:withErrorCode:, ad:%@, error:%@}", ad.adUnitIdentifier, @(errorCode)];
+    NSLog(message);
+    
     [self loadAdvert:type];
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:[NSString stringWithFormat:@"Applovin %@", @(errorCode)]];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
     [self callbackWithError:error type:type];
 }
 
 #pragma mark - MARewardedAdDelegate
 - (void)didStartRewardedVideoForAd:(MAAd *)ad {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didStartRewardedVideoForAd:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
 }
 
 - (void)didCompleteRewardedVideoForAd:(MAAd *)ad {
-//    [self loadRewardAdvert];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didCompleteRewardedVideoForAd:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
 }
 
 - (void)didRewardUserForAd:(MAAd *)ad withReward:(MAReward *)reward {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didRewardUserForAd:withReward:, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - MAAdViewAdDelegate
 - (void)didExpandAd:(MAAd *)ad {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didExpandAd, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
 }
 
 - (void)didCollapseAd:(MAAd *)ad {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didCollapseAd, ad:%@}", ad.adUnitIdentifier];
+    NSLog(message);
     [self loadBannerAdvert];
 }
 

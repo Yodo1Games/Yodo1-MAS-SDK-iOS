@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define DelayTime 120
+
 typedef void(^Yodo1MasAdapterInitSuccessful)(NSString *);
 typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
@@ -43,6 +45,7 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
 - (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type;
 - (void)loadAdvert:(Yodo1MasAdvertType)type;
+- (void)loadAdvertDelayed:(Yodo1MasAdvertType)type;
 - (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
 - (BOOL)isCanShow:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
 - (void)callbackWithEvent:(Yodo1MasAdvertEventCode)code type:(Yodo1MasAdvertType)type;
@@ -51,16 +54,19 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded;
 - (void)loadRewardAdvert;
+- (void)loadRewardAdvertDelayed;
 - (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback;
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded;
 - (void)loadInterstitialAdvert;
+- (void)loadInterstitialAdvertDelayed;
 - (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback;
 
 #pragma mark - 插屏广告
 - (BOOL)isBannerAdvertLoaded;
 - (void)loadBannerAdvert;
+- (void)loadBannerAdvertDelayed;
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback;
 - (void)dismissBannerAdvert;
 

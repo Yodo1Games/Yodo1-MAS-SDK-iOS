@@ -7,6 +7,8 @@
 
 #import "Yodo1MasAdapterBase.h"
 
+#define TAG @"[Yodo1MasAdapterBase]"
+
 @implementation Yodo1MasAdapterConfig
 
 @end
@@ -31,11 +33,14 @@
 }
 
 - (BOOL)isInitSDK {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: isInitSDK}", TAG];
+    NSLog(message);
     return NO;
 }
 
 - (void)updatePrivacy {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: updatePrivacy}", TAG];
+    NSLog(message);
 }
 
 - (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type {
@@ -65,6 +70,23 @@
         }
         case Yodo1MasAdvertTypeBanner: {
             [self loadBannerAdvert];
+            break;
+        }
+    }
+}
+
+- (void)loadAdvertDelayed:(Yodo1MasAdvertType)type {
+    switch (type) {
+        case Yodo1MasAdvertTypeReward: {
+            [self loadRewardAdvertDelayed];
+            break;
+        }
+        case Yodo1MasAdvertTypeInterstitial: {
+            [self loadInterstitialAdvertDelayed];
+            break;
+        }
+        case Yodo1MasAdvertTypeBanner: {
+            [self loadBannerAdvertDelayed];
             break;
         }
     }
@@ -109,6 +131,8 @@
     if (event == nil) {
         return;
     }
+    NSString *message = [NSString stringWithFormat:@"%@: {method: callbackWtihEvent, event: %@}", TAG, [event getJsonObject]];
+    NSLog(message);
     switch (event.type) {
         case Yodo1MasAdvertTypeReward: {
             if (self.rewardCallback != nil) {
@@ -143,46 +167,74 @@
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: isRewardAdvertLoaded}", TAG];
+    NSLog(message);
     return NO;
 }
 
 - (void)loadRewardAdvert {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAdvert}", TAG];
+    NSLog(message);
+}
+
+- (void)loadRewardAdvertDelayed {
+    [self performSelector:@selector(loadRewardAdvert) withObject:nil afterDelay:DelayTime];
 }
 
 - (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert:}", TAG];
+    NSLog(message);
     _rewardCallback = callback;
 }
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: isInterstitialAdvertLoaded}", TAG];
+    NSLog(message);
     return NO;
 }
 
 - (void)loadInterstitialAdvert {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAdvert}", TAG];
+    NSLog(message);
+}
+
+- (void)loadInterstitialAdvertDelayed {
+    [self performSelector:@selector(loadInterstitialAdvert) withObject:nil afterDelay:DelayTime];
 }
 
 - (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:}", TAG];
+    NSLog(message);
     _interstitialCallback = callback;
 }
 
 
 #pragma mark - 插屏广告
 - (BOOL)isBannerAdvertLoaded {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: isBannerAdvertLoaded}", TAG];
+    NSLog(message);
     return NO;
 }
 
 - (void)loadBannerAdvert {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAdvert}", TAG];
+    NSLog(message);
+}
+
+- (void)loadBannerAdvertDelayed {
+    [self performSelector:@selector(loadBannerAdvert) withObject:nil afterDelay:DelayTime];
 }
 
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: showBannerAdvert:}", TAG];
+    NSLog(message);
     _bannerCallback = callback;
 }
 
 - (void)dismissBannerAdvert {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: dismissBannerAdvert}", TAG];
+    NSLog(message);
 }
 
 #pragma mark - Method

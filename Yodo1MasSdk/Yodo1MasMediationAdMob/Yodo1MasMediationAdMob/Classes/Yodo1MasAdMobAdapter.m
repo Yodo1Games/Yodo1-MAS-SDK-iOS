@@ -8,6 +8,8 @@
 #import "Yodo1MasAdMobAdapter.h"
 @import GoogleMobileAds;
 
+#define TAG @"[Yodo1MasAdMobAdapter]"
+
 @interface Yodo1MasAdMobAdapter()<GADRewardedAdDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 @property (nonatomic, strong) GADMobileAds *sdk;
@@ -43,13 +45,18 @@
         }
         __weak __typeof(self)weakSelf = self;
         [self.sdk startWithCompletionHandler:^(GADInitializationStatus * _Nonnull status) {
-            if (successful != nil) {
-                successful(weakSelf.advertCode);
-            }
+            
             [weakSelf updatePrivacy];
             [weakSelf loadRewardAdvert];
             [weakSelf loadInterstitialAdvert];
             [weakSelf loadBannerAdvert];
+            
+            if (successful != nil) {
+                successful(weakSelf.advertCode);
+            }
+            
+            NSString *message = [NSString stringWithFormat:@"%@: {method: GADInitializationCompletionHandler, status: %@}", TAG, status];
+            NSLog(message);
         }];
     } else {
         if (successful != nil) {
@@ -59,6 +66,7 @@
 }
 
 - (BOOL)isInitSDK {
+    [super isInitSDK];
     if (self.sdk == nil) {
         return NO;
     } else {
@@ -69,6 +77,7 @@
 }
 
 - (void)updatePrivacy {
+    [super updatePrivacy];
     [[NSUserDefaults standardUserDefaults] setBool:[Yodo1Mas sharedInstance].isGDPRUserConsent forKey:@"gad_npa"];
     [[GADMobileAds sharedInstance].requestConfiguration tagForChildDirectedTreatment:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
     [[GADMobileAds sharedInstance].requestConfiguration tagForUnderAgeOfConsent:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
@@ -78,6 +87,7 @@
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded {
+    [super isRewardAdvertLoaded];
     return self.rewardAd != nil && self.rewardAd.isReady;
 }
 
@@ -90,8 +100,17 @@
     }
     
     if (self.rewardAd != nil) {
-        [self.rewardAd loadRequest:[GADRequest request] completionHandler:^(GADRequestError * _Nullable error) {
-                    
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAdvert, loading reward ad...}", TAG];
+        NSLog(message);
+        
+        __weak __typeof(self)weakSelf = self;
+        [self.rewardAd loadRequest:[GADRequest request] completionHandler:^(GADRequestError * _Nullable adError) {
+            if (adError != nil) {
+                NSString *message = [NSString stringWithFormat:@"%@:{method: GADRewardedAdLoadCompletionHandler, error: %@}", TAG, adError];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+                [weakSelf callbackWithError:error type:Yodo1MasAdvertTypeReward];
+                [weakSelf loadRewardAdvertDelayed];
+            }
         }];
     }
 }
@@ -101,6 +120,8 @@
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         if (controller != nil) {
+            NSString *message = [NSString stringWithFormat:@"%@:{method: showRewardAdvert, show reward ad...}", TAG];
+            NSLog(message);
             [self.rewardAd presentFromRootViewController:controller delegate:self];
         }
     }
@@ -109,31 +130,46 @@
 #pragma mark - GADRewardedAdDelegate
 - (void)rewardedAd:(nonnull GADRewardedAd *)rewardedAd
 didFailToPresentWithError:(nonnull NSError *)adMobError {
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:adMobError.localizedDescription];
+    
+    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedAd:didFailToPresentWithError:, reward:%@, error: %@}", TAG, rewardedAd.adUnitID, adMobError];
+    NSLog(message);
+    
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
     [self loadRewardAdvert];
 }
 
 - (void)rewardedAdDidPresent:(nonnull GADRewardedAd *)rewardedAd {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedAdDidPresent:, reward: %@}", TAG, rewardedAd.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedAdDidDismiss:(nonnull GADRewardedAd *)rewardedAd {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedAdDidDismiss:, reward: %@}", TAG, rewardedAd.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
     [self loadRewardAdvert];
 }
 
 - (void)rewardedAd:(nonnull GADRewardedAd *)rewardedAd
  userDidEarnReward:(nonnull GADAdReward *)reward {
+    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedAd:userDidEarnReward:, reward: %@}", TAG, rewardedAd.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded {
+    [super isInterstitialAdvertLoaded];
     return self.interstitialAd != nil && self.interstitialAd.isReady;
 }
 
 - (void)loadInterstitialAdvert {
+    [super loadInterstitialAdvert];
     if (![self isInitSDK]) return;
     
     if (self.interstitialPlacementId != nil) {
@@ -141,6 +177,8 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
         self.interstitialAd.delegate = self;
     }
     if (self.interstitialAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@:{method:loadInterstitialAdvert, loading interstitial ad...}", TAG];
+        NSLog(message);
         [self.interstitialAd loadRequest:[GADRequest request]];
     }
 }
@@ -151,35 +189,66 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         
         UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
-        
         if (controller != nil) {
+            NSString *message = [NSString stringWithFormat:@"%@:{method:showInterstitialAdvert:, show interstitial ad...}", TAG];
+            NSLog(message);
             [self.interstitialAd presentFromRootViewController:controller];
         }
     }
 }
 
 #pragma mark - GADInterstitialDelegate
+- (void)interstitialDidReceiveAd:(nonnull GADInterstitial *)ad {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:interstitialDidReceiveAd, ad: %@}", TAG, ad.adUnitID];
+    NSLog(message);
+}
+
+- (void)interstitial:(nonnull GADInterstitial *)ad
+didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:interstitialDidReceiveAd:, ad: %@, error: %@}", TAG, ad.adUnitID, adError];
+    NSLog(message);
+    
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+}
+
 - (void)interstitialWillPresentScreen:(nonnull GADInterstitial *)ad {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:interstitialDidReceiveAd:, ad: %@}", TAG, ad.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)interstitialDidFailToPresentScreen:(nonnull GADInterstitial *)ad {
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:@"show interstitial ad failed"];
+    NSString *message = [NSString stringWithFormat:@"%@:{method:interstitialDidFailToPresentScreen:, ad: %@, show interstitial ad failed}", TAG, ad.adUnitID];
+    NSLog(message);
+    
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
 - (void)interstitialDidDismissScreen:(nonnull GADInterstitial *)ad {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:interstitialDidDismissScreen:, ad: %@}", TAG, ad.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
+- (void)interstitialWillDismissScreen:(GADInterstitial *)ad {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:interstitialWillDismissScreen:, ad: %@}", TAG, ad.adUnitID];
+    NSLog(message);
+}
+
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
+    [super isBannerAdvertLoaded];
     return self.bannerView != nil;
 }
 
 - (void)loadBannerAdvert {
+    [super loadBannerAdvert];
     if (![self isInitSDK]) return;
     if (self.bannerView == nil && self.bannerPlacementId != nil) {
         self.bannerView == [[GADBannerView alloc]
@@ -188,6 +257,8 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
         self.bannerView.delegate = self;
     }
     if (self.bannerView != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@:{method:loadBannerAdvert:, loading banner ad...}", TAG];
+        NSLog(message);
         [self.bannerView loadRequest:[GADRequest request]];
     }
 }
@@ -195,6 +266,9 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
     [self showBannerAdvert:callback];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@:{method:showBannerAdvert:, show banner ad...}", TAG];
+        NSLog(message);
+        
         UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         if (controller != nil) {
             self.bannerView.rootViewController = controller;
@@ -217,19 +291,29 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
 
 #pragma mark - GADBannerViewDelegate
 - (void)adViewDidReceiveAd:(nonnull GADBannerView *)bannerView {
-    
+    NSString *message = [NSString stringWithFormat:@"%@:{method:adViewDidReceiveAd:, banner: %@}", TAG, bannerView.adUnitID];
+    NSLog(message);
 }
 
 - (void)adView:(nonnull GADBannerView *)bannerView
-didFailToReceiveAdWithError:(nonnull GADRequestError *)error {
-    
+didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:adView:didFailToReceiveAdWithError:, banner: %@, error: %@}", TAG, bannerView.adUnitID, adError];
+    NSLog(message);
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
 }
 
 - (void)adViewWillPresentScreen:(nonnull GADBannerView *)bannerView {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:adViewWillPresentScreen:, banner: %@}", TAG, bannerView.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
 }
 
 - (void)adViewDidDismissScreen:(nonnull GADBannerView *)bannerView {
+    NSString *message = [NSString stringWithFormat:@"%@:{method:adViewDidDismissScreen:, banner: %@}", TAG, bannerView.adUnitID];
+    NSLog(message);
+    
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeBanner];
     [self loadBannerAdvert];
 }
