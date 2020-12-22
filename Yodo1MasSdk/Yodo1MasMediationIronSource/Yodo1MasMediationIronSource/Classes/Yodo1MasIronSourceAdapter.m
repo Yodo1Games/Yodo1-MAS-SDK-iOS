@@ -51,7 +51,7 @@
                 successful(self.advertCode);
             }
         } else {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}"];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",TAG];
             NSLog(message);
             if (fail != nil) {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertUninitialized message:message];
@@ -86,7 +86,7 @@
     [super loadRewardAdvert];
     if (![self isInitSDK]) return;
     if (self.rewardPlacementId != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@:{method: loadRewardAdvert, loading reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAdvert, loading reward ad...}", TAG];
         NSLog(message);
         [IronSource loadISDemandOnlyRewardedVideo:self.rewardPlacementId];
     }
@@ -97,7 +97,7 @@
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@:{method: showRewardAdvert, show reward ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert, show reward ad...}", TAG];
             NSLog(message);
             [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
@@ -106,12 +106,12 @@
 
 #pragma mark - ISDemandOnlyRewardedVideoDelegate
 - (void)rewardedVideoDidLoad:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoDidLoad:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidLoad:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
 }
 
 - (void)rewardedVideoDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoDidFailToLoadWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidFailToLoadWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, adError];
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
@@ -119,19 +119,19 @@
 }
 
 - (void)rewardedVideoDidOpen:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoDidOpen:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidOpen:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedVideoDidClose:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoDidClose:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidClose:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
 }
 
 - (void)rewardedVideoDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoDidFailToShowWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, ironSourceError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidFailToShowWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, ironSourceError];
     NSLog(message);
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
@@ -140,12 +140,12 @@
 }
 
 - (void)rewardedVideoDidClick:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoDidClick:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidClick:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
 }
 
 - (void)rewardedVideoAdRewarded:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: rewardedVideoAdRewarded:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoAdRewarded:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
 }
@@ -160,7 +160,7 @@
     [super loadInterstitialAdvert];
     if (![self isInitSDK]) return;
     if (self.interstitialPlacementId != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@:{method: loadInterstitialAdvert, loading interstitial ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAdvert, loading interstitial ad...}", TAG];
         NSLog(message);
         [IronSource loadISDemandOnlyInterstitial:self.interstitialPlacementId];
     }
@@ -171,7 +171,7 @@
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@:{method: showInterstitialAdvert:, show interstitial ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:, show interstitial ad...}", TAG];
             NSLog(message);
             [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
@@ -180,12 +180,12 @@
 
 #pragma mark - ISDemandOnlyInterstitialDelegate
 - (void)interstitialDidLoad:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: interstitialDidLoad:, show instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidLoad:, show instanceId: %@}", TAG, instanceId];
     NSLog(message);
 }
 
 - (void)interstitialDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: interstitialDidFailToLoadWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidFailToLoadWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, adError];
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
@@ -193,21 +193,21 @@
 }
 
 - (void)interstitialDidOpen:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: interstitialDidOpen:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidOpen:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)interstitialDidClose:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: interstitialDidClose:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidClose:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
 }
 
 - (void)interstitialDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
     
-    NSString *message = [NSString stringWithFormat:@"%@:{method: interstitialDidFailToShowWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, ironSourceError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidFailToShowWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, ironSourceError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
@@ -216,7 +216,7 @@
 }
 
 - (void)didClickInterstitial:(NSString *)instanceId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: didClickInterstitial:, instanceId: %@}", TAG, instanceId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: didClickInterstitial:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
 }
 
@@ -236,12 +236,12 @@
 
 #pragma mark - ISBannerDelegate
 - (void)bannerDidLoad:(ISBannerView *)bannerView {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: bannerDidLoad:, banner: %@}", TAG, bannerView];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidLoad:, banner: %@}", TAG, bannerView];
     NSLog(message);
 }
 
 - (void)bannerDidFailToLoadWithError:(NSError *)adError {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: bannerDidFailToLoadWithError:, error: %@}", TAG, adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidFailToLoadWithError:, error: %@}", TAG, adError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
@@ -249,22 +249,22 @@
 }
 
 - (void)didClickBanner {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: didClickBanner}", TAG];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: didClickBanner}", TAG];
     NSLog(message);
 }
 
 - (void)bannerWillPresentScreen {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: bannerWillPresentScreen}", TAG];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerWillPresentScreen}", TAG];
     NSLog(message);
 }
 
 - (void)bannerDidDismissScreen {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: bannerDidDismissScreen}", TAG];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidDismissScreen}", TAG];
     NSLog(message);
 }
 
 - (void)bannerWillLeaveApplication {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: bannerWillLeaveApplication}", TAG];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerWillLeaveApplication}", TAG];
     NSLog(message);
 }
 

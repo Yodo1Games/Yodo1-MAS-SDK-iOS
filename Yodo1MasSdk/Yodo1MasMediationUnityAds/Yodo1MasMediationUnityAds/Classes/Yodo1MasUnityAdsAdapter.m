@@ -37,7 +37,7 @@
         if (config.appId != nil && config.appId.length > 0) {
             [UnityAds initialize:config.appId initializationDelegate:self];
         } else {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}"];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",TAG];
             NSLog(message);
             if (fail != nil) {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertUninitialized message:message];
@@ -53,7 +53,7 @@
 
 #pragma mark - UnityAdsInitializationDelegate
 - (void)initializationComplete {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: initializationComplete, init successful}", TAG];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: initializationComplete, init successful}", TAG];
     NSLog(message);
     
     [self updatePrivacy];
@@ -66,7 +66,7 @@
 }
 
 - (void)initializationFailed:(UnityAdsInitializationError)adError withMessage:(NSString *)adMessage {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: initializationFailed:withMessage:, error: %@, message: %@}", TAG, @(adError), adMessage];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: initializationFailed:withMessage:, error: %@, message: %@}", TAG, @(adError), adMessage];
     NSLog(message);
     
     if (self.initFailCallback != nil) {
@@ -98,7 +98,7 @@
     [super loadRewardAdvert];
     if (![self isInitSDK]) return;
     if (self.rewardPlacementId != nil && self.rewardPlacementId.length > 0) {
-        NSString *message = [NSString stringWithFormat:@"%@:{method: loadRewardAdvert, loading reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAdvert, loading reward ad...}", TAG];
         NSLog(message);
         [UnityAds load:self.rewardPlacementId loadDelegate:self];
     }
@@ -109,7 +109,7 @@
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasUnityAdsAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@:{method: showRewardAdvert, show reward ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert, show reward ad...}", TAG];
             NSLog(message);
             [UnityAds show:controller placementId:self.rewardPlacementId];
         }
@@ -126,7 +126,7 @@
     [super loadInterstitialAdvert];
     if (![self isInitSDK]) return;
     if (self.interstitialPlacementId != nil && self.interstitialPlacementId.length > 0) {
-        NSString *message = [NSString stringWithFormat:@"%@:{method: loadInterstitialAdvert, loading interstitial ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAdvert, loading interstitial ad...}", TAG];
         NSLog(message);
         [UnityAds load:self.interstitialPlacementId loadDelegate:self];
     }
@@ -137,7 +137,7 @@
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasUnityAdsAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@:{method: showInterstitialAdvert, show interstitial ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert, show interstitial ad...}", TAG];
             NSLog(message);
             [UnityAds show:controller placementId:self.interstitialPlacementId];
         }
@@ -163,12 +163,12 @@
 
 #pragma mark - UnityAdsLoadDelegate
 - (void)unityAdsAdLoaded:(NSString *)placementId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsAdLoaded:, placementId: %@}", TAG, placementId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsAdLoaded:, placementId: %@}", TAG, placementId];
     NSLog(message);
 }
 
 - (void)unityAdsAdFailedToLoad:(NSString *)placementId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsAdFailedToLoad:, placementId: %@}", TAG, placementId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsAdFailedToLoad:, placementId: %@}", TAG, placementId];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
@@ -183,12 +183,12 @@
 
 #pragma mark - UnityAdsDelegate
 - (void)unityAdsReady:(NSString *)placementId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsReady:, placementId: %@}", TAG, placementId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsReady:, placementId: %@}", TAG, placementId];
     NSLog(message);
 }
 
 - (void)unityAdsDidError:(UnityAdsError)adError withMessage:(NSString *)adMessage {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsDidError:withMessage:, error: %@, message: %@}", TAG, @(adError), adMessage];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsDidError:withMessage:, error: %@, message: %@}", TAG, @(adError), adMessage];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
@@ -197,7 +197,7 @@
 }
 
 - (void)unityAdsDidStart:(NSString *)placementId {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsDidStart:, placementId: %@}", TAG, placementId];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsDidStart:, placementId: %@}", TAG, placementId];
     NSLog(message);
     
     if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
@@ -209,7 +209,7 @@
 
 - (void)unityAdsDidFinish:(NSString *)placementId
           withFinishState:(UnityAdsFinishState)state {
-    NSString *message = [NSString stringWithFormat:@"%@:{method: unityAdsDidFinish:, placementId: %@, state: %@}", TAG, placementId, @(state)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsDidFinish:, placementId: %@, state: %@}", TAG, placementId, @(state)];
     NSLog(message);
     
     switch (state) {
