@@ -35,9 +35,9 @@ TODO: Add long description of the pod here.
   s.source_files = 'Yodo1MasMediationIronSource/Classes/**/*'
   
 #  s.ios.vendored_frameworks = "Yodo1MasMediationIronSource/Framework/*.framework"
-  s.resource_bundles = {
-    'Yodo1MasMediationIronSource' => ['Yodo1MasMediationIronSource/Assets/*']
-  }
+#  s.resource_bundles = {
+#    'Yodo1MasMediationIronSource' => ['Yodo1MasMediationIronSource/Assets/*']
+#  }
   # s.resources = 'Yodo1MasMediationIronSource/Assets/*.strings', 'Yodo1MasMediationIronSource/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's

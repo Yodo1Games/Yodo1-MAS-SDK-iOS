@@ -34,9 +34,9 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Yodo1MasMediationUnityAds/Classes/**/*'
   
-  s.resource_bundles = {
-    'Yodo1MasMediationUnityAds' => ['Yodo1MasMediationUnityAds/Assets/*']
-  }
+#  s.resource_bundles = {
+#    'Yodo1MasMediationUnityAds' => ['Yodo1MasMediationUnityAds/Assets/*']
+#  }
   # s.resources = 'Yodo1MasMediationUnityAds/Assets/*.strings', 'Yodo1MasMediationUnityAds/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's

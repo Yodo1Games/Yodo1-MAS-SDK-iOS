@@ -34,9 +34,9 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Yodo1MasMediationTapjoy/Classes/**/*'
   
-  s.resource_bundles = {
-    'Yodo1MasMediationTapjoy' => ['Yodo1MasMediationTapjoy/Assets/*']
-  }
+#  s.resource_bundles = {
+#    'Yodo1MasMediationTapjoy' => ['Yodo1MasMediationTapjoy/Assets/*']
+#  }
   # s.resources = 'Yodo1MasMediationTapjoy/Assets/*.strings', 'Yodo1MasMediationTapjoy/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's

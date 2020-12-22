@@ -34,9 +34,9 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Yodo1MasMediationFacebook/Classes/**/*'
   
-  s.resource_bundles = {
-    'Yodo1MasMediationFacebook' => ['Yodo1MasMediationFacebook/Assets/*']
-  }
+#  s.resource_bundles = {
+#    'Yodo1MasMediationFacebook' => ['Yodo1MasMediationFacebook/Assets/*']
+#  }
   # s.resources = 'Yodo1MasMediationFacebook/Assets/*.strings', 'Yodo1MasMediationFacebook/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
