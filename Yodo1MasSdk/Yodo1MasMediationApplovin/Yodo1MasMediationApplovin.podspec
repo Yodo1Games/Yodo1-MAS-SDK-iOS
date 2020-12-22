@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasMediationApplovin/Assets/*.strings', 'Yodo1MasMediationApplovin/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
-  # s.frameworks = 'UIKit'
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
   s.dependency 'AppLovinSDK','~> 6.14.6'
   s.dependency 'AppLovinMediationGoogleAdapter','~> 7.67.1.5'

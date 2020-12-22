@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasMediationTapjoy/Assets/*.strings', 'Yodo1MasMediationTapjoy/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
-  # s.frameworks = 'UIKit'
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
   s.dependency 'TapjoySDK','~> 12.7.1'
   

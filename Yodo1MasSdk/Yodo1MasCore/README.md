@@ -1,4 +1,4 @@
-# QSKit
+# Yodo1MasCore
 
 [![CI Status](https://img.shields.io/travis/yodo1/Yodo1MasCore.svg?style=flat)](https://travis-ci.org/yodo1/Yodo1MasCore)
 [![Version](https://img.shields.io/cocoapods/v/Yodo1MasCore.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasCore)

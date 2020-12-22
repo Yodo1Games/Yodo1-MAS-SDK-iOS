@@ -1,4 +1,4 @@
-# QSKit
+# Yodo1MasUnityAds
 
 [![CI Status](https://img.shields.io/travis/yodo1/Yodo1MasUnityAds.svg?style=flat)](https://travis-ci.org/yodo1/Yodo1MasUnityAds)
 [![Version](https://img.shields.io/cocoapods/v/Yodo1MasUnityAds.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasUnityAds)

@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasMediationIronSource/Assets/*.strings', 'Yodo1MasMediationIronSource/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
-  # s.frameworks = 'UIKit'
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
   s.dependency 'IronSourceSDK','~> 7.0.4.0'
   s.dependency 'IronSourceAdMobAdapter','~> 4.3.17.2'

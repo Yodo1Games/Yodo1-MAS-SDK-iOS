@@ -1,4 +1,4 @@
-# QSKit
+# Yodo1MasFacebook
 
 [![CI Status](https://img.shields.io/travis/yodo1/Yodo1MasFacebook.svg?style=flat)](https://travis-ci.org/yodo1/Yodo1MasFacebook)
 [![Version](https://img.shields.io/cocoapods/v/Yodo1MasFacebook.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasFacebook)

@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasMediationFacebook/Assets/*.strings', 'Yodo1MasMediationFacebook/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
-  # s.frameworks = 'UIKit'
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
   s.dependency 'FBAudienceNetwork','~> 6.2.0'
   

@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasMediationAdMob/Assets/*.strings', 'Yodo1MasMediationAdMob/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit'
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
   s.dependency 'Google-Mobile-Ads-SDK','~> 7.66.0'
   # s.dependency 'GoogleMobileAdsMediationAppLovin' #,'6.14.9.0'

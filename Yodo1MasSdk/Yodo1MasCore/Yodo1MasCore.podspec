@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasCore/Assets/*.strings', 'Yodo1MasCore/Assets/*.xcassets'
 
   s.public_header_files = 'Yodo1MasCore/Classes/**/*.h'
-  # s.frameworks = 'UIKit'
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'AFNetworking'
   s.dependency 'YYModel'
   

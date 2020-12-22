@@ -1,4 +1,4 @@
-# QSKit
+# Yodo1MasInMobi
 
 [![CI Status](https://img.shields.io/travis/yodo1/Yodo1MasInMobi.svg?style=flat)](https://travis-ci.org/yodo1/Yodo1MasInMobi)
 [![Version](https://img.shields.io/cocoapods/v/Yodo1MasInMobi.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasInMobi)

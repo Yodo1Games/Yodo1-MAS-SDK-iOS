@@ -40,8 +40,7 @@ TODO: Add long description of the pod here.
   # s.resources = 'Yodo1MasMediationUnityAds/Assets/*.strings', 'Yodo1MasMediationUnityAds/Assets/*.xcassets'
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
-  # s.frameworks = 'UIKit'
-  
+  s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
   s.dependency 'UnityAds','~> 3.5.1'
   
