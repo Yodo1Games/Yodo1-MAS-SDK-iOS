@@ -479,7 +479,7 @@
 
 - (void)showInterstitialAdvert {
     Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.interstitial : nil;
-    [self showAdvert:config type:Yodo1MasAdvertTypeReward];
+    [self showAdvert:config type:Yodo1MasAdvertTypeInterstitial];
 }
 
 #pragma mark - 横幅广告
@@ -493,7 +493,7 @@
 
 - (void)showBannerAdvert {
     Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.banner : nil;
-    [self showAdvert:config type:Yodo1MasAdvertTypeReward];
+    [self showAdvert:config type:Yodo1MasAdvertTypeBanner];
 }
 
 - (void)showBannerAdvert:(Yodo1MasBannerAlign)align {
