@@ -7,6 +7,7 @@ inhibit_all_warnings!
 target "Yodo1MasSdkDemo" do
 
 pod 'Toast'
+pod 'Masonry'
 
 # 开发时打开
 pod 'Yodo1MasMediationAdMob', :path => '../Yodo1MasSdkDemo'

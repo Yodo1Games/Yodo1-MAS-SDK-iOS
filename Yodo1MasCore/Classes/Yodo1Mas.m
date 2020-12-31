@@ -60,7 +60,12 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
 #ifdef DEBUG
-    [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
+    NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
+    if (api != nil && api.length > 0) {
+        [url appendString:api];
+    } else {
+        [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
+    }
     parameters[@"country"] = [NSLocale currentLocale].countryCode;
 #else
     [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
@@ -72,6 +77,14 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         Yodo1MasResponse *res = [Yodo1MasResponse yy_modelWithJSON:responseObject];
+#ifdef DEBUG
+        // Mock
+        NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
+        if (res.data == nil && api != nil && api.length > 0) {
+            res.data = responseObject;
+        }
+#endif
+        
         if (res != nil && res.data != nil) {
             Yodo1MasInitData *data = [Yodo1MasInitData yy_modelWithJSON:res.data];
             weakSelf.masInitConfig = data.mas_init_config;

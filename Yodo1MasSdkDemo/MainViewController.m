@@ -6,10 +6,11 @@
 //
 
 #import "MainViewController.h"
+#import "MockViewController.h"
 #import <Yodo1MasCore/Yodo1Mas.h>
 #import <Toast/Toast.h>
 
-@interface MainViewController ()<UITextFieldDelegate>
+@interface MainViewController ()<UITextFieldDelegate, MockViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 @property (weak, nonatomic) IBOutlet UIButton *enterButton;
@@ -29,30 +30,39 @@
         return;
     }
     
-    self.inputField.enabled = NO;
-    self.enterButton.enabled = NO;
-    [self.enterButton setTitle:@"SDK初始化..." forState:UIControlStateNormal];
-    __weak __typeof(self)weakSelf = self;
-    [[Yodo1Mas sharedInstance] initWithAppId:appId successful:^{
-        weakSelf.inputField.enabled = YES;
-        weakSelf.enterButton.enabled = YES;
-        [weakSelf.enterButton setTitle:@"确定" forState:UIControlStateNormal];
-        
-        UIViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DemoViewController"];
-        [weakSelf showViewController:controller sender:nil];
-    } fail:^(NSError * _Nonnull error) {
-        weakSelf.inputField.enabled = YES;
-        weakSelf.enterButton.enabled = YES;
-        [weakSelf.enterButton setTitle:@"确定" forState:UIControlStateNormal];
-        [weakSelf.view makeToast:@""];
-        NSLog(@"初始化错误 - %@", error.localizedDescription);
-    }];
+    MockViewController *mockVC = [[MockViewController alloc] initWithSourceView:sender];
+    mockVC.delegate = self;
+    [self presentViewController:mockVC animated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self onEnterClicked:self.enterButton];
     return NO;
+}
+
+#pragma mark - MockViewControllerDelegate
+- (void)onMockSelected:(NSInteger)index {
+    
+    NSString *appId = [_inputField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.inputField.enabled = NO;
+    self.enterButton.enabled = NO;
+    [self.enterButton setTitle:@"SDK init..." forState:UIControlStateNormal];
+    __weak __typeof(self)weakSelf = self;
+    [[Yodo1Mas sharedInstance] initWithAppId:appId successful:^{
+        weakSelf.inputField.enabled = YES;
+        weakSelf.enterButton.enabled = YES;
+        [weakSelf.enterButton setTitle:@"Confirm" forState:UIControlStateNormal];
+
+        UIViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DemoViewController"];
+        [weakSelf showViewController:controller sender:nil];
+    } fail:^(NSError * _Nonnull error) {
+        weakSelf.inputField.enabled = YES;
+        weakSelf.enterButton.enabled = YES;
+        [weakSelf.enterButton setTitle:@"Confirm" forState:UIControlStateNormal];
+        [weakSelf.view makeToast:@""];
+        NSLog(@"初始化错误 - %@", error.localizedDescription);
+    }];
 }
 
 @end
