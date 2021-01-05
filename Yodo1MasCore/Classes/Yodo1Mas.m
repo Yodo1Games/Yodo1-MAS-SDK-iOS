@@ -11,6 +11,10 @@
 #import "Yodo1MasResponse.h"
 #import "Yodo1MasInitData.h"
 #import "Yodo1MasAdapterBase.h"
+#if defined(__IPHONE_14_0)
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#endif
+#import <AdSupport/AdSupport.h>
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
@@ -53,9 +57,15 @@
 }
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+#if defined(__IPHONE_14_0)
+    if (@available(iOS 14, *)) {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            
+        }];
+    }
+#endif
     
     __weak __typeof(self)weakSelf = self;
-    
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
@@ -338,7 +348,25 @@
     return adapters;
 }
 
-- (void)showAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdvertType)type {
+- (void)showAdvert:(Yodo1MasAdvertType)type {
+    [self showAdvert:type object:nil];
+}
+
+- (void)showAdvert:(Yodo1MasAdvertType)type object: (NSDictionary *)object {
+    Yodo1MasNetworkAdvert *config = nil;
+    switch (type) {
+        case Yodo1MasAdvertTypeReward:
+            config = self.masNetworkConfig != nil ? self.masNetworkConfig.reward : nil;
+            break;
+        case Yodo1MasAdvertTypeInterstitial:
+            config = self.masNetworkConfig != nil ? self.masNetworkConfig.interstitial : nil;
+            break;
+        case Yodo1MasAdvertTypeBanner:
+            config = self.masNetworkConfig != nil ? self.masNetworkConfig.banner : nil;
+            break;
+    }
+    
+    
     if (config != nil) {
         NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
         __weak Yodo1MasAdvertCallback block = ^(Yodo1MasAdvertEvent *event) {
@@ -351,7 +379,7 @@
                 case Yodo1MasAdvertEventCodeError: {
                     [adapters removeObjectAtIndex:0];
                     if (adapters.count > 0) {
-                        [adapters.firstObject showAdvert:type callback:block];
+                        [adapters.firstObject showAdvert:type callback:block object:object];
                     } else {
                         [self callbackWithEvent:event];
                     }
@@ -364,7 +392,7 @@
             }
         };
         if (adapters.count > 0) {
-            [adapters.firstObject showAdvert:type callback:block];
+            [adapters.firstObject showAdvert:type callback:block object:object];
         } else {
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertAadpterNull message:@"ad adapters is null"];
             Yodo1MasAdvertEvent *event = [[Yodo1MasAdvertEvent alloc] initWithCode:Yodo1MasAdvertEventCodeError type:type message:@"" error:error];
@@ -477,8 +505,7 @@
 }
 
 - (void)showRewardAdvert {
-    Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.reward : nil;
-    [self showAdvert:config type:Yodo1MasAdvertTypeReward];
+    [self showAdvert:Yodo1MasAdvertTypeReward];
 }
 
 #pragma mark - 插屏广告
@@ -491,8 +518,7 @@
 }
 
 - (void)showInterstitialAdvert {
-    Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.interstitial : nil;
-    [self showAdvert:config type:Yodo1MasAdvertTypeInterstitial];
+    [self showAdvert:Yodo1MasAdvertTypeInterstitial];
 }
 
 #pragma mark - 横幅广告
@@ -505,12 +531,11 @@
 }
 
 - (void)showBannerAdvert {
-    Yodo1MasNetworkAdvert *config = self.masNetworkConfig != nil ? self.masNetworkConfig.banner : nil;
-    [self showAdvert:config type:Yodo1MasAdvertTypeBanner];
+    [self showBannerAdvert:Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter];
 }
 
 - (void)showBannerAdvert:(Yodo1MasBannerAlign)align {
-    
+    [self showAdvert:Yodo1MasAdvertTypeBanner object:@{KeyBannerAlign : @(align)}];
 }
 
 @end

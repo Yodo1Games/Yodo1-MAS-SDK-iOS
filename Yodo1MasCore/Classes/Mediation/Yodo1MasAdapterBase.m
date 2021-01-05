@@ -92,7 +92,7 @@
     }
 }
 
-- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback {
+- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
     switch (type) {
         case Yodo1MasAdvertTypeReward: {
             [self showRewardAdvert:callback];
@@ -103,7 +103,11 @@
             break;
         }
         case Yodo1MasAdvertTypeBanner: {
-            [self showBannerAdvert:callback];
+            Yodo1MasBannerAlign align = Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter;
+            if (object != nil && object[KeyBannerAlign] != nil) {
+                align = [object[KeyBannerAlign] integerValue];
+            }
+            [self showBannerAdvert:callback align:align];
             break;
         }
     }
@@ -227,6 +231,10 @@
 }
 
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
+    [self showBannerAdvert:callback align:Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter];
+}
+
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
     NSString *message = [NSString stringWithFormat:@"%@: {method: showBannerAdvert:}", TAG];
     NSLog(message);
     _bannerCallback = callback;

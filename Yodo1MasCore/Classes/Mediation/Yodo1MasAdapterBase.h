@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define DelayTime 120
+#define KeyBannerAlign      @"BannerAlign"
 
 typedef void(^Yodo1MasAdapterInitSuccessful)(NSString *);
 typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
@@ -46,7 +47,7 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 - (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type;
 - (void)loadAdvert:(Yodo1MasAdvertType)type;
 - (void)loadAdvertDelayed:(Yodo1MasAdvertType)type;
-- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
+- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object;
 - (BOOL)isCanShow:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
 - (void)callbackWithEvent:(Yodo1MasAdvertEventCode)code type:(Yodo1MasAdvertType)type;
 - (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdvertType)type;
@@ -68,6 +69,7 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 - (void)loadBannerAdvert;
 - (void)loadBannerAdvertDelayed;
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback;
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align;
 - (void)dismissBannerAdvert;
 
 + (UIWindow *)getTopWindow;

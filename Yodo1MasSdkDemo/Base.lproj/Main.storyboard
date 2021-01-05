@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1yLpy8IMte" borderStyle="bezel" placeholder="请输入AppId" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qov-rk-RX4">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1yLpy8IMte" borderStyle="bezel" placeholder="Please enter AppId" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qov-rk-RX4">
                                 <rect key="frame" x="15" y="64" width="384" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="QBq-8G-CPp"/>
@@ -149,7 +149,7 @@
                             <constraint firstItem="DtV-Lj-H0F" firstAttribute="trailing" secondItem="dzj-8R-cfZ" secondAttribute="trailing" id="27K-yL-tk6"/>
                             <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="9KA-Dl-Arx" secondAttribute="leading" id="2r2-mn-qdM"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="centerY" secondItem="9KA-Dl-Arx" secondAttribute="centerY" id="3Ax-xn-yao"/>
-                            <constraint firstItem="DxG-0F-XML" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DtV-Lj-H0F" secondAttribute="leading" id="4zk-KG-qTz"/>
+                            <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="DtV-Lj-H0F" secondAttribute="leading" id="4zk-KG-qTz"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rWd-xF-H4O" secondAttribute="trailing" constant="20" id="60Z-eA-Q8J"/>
                             <constraint firstItem="2BR-Fg-cfL" firstAttribute="top" secondItem="vP8-eW-RuD" secondAttribute="bottom" constant="15" id="7ei-f7-2ks"/>
                             <constraint firstItem="vP8-eW-RuD" firstAttribute="top" secondItem="KII-W4-NV3" secondAttribute="bottom" constant="15" id="862-ee-404"/>
@@ -161,7 +161,7 @@
                             <constraint firstItem="DtV-Lj-H0F" firstAttribute="top" secondItem="2BR-Fg-cfL" secondAttribute="bottom" constant="15" id="KZv-by-iaj"/>
                             <constraint firstItem="rWd-xF-H4O" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="LME-7i-Cee"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9KA-Dl-Arx" secondAttribute="trailing" constant="20" id="PjG-Q0-CTX"/>
-                            <constraint firstItem="dzj-8R-cfZ" firstAttribute="leading" secondItem="DxG-0F-XML" secondAttribute="trailing" constant="151.5" id="Rh5-i2-QnM"/>
+                            <constraint firstItem="dzj-8R-cfZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DxG-0F-XML" secondAttribute="trailing" constant="20" id="Rh5-i2-QnM"/>
                             <constraint firstItem="9KA-Dl-Arx" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="SF5-6H-7BH"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="centerY" secondItem="rWd-xF-H4O" secondAttribute="centerY" id="aly-z6-kAn"/>
                             <constraint firstItem="DxG-0F-XML" firstAttribute="top" secondItem="DtV-Lj-H0F" secondAttribute="bottom" constant="26" id="dDz-eb-XET"/>

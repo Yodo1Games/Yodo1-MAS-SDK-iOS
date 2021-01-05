@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B9057A4E259D6CF1002CE73C /* MockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9057A4D259D6CF1002CE73C /* MockViewController.m */; };
+		B97FA73E25A3478C003BD4F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B97FA74025A3478C003BD4F0 /* InfoPlist.strings */; };
 		CB0E403325787EF7000ACB94 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0E403225787EF7000ACB94 /* MainViewController.m */; };
 		CB0E403C25787F61000ACB94 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0E403B25787F61000ACB94 /* DemoViewController.m */; };
 		CBC4766A256D466A00DB3CAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC47669256D466A00DB3CAF /* AppDelegate.m */; };
@@ -49,6 +50,10 @@
 		B8CC976DFB01613967BE3B80 /* Pods-Yodo1MasSdkDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemoTests/Pods-Yodo1MasSdkDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9057A4C259D6CF1002CE73C /* MockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockViewController.h; sourceTree = "<group>"; };
 		B9057A4D259D6CF1002CE73C /* MockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockViewController.m; sourceTree = "<group>"; };
+		B950DEC825A3316300C7AC2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		B950DEC925A3316300C7AC2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B97FA73F25A3478C003BD4F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B97FA74425A347A0003BD4F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BA3C5FC38978C02AF644AC4C /* libPods-Yodo1MasSdkDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yodo1MasSdkDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4950EEBDC757E58396699FF /* Pods-Yodo1MasSdkDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemoTests.release.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemoTests/Pods-Yodo1MasSdkDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB0E403125787EF7000ACB94 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -159,6 +164,7 @@
 				CBC47676256D466E00DB3CAF /* LaunchScreen.storyboard */,
 				CBC47674256D466E00DB3CAF /* Assets.xcassets */,
 				CBC47679256D466E00DB3CAF /* Info.plist */,
+				B97FA74025A3478C003BD4F0 /* InfoPlist.strings */,
 				CBC4767A256D466E00DB3CAF /* main.m */,
 			);
 			path = Yodo1MasSdkDemo;
@@ -270,6 +276,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = CBC4765C256D466A00DB3CAF;
 			productRefGroup = CBC47666256D466A00DB3CAF /* Products */;
@@ -289,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBC47678256D466E00DB3CAF /* LaunchScreen.storyboard in Resources */,
+				B97FA73E25A3478C003BD4F0 /* InfoPlist.strings in Resources */,
 				CBC47675256D466E00DB3CAF /* Assets.xcassets in Resources */,
 				CBC47673256D466A00DB3CAF /* Main.storyboard in Resources */,
 			);
@@ -441,10 +449,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B97FA74025A3478C003BD4F0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B97FA73F25A3478C003BD4F0 /* en */,
+				B97FA74425A347A0003BD4F0 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CBC47671256D466A00DB3CAF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CBC47672256D466A00DB3CAF /* Base */,
+				B950DEC825A3316300C7AC2E /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -453,6 +471,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CBC47677256D466E00DB3CAF /* Base */,
+				B950DEC925A3316300C7AC2E /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -464,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -523,6 +543,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
