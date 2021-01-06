@@ -263,8 +263,8 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
-    [self showBannerAdvert:callback];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
+    [self showBannerAdvert:callback align:align];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:, show banner ad...}", TAG];
         NSLog(message);

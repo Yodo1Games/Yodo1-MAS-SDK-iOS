@@ -1,6 +1,6 @@
 #use_frameworks!
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/Yodo1Games/MAS-Spec.git'
+# source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
 platform :ios, '9.0'
 inhibit_all_warnings!
@@ -19,6 +19,7 @@ pod 'Yodo1MasMediationTapjoy', :path => '../Yodo1MasSdkDemo'
 pod 'Yodo1MasMediationUnityAds', :path => '../Yodo1MasSdkDemo'
 pod 'Yodo1MasMediationVungle', :path => '../Yodo1MasSdkDemo'
 pod 'Yodo1MasCore', :path => '../Yodo1MasSdkDemo'
+pod 'Yodo1MasSDK', :path => '../Yodo1MasSdkDemo'
 
 # 开发时注释
 #pod 'Yodo1MasSDK', '~> 0.0.0.1-beta'

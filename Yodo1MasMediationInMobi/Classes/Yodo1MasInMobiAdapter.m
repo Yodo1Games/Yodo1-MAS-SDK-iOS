@@ -171,8 +171,8 @@
     [super loadBannerAdvert];
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:callback];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
+    [super showBannerAdvert:callback align:align];
 }
 
 #pragma mark - IMInterstitialDelegate

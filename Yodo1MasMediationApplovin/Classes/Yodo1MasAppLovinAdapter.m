@@ -155,8 +155,8 @@
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:callback];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
+    [super showBannerAdvert:callback align:align];
     
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:, show banner ad...}", TAG];
