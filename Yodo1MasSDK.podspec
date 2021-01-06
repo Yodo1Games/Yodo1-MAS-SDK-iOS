@@ -32,23 +32,23 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   # s.static_framework = true
 
-  s.source_files = 'Yodo1MasSDK/Classes/**/*'
+  #s.source_files = 'Yodo1MasSDK/Classes/**/*'
   
 #  s.resource_bundles = {
 #    'Yodo1MasSDK' => ['Yodo1MasSDK/Assets/*']
 #  }
   # s.resources = 'Yodo1MasSDK/Assets/*.strings', 'Yodo1MasSDK/Assets/*.xcassets'
 
-  s.public_header_files = 'Yodo1MasSDK/Classes/**/*.h'
+  #s.public_header_files = 'Yodo1MasSDK/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationAdMob'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationApplovin'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationIronSource'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationFacebook'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationInMobi'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationTapjoy'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationUnityAds'#, '~> 0.0.0.1-beta'
-  s.dependency 'Yodo1MasMediationVungle'#, '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasCore', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationAdMob', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationApplovin', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationIronSource', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationFacebook', '~> 0.0.0.1-beta'
+  #s.dependency 'Yodo1MasMediationInMobi', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationTapjoy', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationUnityAds', '~> 0.0.0.1-beta'
+  s.dependency 'Yodo1MasMediationVungle', '~> 0.0.0.1-beta'
   
 end
