@@ -1,6 +1,13 @@
 name: iOS starter workflow
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
+    tags-ignore:
+      # Ignore all tags as we do not want
+      # to trigger this workflow by a release.
+      - '**'
 
 jobs:
   build:
