@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) FBRewardedVideoAd *rewardAd;
 @property (nonatomic, strong) FBInterstitialAd *interstitialAd;
-@property (nonatomic, strong) FBAdView *bannerView;
+@property (nonatomic, strong) FBAdView *bannerAd;
 
 @end
 
@@ -199,25 +199,38 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
     [super isBannerAdvertLoaded];
-    return self.bannerView != nil && self.bannerView.isAdValid;
+    return self.bannerAd != nil && self.bannerAd.isAdValid;
 }
 
 - (void)loadBannerAdvert {
     [super loadBannerAdvert];
     if (![self isInitSDK]) return;
     
-    if (self.bannerView == nil && self.bannerPlacementId != nil) {
-        self.bannerView = [[FBAdView alloc] initWithPlacementID:self.bannerPlacementId adSize:kFBAdSizeHeight50Banner rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
+    if (self.bannerAd == nil && self.bannerPlacementId != nil) {
+        self.bannerAd = [[FBAdView alloc] initWithPlacementID:self.bannerPlacementId adSize:kFBAdSizeHeight50Banner rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
+        self.bannerAd.delegate = self;
     }
-    if (self.bannerView != nil) {
+    if (self.bannerAd != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert:, loading banner ad...}",TAG];
         NSLog(message);
-        [self.bannerView loadAd];
+        [self.bannerAd loadAd];
     }
 }
 
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
     [super showBannerAdvert:callback align:align];
+    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}",TAG];
+        NSLog(message);
+        UIViewController *controller = [Yodo1MasFacebookAdapter getTopViewController];
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+    }
+}
+
+- (void)dismissBannerAdvert {
+    [super dismissBannerAdvert];
+    [Yodo1MasBanner removeBanner:self.bannerAd];
+    self.bannerAd = nil;
 }
 
 #pragma mark - FBAdViewDelegate

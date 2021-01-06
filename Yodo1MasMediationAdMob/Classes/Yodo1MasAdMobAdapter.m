@@ -15,7 +15,7 @@
 @property (nonatomic, strong) GADMobileAds *sdk;
 @property (nonatomic, strong) GADRewardedAd *rewardAd;
 @property (nonatomic, strong) GADInterstitial *interstitialAd;
-@property (nonatomic, strong) GADBannerView *bannerView;
+@property (nonatomic, strong) GADBannerView *bannerAd;
 
 @end
 
@@ -107,6 +107,8 @@
         [self.rewardAd loadRequest:[GADRequest request] completionHandler:^(GADRequestError * _Nullable adError) {
             if (adError != nil) {
                 NSString *message = [NSString stringWithFormat:@"%@:{method: GADRewardedAdLoadCompletionHandler, error: %@}", TAG, adError];
+                NSLog(message);
+
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
                 [weakSelf callbackWithError:error type:Yodo1MasAdvertTypeReward];
                 [weakSelf loadRewardAdvertDelayed];
@@ -244,22 +246,22 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
     [super isBannerAdvertLoaded];
-    return self.bannerView != nil;
+    return self.bannerAd != nil;
 }
 
 - (void)loadBannerAdvert {
     [super loadBannerAdvert];
     if (![self isInitSDK]) return;
-    if (self.bannerView == nil && self.bannerPlacementId != nil) {
-        self.bannerView == [[GADBannerView alloc]
+    if (self.bannerAd == nil && self.bannerPlacementId != nil) {
+        self.bannerAd == [[GADBannerView alloc]
                             initWithAdSize:kGADAdSizeSmartBannerPortrait];
-        self.bannerView.adUnitID = self.bannerPlacementId;
-        self.bannerView.delegate = self;
+        self.bannerAd.adUnitID = self.bannerPlacementId;
+        self.bannerAd.delegate = self;
     }
-    if (self.bannerView != nil) {
+    if (self.bannerAd != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert:, loading banner ad...}", TAG];
         NSLog(message);
-        [self.bannerView loadRequest:[GADRequest request]];
+        [self.bannerAd loadRequest:[GADRequest request]];
     }
 }
 
@@ -271,22 +273,16 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
         
         UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         if (controller != nil) {
-            self.bannerView.rootViewController = controller;
-            self.bannerView.frame = CGRectMake(0, controller.view.bounds.size.height - 50, controller.view.bounds.size.width, 50);
-            [controller.view addSubview:self.bannerView];
-        } else {
-            UIWindow *window = [Yodo1MasAdMobAdapter getTopWindow];
-            self.bannerView.frame = CGRectMake(0, window.bounds.size.height - 50, window.bounds.size.width, 50);
-            [window addSubview:self.bannerView];
+            self.bannerAd.rootViewController = controller;
         }
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
     }
 }
 
 - (void)dismissBannerAdvert {
     [super dismissBannerAdvert];
-    if (self.bannerView) {
-        [self.bannerView removeFromSuperview];
-    }
+    [Yodo1MasBanner removeBanner:self.bannerAd];
+    self.bannerAd = nil;
 }
 
 #pragma mark - GADBannerViewDelegate
@@ -301,6 +297,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
+    [self loadBannerAdvertDelayed];
 }
 
 - (void)adViewWillPresentScreen:(nonnull GADBannerView *)bannerView {

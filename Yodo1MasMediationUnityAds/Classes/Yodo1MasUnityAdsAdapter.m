@@ -6,11 +6,13 @@
 //
 
 #import "Yodo1MasUnityAdsAdapter.h"
-#import <UnityAds/UnityAds.h>
+@import UnityAds;
 
 #define TAG @"[Yodo1MasUnityAdsAdapter]"
 
-@interface Yodo1MasUnityAdsAdapter()<UnityAdsInitializationDelegate, UnityAdsLoadDelegate, UnityAdsDelegate>
+@interface Yodo1MasUnityAdsAdapter()<UnityAdsInitializationDelegate, UnityAdsLoadDelegate, UnityAdsDelegate, UADSBannerViewDelegate>
+
+@property (nonatomic, strong) UADSBannerView *bannerAd;
 
 @end
 
@@ -147,18 +149,38 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
     [super isBannerAdvertLoaded];
-    return NO;
+    return self.bannerPlacementId != nil && self.bannerAd != nil;
 }
 
 - (void)loadBannerAdvert {
     [super loadBannerAdvert];
+    if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0 && self.bannerAd == nil) {
+        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:self.bannerPlacementId size:CGSizeMake(320, 50)];
+        self.bannerAd.delegate = self;
+    }
+    if (self.bannerAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert:, loading banner ad...}", TAG];
+        NSLog(message);
+        [self.bannerAd load];
+    }
 }
 
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
     [super showBannerAdvert:callback align:align];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
-        
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}", TAG];
+        NSLog(message);
+        UIViewController *controller = [Yodo1MasUnityAdsAdapter getTopViewController];
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
     }
+}
+
+- (void)dismissBannerAdvert {
+    [super dismissBannerAdvert];
+    [Yodo1MasBanner removeBanner:self.bannerAd];
+    self.bannerAd = nil;
+    [self loadBannerAdvert];
 }
 
 #pragma mark - UnityAdsLoadDelegate
@@ -233,6 +255,32 @@
             break;
         }
     }
+}
+
+#pragma mark - UADSBannerViewDelegate
+- (void)bannerViewDidLoad:(UADSBannerView *)bannerView {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidLoad:, id: %@}", TAG, bannerView.placementId];
+    NSLog(message);
+}
+
+- (void)bannerViewDidClick:(UADSBannerView *)bannerView {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidClick:, id: %@}", TAG, bannerView.placementId];
+    NSLog(message);
+}
+
+- (void)bannerViewDidLeaveApplication:(UADSBannerView *)bannerView {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidLeaveApplication:, id: %@}", TAG, bannerView.placementId];
+    NSLog(message);
+}
+
+- (void)bannerViewDidError:(UADSBannerView *)bannerView error:(UADSBannerError *)adError {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidError:error:, id: %@, error: %@}", TAG, bannerView.placementId, adError];
+    NSLog(message);
+
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
+
+    [self loadRewardAdvertDelayed];
 }
 
 @end

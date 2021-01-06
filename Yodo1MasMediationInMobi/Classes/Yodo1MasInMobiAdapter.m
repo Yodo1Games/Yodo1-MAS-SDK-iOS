@@ -10,12 +10,12 @@
 
 #define TAG @"[Yodo1MasInMobiAdapter]"
 
-@interface Yodo1MasInMobiAdapter()<IMInterstitialDelegate>
+@interface Yodo1MasInMobiAdapter()<IMInterstitialDelegate, IMBannerDelegate>
 
 @property (nonatomic, assign) BOOL sdkInit;
 @property (nonatomic, strong) IMInterstitial *rewardAd;
 @property (nonatomic, strong) IMInterstitial *interstitialAd;
-@property (nonatomic, strong) IMBanner *bannerView;
+@property (nonatomic, strong) IMBanner *bannerAd;
 
 @end
 
@@ -161,18 +161,38 @@
 }
 
 #pragma mark - 横幅广告
-
 - (BOOL)isBannerAdvertLoaded {
     [super isBannerAdvertLoaded];
-    return NO;
+    return self.bannerPlacementId != nil && self.bannerAd != nil;
 }
 
 - (void)loadBannerAdvert {
     [super loadBannerAdvert];
+    if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0 && self.bannerAd == nil) {
+        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, 320, 50) placementId:[self.bannerPlacementId longLongValue] delegate:self];
+    }
+
+    if (self.bannerAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert:, loading banner ad...}",TAG];
+        NSLog(message);
+        [self.bannerAd load];
+    }
 }
 
 - (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
     [super showBannerAdvert:callback align:align];
+    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}",TAG];
+        NSLog(message);
+        UIViewController *controller = [Yodo1MasInMobiAdapter getTopViewController];
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+    }
+}
+
+- (void)dismissBannerAdvert {
+    [super dismissBannerAdvert];
+    [Yodo1MasBanner removeBanner:self.bannerAd];
+    self.bannerAd = nil;
 }
 
 #pragma mark - IMInterstitialDelegate
@@ -281,8 +301,87 @@
     }
 }
 
-- (void)userWillLeaveApplicationFromInterstitial:(IMInterstitial*)interstitial {
+- (void)userWillLeaveApplicationFromInterstitial:(IMInterstitial *)interstitial {
     NSString *message = [NSString stringWithFormat:@"%@: {method:userWillLeaveApplicationFromInterstitial:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSLog(message);
+}
+
+#pragma mark - IMBannerDelegate
+-(void)banner:(IMBanner*)banner gotSignals:(NSData *)signals {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:gotSignals:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+}
+
+-(void)banner:(IMBanner *)banner failedToGetSignalsWithError:(IMRequestStatus *)status {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:failedToGetSignalsWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), status];
+    NSLog(message);
+}
+
+-(void)bannerDidFinishLoading:(IMBanner *)banner {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidFinishLoading:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+}
+
+-(void)banner:(IMBanner*)banner didReceiveWithMetaInfo:(IMAdMetaInfo *)info {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didReceiveWithMetaInfo:, ad: %@, info: %@}",TAG, @(banner.placementId), info.creativeID];
+    NSLog(message);
+}
+
+-(void)banner:(IMBanner*)banner didFailToReceiveWithError:(IMRequestStatus *)adError {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToReceiveWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), adError];
+    NSLog(message);
+
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
+    [self loadBannerAdvertDelayed];
+}
+
+-(void)banner:(IMBanner*)banner didFailToLoadWithError:(IMRequestStatus *)adError {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToLoadWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), adError];
+    NSLog(message);
+
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
+    [self loadBannerAdvertDelayed];
+}
+
+-(void)banner:(IMBanner*)banner didInteractWithParams:(NSDictionary *)params {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didInteractWithParams:, ad: %@, params: %@}",TAG, @(banner.placementId), params];
+    NSLog(message);
+}
+
+-(void)userWillLeaveApplicationFromBanner:(IMBanner *)banner {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:userWillLeaveApplicationFromBanner:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+}
+
+-(void)bannerWillPresentScreen:(IMBanner*)banner {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerWillPresentScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+}
+
+-(void)bannerDidPresentScreen:(IMBanner*)banner {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidPresentScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
+}
+
+-(void)bannerWillDismissScreen:(IMBanner*)banner {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerWillDismissScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+}
+
+-(void)bannerDidDismissScreen:(IMBanner*)banner {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidDismissScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSLog(message);
+
+    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeBanner];
+    [self loadBannerAdvert];
+}
+
+-(void)banner:(IMBanner*)banner rewardActionCompletedWithRewards:(NSDictionary *)rewards {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:rewardActionCompletedWithRewards:, ad: %@, rewards: %@}",TAG, @(banner.placementId), rewards];
     NSLog(message);
 }
 
