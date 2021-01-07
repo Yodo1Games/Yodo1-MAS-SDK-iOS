@@ -110,8 +110,8 @@
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showBannerAdvert:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showBannerAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         
         UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
@@ -156,8 +156,8 @@
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showInterstitialAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         
         UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
@@ -203,8 +203,8 @@
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
-    [super showBannerAdvert:callback align:align];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showBannerAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         NSLog([NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}", TAG]);
         NSError *adError;
@@ -217,7 +217,7 @@
             [self loadBannerAdvert];
         } else {
             UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
-            [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+            [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
             [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
         }
     }

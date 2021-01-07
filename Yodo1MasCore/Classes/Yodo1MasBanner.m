@@ -10,7 +10,13 @@
 
 @implementation Yodo1MasBanner
 
-+ (void)showBanner:(UIView *)banner controller:(UIViewController *)controller align:(Yodo1MasBannerAlign)align {
++ (void)showBanner:(UIView *)banner controller:(UIViewController *)controller object:(NSDictionary *)object {
+    
+    Yodo1MasBannerAlign align = Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter;
+    if (object != nil && object[KeyArgumentBannerAlign] != nil) {
+        align = [object[KeyArgumentBannerAlign] integerValue];
+    }
+    
     UIView *superview = controller != nil? controller.view : [Yodo1MasAdapterBase getTopWindow];
     if (superview != nil && banner != nil) {
         CGRect frame = CGRectMake(0, 0, 320, 50);

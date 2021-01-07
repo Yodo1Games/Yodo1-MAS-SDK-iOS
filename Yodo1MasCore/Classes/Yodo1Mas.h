@@ -55,13 +55,18 @@ typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 
 - (BOOL)isRewardAdvertLoaded;
 - (void)showRewardAdvert;
+- (void)showRewardAdvert:(NSString *)placement;
+- (void)dismissRewardAdvert;
 
 - (BOOL)isInterstitialAdvertLoaded;
 - (void)showInterstitialAdvert;
+- (void)showInterstitialAdvert:(NSString *)placement;
+- (void)dismissInterstitialAdvert;
 
 - (BOOL)isBannerAdvertLoaded;
 - (void)showBannerAdvert;
 - (void)showBannerAdvert:(Yodo1MasBannerAlign)align;
+- (void)dismissBannerAdvert;
 
 @end
 

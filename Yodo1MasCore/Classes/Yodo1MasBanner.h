@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Yodo1MasBanner : NSObject
 
-+ (void)showBanner:(UIView *)banner controller:(UIViewController *)controller align:(Yodo1MasBannerAlign)align;
++ (void)showBanner:(UIView *)banner controller:(UIViewController *)controller object:(NSDictionary *)object;
 + (void)removeBanner:(UIView *)banner;
 
 @end

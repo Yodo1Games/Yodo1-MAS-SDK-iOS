@@ -95,19 +95,15 @@
 - (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
     switch (type) {
         case Yodo1MasAdvertTypeReward: {
-            [self showRewardAdvert:callback];
+            [self showRewardAdvert:callback object:object];
             break;
         }
         case Yodo1MasAdvertTypeInterstitial: {
-            [self showInterstitialAdvert:callback];
+            [self showInterstitialAdvert:callback object:object];
             break;
         }
         case Yodo1MasAdvertTypeBanner: {
-            Yodo1MasBannerAlign align = Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter;
-            if (object != nil && object[KeyBannerAlign] != nil) {
-                align = [object[KeyBannerAlign] integerValue];
-            }
-            [self showBannerAdvert:callback align:align];
+            [self showBannerAdvert:callback object:object];
             break;
         }
     }
@@ -185,10 +181,14 @@
     [self performSelector:@selector(loadRewardAdvert) withObject:nil afterDelay:DelayTime];
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert:}", TAG];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert:object:}", TAG];
     NSLog(message);
     _rewardCallback = callback;
+}
+
+- (void)dismissRewardAdvert {
+    
 }
 
 #pragma mark - 插屏广告
@@ -207,14 +207,17 @@
     [self performSelector:@selector(loadInterstitialAdvert) withObject:nil afterDelay:DelayTime];
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:}", TAG];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:object:}", TAG];
     NSLog(message);
     _interstitialCallback = callback;
 }
 
+- (void)dismissInterstitialAdvert {
+    
+}
 
-#pragma mark - 插屏广告
+#pragma mark - 横幅广告
 - (BOOL)isBannerAdvertLoaded {
     NSString *message = [NSString stringWithFormat:@"%@: {method: isBannerAdvertLoaded}", TAG];
     NSLog(message);
@@ -230,12 +233,8 @@
     [self performSelector:@selector(loadBannerAdvert) withObject:nil afterDelay:DelayTime];
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback {
-    [self showBannerAdvert:callback align:Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter];
-}
-
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: showBannerAdvert:}", TAG];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: showBannerAdvert:object:}", TAG];
     NSLog(message);
     _bannerCallback = callback;
 }

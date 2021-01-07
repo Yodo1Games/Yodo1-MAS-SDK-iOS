@@ -117,8 +117,8 @@
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showRewardAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         if (controller != nil) {
@@ -127,6 +127,10 @@
             [self.rewardAd presentFromRootViewController:controller delegate:self];
         }
     }
+}
+
+- (void)dismissRewardAdvert {
+    
 }
 
 #pragma mark - GADRewardedAdDelegate
@@ -185,8 +189,8 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showInterstitialAdvert:callback object:object];
     
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         
@@ -197,6 +201,10 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
             [self.interstitialAd presentFromRootViewController:controller];
         }
     }
+}
+
+- (void)dismissInterstitialAdvert {
+    
 }
 
 #pragma mark - GADInterstitialDelegate
@@ -265,8 +273,8 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
-    [self showBannerAdvert:callback align:align];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [self showBannerAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:, show banner ad...}", TAG];
         NSLog(message);
@@ -275,7 +283,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
         if (controller != nil) {
             self.bannerAd.rootViewController = controller;
         }
-        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
     }
 }
 

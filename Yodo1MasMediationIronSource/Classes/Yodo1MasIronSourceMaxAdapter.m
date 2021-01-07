@@ -81,16 +81,26 @@
     if (![self isInitSDK]) return;
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showRewardAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert:, show reward ad...}", TAG];
             NSLog(message);
-            [IronSource showRewardedVideoWithViewController:controller];
+            
+            NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
+            if (placement != nil && placement.length > 0) {
+                [IronSource showInterstitialWithViewController:controller placement:placement];
+            } else {
+                [IronSource showRewardedVideoWithViewController:controller];
+            }
         }
     }
+}
+
+- (void)dismissRewardAdvert {
+    
 }
 
 #pragma mark - ISRewardedVideoDelegate
@@ -155,16 +165,26 @@
     [IronSource loadInterstitial];
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showInterstitialAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:, show interstitial ad...}", TAG];
             NSLog(message);
-            [IronSource showInterstitialWithViewController:controller];
+            NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
+            if (placement != nil && placement.length > 0) {
+                [IronSource showInterstitialWithViewController:controller placement:placement];
+            } else {
+                [IronSource showInterstitialWithViewController:controller];
+            }
+            
         }
     }
+}
+
+- (void)dismissInterstitialAdvert {
+    
 }
 
 #pragma mark - ISInterstitialDelegate
@@ -228,13 +248,13 @@
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
-    [super showBannerAdvert:callback align:align];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showBannerAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}", TAG];
         NSLog(message);
         UIViewController *controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
-        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
     }
 }
 

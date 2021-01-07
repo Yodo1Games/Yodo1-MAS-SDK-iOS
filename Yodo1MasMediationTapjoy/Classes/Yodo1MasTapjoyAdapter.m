@@ -120,8 +120,8 @@
     [_rewardAd requestContent];
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showRewardAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasTapjoyAdapter getTopViewController];
         if (controller != nil) {
@@ -148,8 +148,8 @@
     [_interstitialAd requestContent];
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showInterstitialAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasTapjoyAdapter getTopViewController];
         if (controller != nil) {
@@ -170,8 +170,8 @@
     [super loadBannerAdvert];
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
-    [super showBannerAdvert:callback align:align];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showBannerAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         
     }

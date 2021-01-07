@@ -93,8 +93,8 @@
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showRewardAdvert:callback];
+- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showRewardAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         if (controller != nil) {
@@ -103,6 +103,10 @@
             [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
     }
+}
+
+- (void)dismissRewardAdvert {
+    
 }
 
 #pragma mark - ISDemandOnlyRewardedVideoDelegate
@@ -169,8 +173,8 @@
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback {
-    [super showInterstitialAdvert:callback];
+- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showInterstitialAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         if (controller != nil) {
@@ -179,6 +183,10 @@
             [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
     }
+}
+
+- (void)dismissInterstitialAdvert {
+    
 }
 
 #pragma mark - ISDemandOnlyInterstitialDelegate
@@ -240,13 +248,13 @@
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback align:(Yodo1MasBannerAlign)align {
-    [super showBannerAdvert:callback align:align];
+- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+    [super showBannerAdvert:callback object:object];
     if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}", TAG];
         NSLog(message);
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
-        [Yodo1MasBanner showBanner:self.bannerAd controller:controller align:align];
+        [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
     }
 }
 

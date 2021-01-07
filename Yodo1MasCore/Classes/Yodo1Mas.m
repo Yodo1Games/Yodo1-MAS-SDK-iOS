@@ -25,6 +25,7 @@
 @property (nonatomic, strong) Yodo1MasInitConfig *masInitConfig;
 @property (nonatomic, strong) Yodo1MasNetworkConfig *masNetworkConfig;
 @property (nonatomic, strong) NSMutableDictionary *mediations;
+@property (nonatomic, strong) Yodo1MasAdapterBase *currentAdapter;
 
 @end
 
@@ -352,7 +353,7 @@
     [self showAdvert:type object:nil];
 }
 
-- (void)showAdvert:(Yodo1MasAdvertType)type object: (NSDictionary *)object {
+- (void)showAdvert:(Yodo1MasAdvertType)type object:(NSDictionary *)object {
     Yodo1MasNetworkAdvert *config = nil;
     switch (type) {
         case Yodo1MasAdvertTypeReward:
@@ -368,6 +369,7 @@
     
     
     if (config != nil) {
+        _currentAdapter = nil;
         NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
         __weak Yodo1MasAdvertCallback block = ^(Yodo1MasAdvertEvent *event) {
             switch (event.code) {
@@ -379,6 +381,7 @@
                 case Yodo1MasAdvertEventCodeError: {
                     [adapters removeObjectAtIndex:0];
                     if (adapters.count > 0) {
+                        _currentAdapter = adapters.firstObject;
                         [adapters.firstObject showAdvert:type callback:block object:object];
                     } else {
                         [self callbackWithEvent:event];
@@ -392,6 +395,7 @@
             }
         };
         if (adapters.count > 0) {
+            _currentAdapter = adapters.firstObject;
             [adapters.firstObject showAdvert:type callback:block object:object];
         } else {
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertAadpterNull message:@"ad adapters is null"];
@@ -508,6 +512,16 @@
     [self showAdvert:Yodo1MasAdvertTypeReward];
 }
 
+- (void)showRewardAdvert:(NSString *)placement {
+    [self showAdvert:Yodo1MasAdvertTypeReward object:@{KeyArgumentPlacement : placement}];
+}
+
+- (void)dismissRewardAdvert {
+    if (_currentAdapter != nil) {
+        [_currentAdapter dismissRewardAdvert];
+    }
+}
+
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded {
     return [self isAdvertLoaded:self.masNetworkConfig.interstitial type:Yodo1MasAdvertTypeInterstitial];
@@ -519,6 +533,16 @@
 
 - (void)showInterstitialAdvert {
     [self showAdvert:Yodo1MasAdvertTypeInterstitial];
+}
+
+- (void)showInterstitialAdvert:(NSString *)placement {
+    [self showAdvert:Yodo1MasAdvertTypeInterstitial object:@{KeyArgumentPlacement : placement}];
+}
+
+- (void)dismissInterstitialAdvert {
+    if (_currentAdapter != nil) {
+        [_currentAdapter dismissInterstitialAdvert];
+    }
 }
 
 #pragma mark - 横幅广告
@@ -535,7 +559,13 @@
 }
 
 - (void)showBannerAdvert:(Yodo1MasBannerAlign)align {
-    [self showAdvert:Yodo1MasAdvertTypeBanner object:@{KeyBannerAlign : @(align)}];
+    [self showAdvert:Yodo1MasAdvertTypeBanner object:@{KeyArgumentBannerAlign : @(align)}];
+}
+
+- (void)dismissBannerAdvert {
+    if (_currentAdapter != nil) {
+        [_currentAdapter dismissBannerAdvert];
+    }
 }
 
 @end
