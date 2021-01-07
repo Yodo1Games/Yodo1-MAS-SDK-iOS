@@ -46,34 +46,34 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 - (BOOL)isInitSDK;
 - (void)updatePrivacy;
 
-- (BOOL)isAdvertLoaded:(Yodo1MasAdType)type;
-- (void)loadAdvert:(Yodo1MasAdType)type;
-- (void)loadAdvertDelayed:(Yodo1MasAdType)type;
-- (void)showAdvert:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
+- (BOOL)isAdLoaded:(Yodo1MasAdType)type;
+- (void)loadAd:(Yodo1MasAdType)type;
+- (void)loadAdDelayed:(Yodo1MasAdType)type;
+- (void)showAd:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
 - (BOOL)isCanShow:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback;
 - (void)callbackWithEvent:(Yodo1MasAdEventCode)code type:(Yodo1MasAdType)type;
 - (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdType)type;
 
 #pragma mark - 激励广告
-- (BOOL)isRewardAdvertLoaded;
-- (void)loadRewardAdvert;
-- (void)loadRewardAdvertDelayed;
-- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
-- (void)dismissRewardAdvert;
+- (BOOL)isRewardAdLoaded;
+- (void)loadRewardAd;
+- (void)loadRewardAdDelayed;
+- (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
+- (void)dismissRewardAd;
 
 #pragma mark - 插屏广告
-- (BOOL)isInterstitialAdvertLoaded;
-- (void)loadInterstitialAdvert;
-- (void)loadInterstitialAdvertDelayed;
-- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
-- (void)dismissInterstitialAdvert;
+- (BOOL)isInterstitialAdLoaded;
+- (void)loadInterstitialAd;
+- (void)loadInterstitialAdDelayed;
+- (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
+- (void)dismissInterstitialAd;
 
 #pragma mark - 插屏广告
-- (BOOL)isBannerAdvertLoaded;
-- (void)loadBannerAdvert;
-- (void)loadBannerAdvertDelayed;
-- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
-- (void)dismissBannerAdvert;
+- (BOOL)isBannerAdLoaded;
+- (void)loadBannerAd;
+- (void)loadBannerAdDelayed;
+- (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
+- (void)dismissBannerAd;
 
 + (UIWindow *)getTopWindow;
 + (UIViewController *)getTopViewController;

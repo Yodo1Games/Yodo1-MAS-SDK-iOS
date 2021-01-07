@@ -36,9 +36,9 @@
     [super initWithConfig:config successful:successful fail:fail];
     
     [self updatePrivacy];
-    [self loadRewardAdvert];
-    [self loadInterstitialAdvert];
-    [self loadBannerAdvert];
+    [self loadRewardAd];
+    [self loadInterstitialAd];
+    [self loadBannerAd];
     
     if (successful != nil) {
         successful(self.advertCode);
@@ -56,13 +56,13 @@
 }
 
 #pragma mark - 激励广告
-- (BOOL)isRewardAdvertLoaded {
-    [super isRewardAdvertLoaded];
+- (BOOL)isRewardAdLoaded {
+    [super isRewardAdLoaded];
     return self.rewardAd != nil && self.rewardAd.isAdValid;
 }
 
-- (void)loadRewardAdvert {
-    [super loadRewardAdvert];
+- (void)loadRewardAd {
+    [super loadRewardAd];
     if (![self isInitSDK]) return;
     if (self.rewardAd == nil && self.rewardPlacementId != nil) {
         self.rewardAd = [[FBRewardedVideoAd alloc] initWithPlacementID:self.rewardPlacementId];
@@ -70,14 +70,14 @@
     }
     
     if (self.rewardAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAdvert, loading reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}", TAG];
         NSLog(message);
         [self.rewardAd loadAd];
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object{
-    [super showRewardAdvert:callback object:object];
+- (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object{
+    [super showRewardAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeReward callback:callback]) {
         
         UIViewController * controller = [Yodo1MasFacebookAdapter getTopViewController];
@@ -89,7 +89,7 @@
     }
 }
 
-- (void)dismissRewardAdvert {
+- (void)dismissRewardAd {
     
 }
 
@@ -103,7 +103,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidClose:, reward: %@}",TAG, rewardedVideoAd.placementID];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
-    [self loadRewardAdvert];
+    [self loadRewardAd];
 }
 
 - (void)rewardedVideoAd:(FBRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)facebookError {
@@ -112,13 +112,13 @@
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
-    [self loadRewardAdvert];
+    [self loadRewardAd];
 }
 
 - (void)rewardedVideoAdVideoComplete:(FBRewardedVideoAd *)rewardedVideoAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdVideoComplete:, reward: %@}",TAG, rewardedVideoAd.placementID];
     NSLog(message);
-    [self loadRewardAdvert];
+    [self loadRewardAd];
 }
 
 - (void)rewardedVideoAdWillLogImpression:(FBRewardedVideoAd *)rewardedVideoAd {
@@ -136,13 +136,13 @@
 }
 
 #pragma mark - 插屏广告
-- (BOOL)isInterstitialAdvertLoaded {
-    [super isInterstitialAdvertLoaded];
+- (BOOL)isInterstitialAdLoaded {
+    [super isInterstitialAdLoaded];
     return self.interstitialAd != nil && self.interstitialAd.isAdValid;
 }
 
-- (void)loadInterstitialAdvert {
-    [super loadInterstitialAdvert];
+- (void)loadInterstitialAd {
+    [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     
     if (self.interstitialAd == nil && self.interstitialPlacementId != nil) {
@@ -151,14 +151,14 @@
     }
     
     if (self.interstitialAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAdvert, load interstitial ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, load interstitial ad...}",TAG];
         NSLog(message);
         [self.interstitialAd loadAd];
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object{
-    [super showInterstitialAdvert:callback object:object];
+- (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object{
+    [super showInterstitialAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
         
         UIViewController *controller = [Yodo1MasFacebookAdapter getTopViewController];
@@ -170,7 +170,7 @@
     }
 }
 
-- (void)dismissInterstitialAdvert {
+- (void)dismissInterstitialAd {
     
 }
 
@@ -185,7 +185,7 @@
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
-    [self loadInterstitialAdvert];
+    [self loadInterstitialAd];
 }
 
 - (void)interstitialAd:(FBInterstitialAd *)interstitialAd didFailWithError:(NSError *)facebookError {
@@ -194,7 +194,7 @@
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
-    [self loadInterstitialAdvert];
+    [self loadInterstitialAd];
 }
 
 - (void)interstitialAdWillLogImpression:(FBInterstitialAd *)interstitialAd {
@@ -205,13 +205,13 @@
 }
 
 #pragma mark - 横幅广告
-- (BOOL)isBannerAdvertLoaded {
-    [super isBannerAdvertLoaded];
+- (BOOL)isBannerAdLoaded {
+    [super isBannerAdLoaded];
     return self.bannerAd != nil && self.bannerAd.isAdValid;
 }
 
-- (void)loadBannerAdvert {
-    [super loadBannerAdvert];
+- (void)loadBannerAd {
+    [super loadBannerAd];
     if (![self isInitSDK]) return;
     
     if (self.bannerAd == nil && self.bannerPlacementId != nil) {
@@ -219,14 +219,14 @@
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert:, loading banner ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",TAG];
         NSLog(message);
         [self.bannerAd loadAd];
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    [super showBannerAdvert:callback object:object];
+- (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
+    [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}",TAG];
         NSLog(message);
@@ -235,8 +235,8 @@
     }
 }
 
-- (void)dismissBannerAdvert {
-    [super dismissBannerAdvert];
+- (void)dismissBannerAd {
+    [super dismissBannerAd];
     [Yodo1MasBanner removeBanner:self.bannerAd];
     self.bannerAd = nil;
 }
@@ -263,7 +263,7 @@
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
-    [self loadBannerAdvert];
+    [self loadBannerAd];
 }
 
 - (void)adViewWillLogImpression:(FBAdView *)adView {

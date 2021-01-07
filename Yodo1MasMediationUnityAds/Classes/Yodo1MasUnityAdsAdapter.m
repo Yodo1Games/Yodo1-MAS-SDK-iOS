@@ -59,9 +59,9 @@
     NSLog(message);
     
     [self updatePrivacy];
-    [self loadRewardAdvert];
-    [self loadInterstitialAdvert];
-    [self loadBannerAdvert];
+    [self loadRewardAd];
+    [self loadInterstitialAd];
+    [self loadBannerAd];
     if (self.initSuccessfulCallback != nil) {
         self.initSuccessfulCallback(self.advertCode);
     }
@@ -91,23 +91,23 @@
 }
 
 #pragma mark - 激励广告
-- (BOOL)isRewardAdvertLoaded {
-    [super isRewardAdvertLoaded];
+- (BOOL)isRewardAdLoaded {
+    [super isRewardAdLoaded];
     return self.rewardPlacementId != nil && [UnityAds isReady:self.rewardPlacementId];
 }
 
-- (void)loadRewardAdvert {
-    [super loadRewardAdvert];
+- (void)loadRewardAd {
+    [super loadRewardAd];
     if (![self isInitSDK]) return;
     if (self.rewardPlacementId != nil && self.rewardPlacementId.length > 0) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAdvert, loading reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG];
         NSLog(message);
         [UnityAds load:self.rewardPlacementId loadDelegate:self];
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    [super showRewardAdvert:callback object:object];
+- (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
+    [super showRewardAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasUnityAdsAdapter getTopViewController];
         if (controller != nil) {
@@ -119,23 +119,23 @@
 }
 
 #pragma mark - 插屏广告
-- (BOOL)isInterstitialAdvertLoaded {
-    [super isInterstitialAdvertLoaded];
+- (BOOL)isInterstitialAdLoaded {
+    [super isInterstitialAdLoaded];
     return self.interstitialPlacementId != nil && [UnityAds isReady:self.interstitialPlacementId];
 }
 
-- (void)loadInterstitialAdvert {
-    [super loadInterstitialAdvert];
+- (void)loadInterstitialAd {
+    [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     if (self.interstitialPlacementId != nil && self.interstitialPlacementId.length > 0) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAdvert, loading interstitial ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG];
         NSLog(message);
         [UnityAds load:self.interstitialPlacementId loadDelegate:self];
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    [super showInterstitialAdvert:callback object:object];
+- (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
+    [super showInterstitialAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasUnityAdsAdapter getTopViewController];
         if (controller != nil) {
@@ -147,26 +147,26 @@
 }
 
 #pragma mark - 横幅广告
-- (BOOL)isBannerAdvertLoaded {
-    [super isBannerAdvertLoaded];
+- (BOOL)isBannerAdLoaded {
+    [super isBannerAdLoaded];
     return self.bannerPlacementId != nil && self.bannerAd != nil;
 }
 
-- (void)loadBannerAdvert {
-    [super loadBannerAdvert];
+- (void)loadBannerAd {
+    [super loadBannerAd];
     if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0 && self.bannerAd == nil) {
         self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:self.bannerPlacementId size:CGSizeMake(320, 50)];
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAdvert:, loading banner ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", TAG];
         NSLog(message);
         [self.bannerAd load];
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    [super showBannerAdvert:callback object:object];
+- (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
+    [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}", TAG];
         NSLog(message);
@@ -176,11 +176,11 @@
     }
 }
 
-- (void)dismissBannerAdvert {
-    [super dismissBannerAdvert];
+- (void)dismissBannerAd {
+    [super dismissBannerAd];
     [Yodo1MasBanner removeBanner:self.bannerAd];
     self.bannerAd = nil;
-    [self loadBannerAdvert];
+    [self loadBannerAd];
 }
 
 #pragma mark - UnityAdsLoadDelegate
@@ -196,10 +196,10 @@
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
         [self callbackWithError:error type:Yodo1MasAdTypeReward];
-        [self loadRewardAdvertDelayed];
+        [self loadRewardAdDelayed];
     } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
         [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
-        [self loadInterstitialAdvertDelayed];
+        [self loadInterstitialAdDelayed];
     }
 }
 
@@ -239,10 +239,10 @@
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
             if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
                 [self callbackWithError:error type:Yodo1MasAdTypeReward];
-                [self loadRewardAdvert];
+                [self loadRewardAd];
             } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
                 [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
-                [self loadInterstitialAdvert];
+                [self loadInterstitialAd];
             }
             break;
         }
@@ -280,7 +280,7 @@
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
 
-    [self loadRewardAdvertDelayed];
+    [self loadRewardAdDelayed];
 }
 
 @end

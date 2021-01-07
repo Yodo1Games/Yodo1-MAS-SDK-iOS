@@ -271,7 +271,7 @@
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
-                        isLoaded = [adapter isAdvertLoaded:type];
+                        isLoaded = [adapter isAdLoaded:type];
                     }
                 }
             }
@@ -283,7 +283,7 @@
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
-                        isLoaded = [adapter isAdvertLoaded:type];
+                        isLoaded = [adapter isAdLoaded:type];
                     }
                 }
                 if (isLoaded) break;
@@ -301,7 +301,7 @@
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
-                        [adapter loadAdvert:type];
+                        [adapter loadAd:type];
                     }
                 }
             }
@@ -313,7 +313,7 @@
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
-                        [adapter loadAdvert:type];
+                        [adapter loadAd:type];
                     }
                 }
             }
@@ -382,7 +382,7 @@
                     [adapters removeObjectAtIndex:0];
                     if (adapters.count > 0) {
                         _currentAdapter = adapters.firstObject;
-                        [adapters.firstObject showAdvert:type callback:block object:object];
+                        [adapters.firstObject showAd:type callback:block object:object];
                     } else {
                         [self callbackWithEvent:event];
                     }
@@ -396,7 +396,7 @@
         };
         if (adapters.count > 0) {
             _currentAdapter = adapters.firstObject;
-            [adapters.firstObject showAdvert:type callback:block object:object];
+            [adapters.firstObject showAd:type callback:block object:object];
         } else {
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"ad adapters is null"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
@@ -518,7 +518,7 @@
 
 - (void)dismissRewardAdvert {
     if (_currentAdapter != nil) {
-        [_currentAdapter dismissRewardAdvert];
+        [_currentAdapter dismissRewardAd];
     }
 }
 
@@ -541,7 +541,7 @@
 
 - (void)dismissInterstitialAd {
     if (_currentAdapter != nil) {
-        [_currentAdapter dismissInterstitialAdvert];
+        [_currentAdapter dismissInterstitialAd];
     }
 }
 
@@ -564,7 +564,7 @@
 
 - (void)dismissBannerAd {
     if (_currentAdapter != nil) {
-        [_currentAdapter dismissBannerAdvert];
+        [_currentAdapter dismissBannerAd];
     }
 }
 
