@@ -8,7 +8,7 @@
 #ifndef UnityYodo1Mas_h
 #define UnityYodo1Mas_h
 
-#import "Yodo1MasAdvertEvent.h"
+#import "Yodo1MasAdEvent.h"
 #import "Yodo1MasError.h"
 
 

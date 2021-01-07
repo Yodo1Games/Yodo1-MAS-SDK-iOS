@@ -562,6 +562,10 @@
     [self showAdvert:Yodo1MasAdTypeBanner object:@{KeyArgumentBannerAlign : @(align)}];
 }
 
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId {
+//TODO
+}
+
 - (void)dismissBannerAd {
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];

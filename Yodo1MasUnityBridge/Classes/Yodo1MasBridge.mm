@@ -12,7 +12,7 @@
 static NSString* kYodo1MasGameObject;
 static NSString* kYodo1MasMethodName;
 
-@interface Yodo1MasBridge : NSObject <Yodo1MasRewardAdvertDelegate, Yodo1MasInterstitialAdvertDelegate, Yodo1MasBannerAdvertDelegate>
+@interface Yodo1MasBridge : NSObject <Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
 
 + (UIViewController*)getRootViewController;
 
@@ -40,8 +40,9 @@ static NSString* kYodo1MasMethodName;
 
 - (BOOL)isBannerAdLoaded;
 - (void)showBannerAd;
-- (void)showBannerAd:(Yodo1MasBannerAlign)align;
-- (void)showBannerAd:(Yodo1MasBannerAlign)align placementId:(NSString *)placementId;
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align;
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId;
+- (void)dismissBannerAd;
 @end
 
 @implementation Yodo1MasBridge
@@ -56,50 +57,56 @@ static NSString* kYodo1MasMethodName;
 }
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
-    [Yodo1Mas sharedInstance].rewardAdvertDelegate = self;
-    [Yodo1Mas sharedInstance].interstitialAdvertDelegate = self;
-    [Yodo1Mas sharedInstance].bannerAdvertDelegate = self;
+    [Yodo1Mas sharedInstance].rewardAdDelegate = self;
+    [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
+    [Yodo1Mas sharedInstance].bannerAdDelegate = self;
     
     [[Yodo1Mas sharedInstance] initWithAppId:appId successful:successful fail:fail];
 }
 
 - (BOOL)isRewardedAdLoaded {
-    return [[Yodo1Mas sharedInstance] isRewardAdvertLoaded];
+    return [[Yodo1Mas sharedInstance] isRewardAdLoaded];
 }
 - (void)showRewardedAd {
-    [[Yodo1Mas sharedInstance] showRewardAdvert];
+    [[Yodo1Mas sharedInstance] showRewardAd];
 }
 
 - (void)showRewardedAd:(NSString *)placementId {
-//TODO
+    [[Yodo1Mas sharedInstance] showRewardAd:placementId];
 }
 
 - (BOOL)isInterstitialAdLoaded {
-    return [[Yodo1Mas sharedInstance] isInterstitialAdvertLoaded];
+    return [[Yodo1Mas sharedInstance] isInterstitialAdLoaded];
 }
 - (void)showInterstitialAd {
-    [[Yodo1Mas sharedInstance] showInterstitialAdvert];
+    [[Yodo1Mas sharedInstance] showInterstitialAd];
 }
 
 - (void)showInterstitialAd:(NSString *)placementId {
-//TODO
+    [[Yodo1Mas sharedInstance] showInterstitialAd:placementId];
 }
 
 - (BOOL)isBannerAdLoaded {
-    return [[Yodo1Mas sharedInstance] isBannerAdvertLoaded];
+    return [[Yodo1Mas sharedInstance] isBannerAdLoaded];
 }
 - (void)showBannerAd {
-    [[Yodo1Mas sharedInstance] showBannerAdvert];
-}
-- (void)showBannerAd:(Yodo1MasBannerAlign)align {
-    [[Yodo1Mas sharedInstance] showBannerAdvert:align];
+    [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
-- (void)showBannerAd:(Yodo1MasBannerAlign)align placementId:(NSString *)placementId {
-//TODO
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align {
+    [[Yodo1Mas sharedInstance] showBannerAd:align];
 }
 
-#pragma mark - Yodo1MasAdvertDelegate
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId {
+    [[Yodo1Mas sharedInstance] showBannerAd:align placementId:placementId];
+}
+
+- (void)dismissBannerAd
+{
+    [[Yodo1Mas sharedInstance] dismissBannerAd];
+}
+
+#pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
     if (event == nil) {
         return;
@@ -129,7 +136,7 @@ static NSString* kYodo1MasMethodName;
 }
 
 #pragma mark - Yodo1MasRewardAdvertDelegate
-- (void)onAdvertRewardEarned:(Yodo1MasAdvertEvent *)event {
+- (void)onAdRewardEarned:(Yodo1MasAdEvent *)event {
     if (event == nil) {
         return;
     }
@@ -319,13 +326,18 @@ void UnityShowBannerAd()
 
 void UnityShowBannerAdWithAlign(int align)
 {
-    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasBannerAlign)align];
+    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasAdBannerAlign)align];
 }
 
 void UnityShowBannerAdWithAlignAndPlacementId(int align, const char* placementId)
 {
     NSString* m_placementId = Yodo1MasCreateNSString(placementId);
-    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasBannerAlign)align placementId:m_placementId];
+    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasAdBannerAlign)align placementId:m_placementId];
+}
+
+void UnityDismissBannerAd()
+{
+    [[Yodo1MasBridge sharedInstance] dismissBannerAd];
 }
 
 #pragma mark - Unity Interstitial
