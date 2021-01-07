@@ -14,11 +14,11 @@
 extern "C" {
 #endif
 #if UNITY_VERSION < 500
-    void MasUnityPause(bool pause) {}
+    void UnityPause(bool pause) {}
     #else
-    void MasUnityPause(int pause){}
+    void UnityPause(int pause){}
     #endif
-    void MasUnitySendMessage(const char* obj, const char* method, const char* msg) {}
+    void UnitySendMessage(const char* obj, const char* method, const char* msg) {}
     
 #ifdef __cplusplus
 }
