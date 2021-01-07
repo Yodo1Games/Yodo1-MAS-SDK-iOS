@@ -513,7 +513,7 @@
 }
 
 - (void)showRewardAd:(NSString *)placement {
-    [self showAdvert:Yodo1MasAdTypeReward object:@{KeyArgumentPlacement : placement}];
+    [self showAdvert:Yodo1MasAdTypeReward object:@{kArgumentPlacement : placement}];
 }
 
 - (void)dismissRewardAdvert {
@@ -536,7 +536,7 @@
 }
 
 - (void)showInterstitialAd:(NSString *)placement {
-    [self showAdvert:Yodo1MasAdTypeInterstitial object:@{KeyArgumentPlacement : placement}];
+    [self showAdvert:Yodo1MasAdTypeInterstitial object:@{kArgumentPlacement : placement}];
 }
 
 - (void)dismissInterstitialAd {
@@ -559,7 +559,11 @@
 }
 
 - (void)showBannerAd:(Yodo1MasAdBannerAlign)align {
-    [self showAdvert:Yodo1MasAdTypeBanner object:@{KeyArgumentBannerAlign : @(align)}];
+    [self showAdvert:Yodo1MasAdTypeBanner object:@{kArgumentBannerAlign : @(align)}];
+}
+
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
+    [self showAdvert:Yodo1MasAdTypeBanner object:@{kArgumentBannerAlign : @(align), kArgumentBannerOffset: [NSValue valueWithCGPoint:offset]}];
 }
 
 - (void)dismissBannerAd {

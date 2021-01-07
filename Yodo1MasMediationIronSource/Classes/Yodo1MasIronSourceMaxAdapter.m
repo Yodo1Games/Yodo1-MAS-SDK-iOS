@@ -89,7 +89,7 @@
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd:, show reward ad...}", TAG];
             NSLog(message);
             
-            NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
+            NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
             if (placement != nil && placement.length > 0) {
                 [IronSource showInterstitialWithViewController:controller placement:placement];
             } else {
@@ -172,7 +172,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", TAG];
             NSLog(message);
-            NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
+            NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
             if (placement != nil && placement.length > 0) {
                 [IronSource showInterstitialWithViewController:controller placement:placement];
             } else {

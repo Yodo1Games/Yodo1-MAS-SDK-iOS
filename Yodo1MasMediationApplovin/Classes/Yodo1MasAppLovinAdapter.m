@@ -102,7 +102,7 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd, show reward ad...}", TAG];
         NSLog(message);
         
-        NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
+        NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
         if ([self isMax] && placement != nil && placement.length > 0) {
             [self.rewardAd showAdForPlacement:placement];
         } else {
@@ -142,7 +142,7 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, show interstitial ad...}", TAG];
         NSLog(message);
         
-        NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
+        NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
         if ([self isMax] && placement != nil && placement.length > 0) {
             [self.interstitialAd showAdForPlacement:placement];
         } else {

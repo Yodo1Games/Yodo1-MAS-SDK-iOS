@@ -13,8 +13,15 @@
 + (void)showBanner:(UIView *)banner controller:(UIViewController *)controller object:(NSDictionary *)object {
     
     Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
-    if (object != nil && object[KeyArgumentBannerAlign] != nil) {
-        align = [object[KeyArgumentBannerAlign] integerValue];
+    CGPoint offset = CGPointZero;
+    if (object != nil) {
+        if (object[kArgumentBannerAlign] != nil) {
+            align = [object[kArgumentBannerAlign] integerValue];
+        }
+        
+        if (object[kArgumentBannerOffset] != nil) {
+            offset = [object[kArgumentBannerOffset] CGPointValue];
+        }
     }
     
     UIView *superview = controller != nil? controller.view : [Yodo1MasAdapterBase getTopWindow];
@@ -46,6 +53,9 @@
         } else {
             frame.origin.y = (superview.bounds.size.height - frame.size.height) / 2;
         }
+        
+        frame.origin.x += offset.x;
+        frame.origin.y += offset.y;
         
         banner.frame = frame;
         [superview addSubview:banner];

@@ -12,8 +12,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define DelayTime 120
-#define KeyArgumentPlacement      @"arg_placement"
-#define KeyArgumentBannerAlign      @"arg_banner_align"
+#define kArgumentPlacement        @"arg_placement"
+#define kArgumentBannerAlign      @"arg_banner_align"
+#define kArgumentBannerOffset     @"arg_banner_offset"
 
 typedef void(^Yodo1MasAdapterInitSuccessful)(NSString *);
 typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);

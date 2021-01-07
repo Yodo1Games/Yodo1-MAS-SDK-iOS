@@ -66,6 +66,7 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 - (BOOL)isBannerAdLoaded;
 - (void)showBannerAd;
 - (void)showBannerAd:(Yodo1MasAdBannerAlign)align;
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
 
 @end
