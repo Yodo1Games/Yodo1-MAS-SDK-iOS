@@ -47,7 +47,7 @@
             NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",TAG];
             NSLog(message);
             if (fail != nil) {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertUninitialized message:message];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
                 fail(self.advertCode, error);
             }
         }
@@ -75,7 +75,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: onTapjoyConnectFail:, init failed, info: %@}", TAG, notification.userInfo];
     NSLog(message);
     if (self.initFailCallback != nil) {
-        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertUninitialized message:message];
+        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
         self.initFailCallback(self.advertCode, error);
     }
 }
@@ -120,12 +120,12 @@
     [_rewardAd requestContent];
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showRewardAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+    if ([self isCanShow:Yodo1MasAdTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasTapjoyAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert:, show reward ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd:, show reward ad...}", TAG];
             NSLog(message);
             [_rewardAd showContentWithViewController:controller];
         }
@@ -148,12 +148,12 @@
     [_interstitialAd requestContent];
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showInterstitialAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+    if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasTapjoyAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:, show interstitial ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", TAG];
             NSLog(message);
             [_interstitialAd showContentWithViewController:controller];
         }
@@ -170,9 +170,9 @@
     [super loadBannerAdvert];
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showBannerAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
+    if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         
     }
 }
@@ -187,12 +187,12 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: requestDidFail:error:, placement: %@, error: %@}", TAG, placement.placementName, adError];
     NSLog(message);
     
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     if (placement == _rewardAd) {
-        [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+        [self callbackWithError:error type:Yodo1MasAdTypeReward];
         [self loadRewardAdvertDelayed];
     } else if (placement == _interstitialAd) {
-        [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+        [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
         [self loadInterstitialAdvertDelayed];
     }
 }
@@ -207,9 +207,9 @@
     NSLog(message);
     
     if (placement == _rewardAd) {
-        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
+        [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
     } else if (placement == _interstitialAd) {
-        [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
+        [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
     }
 }
 
@@ -218,10 +218,10 @@
     NSLog(message);
     
     if (placement == _rewardAd) {
-        [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
+        [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
         [self loadRewardAdvert];
     } else if (placement == _interstitialAd) {
-        [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
+        [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
         [self loadInterstitialAdvert];
     }
 }
@@ -240,7 +240,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: placement:didRequestPurchase:productId:, placement: %@, request: %@, itemId: %@, quantity: %@}", TAG, placement.placementName, request.requestId, itemId, @(quantity)];
     NSLog(message);
     if (placement == _rewardAd) {
-        [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
+        [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
     }
 }
 

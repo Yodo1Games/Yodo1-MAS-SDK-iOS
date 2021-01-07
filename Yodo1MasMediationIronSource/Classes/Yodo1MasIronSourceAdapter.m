@@ -54,7 +54,7 @@
             NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}", TAG];
             NSLog(message);
             if (fail != nil) {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertUninitialized message:message];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
                 fail(self.advertCode, error);
             }
         }
@@ -93,12 +93,12 @@
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showRewardAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
+    if ([self isCanShow:Yodo1MasAdTypeReward callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAdvert, show reward ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd, show reward ad...}", TAG];
             NSLog(message);
             [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
@@ -119,29 +119,29 @@
 - (void)rewardedVideoDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidFailToLoadWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, adError];
     NSLog(message);
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
-    [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdTypeReward];
     [self loadRewardAdvertDelayed];
 }
 
 - (void)rewardedVideoDidOpen:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidOpen:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeReward];
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedVideoDidClose:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidClose:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeReward];
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedVideoDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidFailToShowWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, ironSourceError];
     NSLog(message);
 
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
-    [self callbackWithError:error type:Yodo1MasAdvertTypeReward];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdTypeReward];
     [self loadRewardAdvert];
 }
 
@@ -153,7 +153,7 @@
 - (void)rewardedVideoAdRewarded:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoAdRewarded:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
+    [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
 }
 
 #pragma mark - 插屏广告
@@ -173,12 +173,12 @@
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showInterstitialAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+    if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAdvert:, show interstitial ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", TAG];
             NSLog(message);
             [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
         }
@@ -199,8 +199,8 @@
 - (void)interstitialDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidFailToLoadWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, adError];
     NSLog(message);
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
-    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
     [self loadInterstitialAdvertDelayed];
 }
 
@@ -208,13 +208,13 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidOpen:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
 
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeInterstitial];
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialDidClose:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidClose:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeInterstitial];
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
@@ -222,8 +222,8 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidFailToShowWithError:instanceId:, instanceId: %@, error: %@}", TAG, instanceId, ironSourceError];
     NSLog(message);
 
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
-    [self callbackWithError:error type:Yodo1MasAdvertTypeInterstitial];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
     [self loadInterstitialAdvert];
 }
 
@@ -248,10 +248,10 @@
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showBannerAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:align:, show banner ad...}", TAG];
+    if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}", TAG];
         NSLog(message);
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
@@ -279,8 +279,8 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidFailToLoadWithError:, error: %@}", TAG, adError];
     NSLog(message);
 
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
-    [self callbackWithError:error type:Yodo1MasAdvertTypeBanner];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self loadBannerAdvertDelayed];
 }
 
@@ -292,14 +292,14 @@
 - (void)bannerWillPresentScreen {
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerWillPresentScreen}", TAG];
     NSLog(message);
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:Yodo1MasAdvertTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidDismissScreen {
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidDismissScreen}", TAG];
     NSLog(message);
 
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:Yodo1MasAdvertTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
     [self loadBannerAdvert];
 }
 

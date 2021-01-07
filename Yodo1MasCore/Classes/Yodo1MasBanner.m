@@ -12,7 +12,7 @@
 
 + (void)showBanner:(UIView *)banner controller:(UIViewController *)controller object:(NSDictionary *)object {
     
-    Yodo1MasBannerAlign align = Yodo1MasBannerAlignBottom | Yodo1MasBannerAlignHorizontalCenter;
+    Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
     if (object != nil && object[KeyArgumentBannerAlign] != nil) {
         align = [object[KeyArgumentBannerAlign] integerValue];
     }
@@ -21,22 +21,22 @@
     if (superview != nil && banner != nil) {
         CGRect frame = CGRectMake(0, 0, 320, 50);
         // horizontal
-        if ((align & Yodo1MasBannerAlignLeft) == Yodo1MasBannerAlignLeft) {
+        if ((align & Yodo1MasAdBannerAlignLeft) == Yodo1MasAdBannerAlignLeft) {
             frame.origin.x = 0;
-        } else if ((align & Yodo1MasBannerAlignRight) == Yodo1MasBannerAlignRight) {
+        } else if ((align & Yodo1MasAdBannerAlignRight) == Yodo1MasAdBannerAlignRight) {
             frame.origin.x = superview.bounds.size.width - frame.size.width;
         } else {
             frame.origin.x = (superview.bounds.size.width - frame.size.width) / 2;
         }
         
         // vertical
-        if ((align & Yodo1MasBannerAlignTop) == Yodo1MasBannerAlignTop) {
+        if ((align & Yodo1MasAdBannerAlignTop) == Yodo1MasAdBannerAlignTop) {
             if (@available(iOS 11, *)) {
                 frame.origin.y = superview.safeAreaInsets.top;
             } else {
                 frame.origin.y = 0;
             }
-        } else if ((align & Yodo1MasBannerAlignBottom) == Yodo1MasBannerAlignBottom) {
+        } else if ((align & Yodo1MasAdBannerAlignBottom) == Yodo1MasAdBannerAlignBottom) {
             
             if (@available(iOS 11, *)) {
                 frame.origin.y = superview.bounds.size.height - frame.size.height - superview.safeAreaInsets.bottom;

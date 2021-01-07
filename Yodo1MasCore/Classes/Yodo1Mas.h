@@ -6,35 +6,35 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Yodo1MasAdvertEvent.h"
+#import "Yodo1MasAdEvent.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^Yodo1MasInitSuccessful)(void);
 typedef void (^Yodo1MasInitFail)(Yodo1MasError *);
-typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
+typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 
-@protocol Yodo1MasAdvertDelegate <NSObject>
-
-@optional
-- (void)onAdvertOpened:(Yodo1MasAdvertEvent *)event;
-- (void)onAdvertClosed:(Yodo1MasAdvertEvent *)event;
-- (void)onAdvertError:(Yodo1MasAdvertEvent *)event error:(Yodo1MasError *)error;
-
-@end
-
-@protocol Yodo1MasRewardAdvertDelegate <NSObject, Yodo1MasAdvertDelegate>
+@protocol Yodo1MasAdDelegate <NSObject>
 
 @optional
-- (void)onAdvertRewardEarned:(Yodo1MasAdvertEvent *)event;
+- (void)onAdOpened:(Yodo1MasAdEvent *)event;
+- (void)onAdClosed:(Yodo1MasAdEvent *)event;
+- (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error;
 
 @end
 
-@protocol Yodo1MasInterstitialAdvertDelegate <NSObject, Yodo1MasAdvertDelegate>
+@protocol Yodo1MasRewardAdDelegate <NSObject, Yodo1MasAdDelegate>
+
+@optional
+- (void)onAdRewardEarned:(Yodo1MasAdEvent *)event;
 
 @end
 
-@protocol Yodo1MasBannerAdvertDelegate <NSObject, Yodo1MasAdvertDelegate>
+@protocol Yodo1MasInterstitialAdDelegate <NSObject, Yodo1MasAdDelegate>
+
+@end
+
+@protocol Yodo1MasBannerAdDelegate <NSObject, Yodo1MasAdDelegate>
 
 @end
 
@@ -43,9 +43,9 @@ typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 @property (nonatomic, assign) BOOL isGDPRUserConsent;
 @property (nonatomic, assign) BOOL isCOPPAAgeRestricted;
 @property (nonatomic, assign) BOOL isCCPADoNotSell;
-@property (nonatomic, weak) id<Yodo1MasRewardAdvertDelegate> rewardAdvertDelegate;
-@property (nonatomic, weak) id<Yodo1MasInterstitialAdvertDelegate> interstitialAdvertDelegate;
-@property (nonatomic, weak) id<Yodo1MasBannerAdvertDelegate> bannerAdvertDelegate;
+@property (nonatomic, weak) id<Yodo1MasRewardAdDelegate> rewardAdDelegate;
+@property (nonatomic, weak) id<Yodo1MasInterstitialAdDelegate> interstitialAdDelegate;
+@property (nonatomic, weak) id<Yodo1MasBannerAdDelegate> bannerAdDelegate;
 
 + (Yodo1Mas *)sharedInstance;
 + (instancetype)new NS_UNAVAILABLE;
@@ -53,20 +53,20 @@ typedef void (^Yodo1MasAdvertCallback) (Yodo1MasAdvertEvent *);
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;
 
-- (BOOL)isRewardAdvertLoaded;
-- (void)showRewardAdvert;
-- (void)showRewardAdvert:(NSString *)placement;
+- (BOOL)isRewardAdLoaded;
+- (void)showRewardAd;
+- (void)showRewardAd:(NSString *)placement;
 - (void)dismissRewardAdvert;
 
-- (BOOL)isInterstitialAdvertLoaded;
-- (void)showInterstitialAdvert;
-- (void)showInterstitialAdvert:(NSString *)placement;
-- (void)dismissInterstitialAdvert;
+- (BOOL)isInterstitialAdLoaded;
+- (void)showInterstitialAd;
+- (void)showInterstitialAd:(NSString *)placement;
+- (void)dismissInterstitialAd;
 
-- (BOOL)isBannerAdvertLoaded;
-- (void)showBannerAdvert;
-- (void)showBannerAdvert:(Yodo1MasBannerAlign)align;
-- (void)dismissBannerAdvert;
+- (BOOL)isBannerAdLoaded;
+- (void)showBannerAd;
+- (void)showBannerAd:(Yodo1MasAdBannerAlign)align;
+- (void)dismissBannerAd;
 
 @end
 

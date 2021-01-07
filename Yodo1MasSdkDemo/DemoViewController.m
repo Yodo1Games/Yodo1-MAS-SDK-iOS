@@ -10,7 +10,7 @@
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
 
-@interface DemoViewController ()<Yodo1MasRewardAdvertDelegate, Yodo1MasInterstitialAdvertDelegate, Yodo1MasBannerAdvertDelegate>
+@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
 
 @property (weak, nonatomic) IBOutlet UISwitch *gdprSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *coppaSwitch;
@@ -25,21 +25,21 @@
     _gdprSwitch.on = [Yodo1Mas sharedInstance].isGDPRUserConsent;
     _coppaSwitch.on = [Yodo1Mas sharedInstance].isCOPPAAgeRestricted;
     _ccpaSwitch.on = [Yodo1Mas sharedInstance].isCCPADoNotSell;
-    [Yodo1Mas sharedInstance].rewardAdvertDelegate = self;
-    [Yodo1Mas sharedInstance].interstitialAdvertDelegate = self;
-    [Yodo1Mas sharedInstance].bannerAdvertDelegate = self;
+    [Yodo1Mas sharedInstance].rewardAdDelegate = self;
+    [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
+    [Yodo1Mas sharedInstance].bannerAdDelegate = self;
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showRewardAdvert];
+    [[Yodo1Mas sharedInstance] showRewardAd];
 }
 
 - (IBAction)onInterstitialClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showInterstitialAdvert];
+    [[Yodo1Mas sharedInstance] showInterstitialAd];
 }
 
 - (IBAction)onBannerClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showBannerAdvert];
+    [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
@@ -58,21 +58,21 @@
     [Yodo1Mas sharedInstance].isCCPADoNotSell = sender.isOn;
 }
 
-#pragma mark - Yodo1MasAdvertDelegate
-- (void)onAdvertOpened:(Yodo1MasAdvertEvent *)event {
+#pragma mark - Yodo1MasAdDelegate
+- (void)onAdOpened:(Yodo1MasAdEvent *)event {
     
 }
 
-- (void)onAdvertClosed:(Yodo1MasAdvertEvent *)event {
+- (void)onAdClosed:(Yodo1MasAdEvent *)event {
     
 }
 
-- (void)onAdvertError:(Yodo1MasAdvertEvent *)event error:(Yodo1MasError *)error {
+- (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
     [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey]];
 }
 
 #pragma mark - Yodo1MasRewardAdvertDelegate
-- (void)onAdvertRewardEarned:(Yodo1MasAdvertEvent *)event {
+- (void)onAdRewardEarned:(Yodo1MasAdEvent *)event {
     
 }
 

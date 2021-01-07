@@ -38,41 +38,41 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
 @property (nonatomic, copy, readonly) Yodo1MasAdapterInitSuccessful initSuccessfulCallback;
 @property (nonatomic, copy, readonly) Yodo1MasAdapterInitFail initFailCallback;
-@property (nonatomic, copy, readonly) Yodo1MasAdvertCallback rewardCallback;
-@property (nonatomic, copy, readonly) Yodo1MasAdvertCallback interstitialCallback;
-@property (nonatomic, copy, readonly) Yodo1MasAdvertCallback bannerCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdCallback rewardCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdCallback interstitialCallback;
+@property (nonatomic, copy, readonly) Yodo1MasAdCallback bannerCallback;
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
 - (BOOL)isInitSDK;
 - (void)updatePrivacy;
 
-- (BOOL)isAdvertLoaded:(Yodo1MasAdvertType)type;
-- (void)loadAdvert:(Yodo1MasAdvertType)type;
-- (void)loadAdvertDelayed:(Yodo1MasAdvertType)type;
-- (void)showAdvert:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object;
-- (BOOL)isCanShow:(Yodo1MasAdvertType)type callback:(Yodo1MasAdvertCallback)callback;
-- (void)callbackWithEvent:(Yodo1MasAdvertEventCode)code type:(Yodo1MasAdvertType)type;
-- (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdvertType)type;
+- (BOOL)isAdvertLoaded:(Yodo1MasAdType)type;
+- (void)loadAdvert:(Yodo1MasAdType)type;
+- (void)loadAdvertDelayed:(Yodo1MasAdType)type;
+- (void)showAdvert:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
+- (BOOL)isCanShow:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback;
+- (void)callbackWithEvent:(Yodo1MasAdEventCode)code type:(Yodo1MasAdType)type;
+- (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdType)type;
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdvertLoaded;
 - (void)loadRewardAdvert;
 - (void)loadRewardAdvertDelayed;
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object;
+- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
 - (void)dismissRewardAdvert;
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdvertLoaded;
 - (void)loadInterstitialAdvert;
 - (void)loadInterstitialAdvertDelayed;
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object;
+- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
 - (void)dismissInterstitialAdvert;
 
 #pragma mark - 插屏广告
 - (BOOL)isBannerAdvertLoaded;
 - (void)loadBannerAdvert;
 - (void)loadBannerAdvertDelayed;
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object;
+- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
 - (void)dismissBannerAdvert;
 
 + (UIWindow *)getTopWindow;

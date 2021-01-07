@@ -209,34 +209,34 @@ pod 'Yodo1MasSDK', '~> 0.0.0.1-beta'
 
 ## 使用
 ```objc
-[Yodo1Mas sharedInstance].rewardAdvertDelegate = self; // 设置激励广告代理
-[Yodo1Mas sharedInstance].interstitialAdvertDelegate = self; // 设置插屏广告代理
-[Yodo1Mas sharedInstance].bannerAdvertDelegate = self; // 设置横幅广告代理
+[Yodo1Mas sharedInstance].rewardAdDelegate = self; // 设置激励广告代理
+[Yodo1Mas sharedInstance].interstitialAdDelegate = self; // 设置插屏广告代理
+[Yodo1Mas sharedInstance].bannerAdDelegate = self; // 设置横幅广告代理
 
 
 // 显示激励广告
-[[Yodo1Mas sharedInstance] showRewardAdvert];
+[[Yodo1Mas sharedInstance] showRewardAd];
 // 显示插屏广告
-[[Yodo1Mas sharedInstance] showInterstitialAdvert];
+[[Yodo1Mas sharedInstance] showInterstitialAd];
 // 显示横幅广告
-[[Yodo1Mas sharedInstance] showBannerAdvert];
+[[Yodo1Mas sharedInstance] showBannerAd];
 
 
-#pragma mark - Yodo1MasAdvertDelegate
-- (void)onAdvertOpened:(Yodo1MasAdvertEvent *)event {
+#pragma mark - Yodo1MasAdDelegate
+- (void)onAdOpened:(Yodo1MasAdEvent *)event {
     
 }
 
-- (void)onAdvertClosed:(Yodo1MasAdvertEvent *)event {
+- (void)onAdClosed:(Yodo1MasAdEvent *)event {
     
 }
 
-- (void)onAdvertError:(Yodo1MasAdvertEvent *)event error:(Yodo1MasError *)error {
+- (void)onAdvertError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
     
 }
 
-#pragma mark - Yodo1MasRewardAdvertDelegate
-- (void)onAdvertRewardEarned:(Yodo1MasAdvertEvent *)event {
+#pragma mark - Yodo1MasRewardAdDelegate
+- (void)onAdRewardEarned:(Yodo1MasAdEvent *)event {
     
 }
 

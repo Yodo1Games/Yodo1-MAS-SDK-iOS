@@ -85,7 +85,7 @@ static NSString* kYodo1MasMethodName;
 }
 
 #pragma mark - Yodo1MasAdvertDelegate
-- (void)onAdvertOpened:(Yodo1MasAdvertEvent *)event {
+- (void)onAdOpened:(Yodo1MasAdEvent *)event {
     if (event == nil) {
         return;
     }
@@ -95,7 +95,7 @@ static NSString* kYodo1MasMethodName;
 
 }
 
-- (void)onAdvertClosed:(Yodo1MasAdvertEvent *)event {
+- (void)onAdClosed:(Yodo1MasAdEvent *)event {
     if (event == nil) {
         return;
     }
@@ -104,7 +104,7 @@ static NSString* kYodo1MasMethodName;
     MasUnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
-- (void)onAdvertError:(Yodo1MasAdvertEvent *)event error:(Yodo1MasError *)error {
+- (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
     if (event == nil) {
         return;
     }

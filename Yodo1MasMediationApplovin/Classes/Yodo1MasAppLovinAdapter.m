@@ -96,10 +96,10 @@
     }
 }
 
-- (void)showRewardAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showRewardAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showRewardAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeReward callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAdvert, show reward ad...}", TAG];
+    if ([self isCanShow:Yodo1MasAdTypeReward callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd, show reward ad...}", TAG];
         NSLog(message);
         
         NSString *placement = object != nil ? object[KeyArgumentPlacement] : nil;
@@ -136,9 +136,9 @@
     }
 }
 
-- (void)showInterstitialAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showInterstitialAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showInterstitialAdvert:callback object:object];
-    if ([self isCanShow:Yodo1MasAdvertTypeInterstitial callback:callback]) {
+    if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAdvert, show interstitial ad...}", TAG];
         NSLog(message);
         
@@ -175,11 +175,11 @@
     }
 }
 
-- (void)showBannerAdvert:(Yodo1MasAdvertCallback)callback object:(NSDictionary *)object {
+- (void)showBannerAdvert:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showBannerAdvert:callback object:object];
     
-    if ([self isCanShow:Yodo1MasAdvertTypeBanner callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAdvert:, show banner ad...}", TAG];
+    if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", TAG];
         NSLog(message);
         UIViewController *controller = [Yodo1MasAppLovinAdapter getTopViewController];
         [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
@@ -199,49 +199,49 @@
 }
 
 - (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withErrorCode:(NSInteger)errorCode {
-    Yodo1MasAdvertType type;
+    Yodo1MasAdType type;
     if (adUnitIdentifier == self.rewardPlacementId) {
-        type = Yodo1MasAdvertTypeReward;
+        type = Yodo1MasAdTypeReward;
     } else if (adUnitIdentifier == self.interstitialPlacementId) {
-        type = Yodo1MasAdvertTypeInterstitial;
+        type = Yodo1MasAdTypeInterstitial;
     } else if (adUnitIdentifier == self.bannerPlacementId) {
-        type = Yodo1MasAdvertTypeBanner;
+        type = Yodo1MasAdTypeBanner;
     } else {
         return;
     }
 
     NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@, error: %@}", TAG, adUnitIdentifier, @(errorCode)];
     NSLog(message);
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertLoadFail message:message];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:type];
     [self loadAdvertDelayed:type];
 }
 
 - (void)didDisplayAd:(MAAd *)ad {
-    Yodo1MasAdvertType type;
+    Yodo1MasAdType type;
     if (ad.format == MAAdFormat.rewarded) {
-        type = Yodo1MasAdvertTypeReward;
+        type = Yodo1MasAdTypeReward;
     } else if (ad.format == MAAdFormat.interstitial) {
-        type = Yodo1MasAdvertTypeInterstitial;
+        type = Yodo1MasAdTypeInterstitial;
     } else if (ad.format == MAAdFormat.banner) {
-        type = Yodo1MasAdvertTypeBanner;
+        type = Yodo1MasAdTypeBanner;
     } else {
         return;
     }
     
     NSString *message = [NSString stringWithFormat:@"%@: {method:didDisplayAd:, ad:%@}", TAG, ad.adUnitIdentifier];
     NSLog(message);
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeOpened type:type];
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:type];
 }
 
 - (void)didHideAd:(MAAd *)ad {
-    Yodo1MasAdvertType type;
+    Yodo1MasAdType type;
     if (ad.format == MAAdFormat.rewarded) {
-        type = Yodo1MasAdvertTypeReward;
+        type = Yodo1MasAdTypeReward;
     } else if (ad.format == MAAdFormat.interstitial) {
-        type = Yodo1MasAdvertTypeInterstitial;
+        type = Yodo1MasAdTypeInterstitial;
     } else if (ad.format == MAAdFormat.banner) {
-        type = Yodo1MasAdvertTypeBanner;
+        type = Yodo1MasAdTypeBanner;
     } else {
         return;
     }
@@ -249,7 +249,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method:didHideAd:, ad:%@}",TAG, ad.adUnitIdentifier];
     NSLog(message);
 
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeClosed type:type];
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:type];
     [self loadAdvert:type];
 }
 
@@ -259,13 +259,13 @@
 }
 
 - (void)didFailToDisplayAd:(MAAd *)ad withErrorCode:(NSInteger)errorCode {
-    Yodo1MasAdvertType type;
+    Yodo1MasAdType type;
     if (ad.format == MAAdFormat.rewarded) {
-        type = Yodo1MasAdvertTypeReward;
+        type = Yodo1MasAdTypeReward;
     } else if (ad.format == MAAdFormat.interstitial) {
-        type = Yodo1MasAdvertTypeInterstitial;
+        type = Yodo1MasAdTypeInterstitial;
     } else if (ad.format == MAAdFormat.banner) {
-        type = Yodo1MasAdvertTypeBanner;
+        type = Yodo1MasAdTypeBanner;
     } else {
         return;
     }
@@ -274,7 +274,7 @@
     NSLog(message);
     
     [self loadAdvert:type];
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdvertShowFail message:message];
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:type];
     [self loadAdvert:type];
 }
@@ -294,7 +294,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method:didRewardUserForAd:withReward:, ad:%@}", TAG, ad.adUnitIdentifier];
     NSLog(message);
     
-    [self callbackWithEvent:Yodo1MasAdvertEventCodeRewardEarned type:Yodo1MasAdvertTypeReward];
+    [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
 }
 
 #pragma mark - MAAdViewAdDelegate
