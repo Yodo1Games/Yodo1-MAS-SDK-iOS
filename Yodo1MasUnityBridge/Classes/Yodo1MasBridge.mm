@@ -30,15 +30,18 @@ static NSString* kYodo1MasMethodName;
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;
 
-- (BOOL)isRewardAdvertLoaded;
-- (void)showRewardAdvert;
+- (BOOL)isRewardedAdLoaded;
+- (void)showRewardedAd;
+- (void)showRewardedAd:(NSString *)placementId;
 
-- (BOOL)isInterstitialAdvertLoaded;
-- (void)showInterstitialAdvert;
+- (BOOL)isInterstitialAdLoaded;
+- (void)showInterstitialAd;
+- (void)showInterstitialAd:(NSString *)placementId;
 
-- (BOOL)isBannerAdvertLoaded;
-- (void)showBannerAdvert;
-- (void)showBannerAdvert:(Yodo1MasBannerAlign)align;
+- (BOOL)isBannerAdLoaded;
+- (void)showBannerAd;
+- (void)showBannerAd:(Yodo1MasBannerAlign)align;
+- (void)showBannerAd:(Yodo1MasBannerAlign)align placementId:(NSString *)placementId;
 @end
 
 @implementation Yodo1MasBridge
@@ -60,28 +63,40 @@ static NSString* kYodo1MasMethodName;
     [[Yodo1Mas sharedInstance] initWithAppId:appId successful:successful fail:fail];
 }
 
-- (BOOL)isRewardAdvertLoaded {
+- (BOOL)isRewardedAdLoaded {
     return [[Yodo1Mas sharedInstance] isRewardAdvertLoaded];
 }
-- (void)showRewardAdvert {
+- (void)showRewardedAd {
     [[Yodo1Mas sharedInstance] showRewardAdvert];
 }
 
-- (BOOL)isInterstitialAdvertLoaded {
+- (void)showRewardedAd:(NSString *)placementId {
+//TODO
+}
+
+- (BOOL)isInterstitialAdLoaded {
     return [[Yodo1Mas sharedInstance] isInterstitialAdvertLoaded];
 }
-- (void)showInterstitialAdvert {
+- (void)showInterstitialAd {
     [[Yodo1Mas sharedInstance] showInterstitialAdvert];
 }
 
-- (BOOL)isBannerAdvertLoaded {
+- (void)showInterstitialAd:(NSString *)placementId {
+//TODO
+}
+
+- (BOOL)isBannerAdLoaded {
     return [[Yodo1Mas sharedInstance] isBannerAdvertLoaded];
 }
-- (void)showBannerAdvert {
+- (void)showBannerAd {
     [[Yodo1Mas sharedInstance] showBannerAdvert];
 }
-- (void)showBannerAdvert:(Yodo1MasBannerAlign)align {
+- (void)showBannerAd:(Yodo1MasBannerAlign)align {
     [[Yodo1Mas sharedInstance] showBannerAdvert:align];
+}
+
+- (void)showBannerAd:(Yodo1MasBannerAlign)align placementId:(NSString *)placementId {
+//TODO
 }
 
 #pragma mark - Yodo1MasAdvertDelegate
@@ -91,7 +106,7 @@ static NSString* kYodo1MasMethodName;
     }
     NSString* data = [Yodo1MasBridge stringWithJSONObject:event.getJsonObject error:nil];
     NSString* msg = [Yodo1MasBridge getSendMessage:1 data:data];
-    MasUnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+    UnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
 
 }
 
@@ -101,7 +116,7 @@ static NSString* kYodo1MasMethodName;
     }
     NSString* data = [Yodo1MasBridge stringWithJSONObject:event.getJsonObject error:nil];
     NSString* msg = [Yodo1MasBridge getSendMessage:1 data:data];
-    MasUnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+    UnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (void)onAdvertError:(Yodo1MasAdvertEvent *)event error:(Yodo1MasError *)error {
@@ -110,7 +125,7 @@ static NSString* kYodo1MasMethodName;
     }
     NSString* data = [Yodo1MasBridge stringWithJSONObject:event.getJsonObject error:nil];
     NSString* msg = [Yodo1MasBridge getSendMessage:1 data:data];
-    MasUnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+    UnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 #pragma mark - Yodo1MasRewardAdvertDelegate
@@ -120,7 +135,7 @@ static NSString* kYodo1MasMethodName;
     }
     NSString* data = [Yodo1MasBridge stringWithJSONObject:event.getJsonObject error:nil];
     NSString* msg = [Yodo1MasBridge getSendMessage:1 data:data];
-    MasUnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+    UnitySendMessage([kYodo1MasGameObject cStringUsingEncoding:NSUTF8StringEncoding], [kYodo1MasMethodName cStringUsingEncoding:NSUTF8StringEncoding], [msg cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 + (UIViewController*)getRootViewController {
@@ -234,39 +249,39 @@ extern "C" {
 
 #pragma mark - Privacy
 
-void Unity3dSetUserConsent(BOOL consent)
+void UnityMasSetUserConsent(BOOL consent)
 {
     [Yodo1Mas sharedInstance].isGDPRUserConsent = consent;
 }
 
-bool Unity3dIsUserConsent()
+bool UnityMasIsUserConsent()
 {
     return [Yodo1Mas sharedInstance].isGDPRUserConsent;
 }
 
-void Unity3dSetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
+void UnityMasSetTagForUnderAgeOfConsent(BOOL isBelowConsentAge)
 {
     [Yodo1Mas sharedInstance].isCOPPAAgeRestricted = isBelowConsentAge;
 }
 
-bool Unity3dIsTagForUnderAgeOfConsent()
+bool UnityMasIsTagForUnderAgeOfConsent()
 {
     return [Yodo1Mas sharedInstance].isCOPPAAgeRestricted;
 }
 
-void Unity3dSetDoNotSell(BOOL doNotSell)
+void UnityMasSetDoNotSell(BOOL doNotSell)
 {
     [Yodo1Mas sharedInstance].isCCPADoNotSell = doNotSell;
 }
 
-bool Unity3dIsDoNotSell()
+bool UnityMasIsDoNotSell()
 {
     return [Yodo1Mas sharedInstance].isCCPADoNotSell;
 }
 
 #pragma mark - Initialize
 
-void Unity3dInitWithAppKey(const char* appKey,const char* gameObjectName, const char* callbackMethodName)
+void UnityMasInitWithAppKey(const char* appKey,const char* gameObjectName, const char* callbackMethodName)
 {
     NSString* m_appKey = Yodo1MasCreateNSString(appKey);
     NSCAssert(m_appKey != nil, @"AppKey 没有设置!");
@@ -282,115 +297,71 @@ void Unity3dInitWithAppKey(const char* appKey,const char* gameObjectName, const 
     [[Yodo1MasBridge sharedInstance] initWithAppId:m_appKey successful:^{
         NSString* data = [Yodo1MasBridge convertToInitJsonString:1 masError:nil];
         NSString* msg = [Yodo1MasBridge getSendMessage:0 data:data];
-        MasUnitySendMessage(gameObjectName, callbackMethodName, [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+        UnitySendMessage(gameObjectName, callbackMethodName, [msg cStringUsingEncoding:NSUTF8StringEncoding]);
     } fail:^(Yodo1MasError * _Nonnull error) {
         NSString* data = [Yodo1MasBridge convertToInitJsonString:0 masError:error];
         NSString* msg = [Yodo1MasBridge getSendMessage:0 data:data];
-        MasUnitySendMessage(gameObjectName, callbackMethodName, [msg cStringUsingEncoding:NSUTF8StringEncoding]);
+        UnitySendMessage(gameObjectName, callbackMethodName, [msg cStringUsingEncoding:NSUTF8StringEncoding]);
     }];
 }
 
-#pragma mark - Unity3dBanner
+#pragma mark - Unity Banner
 
-//void Unity3dSetBannerAlign(Yodo1AdsCBannerAdAlign align)
-//{
-//    [Yodo1Ads setBannerAlign:(Yodo1AdsBannerAdAlign)align];
-//}
-//
-//void Unity3dSetBannerOffset(float x,float y)
-//{
-//    [Yodo1Ads setBannerOffset:CGPointMake(x,y)];
-//}
-//
-//void Unity3dSetBannerScale(float sx,float sy)
-//{
-//    [Yodo1Ads setBannerScale:sx sy:sy];
-//}
-//
-bool Unity3dBannerIsReady()
+bool UnityIsBannerAdLoaded()
 {
-    return [[Yodo1MasBridge sharedInstance] isBannerAdvertLoaded];
+    return [[Yodo1MasBridge sharedInstance] isBannerAdLoaded];
 }
 
-void UnityShowBanner(const char* gameObjectName, const char* callbackMethodName)
+void UnityShowBannerAd()
 {
-    NSString* m_gameObject = Yodo1MasCreateNSString(gameObjectName);
-    NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
-    kYodo1MasGameObject = m_gameObject;
-    
-    NSString* m_methodName = Yodo1MasCreateNSString(callbackMethodName);
-    NSCAssert(m_methodName != nil, @"Unity3d callback method isn't set!");
-    kYodo1MasMethodName = m_methodName;
-    
-    [[Yodo1MasBridge sharedInstance] showBannerAdvert];
+    [[Yodo1MasBridge sharedInstance] showBannerAd];
 }
 
-void UnityShowBannerWithAlign(int align, const char* gameObjectName, const char* callbackMethodName)
+void UnityShowBannerAdWithAlign(int align)
 {
-    NSString* m_gameObject = Yodo1MasCreateNSString(gameObjectName);
-    NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
-    kYodo1MasGameObject = m_gameObject;
-    
-    NSString* m_methodName = Yodo1MasCreateNSString(callbackMethodName);
-    NSCAssert(m_methodName != nil, @"Unity3d callback method isn't set!");
-    kYodo1MasMethodName = m_methodName;
-    
-    [[Yodo1MasBridge sharedInstance] showBannerAdvert:(Yodo1MasBannerAlign)align];
+    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasBannerAlign)align];
 }
 
-//
-//void UnityShowBannerWithPlacement(const char* placement_id) {
-//    [Yodo1Ads showBanner:Yodo1CreateNSString(placement_id)];
-//}
-//
-//void Unity3dHideBanner()
-//{
-//    [Yodo1Ads hideBanner];
-//}
-//
-//void Unity3dRemoveBanner()
-//{
-//    [Yodo1Ads removeBanner];
-//}
-
-#pragma mark - Unity3dInterstitial
-
-bool Unity3dInterstitialIsReady()
+void UnityShowBannerAdWithAlignAndPlacementId(int align, const char* placementId)
 {
-    return [[Yodo1Mas sharedInstance] isInterstitialAdvertLoaded];
+    NSString* m_placementId = Yodo1MasCreateNSString(placementId);
+    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasBannerAlign)align placementId:m_placementId];
 }
 
-void Unity3dShowInterstitial(const char* gameObjectName, const char* callbackMethodName)
+#pragma mark - Unity Interstitial
+
+bool UnityIsInterstitialLoaded()
 {
-    NSString* m_gameObject = Yodo1MasCreateNSString(gameObjectName);
-    NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
-    kYodo1MasGameObject = m_gameObject;
-    
-    NSString* m_methodName = Yodo1MasCreateNSString(callbackMethodName);
-    NSCAssert(m_methodName != nil, @"Unity3d callback method isn't set!");
-    kYodo1MasMethodName = m_methodName;
-    
-    [[Yodo1MasBridge sharedInstance] showInterstitialAdvert];
+    return [[Yodo1MasBridge sharedInstance] isInterstitialAdLoaded];
 }
 
-#pragma mark - Unity3dVideo
-
-bool Unity3dVideoIsReady()
+void UnityShowInterstitialAd()
 {
-    return [[Yodo1Mas sharedInstance] isRewardAdvertLoaded];
+    [[Yodo1MasBridge sharedInstance] showInterstitialAd];
 }
 
-void Unity3dShowVideo(const char* gameObjectName, const char* callbackMethodName)
+void UnityShowInterstitialAdWithPlacementId(const char* placementId)
 {
-    NSString* m_gameObject = Yodo1MasCreateNSString(gameObjectName);
-    NSCAssert(m_gameObject != nil, @"Unity3d gameObject isn't set!");
-    kYodo1MasGameObject = m_gameObject;
-    
-    NSString* m_methodName = Yodo1MasCreateNSString(callbackMethodName);
-    NSCAssert(m_methodName != nil, @"Unity3d callback method isn't set!");
-    kYodo1MasMethodName = m_methodName;
-    
-    [[Yodo1MasBridge sharedInstance] showRewardAdvert];
+    NSString* m_placementId = Yodo1MasCreateNSString(placementId);
+    [[Yodo1MasBridge sharedInstance] showInterstitialAd:m_placementId];
+}
+
+#pragma mark - Unity Rewarded Ad
+
+bool UnityIsRewardedAdLoaded()
+{
+    return [[Yodo1MasBridge sharedInstance] isRewardedAdLoaded];
+}
+
+void UnityShowRewardedAd()
+{
+    [[Yodo1MasBridge sharedInstance] showRewardedAd];
+}
+
+void UnityShowRewardedAdWithPlacementId(const char* placementId)
+{
+    NSString* m_placementId = Yodo1MasCreateNSString(placementId);
+    [[Yodo1MasBridge sharedInstance] showRewardedAd:m_placementId];
 }
 
 }
