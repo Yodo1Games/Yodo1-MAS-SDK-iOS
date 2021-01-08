@@ -443,7 +443,7 @@
             }
             break;
         }
-
+            
         case Yodo1MasAdTypeInterstitial: {
             id delegate = self.interstitialAdDelegate;
             if (delegate != nil) {
@@ -512,7 +512,7 @@
     [self showAdvert:Yodo1MasAdTypeReward];
 }
 
-- (void)showRewardAd:(NSString *)placement {
+- (void)showRewardAdWithPlacement:(NSString *)placement {
     [self showAdvert:Yodo1MasAdTypeReward object:@{kArgumentPlacement : placement}];
 }
 
@@ -535,7 +535,7 @@
     [self showAdvert:Yodo1MasAdTypeInterstitial];
 }
 
-- (void)showInterstitialAd:(NSString *)placement {
+- (void)showInterstitialAdWithPlacement:(NSString *)placement {
     [self showAdvert:Yodo1MasAdTypeInterstitial object:@{kArgumentPlacement : placement}];
 }
 
@@ -555,19 +555,19 @@
 }
 
 - (void)showBannerAd {
-    [self showBannerAd:Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter];
+    [self showBannerAdWithPlacement:nil align:Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter offset:CGPointZero];
 }
 
 - (void)showBannerAd:(Yodo1MasAdBannerAlign)align {
-    [self showAdvert:Yodo1MasAdTypeBanner object:@{kArgumentBannerAlign : @(align)}];
+    [self showBannerAdWithPlacement:nil align:align offset:CGPointZero];
 }
 
 - (void)showBannerAd:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
-    [self showAdvert:Yodo1MasAdTypeBanner object:@{kArgumentBannerAlign : @(align), kArgumentBannerOffset: [NSValue valueWithCGPoint:offset]}];
+    [self showBannerAdWithPlacement:nil align:align offset:offset];
 }
 
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId {
-//TODO
+- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
+    [self showAdvert:Yodo1MasAdTypeBanner object:@{kArgumentPlacement : placement, kArgumentBannerAlign: @(align), kArgumentBannerOffset: [NSValue valueWithCGPoint:offset]}];
 }
 
 - (void)dismissBannerAd {

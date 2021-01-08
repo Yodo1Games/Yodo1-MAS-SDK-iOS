@@ -181,6 +181,12 @@
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", TAG];
         NSLog(message);
+        
+        NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
+        if (placement != nil && placement.length > 0) {
+            self.bannerAd.placement = placement;
+        }
+        
         UIViewController *controller = [Yodo1MasAppLovinAdapter getTopViewController];
         [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
     }

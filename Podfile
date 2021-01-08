@@ -18,6 +18,7 @@ pod 'Yodo1MasMediationInMobi', :path => './'
 pod 'Yodo1MasMediationTapjoy', :path => './'
 pod 'Yodo1MasMediationUnityAds', :path => './'
 pod 'Yodo1MasMediationVungle', :path => './'
+#pod 'Yodo1MasUnityBridge', :path => './'
 pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasSDK', :path => './'
 

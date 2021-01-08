@@ -72,7 +72,7 @@ static NSString* kYodo1MasMethodName;
 }
 
 - (void)showRewardedAd:(NSString *)placementId {
-    [[Yodo1Mas sharedInstance] showRewardAd:placementId];
+    [[Yodo1Mas sharedInstance] showRewardAdWithPlacement:placementId];
 }
 
 - (BOOL)isInterstitialAdLoaded {
@@ -83,7 +83,7 @@ static NSString* kYodo1MasMethodName;
 }
 
 - (void)showInterstitialAd:(NSString *)placementId {
-    [[Yodo1Mas sharedInstance] showInterstitialAd:placementId];
+    [[Yodo1Mas sharedInstance] showInterstitialAdWithPlacement:placementId];
 }
 
 - (BOOL)isBannerAdLoaded {
@@ -94,11 +94,11 @@ static NSString* kYodo1MasMethodName;
 }
 
 - (void)showBannerAd:(Yodo1MasAdBannerAlign)align {
-    [[Yodo1Mas sharedInstance] showBannerAd:align];
+    [[Yodo1Mas sharedInstance] showBannerAdWithAlign:align];
 }
 
 - (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId {
-    [[Yodo1Mas sharedInstance] showBannerAd:align placementId:placementId];
+    [[Yodo1Mas sharedInstance] showBannerAdWithPlacement:placementId align:align offset:CGPointZero];
 }
 
 - (void)dismissBannerAd

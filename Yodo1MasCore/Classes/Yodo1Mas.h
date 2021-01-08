@@ -55,19 +55,20 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 
 - (BOOL)isRewardAdLoaded;
 - (void)showRewardAd;
-- (void)showRewardAd:(NSString *)placement;
-- (void)dismissRewardAdvert;
+- (void)showRewardAdWithPlacement:(NSString *)placement;
+//- (void)dismissRewardAdvert;
 
 - (BOOL)isInterstitialAdLoaded;
 - (void)showInterstitialAd;
-- (void)showInterstitialAd:(NSString *)placement;
-- (void)dismissInterstitialAd;
+- (void)showInterstitialAdWithPlacement:(NSString *)placement;
+//- (void)dismissInterstitialAd;
 
 - (BOOL)isBannerAdLoaded;
 - (void)showBannerAd;
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align;
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId;
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
+- (void)showBannerAdWithPlacement:(NSString *)placement;
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align;
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
+- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
 
 @end

@@ -1,33 +1,31 @@
 # Yodo1Mas
 
-[![CI Status](https://img.shields.io/travis/yodo1/Yodo1MasCore.svg?style=flat)](https://travis-ci.org/yodo1/Yodo1MasCore)
-[![Version](https://img.shields.io/cocoapods/v/Yodo1MasCore.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasCore)
-[![License](https://img.shields.io/cocoapods/l/Yodo1MasCore.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasCore)
-[![Platform](https://img.shields.io/cocoapods/p/Yodo1MasCore.svg?style=flat)](https://cocoapods.org/pods/Yodo1MasCore)
+### 使用`Cocoapods`安装
 
-## 运行
-```ruby
-cd Yodo1MasSdkDemo
-pod install
+终端内，执行以下命令：
+
+```shell
+cd 你项目的根目录
+touch Podfile
 ```
-打开`Yodo1MasSdkDemo.xcworkspace`
 
-## 要求
-- iOS9+
-- XCode 12
-- arm64 arm64e armv7 armv7s 
-
-## 安装
-
-Yodo1MasCore is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+使用文本编辑器打开`Podfile`， 将以下内容添加到文件内并保存‘
 
 ```ruby
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
-
 pod 'Yodo1MasSDK', '~> 0.0.0.1-beta'
 ```
 
+终端内，执行以下命令
+
+```shell
+cd 你项目的根目录
+pod install
+```
+
+打开`.xcworkspace`文件
+
+### 项目配置
 `Info.plist`中添加
 ```xml
 
