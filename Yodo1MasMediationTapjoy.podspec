@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationTapjoy'
-  s.version          = '0.0.0.1-beta'
+  s.version          = '0.0.0.2-beta'
   s.summary          = 'Yodo1MasMediationTapjoy'
   s.swift_version    = '5.0'
 
@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '>= 0.0.0.1-beta'
+  s.dependency 'Yodo1MasCore', '>= 0.0.0.2-beta'
   s.dependency 'TapjoySDK','~> 12.7.1'
   
 end
