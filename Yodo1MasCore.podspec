@@ -43,5 +43,6 @@ TODO: Add long description of the pod here.
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'AFNetworking'
   s.dependency 'YYModel'
+  s.dependency 'Yodo1SaAnalytics'
   
 end

@@ -15,6 +15,7 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #endif
 #import <AdSupport/AdSupport.h>
+#import "Yodo1SaManager.h"
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
@@ -68,6 +69,23 @@
     
     __weak __typeof(self)weakSelf = self;
     
+#ifdef DEBUG
+    NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=default";
+    int debugMode = 2;
+#else
+    NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=production";
+    int debugMode = 0;
+#endif
+    //init Sa SDK,debugMode:0 close debug, 1 is debug,2 is debug and data import
+    [Yodo1SaManager initializeSdkServerURL: serverURL debug:debugMode];
+    NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+    [Yodo1SaManager registerSuperProperties:@{@"gameKey":appId,
+                                              @"gameBundleId":bundleId,
+                                              @"sdkType":@"mas_global",
+                                              @"publishChannelCode":@"appstore",
+                                              @"sdkVersion":@"0.0.0.2-beta"}];
+    [Yodo1SaManager track:@"adInit" properties:nil];
+
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
 #ifdef DEBUG
