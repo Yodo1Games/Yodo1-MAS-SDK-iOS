@@ -576,11 +576,15 @@
     [self showBannerAdWithPlacement:nil align:Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter offset:CGPointZero];
 }
 
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align {
+- (void)showBannerAdWithPlacement:(NSString *)placement {
+    [self showBannerAdWithPlacement:placement align:Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter offset:CGPointZero];
+}
+
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align {
     [self showBannerAdWithPlacement:nil align:align offset:CGPointZero];
 }
 
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
     [self showBannerAdWithPlacement:nil align:align offset:offset];
 }
 

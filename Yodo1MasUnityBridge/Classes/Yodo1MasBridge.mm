@@ -40,8 +40,10 @@ static NSString* kYodo1MasMethodName;
 
 - (BOOL)isBannerAdLoaded;
 - (void)showBannerAd;
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align;
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId;
+- (void)showBannerAdWithPlacement:(NSString *)placementId;
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align;
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
+- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
 @end
 
@@ -93,12 +95,20 @@ static NSString* kYodo1MasMethodName;
     [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align {
+- (void)showBannerAdWithPlacement:(NSString *)placementId {
+    [[Yodo1Mas sharedInstance] showBannerAdWithPlacement:placementId];
+}
+
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align {
     [[Yodo1Mas sharedInstance] showBannerAdWithAlign:align];
 }
 
-- (void)showBannerAd:(Yodo1MasAdBannerAlign)align placementId:(NSString *)placementId {
-    [[Yodo1Mas sharedInstance] showBannerAdWithPlacement:placementId align:align offset:CGPointZero];
+- (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
+    [[Yodo1Mas sharedInstance] showBannerAdWithAlign:align offset:offset];
+}
+
+- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
+    [[Yodo1Mas sharedInstance] showBannerAdWithPlacement:placement align:align offset:offset];
 }
 
 - (void)dismissBannerAd
@@ -324,15 +334,26 @@ void UnityShowBannerAd()
     [[Yodo1MasBridge sharedInstance] showBannerAd];
 }
 
-void UnityShowBannerAdWithAlign(int align)
-{
-    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasAdBannerAlign)align];
-}
-
-void UnityShowBannerAdWithAlignAndPlacementId(int align, const char* placementId)
+void UnityShowBannerAdWithPlacement(const char* placementId)
 {
     NSString* m_placementId = Yodo1MasCreateNSString(placementId);
-    [[Yodo1MasBridge sharedInstance] showBannerAd:(Yodo1MasAdBannerAlign)align placementId:m_placementId];
+    [[Yodo1MasBridge sharedInstance] showBannerAdWithPlacement:m_placementId];
+}
+
+void UnityShowBannerAdWithAlign(int align)
+{
+    [[Yodo1MasBridge sharedInstance] showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align];
+}
+
+void UnityShowBannerAdWithAlignAndOffset(int align, int offsetX, int offsetY)
+{
+    [[Yodo1MasBridge sharedInstance] showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:CGPointMake(offsetX, offsetY)];
+}
+
+void UnityShowBannerAdWithPlacementAndAlignAndOffset(const char* placementId, int align, int offsetX, int offsetY)
+{
+    NSString* m_placementId = Yodo1MasCreateNSString(placementId);
+    [[Yodo1MasBridge sharedInstance] showBannerAdWithPlacement:m_placementId align:(Yodo1MasAdBannerAlign)align offset:CGPointMake(offsetX, offsetY)];
 }
 
 void UnityDismissBannerAd()
