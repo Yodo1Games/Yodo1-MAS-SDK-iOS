@@ -207,5 +207,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>Yodo1MasConfig</key>
+	<dict>
+		<key>Debug</key>
+		<true/>
+		<key>Api</key>
+		<string>https://rivendell-dev.explorer.yodo1.com/init/</string>
+	</dict>
 </dict>
 </plist>

@@ -41,6 +41,10 @@
     return _instance;
 }
 
++ (NSString *)sdkVersion {
+    return @"0.0.0.3-beta";
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -79,26 +83,36 @@
     //init Sa SDK,debugMode:0 close debug, 1 is debug,2 is debug and data import
     [Yodo1SaManager initializeSdkServerURL: serverURL debug:debugMode];
     NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-    [Yodo1SaManager registerSuperProperties:@{@"gameKey":appId,
-                                              @"gameBundleId":bundleId,
-                                              @"sdkType":@"mas_global",
-                                              @"publishChannelCode":@"appstore",
-                                              @"sdkVersion":@"0.0.0.2-beta"}];
+    [Yodo1SaManager registerSuperProperties:@{@"gameKey": appId,
+                                              @"gameBundleId": bundleId,
+                                              @"sdkType": @"mas_global",
+                                              @"publishChannelCode": @"appstore",
+                                              @"sdkVersion": [Yodo1Mas sdkVersion]}];
     [Yodo1SaManager track:@"adInit" properties:nil];
-
+    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
+    NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
+    BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
+    if (debug) {
 #ifdef DEBUG
-    NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
-    if (api != nil && api.length > 0) {
-        [url appendString:api];
-    } else {
-        [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
-    }
-    parameters[@"country"] = [NSLocale currentLocale].countryCode;
+        NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
+        if (api == nil || api.length == 0) {
+            api = yodo1Config[@"Api"];
+        }
+        if (api != nil && api.length > 0) {
+            [url appendString:api];
+        } else {
+            [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
+        }
+        parameters[@"country"] = [NSLocale currentLocale].countryCode;
 #else
-    [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
+        [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
 #endif
+    } else {
+        [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
+    }
+    
     [url appendString:appId];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -106,13 +120,15 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         Yodo1MasResponse *res = [Yodo1MasResponse yy_modelWithJSON:responseObject];
+        if (debug) {
 #ifdef DEBUG
-        // Mock
-        NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
-        if (res.data == nil && api != nil && api.length > 0) {
-            res.data = responseObject;
-        }
+            // Mock
+            NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
+            if (res.data == nil && api != nil && api.length > 0) {
+                res.data = responseObject;
+            }
 #endif
+        }
         
         if (res != nil && res.data != nil) {
             Yodo1MasInitData *data = [Yodo1MasInitData yy_modelWithJSON:res.data];

@@ -48,6 +48,7 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 @property (nonatomic, weak) id<Yodo1MasBannerAdDelegate> bannerAdDelegate;
 
 + (Yodo1Mas *)sharedInstance;
++ (NSString *)sdkVersion;
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
