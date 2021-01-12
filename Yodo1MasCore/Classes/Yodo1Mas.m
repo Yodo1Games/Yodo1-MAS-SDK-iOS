@@ -42,7 +42,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"0.0.0.3-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (instancetype)init {
@@ -95,7 +95,6 @@
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
     if (debug) {
-#ifdef DEBUG
         NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
         if (api == nil || api.length == 0) {
             api = yodo1Config[@"Api"];
@@ -106,14 +105,13 @@
             [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
         }
         parameters[@"country"] = [NSLocale currentLocale].countryCode;
-#else
-        [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
-#endif
     } else {
         [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
     }
     
     [url appendString:appId];
+    
+    NSLog(@"request - %@", url);
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -121,13 +119,11 @@
     [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         Yodo1MasResponse *res = [Yodo1MasResponse yy_modelWithJSON:responseObject];
         if (debug) {
-#ifdef DEBUG
             // Mock
             NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
             if (res.data == nil && api != nil && api.length > 0) {
                 res.data = responseObject;
             }
-#endif
         }
         
         if (res != nil && res.data != nil) {
@@ -245,15 +241,53 @@
                 if (adapter != nil) {
                     switch (type) {
                         case Yodo1MasAdTypeReward: {
-                            adapter.rewardPlacementId = unitId;
+                            [adapter.rewardAdIds removeAllObjects];
+                            [adapter.rewardAdIds addObject:[[Yodo1MasAdId alloc]initWitId:unitId object:nil]];
                             break;
                         }
                         case Yodo1MasAdTypeInterstitial: {
-                            adapter.interstitialPlacementId = unitId;
+                            [adapter.interstitialAdIds removeAllObjects];
+                            [adapter.interstitialAdIds addObject:[[Yodo1MasAdId alloc]initWitId:unitId object:nil]];
                             break;
                         }
                         case Yodo1MasAdTypeBanner: {
-                            adapter.bannerPlacementId = unitId;
+                            [adapter.bannerAdIds removeAllObjects];
+                            [adapter.bannerAdIds addObject:[[Yodo1MasAdId alloc]initWitId:unitId object:nil]];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    if (config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
+        for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
+            NSArray<Yodo1MasNetworkPlacement *> *placements = waterfall.ad_network_placements;
+            NSString *networkName = waterfall.ad_network_name;
+            if (networkName != nil && networkName.length > 0 && placements != nil && placements.count > 0) {
+                Yodo1MasAdapterBase *adapter = _mediations[networkName];
+                if (adapter != nil) {
+                    switch (type) {
+                        case Yodo1MasAdTypeReward: {
+                            [adapter.rewardAdIds removeAllObjects];
+                            for (Yodo1MasNetworkPlacement *placement in placements) {
+                                [adapter.rewardAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.placement_id object:placement]];
+                            }
+                            break;
+                        }
+                        case Yodo1MasAdTypeInterstitial: {
+                            [adapter.interstitialAdIds removeAllObjects];
+                            for (Yodo1MasNetworkPlacement *placement in placements) {
+                                [adapter.interstitialAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.placement_id object:placement]];
+                            }
+                            break;
+                        }
+                        case Yodo1MasAdTypeBanner: {
+                            [adapter.bannerAdIds removeAllObjects];
+                            for (Yodo1MasNetworkPlacement *placement in placements) {
+                                [adapter.bannerAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.placement_id object:placement]];
+                            }
                             break;
                         }
                     }
@@ -605,7 +639,13 @@
 }
 
 - (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
-    [self showAdvert:Yodo1MasAdTypeBanner object:@{kArgumentPlacement : placement, kArgumentBannerAlign: @(align), kArgumentBannerOffset: [NSValue valueWithCGPoint:offset]}];
+    NSMutableDictionary *object = [NSMutableDictionary dictionary];
+    if (placement != nil && placement.length > 0) {
+        object[kArgumentPlacement] = placement;
+    }
+    object[kArgumentBannerAlign] = @(align);
+    object[kArgumentBannerOffset] = [NSValue valueWithCGPoint:offset];
+    [self showAdvert:Yodo1MasAdTypeBanner object:object];
 }
 
 - (void)dismissBannerAd {

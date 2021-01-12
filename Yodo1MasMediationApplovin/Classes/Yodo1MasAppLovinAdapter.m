@@ -31,7 +31,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -84,8 +84,8 @@
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
-    if (self.rewardAd == nil && self.rewardPlacementId != nil) {
-        self.rewardAd = [MARewardedAd sharedWithAdUnitIdentifier:self.rewardPlacementId];
+    if ([self getRewardAdId] != nil) {
+        self.rewardAd = [MARewardedAd sharedWithAdUnitIdentifier:[self getRewardAdId].adId];
         self.rewardAd.delegate = self;
     }
     
@@ -124,8 +124,8 @@
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
-    if (self.interstitialAd == nil && self.interstitialPlacementId != nil) {
-        self.interstitialAd = [[MAInterstitialAd alloc] initWithAdUnitIdentifier:self.interstitialPlacementId];
+    if ([self getInterstitialAdId]) {
+        self.interstitialAd = [[MAInterstitialAd alloc] initWithAdUnitIdentifier:[self getInterstitialAdId].adId];
         self.interstitialAd.delegate = self;
     }
     
@@ -164,8 +164,11 @@
 - (void)loadBannerAd {
     [super loadBannerAd];
     if (![self isInitSDK]) return;
-    if (self.bannerAd == nil && self.bannerPlacementId != nil) {
-        self.bannerAd = [[MAAdView alloc] initWithAdUnitIdentifier:self.bannerPlacementId];
+    if (self.bannerAd != nil) {
+        [self.bannerAd removeFromSuperview];
+    }
+    if ([self getBannerAdId] != nil) {
+        self.bannerAd = [[MAAdView alloc] initWithAdUnitIdentifier:[self getBannerAdId].adId];
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {
@@ -206,11 +209,11 @@
 
 - (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withErrorCode:(NSInteger)errorCode {
     Yodo1MasAdType type;
-    if (adUnitIdentifier == self.rewardPlacementId) {
+    if (adUnitIdentifier == [self getRewardAdId].adId) {
         type = Yodo1MasAdTypeReward;
-    } else if (adUnitIdentifier == self.interstitialPlacementId) {
+    } else if (adUnitIdentifier == [self getInterstitialAdId].adId) {
         type = Yodo1MasAdTypeInterstitial;
-    } else if (adUnitIdentifier == self.bannerPlacementId) {
+    } else if (adUnitIdentifier == [self getBannerAdId].adId) {
         type = Yodo1MasAdTypeBanner;
     } else {
         return;

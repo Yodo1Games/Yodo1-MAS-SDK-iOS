@@ -13,6 +13,27 @@
 
 @end
 
+@implementation Yodo1MasAdId
+
+- (instancetype)initWitId:(NSString *)adId object:(id)object {
+    self = [super init];
+    if (self) {
+        _adId = adId;
+        _object = object;
+    }
+    return self;
+}
+
+@end
+
+@interface Yodo1MasAdapterBase()
+
+@property (nonatomic, assign) NSInteger currentRewardAdIdIndex;
+@property (nonatomic, assign) NSInteger currentInterstitialAdIdIndex;
+@property (nonatomic, assign) NSInteger currentBannerAdIdIndex;
+
+@end
+
 @implementation Yodo1MasAdapterBase
 
 - (NSString *)getAdvertCode {
@@ -25,6 +46,19 @@
 
 - (NSString *)getMediationVersion {
     return nil;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _currentRewardAdIdIndex = -1;
+        _rewardAdIds = [NSMutableArray array];
+        _currentInterstitialAdIdIndex = -1;
+        _interstitialAdIds = [NSMutableArray array];
+        _currentBannerAdIdIndex = -1;
+        _bannerAdIds = [NSMutableArray array];
+    }
+    return self;
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -41,6 +75,60 @@
 - (void)updatePrivacy {
     NSString *message = [NSString stringWithFormat:@"%@: {method: updatePrivacy}", TAG];
     NSLog(message);
+}
+
+- (void)nextReward {
+    if (_currentRewardAdIdIndex < 0) {
+        _currentRewardAdIdIndex = 0;
+    } else {
+        _currentRewardAdIdIndex++;
+    }
+    if (_currentRewardAdIdIndex >= _rewardAdIds.count) {
+        _currentRewardAdIdIndex = 0;
+    }
+}
+
+- (Yodo1MasAdId *)getRewardAdId {
+    if (_currentRewardAdIdIndex >= _rewardAdIds.count || _currentRewardAdIdIndex < 0) {
+        _currentRewardAdIdIndex = 0;
+    }
+    return _rewardAdIds.count > _currentRewardAdIdIndex ? _rewardAdIds[_currentRewardAdIdIndex] : nil;
+}
+
+-(void)nextInterstitial {
+    if (_currentInterstitialAdIdIndex < 0) {
+        _currentInterstitialAdIdIndex = 0;
+    } else {
+        _currentInterstitialAdIdIndex++;
+    }
+    if (_currentInterstitialAdIdIndex >= _rewardAdIds.count) {
+        _currentInterstitialAdIdIndex = 0;
+    }
+}
+
+- (Yodo1MasAdId *)getInterstitialAdId {
+    if (_currentInterstitialAdIdIndex >= _interstitialAdIds.count || _currentInterstitialAdIdIndex < 0) {
+        _currentInterstitialAdIdIndex = 0;
+    }
+    return _interstitialAdIds.count > _currentInterstitialAdIdIndex ? _interstitialAdIds[_currentInterstitialAdIdIndex] : nil;
+}
+
+- (void)nextBanner {
+    if (_currentBannerAdIdIndex < 0) {
+        _currentBannerAdIdIndex = 0;
+    } else {
+        _currentBannerAdIdIndex++;
+    }
+    if (_currentBannerAdIdIndex >= _rewardAdIds.count) {
+        _currentBannerAdIdIndex = 0;
+    }
+}
+
+- (Yodo1MasAdId *)getBannerAdId {
+    if (_currentBannerAdIdIndex >= _bannerAdIds.count || _currentBannerAdIdIndex < 0) {
+        _currentBannerAdIdIndex = 0;
+    }
+    return _bannerAdIds.count > _currentBannerAdIdIndex ? _bannerAdIds[_currentBannerAdIdIndex] : nil;
 }
 
 - (BOOL)isAdLoaded:(Yodo1MasAdType)type {
@@ -175,6 +263,8 @@
 - (void)loadRewardAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd}", TAG];
     NSLog(message);
+    
+    [self nextReward];
 }
 
 - (void)loadRewardAdDelayed {
@@ -201,6 +291,7 @@
 - (void)loadInterstitialAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd}", TAG];
     NSLog(message);
+    [self nextInterstitial];
 }
 
 - (void)loadInterstitialAdDelayed {
@@ -227,6 +318,7 @@
 - (void)loadBannerAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAd}", TAG];
     NSLog(message);
+    [self nextBanner];
 }
 
 - (void)loadBannerAdDelayed {

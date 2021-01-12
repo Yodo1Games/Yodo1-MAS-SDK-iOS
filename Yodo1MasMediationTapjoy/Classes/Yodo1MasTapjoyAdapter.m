@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 -(void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail  {

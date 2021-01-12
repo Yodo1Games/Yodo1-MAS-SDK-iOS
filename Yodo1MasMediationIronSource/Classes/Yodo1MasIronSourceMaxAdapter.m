@@ -236,15 +236,15 @@
 
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return self.bannerPlacementId != nil && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && self.bannerAd != nil;
 }
 
 - (void)loadBannerAd {
     [super loadBannerAd];
-    if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0) {
+    if ([self getBannerAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", TAG];
         NSLog(message);
-        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceMaxAdapter getTopViewController] size:ISBannerSize_BANNER placement:self.bannerPlacementId];
+        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceMaxAdapter getTopViewController] size:ISBannerSize_BANNER placement:[self getBannerAdId].adId];
     }
 }
 

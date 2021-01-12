@@ -27,15 +27,24 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
 @end
 
+@interface Yodo1MasAdId : NSObject
+
+@property (nonatomic, copy) NSString *adId;
+@property (nonatomic, strong) id object;
+
+- (instancetype)initWitId:(NSString *)adId object:(id)object;
+
+@end
+
 @interface Yodo1MasAdapterBase : NSObject
 
 @property (nonatomic, copy, readonly) NSString *advertCode;
 @property (nonatomic, copy, readonly) NSString *sdkVersion;
 @property (nonatomic, copy, readonly) NSString *mediationVersion;
 
-@property (nonatomic, copy) NSString *rewardPlacementId;
-@property (nonatomic, copy) NSString *interstitialPlacementId;
-@property (nonatomic, copy) NSString *bannerPlacementId;
+@property (nonatomic, strong) NSMutableArray<Yodo1MasAdId *> *rewardAdIds;
+@property (nonatomic, strong) NSMutableArray<Yodo1MasAdId *> *interstitialAdIds;
+@property (nonatomic, strong) NSMutableArray<Yodo1MasAdId *> *bannerAdIds;
 
 @property (nonatomic, copy, readonly) Yodo1MasAdapterInitSuccessful initSuccessfulCallback;
 @property (nonatomic, copy, readonly) Yodo1MasAdapterInitFail initFailCallback;
@@ -46,6 +55,10 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
 - (BOOL)isInitSDK;
 - (void)updatePrivacy;
+
+- (Yodo1MasAdId *)getRewardAdId;
+- (Yodo1MasAdId *)getInterstitialAdId;
+- (Yodo1MasAdId *)getBannerAdId;
 
 - (BOOL)isAdLoaded:(Yodo1MasAdType)type;
 - (void)loadAd:(Yodo1MasAdType)type;

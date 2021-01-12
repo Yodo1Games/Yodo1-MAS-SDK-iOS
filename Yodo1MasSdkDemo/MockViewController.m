@@ -27,14 +27,16 @@
         self.popoverPresentationController.delegate = self;
         
         _items = @[
-            @{@"title" : @"Server Config",      @"api" : @""},
-            @{@"title" : @"Mock AppLovin",      @"api" : @"https://run.mocky.io/v3/0a999653-141c-4eac-8447-07605465abf0/"},
-            @{@"title" : @"Mock AdMob",         @"api" : @"https://run.mocky.io/v3/f1156264-7747-47d2-82b7-11ad4b97d117/"},
-            @{@"title" : @"Mock IronSource",    @"api" : @"https://run.mocky.io/v3/aa45cf17-b602-4a7b-b309-5a3319d691fd/"},
-            @{@"title" : @"Mock Facebook",      @"api" : @"https://run.mocky.io/v3/6c737c47-6797-44a5-913d-b6f165949644/"},
-            @{@"title" : @"Mock Tapjoy",        @"api" : @"https://run.mocky.io/v3/81f600a7-0210-411a-a138-45df076dfe99/"},
-            @{@"title" : @"Mock UnityAds",      @"api" : @"https://run.mocky.io/v3/9a1c9ad4-22cd-4bff-907a-295a3bc0e019/"},
-            @{@"title" : @"Mock Vungle",        @"api" : @"https://run.mocky.io/v3/aae65942-c389-4cbe-a33c-4417ebe0995e/"}
+            @{@"title" : @"Server Config",                  @"api" : @""},
+            @{@"title" : @"Mock AppLovin Mediation Banner", @"api" : @"https://run.mocky.io/v3/d0ec4c98-c784-4995-85b5-d37251ac588f/"},
+            @{@"title" : @"Mock AdMob Network Banner",      @"api" : @"https://run.mocky.io/v3/b0a66eb2-edbe-4fc1-94d1-dbd7a157ac22/"},
+            @{@"title" : @"Mock AppLovin Mediation",        @"api" : @"https://run.mocky.io/v3/0a999653-141c-4eac-8447-07605465abf0/"},
+            @{@"title" : @"Mock AdMob Network",             @"api" : @"https://run.mocky.io/v3/f1156264-7747-47d2-82b7-11ad4b97d117/"},
+            @{@"title" : @"Mock IronSource Network",        @"api" : @"https://run.mocky.io/v3/aa45cf17-b602-4a7b-b309-5a3319d691fd/"},
+            @{@"title" : @"Mock Facebook Network",          @"api" : @"https://run.mocky.io/v3/6c737c47-6797-44a5-913d-b6f165949644/"},
+            @{@"title" : @"Mock Tapjoy Network",            @"api" : @"https://run.mocky.io/v3/81f600a7-0210-411a-a138-45df076dfe99/"},
+            @{@"title" : @"Mock UnityAds Network",          @"api" : @"https://run.mocky.io/v3/9a1c9ad4-22cd-4bff-907a-295a3bc0e019/"},
+            @{@"title" : @"Mock Vungle Network",            @"api" : @"https://run.mocky.io/v3/aae65942-c389-4cbe-a33c-4417ebe0995e/"}
         ];
     }
     return self;

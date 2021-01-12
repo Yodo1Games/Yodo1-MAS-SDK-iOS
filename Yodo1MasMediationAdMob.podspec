@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationAdMob'
-  s.version          = '0.0.0.2-beta'
+  s.version          = '0.0.0.4-beta'
   s.summary          = 'Yodo1MasMediationAdMob'
   s.swift_version    = '5.0'
 
@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '>= 0.0.0.2-beta'
+  s.dependency 'Yodo1MasCore', '>= 0.0.0.4-beta'
   s.dependency 'Google-Mobile-Ads-SDK','~> 7.66.0'
   # s.dependency 'GoogleMobileAdsMediationAppLovin' #,'6.14.9.0'
   # s.dependency 'GoogleMobileAdsMediationIronSource' #,'7.0.3.0'

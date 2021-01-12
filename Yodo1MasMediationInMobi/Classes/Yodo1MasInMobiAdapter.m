@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -100,8 +100,8 @@
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     
-    if (self.rewardAd == nil && self.rewardPlacementId != nil) {
-        self.rewardAd = [[IMInterstitial alloc] initWithPlacementId:[self.rewardPlacementId longLongValue]];
+    if ([self getRewardAdId] != nil) {
+        self.rewardAd = [[IMInterstitial alloc] initWithPlacementId:[[self getRewardAdId].adId longLongValue]];
         self.rewardAd.delegate = self;
     }
     
@@ -139,8 +139,8 @@
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     
-    if (self.interstitialAd == nil && self.interstitialPlacementId != nil) {
-        self.interstitialAd = [[IMInterstitial alloc] initWithPlacementId:[self.interstitialPlacementId longLongValue]];
+    if ([self getInterstitialAdId] != nil) {
+        self.interstitialAd = [[IMInterstitial alloc] initWithPlacementId:[[self getInterstitialAdId].adId longLongValue]];
         self.interstitialAd.delegate = self;
     }
     
@@ -171,13 +171,17 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return self.bannerPlacementId != nil && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && self.bannerAd != nil;
 }
 
 - (void)loadBannerAd {
     [super loadBannerAd];
-    if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0 && self.bannerAd == nil) {
-        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, 320, 50) placementId:[self.bannerPlacementId longLongValue] delegate:self];
+    
+    if (self.bannerAd != nil) {
+        [self.bannerAd removeFromSuperview];
+    }
+    if ([self getBannerAdId] != nil) {
+        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, 320, 50) placementId:[[self getBannerAdId].adId longLongValue] delegate:self];
     }
 
     if (self.bannerAd != nil) {

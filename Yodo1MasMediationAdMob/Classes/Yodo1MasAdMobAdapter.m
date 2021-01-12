@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -95,8 +95,8 @@
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     
-    if (self.rewardPlacementId != nil) {
-        self.rewardAd = [[GADRewardedAd alloc] initWithAdUnitID:self.rewardPlacementId];
+    if ([self getRewardAdId] != nil) {
+        self.rewardAd = [[GADRewardedAd alloc] initWithAdUnitID:[self getRewardAdId].adId];
     }
     
     if (self.rewardAd != nil) {
@@ -178,8 +178,8 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     
-    if (self.interstitialPlacementId != nil) {
-        self.interstitialAd = [[GADInterstitial alloc] initWithAdUnitID:self.interstitialPlacementId];
+    if ([self getInterstitialAdId] != nil) {
+        self.interstitialAd = [[GADInterstitial alloc] initWithAdUnitID:[self getInterstitialAdId].adId];
         self.interstitialAd.delegate = self;
     }
     if (self.interstitialAd != nil) {
@@ -260,10 +260,13 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
 - (void)loadBannerAd {
     [super loadBannerAd];
     if (![self isInitSDK]) return;
-    if (self.bannerAd == nil && self.bannerPlacementId != nil) {
+    if (self.bannerAd != nil) {
+        [self.bannerAd removeFromSuperview];
+    }
+    if ([self getBannerAdId] != nil) {
         self.bannerAd == [[GADBannerView alloc]
                             initWithAdSize:kGADAdSizeSmartBannerPortrait];
-        self.bannerAd.adUnitID = self.bannerPlacementId;
+        self.bannerAd.adUnitID = [self getBannerAdId].adId;
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {

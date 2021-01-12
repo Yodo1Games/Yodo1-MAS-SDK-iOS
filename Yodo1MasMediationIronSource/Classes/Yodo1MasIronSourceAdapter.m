@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -80,16 +80,16 @@
 
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
-    return self.rewardPlacementId != nil && [IronSource hasISDemandOnlyRewardedVideo:self.rewardPlacementId];
+    return [self getRewardAdId] != nil && [IronSource hasISDemandOnlyRewardedVideo:[self getRewardAdId].adId];
 }
 
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
-    if (self.rewardPlacementId != nil) {
+    if ([self getRewardAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG];
         NSLog(message);
-        [IronSource loadISDemandOnlyRewardedVideo:self.rewardPlacementId];
+        [IronSource loadISDemandOnlyRewardedVideo:[self getRewardAdId].adId];
     }
 }
 
@@ -100,7 +100,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd, show reward ad...}", TAG];
             NSLog(message);
-            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
+            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:[self getRewardAdId].adId];
         }
     }
 }
@@ -160,16 +160,16 @@
 
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return self.interstitialPlacementId != nil && [IronSource hasISDemandOnlyInterstitial:self.interstitialPlacementId];
+    return [self getInterstitialAdId] != nil && [IronSource hasISDemandOnlyInterstitial: [self getInterstitialAdId].adId];
 }
 
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
-    if (self.interstitialPlacementId != nil) {
+    if ( [self getInterstitialAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG];
         NSLog(message);
-        [IronSource loadISDemandOnlyInterstitial:self.interstitialPlacementId];
+        [IronSource loadISDemandOnlyInterstitial:[self getInterstitialAdId].adId];
     }
 }
 
@@ -180,7 +180,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", TAG];
             NSLog(message);
-            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:self.rewardPlacementId];
+            [IronSource showISDemandOnlyRewardedVideo:controller instanceId: [self getInterstitialAdId].adId];
         }
     }
 }
@@ -236,15 +236,15 @@
 
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return self.bannerPlacementId != nil && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && self.bannerAd != nil;
 }
 
 - (void)loadBannerAd {
     [super loadBannerAd];
-    if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0) {
+    if ([self getBannerAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", TAG];
         NSLog(message);
-        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceAdapter getTopViewController] size:ISBannerSize_BANNER placement:self.bannerPlacementId];
+        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceAdapter getTopViewController] size:ISBannerSize_BANNER placement:[self getBannerAdId].adId];
     }
 }
 

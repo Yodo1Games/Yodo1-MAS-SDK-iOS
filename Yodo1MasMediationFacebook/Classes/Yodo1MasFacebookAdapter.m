@@ -29,7 +29,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -64,8 +64,8 @@
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
-    if (self.rewardAd == nil && self.rewardPlacementId != nil) {
-        self.rewardAd = [[FBRewardedVideoAd alloc] initWithPlacementID:self.rewardPlacementId];
+    if ([self getRewardAdId] != nil) {
+        self.rewardAd = [[FBRewardedVideoAd alloc] initWithPlacementID:[self getRewardAdId].adId];
         self.rewardAd.delegate = self;
     }
     
@@ -145,8 +145,8 @@
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     
-    if (self.interstitialAd == nil && self.interstitialPlacementId != nil) {
-        self.interstitialAd = [[FBInterstitialAd alloc] initWithPlacementID:self.interstitialPlacementId];
+    if ([self getInterstitialAdId] != nil) {
+        self.interstitialAd = [[FBInterstitialAd alloc] initWithPlacementID:[self getInterstitialAdId].adId];
         self.interstitialAd.delegate = self;
     }
     
@@ -214,8 +214,11 @@
     [super loadBannerAd];
     if (![self isInitSDK]) return;
     
-    if (self.bannerAd == nil && self.bannerPlacementId != nil) {
-        self.bannerAd = [[FBAdView alloc] initWithPlacementID:self.bannerPlacementId adSize:kFBAdSizeHeight50Banner rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
+    if (self.bannerAd != nil) {
+        [self.bannerAd removeFromSuperview];
+    }
+    if ([self getBannerAdId] != nil) {
+        self.bannerAd = [[FBAdView alloc] initWithPlacementID:[self getBannerAdId].adId adSize:kFBAdSizeHeight50Banner rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {

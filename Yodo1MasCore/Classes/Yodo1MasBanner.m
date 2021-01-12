@@ -12,6 +12,10 @@
 
 + (void)showBanner:(UIView *)banner controller:(UIViewController *)controller object:(NSDictionary *)object {
     
+    if (banner.superview != nil) {
+        [banner removeFromSuperview];
+    }
+    
     Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
     CGPoint offset = CGPointZero;
     if (object != nil) {

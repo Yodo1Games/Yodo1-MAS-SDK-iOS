@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.4-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -93,16 +93,16 @@
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
-    return self.rewardPlacementId != nil && [UnityAds isReady:self.rewardPlacementId];
+    return [self getRewardAdId] != nil && [UnityAds isReady:[self getRewardAdId].adId];
 }
 
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
-    if (self.rewardPlacementId != nil && self.rewardPlacementId.length > 0) {
+    if ([self getRewardAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG];
         NSLog(message);
-        [UnityAds load:self.rewardPlacementId loadDelegate:self];
+        [UnityAds load:[self getRewardAdId].adId loadDelegate:self];
     }
 }
 
@@ -113,7 +113,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd, show reward ad...}", TAG];
             NSLog(message);
-            [UnityAds show:controller placementId:self.rewardPlacementId];
+            [UnityAds show:controller placementId:[self getRewardAdId].adId];
         }
     }
 }
@@ -121,16 +121,16 @@
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return self.interstitialPlacementId != nil && [UnityAds isReady:self.interstitialPlacementId];
+    return [self getInterstitialAdId] != nil && [UnityAds isReady:[self getInterstitialAdId].adId];
 }
 
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
-    if (self.interstitialPlacementId != nil && self.interstitialPlacementId.length > 0) {
+    if ([self getInterstitialAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG];
         NSLog(message);
-        [UnityAds load:self.interstitialPlacementId loadDelegate:self];
+        [UnityAds load:[self getInterstitialAdId].adId loadDelegate:self];
     }
 }
 
@@ -141,7 +141,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd, show interstitial ad...}", TAG];
             NSLog(message);
-            [UnityAds show:controller placementId:self.interstitialPlacementId];
+            [UnityAds show:controller placementId:[self getInterstitialAdId].adId];
         }
     }
 }
@@ -149,13 +149,17 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return self.bannerPlacementId != nil && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && self.bannerAd != nil;
 }
 
 - (void)loadBannerAd {
     [super loadBannerAd];
-    if (self.bannerPlacementId != nil && self.bannerPlacementId.length > 0 && self.bannerAd == nil) {
-        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:self.bannerPlacementId size:CGSizeMake(320, 50)];
+    
+    if (self.bannerAd != nil) {
+        [self.bannerAd removeFromSuperview];
+    }
+    if ([self getBannerAdId] != nil) {
+        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:[self getBannerAdId].adId size:CGSizeMake(320, 50)];
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {
@@ -194,10 +198,10 @@
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
-    if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+    if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
         [self callbackWithError:error type:Yodo1MasAdTypeReward];
         [self loadRewardAdDelayed];
-    } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+    } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
         [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
         [self loadInterstitialAdDelayed];
     }
@@ -222,9 +226,9 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsDidStart:, placementId: %@}", TAG, placementId];
     NSLog(message);
     
-    if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+    if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
         [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
-    } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+    } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
         [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
     }
 }
@@ -237,19 +241,19 @@
     switch (state) {
         case kUnityAdsFinishStateError: {
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
-            if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+            if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
                 [self callbackWithError:error type:Yodo1MasAdTypeReward];
                 [self loadRewardAd];
-            } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+            } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
                 [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
                 [self loadInterstitialAd];
             }
             break;
         }
         default: {
-            if (self.rewardPlacementId != nil && [placementId isEqualToString:self.rewardPlacementId]) {
+            if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
                 [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
-            } else if (self.interstitialPlacementId != nil && [placementId isEqualToString:self.interstitialPlacementId]) {
+            } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
                 [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
             }
             break;
