@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.4-beta";
+    return @"0.0.0.5-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -142,6 +142,8 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
+    
+    [self nextReward];
     [self loadRewardAd];
 }
 
@@ -220,6 +222,9 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+    
+    [self nextInterstitial];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)interstitialWillPresentScreen:(nonnull GADInterstitial *)ad {
@@ -235,6 +240,8 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+    
+    [self nextInterstitial];
     [self loadInterstitialAd];
 }
 
@@ -308,6 +315,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
+    [self nextBanner];
     [self loadBannerAdDelayed];
 }
 

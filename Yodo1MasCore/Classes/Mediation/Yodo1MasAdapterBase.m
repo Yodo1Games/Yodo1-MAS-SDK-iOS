@@ -95,7 +95,7 @@
     return _rewardAdIds.count > _currentRewardAdIdIndex ? _rewardAdIds[_currentRewardAdIdIndex] : nil;
 }
 
--(void)nextInterstitial {
+- (void)nextInterstitial {
     if (_currentInterstitialAdIdIndex < 0) {
         _currentInterstitialAdIdIndex = 0;
     } else {
@@ -263,8 +263,6 @@
 - (void)loadRewardAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd}", TAG];
     NSLog(message);
-    
-    [self nextReward];
 }
 
 - (void)loadRewardAdDelayed {
@@ -291,7 +289,6 @@
 - (void)loadInterstitialAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd}", TAG];
     NSLog(message);
-    [self nextInterstitial];
 }
 
 - (void)loadInterstitialAdDelayed {
@@ -318,7 +315,6 @@
 - (void)loadBannerAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAd}", TAG];
     NSLog(message);
-    [self nextBanner];
 }
 
 - (void)loadBannerAdDelayed {

@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.4-beta";
+    return @"0.0.0.5-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -200,9 +200,11 @@
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
         [self callbackWithError:error type:Yodo1MasAdTypeReward];
+        [self nextReward];
         [self loadRewardAdDelayed];
     } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
         [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+        [self nextInterstitial];
         [self loadInterstitialAdDelayed];
     }
 }
@@ -243,9 +245,11 @@
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
             if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
                 [self callbackWithError:error type:Yodo1MasAdTypeReward];
+                [self nextReward];
                 [self loadRewardAd];
             } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
                 [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+                [self nextInterstitial];
                 [self loadInterstitialAd];
             }
             break;
@@ -283,7 +287,7 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
-
+    [self nextBanner];
     [self loadRewardAdDelayed];
 }
 

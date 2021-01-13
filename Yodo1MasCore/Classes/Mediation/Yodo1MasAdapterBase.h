@@ -56,8 +56,11 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 - (BOOL)isInitSDK;
 - (void)updatePrivacy;
 
+- (void)nextReward;
 - (Yodo1MasAdId *)getRewardAdId;
+- (void)nextInterstitial;
 - (Yodo1MasAdId *)getInterstitialAdId;
+- (void)nextBanner;
 - (Yodo1MasAdId *)getBannerAdId;
 
 - (BOOL)isAdLoaded:(Yodo1MasAdType)type;

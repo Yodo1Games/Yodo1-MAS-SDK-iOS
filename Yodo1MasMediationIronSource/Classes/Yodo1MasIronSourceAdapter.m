@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.4-beta";
+    return @"0.0.0.5-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -121,6 +121,7 @@
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
+    [self nextReward];
     [self loadRewardAdDelayed];
 }
 
@@ -134,6 +135,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidClose:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+    [self loadRewardAd];
 }
 
 - (void)rewardedVideoDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
@@ -142,6 +144,7 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
+    [self nextReward];
     [self loadRewardAd];
 }
 
@@ -201,6 +204,7 @@
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
     [self loadInterstitialAdDelayed];
 }
 
@@ -215,6 +219,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidClose:, instanceId: %@}", TAG, instanceId];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+    [self loadRewardAd];
 }
 
 - (void)interstitialDidFailToShowWithError:(NSError *)ironSourceError instanceId:(NSString *)instanceId {
@@ -224,6 +229,7 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
     [self loadInterstitialAd];
 }
 
@@ -281,6 +287,7 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
+    [self nextBanner];
     [self loadBannerAdDelayed];
 }
 

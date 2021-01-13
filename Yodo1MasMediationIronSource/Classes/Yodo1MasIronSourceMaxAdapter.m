@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.2-beta";
+    return @"0.0.0.5-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -121,6 +121,8 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
+    [self nextReward];
+    [self loadRewardAd];
 }
 
 - (void)rewardedVideoDidOpen {
@@ -133,6 +135,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidClose}", TAG];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+    [self loadRewardAd];
 }
 
 - (void)rewardedVideoDidStart {
@@ -199,6 +202,8 @@
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)interstitialDidOpen {
@@ -211,6 +216,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidClose}", TAG];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+    [self loadInterstitialAd];
 }
 
 - (void)interstitialDidShow {
@@ -224,6 +230,7 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
     [self loadInterstitialAd];
 }
 
@@ -281,6 +288,7 @@
 
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
+    [self nextBanner];
     [self loadBannerAdDelayed];
 }
 

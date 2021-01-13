@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationInMobi'
-  s.version          = '0.0.0.4-beta'
+  s.version          = '0.0.0.5-beta'
   s.summary          = 'Yodo1MasMediationInMobi'
   s.swift_version    = '5.0'
 
@@ -41,7 +41,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '>= 0.0.0.4-beta'
+  s.dependency 'Yodo1MasCore', '>= 0.0.0.5-beta'
   s.dependency 'InMobiSDK','~> 9.1.0'
   
 end

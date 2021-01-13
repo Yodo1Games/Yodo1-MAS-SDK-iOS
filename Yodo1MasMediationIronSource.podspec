@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationIronSource'
-  s.version          = '0.0.0.4-beta'
+  s.version          = '0.0.0.5-beta'
   s.summary          = 'Yodo1MasMediationIronSource'
   s.swift_version    = '5.0'
 
@@ -42,7 +42,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '>= 0.0.0.4-beta'
+  s.dependency 'Yodo1MasCore', '>= 0.0.0.5-beta'
   s.dependency 'IronSourceSDK','~> 7.0.4.0'
   s.dependency 'IronSourceAdMobAdapter','~> 4.3.17.2'
   s.dependency 'IronSourceAppLovinAdapter','~> 4.3.20.1'

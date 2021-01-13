@@ -31,7 +31,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.4-beta";
+    return @"0.0.0.5-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -211,10 +211,13 @@
     Yodo1MasAdType type;
     if (adUnitIdentifier == [self getRewardAdId].adId) {
         type = Yodo1MasAdTypeReward;
+        [self nextReward];
     } else if (adUnitIdentifier == [self getInterstitialAdId].adId) {
         type = Yodo1MasAdTypeInterstitial;
+        [self nextInterstitial];
     } else if (adUnitIdentifier == [self getBannerAdId].adId) {
         type = Yodo1MasAdTypeBanner;
+        [self nextBanner];
     } else {
         return;
     }
@@ -271,10 +274,13 @@
     Yodo1MasAdType type;
     if (ad.format == MAAdFormat.rewarded) {
         type = Yodo1MasAdTypeReward;
+        [self nextReward];
     } else if (ad.format == MAAdFormat.interstitial) {
         type = Yodo1MasAdTypeInterstitial;
+        [self nextInterstitial];
     } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdTypeBanner;
+        [self nextBanner];
     } else {
         return;
     }

@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.4-beta";
+    return @"0.0.0.5-beta";
 }
 
 -(void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail  {
@@ -190,9 +190,11 @@
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     if (placement == _rewardAd) {
         [self callbackWithError:error type:Yodo1MasAdTypeReward];
+        [self nextReward];
         [self loadRewardAdDelayed];
     } else if (placement == _interstitialAd) {
         [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+        [self nextInterstitial];
         [self loadInterstitialAdDelayed];
     }
 }

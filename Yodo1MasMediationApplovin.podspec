@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationApplovin'
-  s.version          = '0.0.0.4-beta'
+  s.version          = '0.0.0.5-beta'
   s.summary          = 'Yodo1MasMediationApplovin'
   s.swift_version    = '5.0'
 
@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h's
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '>= 0.0.0.4-beta'
+  s.dependency 'Yodo1MasCore', '>= 0.0.0.5-beta'
   s.dependency 'AppLovinSDK','~> 6.14.6'
   s.dependency 'AppLovinMediationGoogleAdapter','~> 7.67.1.5'
   s.dependency 'AppLovinMediationIronSourceAdapter','~> 7.0.4.0.0'
