@@ -71,17 +71,16 @@
 #endif
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
+    BOOL sensorsDebugEnv = yodo1Config[@"sensors_debug_env"] && [yodo1Config[@"sensors_debug_env"] boolValue];
 
     __weak __typeof(self)weakSelf = self;
-#ifdef DEBUG
-    NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=default";
-    int debugMode = 2;
-#else
+    
     NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=production";
-    int debugMode = 0;
-#endif
+    if (sensorsDebugEnv) {
+        serverURL = @"https://sensors.yodo1api.com/sa?project=default";
+    }
     //init Sa SDK,debugMode:0 close debug, 1 is debug,2 is debug and data import
-    [Yodo1SaManager initializeSdkServerURL: serverURL debug:debugMode];
+    [Yodo1SaManager initializeSdkServerURL: serverURL debug:0];
     NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     [Yodo1SaManager registerSuperProperties:@{@"gameKey": appId,
                                               @"gameBundleId": bundleId,

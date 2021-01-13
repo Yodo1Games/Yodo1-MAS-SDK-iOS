@@ -209,6 +209,8 @@
 	</array>
 	<key>Yodo1MasConfig</key>
 	<dict>
+		<key>sensors_debug_env</key>
+		<string>1</string>
 		<key>Debug</key>
 		<true/>
 		<key>Api</key>
