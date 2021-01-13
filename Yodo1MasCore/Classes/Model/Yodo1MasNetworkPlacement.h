@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Yodo1MasNetworkPlacement : NSObject
 
-@property(nonatomic, copy) NSString *placement_id;
+@property(nonatomic, copy) NSString *network_code;
 @property(nonatomic, copy) NSString *price_type;
 @property(nonatomic, assign) NSInteger price;
 @property(nonatomic, copy) NSString *extra_params;

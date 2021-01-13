@@ -11,7 +11,7 @@
 @implementation Yodo1MasNetworkWaterfall
 
 + (nullable NSDictionary<NSString *, id> *)modelContainerPropertyGenericClass {
-    return @{@"ad_network_placements" : [Yodo1MasNetworkPlacement class]};
+    return @{@"placements" : [Yodo1MasNetworkPlacement class]};
 }
 
 @end

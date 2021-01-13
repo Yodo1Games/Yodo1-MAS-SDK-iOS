@@ -8,7 +8,6 @@
 #import "Yodo1Mas.h"
 #import <AFNetworking/AFNetworking.h>
 #import <YYModel/YYModel.h>
-#import "Yodo1MasResponse.h"
 #import "Yodo1MasInitData.h"
 #import "Yodo1MasAdapterBase.h"
 #if defined(__IPHONE_14_0)
@@ -70,9 +69,10 @@
         }];
     }
 #endif
-    
+    NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
+    BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
+
     __weak __typeof(self)weakSelf = self;
-    
 #ifdef DEBUG
     NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=default";
     int debugMode = 2;
@@ -92,21 +92,16 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
-    NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
-    BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
     if (debug) {
-        NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
-        if (api == nil || api.length == 0) {
-            api = yodo1Config[@"Api"];
-        }
+        NSString *api = yodo1Config[@"Api"];
         if (api != nil && api.length > 0) {
             [url appendString:api];
         } else {
-            [url appendString:@"https://rivendell-dev.explorer.yodo1.com/init/"];
+            [url appendString:@"https://rivendell-dev.explorer.yodo1.com/v1/init/"];
         }
         parameters[@"country"] = [NSLocale currentLocale].countryCode;
     } else {
-        [url appendString:@"https://rivendell.explorer.yodo1.com/init/"];
+        [url appendString:@"https://rivendell.explorer.yodo1.com/v1/init/"];
     }
     
     [url appendString:appId];
@@ -117,21 +112,12 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        Yodo1MasResponse *res = [Yodo1MasResponse yy_modelWithJSON:responseObject];
-        if (debug) {
-            // Mock
-            NSString *api = [[NSUserDefaults standardUserDefaults] stringForKey:@"MockApi"];
-            if (res.data == nil && api != nil && api.length > 0) {
-                res.data = responseObject;
-            }
-        }
-        
-        if (res != nil && res.data != nil) {
-            Yodo1MasInitData *data = [Yodo1MasInitData yy_modelWithJSON:res.data];
+        Yodo1MasInitData *data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
+        if (data != nil) {
             weakSelf.masInitConfig = data.mas_init_config;
             weakSelf.masNetworkConfig = data.ad_network_config;
             if (data.mas_init_config && data.ad_network_config) {
-                NSLog(@"获取广告数据成功 - %@", res.data);
+                NSLog(@"获取广告数据成功 - %@", responseObject);
                 [weakSelf doInitAdapter];
                 [weakSelf doInitAdvert];
                 if (successful) {
@@ -158,20 +144,20 @@
 
 - (void)doInitAdapter {
     NSDictionary *mediations = @{
-        @"ADMOB_MEDIATION" : @"Yodo1MasAdMobMaxAdapter",
-        @"APPLOVIN_MEDIATION" : @"Yodo1MasAppLovinMaxAdapter",
-        @"IRONSOURCE_MEDIATION" : @"Yodo1MasIronSourceMaxAdapter"
+        @"ADMOB" : @"Yodo1MasAdMobMaxAdapter",
+        @"APPLOVIN" : @"Yodo1MasAppLovinMaxAdapter",
+        @"IRONSOURCE" : @"Yodo1MasIronSourceMaxAdapter"
     };
     
     NSDictionary *networks = @{
-        @"ADMOB_NETWORK" : @"Yodo1MasAdMobAdapter",
-        @"APPLOVIN_NETWORK" : @"Yodo1MasAppLovinAdapter",
-        @"FACEBOOK_NETWORK" : @"Yodo1MasFacebookAdapter",
-        @"INMOBI_NETWORK" : @"Yodo1MasInMobiAdapter",
-        @"IRONSOURCE_NETWORK" : @"Yodo1MasIronSourceAdapter",
-        @"TAPJOY_NETWORK" : @"Yodo1MasTapjoyAdapter",
-        @"UNITYADS_NETWORK" : @"Yodo1MasUnityAdsAdapter",
-        @"VUNGLE_NETWORK" : @"Yodo1MasVungleAdapter"
+        @"admob" : @"Yodo1MasAdMobAdapter",
+        @"applovin" : @"Yodo1MasAppLovinAdapter",
+        @"facebook" : @"Yodo1MasFacebookAdapter",
+        @"inmobi" : @"Yodo1MasInMobiAdapter",
+        @"ironsource" : @"Yodo1MasIronSourceAdapter",
+        @"tapjoy" : @"Yodo1MasTapjoyAdapter",
+        @"unityads" : @"Yodo1MasUnityAdsAdapter",
+        @"vungle" : @"Yodo1MasVungleAdapter"
     };
     
     if (self.masInitConfig.mediation_list != nil && self.masInitConfig.mediation_list.count > 0) {
@@ -234,8 +220,8 @@
 - (void)doInitAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdType)type {
     if (config.mediation_list != nil && config.mediation_list.count > 0) {
         for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
-            NSString *mediationName = mediation.mediation_name;
-            NSString *unitId = mediation.ad_unit_id;
+            NSString *mediationName = mediation.name;
+            NSString *unitId = mediation.unit_id;
             if (mediationName != nil && unitId != nil) {
                 Yodo1MasAdapterBase *adapter = self.mediations[mediationName];
                 if (adapter != nil) {
@@ -263,8 +249,8 @@
     
     if (config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
         for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
-            NSArray<Yodo1MasNetworkPlacement *> *placements = waterfall.ad_network_placements;
-            NSString *networkName = waterfall.ad_network_name;
+            NSArray<Yodo1MasNetworkPlacement *> *placements = waterfall.placements;
+            NSString *networkName = waterfall.network;
             if (networkName != nil && networkName.length > 0 && placements != nil && placements.count > 0) {
                 Yodo1MasAdapterBase *adapter = _mediations[networkName];
                 if (adapter != nil) {
@@ -272,21 +258,21 @@
                         case Yodo1MasAdTypeReward: {
                             [adapter.rewardAdIds removeAllObjects];
                             for (Yodo1MasNetworkPlacement *placement in placements) {
-                                [adapter.rewardAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.placement_id object:placement]];
+                                [adapter.rewardAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.network_code object:placement]];
                             }
                             break;
                         }
                         case Yodo1MasAdTypeInterstitial: {
                             [adapter.interstitialAdIds removeAllObjects];
                             for (Yodo1MasNetworkPlacement *placement in placements) {
-                                [adapter.interstitialAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.placement_id object:placement]];
+                                [adapter.interstitialAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.network_code object:placement]];
                             }
                             break;
                         }
                         case Yodo1MasAdTypeBanner: {
                             [adapter.bannerAdIds removeAllObjects];
                             for (Yodo1MasNetworkPlacement *placement in placements) {
-                                [adapter.bannerAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.placement_id object:placement]];
+                                [adapter.bannerAdIds addObject:[[Yodo1MasAdId alloc] initWitId:placement.network_code object:placement]];
                             }
                             break;
                         }
@@ -335,7 +321,7 @@
     if (config != nil) {
         if (config.mediation_list != nil && config.mediation_list.count > 0) {
             for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
-                NSString *name = mediation.mediation_name;
+                NSString *name = mediation.name;
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
@@ -347,7 +333,7 @@
         
         if (!isLoaded && config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
             for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
-                NSString *name = waterfall.ad_network_name;
+                NSString *name = waterfall.network;
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
@@ -365,7 +351,7 @@
     if (config != nil) {
         if (config.mediation_list != nil && config.mediation_list.count > 0) {
             for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
-                NSString *name = mediation.mediation_name;
+                NSString *name = mediation.name;
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
@@ -377,7 +363,7 @@
         
         if (config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
             for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
-                NSString *name = waterfall.ad_network_name;
+                NSString *name = waterfall.network;
                 if (name != nil && name.length > 0) {
                     Yodo1MasAdapterBase *adapter = self.mediations[name];
                     if (adapter != nil) {
@@ -393,7 +379,7 @@
     NSMutableArray<Yodo1MasAdapterBase *> *adapters = [NSMutableArray array];
     if (config.mediation_list != nil && config.mediation_list.count > 0) {
         for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
-            NSString *name = mediation.mediation_name;
+            NSString *name = mediation.name;
             if (name != nil && name.length > 0) {
                 Yodo1MasAdapterBase *adapter = self.mediations[name];
                 if (adapter != nil) {
@@ -405,7 +391,7 @@
     
     if (config.fallback_waterfall != nil && config.fallback_waterfall.count > 0) {
         for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
-            NSString *name = waterfall.ad_network_name;
+            NSString *name = waterfall.network;
             if (name != nil && name.length > 0) {
                 Yodo1MasAdapterBase *adapter = self.mediations[name];
                 if (adapter != nil) {

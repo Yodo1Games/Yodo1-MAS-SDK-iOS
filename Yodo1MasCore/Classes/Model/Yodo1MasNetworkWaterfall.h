@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Yodo1MasNetworkWaterfall : NSObject
 
-@property(nonatomic, copy) NSString *ad_network_name;
-@property(nonatomic, strong) NSArray<Yodo1MasNetworkPlacement *> *ad_network_placements;
+@property(nonatomic, copy) NSString *network;
+@property(nonatomic, strong) NSArray<Yodo1MasNetworkPlacement *> *placements;
 
 @end
 

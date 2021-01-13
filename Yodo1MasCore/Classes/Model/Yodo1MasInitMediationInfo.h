@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *app_id;
 @property(nonatomic, copy) NSString *app_key;
-@property(nonatomic, assign) NSInteger priority;
 
 @end
 
