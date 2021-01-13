@@ -47,7 +47,7 @@ TODO: Add long description of the pod here.
   s.dependency 'IronSourceAdMobAdapter','~> 4.3.17.2'
   s.dependency 'IronSourceAppLovinAdapter','~> 4.3.20.1'
   s.dependency 'IronSourceFacebookAdapter','~> 4.3.21.1'
-  s.dependency 'IronSourceInMobiAdapter','~> 4.3.8.2'
+  #s.dependency 'IronSourceInMobiAdapter','~> 4.3.8.2'
   s.dependency 'IronSourceTapjoyAdapter','~> 4.1.15.1'
   s.dependency 'IronSourceUnityAdsAdapter','~> 4.3.6.1'
   s.dependency 'IronSourceVungleAdapter','~> 4.3.8.1'

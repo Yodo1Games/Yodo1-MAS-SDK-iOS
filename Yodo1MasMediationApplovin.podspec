@@ -45,7 +45,7 @@ TODO: Add long description of the pod here.
   s.dependency 'AppLovinMediationGoogleAdapter','~> 7.67.1.5'
   s.dependency 'AppLovinMediationIronSourceAdapter','~> 7.0.4.0.0'
   s.dependency 'AppLovinMediationFacebookAdapter','~> 6.2.0.1'
-  s.dependency 'AppLovinMediationInMobiAdapter','~> 9.1.0.1'
+  #s.dependency 'AppLovinMediationInMobiAdapter','~> 9.1.0.1'
   s.dependency 'AppLovinMediationTapjoyAdapter','~> 12.7.1.1'
   s.dependency 'AppLovinMediationUnityAdsAdapter','~> 3.5.1.0'
   s.dependency 'AppLovinMediationVungleAdapter','~> 6.8.1.2'
