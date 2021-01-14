@@ -209,6 +209,8 @@
 	</array>
 	<key>Yodo1MasConfig</key>
 	<dict>
+		<key>sensors_debug_env</key>
+		<string>1</string>
 		<key>Api</key>
 		<string>https://rivendell-dev.explorer.yodo1.com/v1/init/</string>
 		<key>Yodo1Config</key>

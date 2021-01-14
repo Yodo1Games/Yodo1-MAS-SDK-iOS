@@ -234,17 +234,23 @@ pod install --repo-update
 
 ## 开发模式
 在`Info.plist`文件中添加:
-```xml
+
+``` xml
 <key>Yodo1MasConfig</key>
 <dict>
-	<!-- 是否开启开发模式 -->
 	<key>Debug</key>
 	<true/>
-	<!-- 开发模式下的Api地址 -->
 	<key>Api</key>
 	<string>https://rivendell-dev.explorer.yodo1.com/init/</string>
+	<key>sensors_debug_env</key>
+	<true/>
 </dict>
 ```
+
+* Debug: 是否开启开发模式
+* Api: 开发模式下的Api地址
+* sensors\_debug\_env: 是否开启神策(Sensors)开发模式
+
 
 ## 插屏广告集成
 ### 1. 设置插屏广告代理方法
