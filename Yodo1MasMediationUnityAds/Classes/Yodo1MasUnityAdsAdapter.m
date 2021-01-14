@@ -159,7 +159,7 @@
         [self.bannerAd removeFromSuperview];
     }
     if ([self getBannerAdId] != nil) {
-        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:[self getBannerAdId].adId size:CGSizeMake(320, 50)];
+        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:[self getBannerAdId].adId size:BANNER_SIZE_320_50];
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {

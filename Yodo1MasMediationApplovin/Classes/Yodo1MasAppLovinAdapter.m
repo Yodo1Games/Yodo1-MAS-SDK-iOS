@@ -169,6 +169,7 @@
     }
     if ([self getBannerAdId] != nil) {
         self.bannerAd = [[MAAdView alloc] initWithAdUnitIdentifier:[self getBannerAdId].adId];
+        self.bannerAd.frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {

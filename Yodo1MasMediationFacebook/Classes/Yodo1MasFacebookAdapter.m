@@ -222,7 +222,7 @@
         [self.bannerAd removeFromSuperview];
     }
     if ([self getBannerAdId] != nil) {
-        self.bannerAd = [[FBAdView alloc] initWithPlacementID:[self getBannerAdId].adId adSize:kFBAdSizeHeight50Banner rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
+        self.bannerAd = [[FBAdView alloc] initWithPlacementID:[self getBannerAdId].adId adSize:kFBAdSize320x50 rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil) {

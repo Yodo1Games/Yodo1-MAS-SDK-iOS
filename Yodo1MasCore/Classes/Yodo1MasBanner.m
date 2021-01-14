@@ -30,7 +30,7 @@
     
     UIView *superview = controller != nil? controller.view : [Yodo1MasAdapterBase getTopWindow];
     if (superview != nil && banner != nil) {
-        CGRect frame = CGRectMake(0, 0, 320, 50);
+        CGRect frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
         // horizontal
         if ((align & Yodo1MasAdBannerAlignLeft) == Yodo1MasAdBannerAlignLeft) {
             frame.origin.x = 0;

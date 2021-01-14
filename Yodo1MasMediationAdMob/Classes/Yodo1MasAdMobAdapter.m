@@ -272,7 +272,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     }
     if ([self getBannerAdId] != nil) {
         self.bannerAd == [[GADBannerView alloc]
-                            initWithAdSize:kGADAdSizeSmartBannerPortrait];
+                            initWithAdSize:kGADAdSizeBanner];
         self.bannerAd.adUnitID = [self getBannerAdId].adId;
         self.bannerAd.delegate = self;
     }

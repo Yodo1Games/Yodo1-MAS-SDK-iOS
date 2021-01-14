@@ -112,7 +112,12 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        Yodo1MasInitData *data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
+        Yodo1MasInitData *data;
+        if (debug && yodo1Config[@"Config"] != nil) {
+            data = [Yodo1MasInitData yy_modelWithJSON:yodo1Config[@"Config"]];
+        } else {
+            data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
+        }
         if (data != nil) {
             weakSelf.masInitConfig = data.mas_init_config;
             weakSelf.masNetworkConfig = data.ad_network_config;

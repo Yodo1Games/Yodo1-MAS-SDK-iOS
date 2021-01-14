@@ -209,10 +209,58 @@
 	</array>
 	<key>Yodo1MasConfig</key>
 	<dict>
-		<key>Debug</key>
-		<true/>
 		<key>Api</key>
 		<string>https://rivendell-dev.explorer.yodo1.com/v1/init/</string>
+		<key>Yodo1Config</key>
+		<dict>
+			<key>ad_network_config</key>
+			<dict>
+				<key>banner</key>
+				<dict>
+					<key>fallback_waterfall</key>
+					<array/>
+					<key>mediation_list</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>APPLOVIN</string>
+							<key>unit_id</key>
+							<string>8e39fc47dec9e97c</string>
+						</dict>
+					</array>
+				</dict>
+				<key>interstitial</key>
+				<dict/>
+				<key>reward</key>
+				<dict/>
+			</dict>
+			<key>app_id</key>
+			<string>1</string>
+			<key>app_key</key>
+			<string>hrteskL2rDC</string>
+			<key>app_name</key>
+			<string>Digit snake</string>
+			<key>country</key>
+			<string>CN</string>
+			<key>init_config</key>
+			<dict>
+				<key>ad_network_list</key>
+				<array/>
+				<key>mediation_list</key>
+				<array>
+					<dict>
+						<key>app_id</key>
+						<string></string>
+						<key>app_secret</key>
+						<string></string>
+						<key>name</key>
+						<string>APPLOVIN</string>
+					</dict>
+				</array>
+			</dict>
+		</dict>
+		<key>Debug</key>
+		<true/>
 	</dict>
 </dict>
 </plist>

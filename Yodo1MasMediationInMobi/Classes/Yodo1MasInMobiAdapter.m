@@ -181,7 +181,7 @@
         [self.bannerAd removeFromSuperview];
     }
     if ([self getBannerAdId] != nil) {
-        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, 320, 50) placementId:[[self getBannerAdId].adId longLongValue] delegate:self];
+        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height) placementId:[[self getBannerAdId].adId longLongValue] delegate:self];
     }
 
     if (self.bannerAd != nil) {
