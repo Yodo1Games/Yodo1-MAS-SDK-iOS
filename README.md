@@ -244,11 +244,60 @@ pod install --repo-update
 	<string>https://rivendell-dev.explorer.yodo1.com/init/</string>
 	<key>sensors_debug_env</key>
 	<true/>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <key>Config</key>
+    <dict>
+        <key>ad_network_config</key>
+        <dict>
+            <key>banner</key>
+            <dict>
+                <key>fallback_waterfall</key>
+                <array/>
+                <key>mediation_list</key>
+                <array>
+                    <dict>
+                        <key>name</key>
+                        <string>APPLOVIN</string>
+                        <key>unit_id</key>
+                        <string>8e39fc47dec9e97c</string>
+                    </dict>
+                </array>
+            </dict>
+            <key>interstitial</key>
+            <dict/>
+            <key>reward</key>
+            <dict/>
+        </dict>
+        <key>app_id</key>
+        <string>1</string>
+        <key>app_key</key>
+        <string>hrteskL2rDC</string>
+        <key>app_name</key>
+        <string>Digit snake</string>
+        <key>country</key>
+        <string>CN</string>
+        <key>init_config</key>
+        <dict>
+            <key>ad_network_list</key>
+            <array/>
+            <key>mediation_list</key>
+            <array>
+                <dict>
+                    <key>app_id</key>
+                    <string></string>
+                    <key>app_secret</key>
+                    <string></string>
+                    <key>name</key>
+                    <string>APPLOVIN</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
 </dict>
 ```
-
 * Debug: 是否开启开发模式
 * Api: 开发模式下的Api地址
+* Config: Mock数据，请根据自己的需求修改，不需要时请删除或者改为其它名称
 * sensors\_debug\_env: 是否开启神策(Sensors)开发模式
 
 
