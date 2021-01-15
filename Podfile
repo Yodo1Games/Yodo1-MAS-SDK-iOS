@@ -10,13 +10,16 @@ target "Yodo1MasSdkDemo" do
 
 pod 'Toast'
 pod 'Masonry'
-
+#pod 'GoogleMobileAdsMediationTestSuite'
 # 开发时打开
+pod 'Yodo1MasMediationAdMobMax', :path => './'
 pod 'Yodo1MasMediationAdMob', :path => './'
+pod 'Yodo1MasMediationApplovinMax', :path => './'
 pod 'Yodo1MasMediationApplovin', :path => './'
+pod 'Yodo1MasMediationIronSourceMax', :path => './'
 pod 'Yodo1MasMediationIronSource', :path => './'
 pod 'Yodo1MasMediationFacebook', :path => './'
-#pod 'Yodo1MasMediationInMobi', :path => './'
+pod 'Yodo1MasMediationInMobi', :path => './'
 pod 'Yodo1MasMediationTapjoy', :path => './'
 pod 'Yodo1MasMediationUnityAds', :path => './'
 pod 'Yodo1MasMediationVungle', :path => './'

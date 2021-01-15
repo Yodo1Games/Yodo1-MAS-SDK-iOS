@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint Yodo1AdvertAdMob.podspec' to ensure this is a
+# Be sure to run `pod lib lint Yodo1MasMediationVungle.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationVungle'
-  s.version          = '0.0.0.5-beta'
+  s.version          = '0.0.0.6-beta'
   s.summary          = 'Yodo1MasMediationVungle'
   s.swift_version    = '5.0'
 
@@ -24,24 +24,17 @@ TODO: Add long description of the pod here.
 
   s.homepage         = 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ZhouYuzhen' => 'zhouyuzhen@yodo1.com' }
   s.source           = { :git => 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  
 
   s.ios.deployment_target = '9.0'
-  #s.static_framework = true
-
   s.source_files = 'Yodo1MasMediationVungle/Classes/**/*'
-  
-#  s.resource_bundles = {
-#    'Yodo1MasMediationVungle' => ['Yodo1MasMediationVungle/Assets/*']
-#  }
-  # s.resources = 'Yodo1MasMediationVungle/Assets/*.strings', 'Yodo1MasMediationVungle/Assets/*.xcassets'
-
-  # s.public_header_files = 'Pod/Classes/**/*.h's
+  s.public_header_files = 'Yodo1MasMediationVungle/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '>= 0.0.0.5-beta'
-  s.dependency 'VungleSDK-iOS','~> 6.8.1'
+  s.dependency 'Yodo1MasCore'
+  s.dependency 'VungleSDK-iOS'
   
 end

@@ -9,6 +9,7 @@
 #import <Yodo1MasCore/Yodo1Mas.h>
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
+//@import GoogleMobileAdsMediationTestSuite;
 
 @interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
 
@@ -40,6 +41,10 @@
 
 - (IBAction)onBannerClicked:(UIButton *)sender {
     [[Yodo1Mas sharedInstance] showBannerAd];
+}
+
+- (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
+    //[GoogleMobileAdsMediationTestSuite presentForAdManagerOnViewController:self delegate:nil];
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
