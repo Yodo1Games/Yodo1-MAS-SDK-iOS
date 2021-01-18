@@ -21,9 +21,9 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-7188592076082444~9912617145</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -209,10 +209,10 @@
 	</array>
 	<key>Yodo1MasConfig</key>
 	<dict>
-		<key>sensors_debug_env</key>
-		<string>1</string>
 		<key>Api</key>
 		<string>https://rivendell-dev.explorer.yodo1.com/v1/init/</string>
+		<key>Debug</key>
+		<true/>
 		<key>Yodo1Config</key>
 		<dict>
 			<key>ad_network_config</key>
@@ -261,8 +261,8 @@
 				</array>
 			</dict>
 		</dict>
-		<key>Debug</key>
-		<true/>
+		<key>sensors_debug_env</key>
+		<string>1</string>
 	</dict>
 </dict>
 </plist>
