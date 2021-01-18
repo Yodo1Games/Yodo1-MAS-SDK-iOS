@@ -32,7 +32,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.source_files = 'Yodo1MasMediationAdMobMax/Classes/**/*'
   s.public_header_files = 'Pod/Classes/**/*.h'
-  #s.vendored_frameworks = 'Yodo1MasMediationAdMobMax/Lib/**/*.framework'
+  s.vendored_frameworks = 'Yodo1MasMediationAdMobMax/Lib/**/*.framework'
   s.dependency 'Yodo1MasMediationAdMob'
   s.dependency 'Yodo1MasMediationApplovin'
   s.dependency 'Yodo1MasMediationIronSource'
