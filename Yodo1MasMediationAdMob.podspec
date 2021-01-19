@@ -33,6 +33,6 @@ TODO: Add long description of the pod here.
   s.source_files = 'Yodo1MasMediationAdMob/Classes/**/*'
   s.public_header_files = 'Yodo1MasMediationAdMob/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'Google-Mobile-Ads-SDK', '7.66.0'
+  s.dependency 'Google-Mobile-Ads-SDK', '~> 7.66.0'
   
 end

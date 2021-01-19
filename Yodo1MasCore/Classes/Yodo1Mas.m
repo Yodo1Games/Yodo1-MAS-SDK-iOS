@@ -100,7 +100,8 @@
         }
         parameters[@"country"] = [NSLocale currentLocale].countryCode;
     } else {
-        [url appendString:@"https://rivendell.explorer.yodo1.com/v1/init/"];
+        [url appendString:@"https://sdk.mas.yodo1.com/v1/init/"];
+        //[url appendString:@"https://rivendell.explorer.yodo1.com/v1/init/"];
     }
     
     [url appendString:appId];
@@ -110,7 +111,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:url parameters:parameters headers:@{@"sdk-version" : [Yodo1Mas sdkVersion]} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         Yodo1MasInitData *data;
         if (debug && yodo1Config[@"Config"] != nil) {
             data = [Yodo1MasInitData yy_modelWithJSON:yodo1Config[@"Config"]];
