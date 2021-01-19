@@ -29,7 +29,7 @@ pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasSDK', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasSDK', '~> 0.0.0.1-beta'
+#pod 'Yodo1MasSDK', '~> 0.0.0.7-beta'
 
 end
 
