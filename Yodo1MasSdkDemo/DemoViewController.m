@@ -13,6 +13,9 @@
 
 @interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *rewardField;
+@property (weak, nonatomic) IBOutlet UITextField *intersititialField;
+@property (weak, nonatomic) IBOutlet UITextField *bannerField;
 @property (weak, nonatomic) IBOutlet UISwitch *gdprSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *coppaSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *ccpaSwitch;
@@ -32,15 +35,30 @@
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showRewardAd];
+    NSString *plcement = [_rewardField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (plcement != nil && plcement.length > 0) {
+        [[Yodo1Mas sharedInstance] showRewardAdWithPlacement:plcement];
+    } else {
+        [[Yodo1Mas sharedInstance] showRewardAd];
+    }
 }
 
 - (IBAction)onInterstitialClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showInterstitialAd];
+    NSString *plcement = [_intersititialField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (plcement != nil && plcement.length > 0) {
+        [[Yodo1Mas sharedInstance] showInterstitialAdWithPlacement:plcement];
+    } else {
+        [[Yodo1Mas sharedInstance] showInterstitialAd];
+    }
 }
 
 - (IBAction)onBannerClicked:(UIButton *)sender {
-    [[Yodo1Mas sharedInstance] showBannerAd];
+    NSString *plcement = [_bannerField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (plcement != nil && plcement.length > 0) {
+        [[Yodo1Mas sharedInstance] showBannerAdWithPlacement:plcement];
+    } else {
+        [[Yodo1Mas sharedInstance] showBannerAd];
+    }
 }
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {

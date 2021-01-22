@@ -1,7 +1,6 @@
 #use_frameworks!
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 source 'https://github.com/Yodo1Games/Yodo1Spec.git'
-
 # source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
 platform :ios, '10.0'

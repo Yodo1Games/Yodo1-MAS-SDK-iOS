@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AppLovinSdkKey</key>
-	<string>xcGD2fy-GdmiZQapx_kUSy5SMKyLoXBk8RyB5u9MVv34KetGdbl4XrXvAUFy0Qg9scKyVTI0NM4i_yzdXih4XE</string>
+	<string>rNHXebCtrUWyeDeAihKoDCmwM9sL2WfshXTVHs-7N0yUBE4D0KtcycoTQgE7Ha2a9CsCn9WI22ZwsJQ29h6LzI</string>
 	<key>AppLovinVerboseLoggingOn</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -25,7 +25,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-7188592076082444~9912617145</string>
+	<string>ca-app-pub-9340590208017770~3034372931</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -131,15 +131,79 @@
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
+			<string>3sh42y64q3.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>44jx6755aq.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>4pfyvq9l8r.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>5l3tpt7t6e.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>5lm9lj6jb7.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>7rz58n8ntl.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>c6k4g5qg8m.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cg4yq2srnc.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>f73kdq92p3.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>ggvn48r87g.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>klf5c3l5u5.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>p78axxw29g.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>ppxm28t8ap.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>uw77j35x4d.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>v72qych5uu.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>w9q455wk68.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>wg4vff78zm.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
 			<string>su67r6k2v3.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>578prtvx9j.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>5lm9lj6jb7.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
@@ -159,15 +223,7 @@
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
-			<string>3sh42y64q3.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>424m5254lk.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>44jx6755aq.skadnetwork</string>
+			<string>424M5254LK.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
@@ -183,23 +239,11 @@
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
-			<string>4pfyvq9l8r.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
 			<string>5a6flpkh64.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>bvpn9ufa9b.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>c6k4g5qg8m.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>f73kdq92p3.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
@@ -211,19 +255,7 @@
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
-			<string>ppxm28t8ap.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>v72qych5uu.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
 			<string>v79kvwwj4g.skadnetwork</string>
-		</dict>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>wg4vff78zm.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
@@ -263,34 +295,8 @@
 	<dict>
 		<key>Api</key>
 		<string>https://rivendell-dev.explorer.yodo1.com/v1/init/</string>
-		<key>Debug</key>
-		<true/>
-		<key>Config</key>
+		<key>Yodo1Config</key>
 		<dict>
-			<key>app_id</key>
-			<string>1</string>
-			<key>app_key</key>
-			<string>hrteskL2rDC</string>
-			<key>app_name</key>
-			<string>Digit snake</string>
-			<key>country</key>
-			<string>CN</string>
-			<key>init_config</key>
-			<dict>
-				<key>mediation_list</key>
-				<array>
-					<dict>
-						<key>app_id</key>
-						<string></string>
-						<key>app_secret</key>
-						<string></string>
-						<key>name</key>
-						<string>APPLOVIN</string>
-					</dict>
-				</array>
-				<key>ad_network_list</key>
-				<array/>
-			</dict>
 			<key>ad_network_config</key>
 			<dict>
 				<key>banner</key>
@@ -312,7 +318,33 @@
 				<key>reward</key>
 				<dict/>
 			</dict>
+			<key>app_id</key>
+			<string>1</string>
+			<key>app_key</key>
+			<string>hrteskL2rDC</string>
+			<key>app_name</key>
+			<string>Digit snake</string>
+			<key>country</key>
+			<string>CN</string>
+			<key>init_config</key>
+			<dict>
+				<key>ad_network_list</key>
+				<array/>
+				<key>mediation_list</key>
+				<array>
+					<dict>
+						<key>app_id</key>
+						<string></string>
+						<key>app_secret</key>
+						<string></string>
+						<key>name</key>
+						<string>APPLOVIN</string>
+					</dict>
+				</array>
+			</dict>
 		</dict>
+		<key>Debug</key>
+		<true/>
 		<key>sensors_debug_env</key>
 		<string>1</string>
 	</dict>
