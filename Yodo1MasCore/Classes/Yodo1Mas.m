@@ -26,6 +26,7 @@
 @property (nonatomic, strong) Yodo1MasNetworkConfig *masNetworkConfig;
 @property (nonatomic, strong) NSMutableDictionary *mediations;
 @property (nonatomic, strong) Yodo1MasAdapterBase *currentAdapter;
+@property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 
 @end
 
@@ -430,7 +431,7 @@
     if (config != nil) {
         _currentAdapter = nil;
         NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
-        __weak Yodo1MasAdCallback block = ^(Yodo1MasAdEvent *event) {
+        _adBlock = ^(Yodo1MasAdEvent *event) {
             switch (event.code) {
                 case Yodo1MasAdEventCodeOpened: {
                     [adapters removeAllObjects];
@@ -438,11 +439,14 @@
                     break;
                 }
                 case Yodo1MasAdEventCodeError: {
-                    [adapters removeObjectAtIndex:0];
+                    if (adapters.count > 0) {
+                        [adapters removeObjectAtIndex:0];
+                    }
                     if (adapters.count > 0) {
                         _currentAdapter = adapters.firstObject;
-                        [adapters.firstObject showAd:type callback:block object:object];
+                        [adapters.firstObject showAd:type callback:_adBlock object:object];
                     } else {
+                        _adBlock = nil;
                         [self callbackWithEvent:event];
                     }
                     break;
@@ -455,7 +459,7 @@
         };
         if (adapters.count > 0) {
             _currentAdapter = adapters.firstObject;
-            [adapters.firstObject showAd:type callback:block object:object];
+            [adapters.firstObject showAd:type callback:_adBlock object:object];
         } else {
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"ad adapters is null"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];

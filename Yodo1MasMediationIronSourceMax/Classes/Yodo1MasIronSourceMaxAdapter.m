@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.6-beta";
+    return @"0.0.0.8-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -67,6 +67,13 @@
 - (BOOL)isInitSDK {
     [super isInitSDK];
     return self.sdkInit;
+}
+
+- (void)updatePrivacy {
+    [super updatePrivacy];
+    [IronSource setConsent:[Yodo1Mas sharedInstance].isGDPRUserConsent];
+    [IronSource setMetaDataWithKey:@"do_not_sell" value:[Yodo1Mas sharedInstance].isCCPADoNotSell ? @"YES" : @"NO"];
+    [IronSource setMetaDataWithKey:@"is_child_directed" value:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted ? @"YES" : @"NO"];
 }
 
 #pragma mark - 激励广告

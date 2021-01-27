@@ -223,7 +223,7 @@
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
-			<string>424M5254LK.skadnetwork</string>
+			<string>424m5254lk.skadnetwork</string>
 		</dict>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
@@ -316,7 +316,32 @@
 				<key>interstitial</key>
 				<dict/>
 				<key>reward</key>
-				<dict/>
+				<dict>
+					<key>fallback_waterfall</key>
+					<array>
+						<dict>
+							<key>network</key>
+							<string>ironsource</string>
+							<key>network_app_id</key>
+							<string>bc1c5a65</string>
+							<key>network_app_key</key>
+							<string></string>
+							<key>placements</key>
+							<array>
+								<dict>
+									<key>price_type</key>
+									<string>manual</string>
+									<key>price</key>
+									<real>15.3</real>
+									<key>network_code</key>
+									<string>2348427</string>
+								</dict>
+							</array>
+						</dict>
+					</array>
+					<key>mediation_list</key>
+					<array/>
+				</dict>
 			</dict>
 			<key>app_id</key>
 			<string>1</string>
@@ -329,7 +354,16 @@
 			<key>init_config</key>
 			<dict>
 				<key>ad_network_list</key>
-				<array/>
+				<array>
+					<dict>
+						<key>ad_network_name</key>
+						<string>ironsource</string>
+						<key>ad_network_app_id</key>
+						<string>bc1c5a65</string>
+						<key>ad_network_app_key</key>
+						<string></string>
+					</dict>
+				</array>
 				<key>mediation_list</key>
 				<array>
 					<dict>
