@@ -10,7 +10,7 @@ target "Yodo1MasSdkDemo" do
 pod 'Toast'
 pod 'Masonry'
 pod 'GoogleMobileAdsMediationTestSuite'
-pod 'MaterialComponents', :path => '../../Lib/material-components-ios/' # 网络好的情况下去掉path, 网络差请自行克隆 MaterialComponents
+
 # 开发时打开
 pod 'Yodo1MasMediationAdMobMax', :path => './'
 pod 'Yodo1MasMediationAdMob', :path => './'
