@@ -42,7 +42,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"0.0.0.6-beta";
+    return @"0.0.0.8-beta";
 }
 
 - (instancetype)init {
