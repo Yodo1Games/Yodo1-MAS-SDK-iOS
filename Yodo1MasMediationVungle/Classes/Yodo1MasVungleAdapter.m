@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.6-beta";
+    return @"0.0.0.7-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -129,6 +129,7 @@
                 [self loadRewardAd];
             } else {
                 [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
+                [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
             }
         }
     }

@@ -7,6 +7,7 @@
 
 #import "DemoViewController.h"
 #import <Yodo1MasCore/Yodo1Mas.h>
+#import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
 @import GoogleMobileAdsMediationTestSuite;
@@ -83,20 +84,28 @@
 
 #pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
-    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Opened" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)onAdClosed:(Yodo1MasAdEvent *)event {
-    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Closed" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
-    [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey]];
+    if (error.code != Yodo1MasErrorCodeAdLoadFail) {
+        [[Yodo1MasAdapterBase getTopWindow] makeToast:[NSString stringWithFormat:@"Error: %@", error.userInfo[NSLocalizedDescriptionKey]]];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 #pragma mark - Yodo1MasRewardAdvertDelegate
 - (void)onAdRewardEarned:(Yodo1MasAdEvent *)event {
-    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Earned" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

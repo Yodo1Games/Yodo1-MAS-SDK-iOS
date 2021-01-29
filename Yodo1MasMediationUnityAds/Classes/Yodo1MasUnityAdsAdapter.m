@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.6-beta";
+    return @"0.0.0.7-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -257,6 +257,7 @@
         default: {
             if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
                 [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+                [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
             } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
                 [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
             }

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasSDK'
-  s.version          = '0.0.0.8-beta'
+  s.version          = '0.0.0.10-beta'
   s.summary          = 'Yodo1MasSDK'
   s.swift_version    = '5.0'
 
@@ -43,7 +43,7 @@ TODO: Add long description of the pod here.
   s.dependency 'Yodo1MasMediationFacebook', '0.0.0.6-beta'
   #s.dependency 'Yodo1MasMediationInMobi', '0.0.0.6-beta'
   s.dependency 'Yodo1MasMediationTapjoy', '0.0.0.6-beta'
-  s.dependency 'Yodo1MasMediationUnityAds', '0.0.0.6-beta'
-  s.dependency 'Yodo1MasMediationVungle', '0.0.0.6-beta'
+  s.dependency 'Yodo1MasMediationUnityAds', '0.0.0.7-beta'
+  s.dependency 'Yodo1MasMediationVungle', '0.0.0.7-beta'
   
 end
