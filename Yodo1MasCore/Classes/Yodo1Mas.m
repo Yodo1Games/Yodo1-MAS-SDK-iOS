@@ -42,7 +42,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"0.0.0.8-beta";
+    return @"0.0.0.9-beta";
 }
 
 - (instancetype)init {
@@ -162,7 +162,7 @@
         @"inmobi" : @"Yodo1MasInMobiAdapter",
         @"ironsource" : @"Yodo1MasIronSourceAdapter",
         @"tapjoy" : @"Yodo1MasTapjoyAdapter",
-        @"unityads" : @"Yodo1MasUnityAdsAdapter",
+        @"unity" : @"Yodo1MasUnityAdsAdapter",
         @"vungle" : @"Yodo1MasVungleAdapter"
     };
     
@@ -388,7 +388,7 @@
             NSString *name = mediation.name;
             if (name != nil && name.length > 0) {
                 Yodo1MasAdapterBase *adapter = self.mediations[name];
-                if (adapter != nil) {
+                if (adapter != nil && ![adapters containsObject:adapter]) {
                     [adapters addObject:adapter];
                 }
             }
@@ -400,7 +400,7 @@
             NSString *name = waterfall.network;
             if (name != nil && name.length > 0) {
                 Yodo1MasAdapterBase *adapter = self.mediations[name];
-                if (adapter != nil) {
+                if (adapter != nil && ![adapters containsObject:adapter]) {
                     [adapters addObject:adapter];
                 }
             }

@@ -33,7 +33,7 @@ TODO: Add long description of the pod here.
   s.source_files = 'Yodo1MasSDK/Classes/**/*'
   s.public_header_files = 'Yodo1MasSDK/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '0.0.0.8-beta'
+  s.dependency 'Yodo1MasCore', '0.0.0.9-beta'
   s.dependency 'Yodo1MasMediationAdMobMax', '0.0.0.6-beta'
   s.dependency 'Yodo1MasMediationAdMob', '0.0.0.6-beta'
   s.dependency 'Yodo1MasMediationApplovinMax', '0.0.0.6-beta'
