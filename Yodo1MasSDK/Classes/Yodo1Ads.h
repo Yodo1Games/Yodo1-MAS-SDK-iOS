@@ -45,109 +45,109 @@ typedef void (^Yodo1RewardGameCallback)(NSString *reward, NSError* error);
 
 @interface Yodo1Ads : NSObject
 
-+ (NSString *)sdkVersion;
++ (NSString *)sdkVersion DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sdkVersion]");
 
 //Init Yodo1Ads with appkey.
-+ (void)initWithAppKey:(NSString *)appKey;
++ (void)initWithAppKey:(NSString *)appKey DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance] initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail");
 
 #pragma mark- Banner
 //Set banner's call back
-+ (void)setBannerCallback:(Yodo1AdsEventCallback)callback;
++ (void)setBannerCallback:(Yodo1AdsEventCallback)callback DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].bannerAdDelegate");
 
 //Set banner's align
-+ (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align;
++ (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showBannerAdWithAlign:]");
 
 //Set banner's align,User-controlled viewcontroller
 + (void)setBannerAlign:(Yodo1AdsBannerAdAlign)align
-        viewcontroller:(UIViewController*)viewcontroller;
+        viewcontroller:(UIViewController*)viewcontroller DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showBannerAdWithAlign:]");
 
 //Set banner's offset
-+ (void)setBannerOffset:(CGPoint)point;
++ (void)setBannerOffset:(CGPoint)point DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showBannerAdWithAlign:offset:]");
 
 //Set the Banner Scale scaling factor x axis direction
 //multiple sx,y axis direction multiple sy
-+ (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy;
++ (void)setBannerScale:(CGFloat)sx sy:(CGFloat)sy DEPRECATED_MSG_ATTRIBUTE("removed");
 
 //Check if banner ad is ready to show
-+ (BOOL)bannerIsReady;
++ (BOOL)bannerIsReady DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] isBannerAdLoaded]");
 
 //Show banner
-+ (void)showBanner;
++ (void)showBanner DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showBannerAd]");
 
-+ (void)showBanner:(NSString *)placement_id;
++ (void)showBanner:(NSString *)placement_id DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showBannerAd:]");
 
 //Hide banner
-+ (void)hideBanner;
++ (void)hideBanner DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] dismissBannerAd]");
 
 //Remove banner
-+ (void)removeBanner;
++ (void)removeBanner DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] dismissBannerAd]");
 
 #pragma mark- Interstitial
 
 //Set interstitial's callback
-+ (void)setInterstitialCallback:(Yodo1AdsEventCallback)callback;
++ (void)setInterstitialCallback:(Yodo1AdsEventCallback)callback DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].interstitialAdDelegate");
 
 //Check if interstitial ad is ready to show
-+ (BOOL)interstitialIsReady;
++ (BOOL)interstitialIsReady DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] isInterstitialAdLoaded]");
 
 //Show interstitial
-+ (void)showInterstitial;
++ (void)showInterstitial DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showInterstitialAd]");
 //Show interstitial with placement_id
-+ (void)showInterstitialWithPlacement:(NSString *)placement_id;
++ (void)showInterstitialWithPlacement:(NSString *)placement_id DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showInterstitialAd:]");
 
 //Show interstitial,User-controlled viewcontroller
-+ (void)showInterstitial:(UIViewController*)viewcontroller;
++ (void)showInterstitial:(UIViewController*)viewcontroller DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showInterstitialAd]");
 //Show interstitial,User-controlled viewcontroller with placement_id
-+ (void)showInterstitial:(UIViewController *)viewcontroller placement:(NSString *)placement_id;
++ (void)showInterstitial:(UIViewController *)viewcontroller placement:(NSString *)placement_id DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showInterstitialAd:]");
 
 #pragma mark- Video
 
 //Set video callback
-+ (void)setVideoCallback:(Yodo1AdsEventCallback)callback;
++ (void)setVideoCallback:(Yodo1AdsEventCallback)callback DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].rewardAdDelegate");
 
 //Check if video ad is ready to play
-+ (BOOL)videoIsReady;
++ (BOOL)videoIsReady DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] isRewardAdLoaded]");
 
 //Play video ad
-+ (void)showVideo;
++ (void)showVideo DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showRewardAd]");
 
 + (void)showVideoWithPlacement:(NSString *)placement_id;
 
 //Play video ad,User-controlled viewcontroller
-+ (void)showVideo:(UIViewController*)viewcontroller;
++ (void)showVideo:(UIViewController*)viewcontroller DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showRewardAd]");
 
-+ (void)showVideo:(UIViewController *)viewcontroller placement:(NSString *)placement_id;
++ (void)showVideo:(UIViewController *)viewcontroller placement:(NSString *)placement_id DEPRECATED_MSG_ATTRIBUTE("Please use [[Yodo1Mas sharedInstance] showRewardAd:]");
 
 //This can be used by the integrating App to indicate if
 //the user falls in any of the GDPR applicable countries
 //(European Economic Area).
 //consent YES User consents (Behavioral and Contextual Ads).
 //NO if they are not.
-+ (void)setUserConsent:(BOOL)consent;
++ (void)setUserConsent:(BOOL)consent DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].isGDPRUserConsent");
 
 // return YES
 // Agrees to collect data. The default is to collect data
-+ (BOOL)isUserConsent;
++ (BOOL)isUserConsent DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].isGDPRUserConsent");
 
 //In the US, the Children’s Online Privacy Protection Act (COPPA) imposes
 //certain requirements on operators of online services that (a)
 //have actual knowledge that the connected user is a child under 13 years of age,
 //or (b) operate services (including apps) that are directed to children under 13.
 //isBelowConsentAge YES if the user is affected by COPPA, NO if they are not.
-+ (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge;
++ (void)setTagForUnderAgeOfConsent:(BOOL)isBelowConsentAge DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].isCOPPAAgeRestricted");
 
 // return YES It means
 // under the age of 16
-+ (BOOL)isTagForUnderAgeOfConsent;
++ (BOOL)isTagForUnderAgeOfConsent DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].isCOPPAAgeRestricted");
 
 //Set whether or not user has opted out of the sale of their personal information.
 //doNotSell 'YES' if the user has opted out of the sale of their personal information.
-+ (void)setDoNotSell:(BOOL)doNotSell;
++ (void)setDoNotSell:(BOOL)doNotSell DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].isCCPADoNotSell");
 
 // return YES
 // Indicates that the user has chosen not to
 // sell their personal information
-+ (BOOL)isDoNotSell;
++ (BOOL)isDoNotSell DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance].isCCPADoNotSell");
 
 @end
 

@@ -576,7 +576,11 @@
 }
 
 - (void)showRewardAdWithPlacement:(NSString *)placement {
-    [self showAdvert:Yodo1MasAdTypeReward object:@{kArgumentPlacement : placement}];
+    NSMutableDictionary *object = [NSMutableDictionary dictionary];
+    if (placement != nil && placement.length > 0) {
+        object[kArgumentPlacement] = placement;
+    }
+    [self showAdvert:Yodo1MasAdTypeReward object:object];
 }
 
 - (void)dismissRewardAdvert {
@@ -599,7 +603,11 @@
 }
 
 - (void)showInterstitialAdWithPlacement:(NSString *)placement {
-    [self showAdvert:Yodo1MasAdTypeInterstitial object:@{kArgumentPlacement : placement}];
+    NSMutableDictionary *object = [NSMutableDictionary dictionary];
+    if (placement != nil && placement.length > 0) {
+        object[kArgumentPlacement] = placement;
+    }
+    [self showAdvert:Yodo1MasAdTypeInterstitial object:object];
 }
 
 - (void)dismissInterstitialAd {
