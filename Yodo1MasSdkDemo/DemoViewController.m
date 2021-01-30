@@ -84,13 +84,11 @@
 
 #pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Opened" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    
 }
 
 - (void)onAdClosed:(Yodo1MasAdEvent *)event {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Closed" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    
 }
 
 - (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {

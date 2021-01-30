@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationIronSource'
-  s.version          = '0.0.0.8-beta'
+  s.version          = '0.0.0.20-beta'
   s.summary          = 'Yodo1MasMediationIronSource'
   s.swift_version    = '5.0'
 
@@ -31,6 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.source_files = 'Yodo1MasMediationIronSource/Classes/**/*'
   s.public_header_files = 'Yodo1MasMediationIronSource/Classes/**/*.h'
+  s.vendored_frameworks = 'Yodo1MasMediationIronSourceMax/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
   s.dependency 'IronSourceSDK'
   

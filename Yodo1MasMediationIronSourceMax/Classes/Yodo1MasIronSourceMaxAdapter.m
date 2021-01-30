@@ -20,7 +20,7 @@
 @implementation Yodo1MasIronSourceMaxAdapter
 
 - (NSString *)advertCode {
-    return @"IronSourceMax";
+    return @"IRONSOURCE";
 }
 
 - (NSString *)sdkVersion {
@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.8-beta";
+    return @"0.0.0.20-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {

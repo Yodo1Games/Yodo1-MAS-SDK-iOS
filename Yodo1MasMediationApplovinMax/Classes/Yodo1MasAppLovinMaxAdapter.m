@@ -10,7 +10,7 @@
 @implementation Yodo1MasAppLovinMaxAdapter
 
 - (NSString *)advertCode {
-    return @"AppLovinMax";
+    return @"APPLOVIN";
 }
 
 - (BOOL)isMax {

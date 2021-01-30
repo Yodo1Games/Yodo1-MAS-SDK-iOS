@@ -202,13 +202,13 @@
         if ([self isAdLoaded:type]) {
             return YES;
         } else {
-            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdNoLoaded message:@"ad config is null"];
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdNoLoaded message:@"ad has not been cached"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
             if(callback != nil) callback(event);
             return NO;
         }
     } else {
-        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:@"ad config is null"];
+        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:@"adapter has not been inited"];
         Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
         if(callback != nil) callback(event);
         return NO;

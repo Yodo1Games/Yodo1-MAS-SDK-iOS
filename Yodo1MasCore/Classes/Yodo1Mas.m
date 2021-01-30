@@ -42,7 +42,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"0.0.0.9-beta";
+    return @"0.0.0.20-beta";
 }
 
 - (instancetype)init {
@@ -125,7 +125,6 @@
             if (data.mas_init_config && data.ad_network_config) {
                 NSLog(@"获取广告数据成功 - %@", responseObject);
                 [weakSelf doInitAdapter];
-                [weakSelf doInitAdvert];
                 if (successful) {
                     successful();
                 }
@@ -194,6 +193,8 @@
             config.appKey = appKey;
             Yodo1MasAdapterBase *adapter = (Yodo1MasAdapterBase *)o;
             self.mediations[key] = adapter;
+            [self doInitAdvert: key];
+            
             [adapter initWithConfig:config successful:^(NSString *advertCode) {
                 NSLog(@"Adapter初始化成功 - %@:%@", key, value);
             } fail:^(NSString *advertCode, NSError *error) {
@@ -211,25 +212,25 @@
     }
 }
 
-- (void)doInitAdvert {
+- (void)doInitAdvert:(NSString *)key {
     if (self.masNetworkConfig.reward != nil) {
-        [self doInitAdvert:self.masNetworkConfig.reward type:Yodo1MasAdTypeReward];
+        [self doInitAdvert:self.masNetworkConfig.reward type:Yodo1MasAdTypeReward key:(NSString *)key];
     }
     if (self.masNetworkConfig.interstitial != nil) {
-        [self doInitAdvert:self.masNetworkConfig.interstitial type:Yodo1MasAdTypeInterstitial];
+        [self doInitAdvert:self.masNetworkConfig.interstitial type:Yodo1MasAdTypeInterstitial key:(NSString *)key];
     }
     if (self.masNetworkConfig.banner != nil) {
-        [self doInitAdvert:self.masNetworkConfig.banner type:Yodo1MasAdTypeBanner];
+        [self doInitAdvert:self.masNetworkConfig.banner type:Yodo1MasAdTypeBanner key:(NSString *)key];
     }
 }
 
-- (void)doInitAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdType)type {
+- (void)doInitAdvert:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdType)type key:(NSString *)key {
     if (config.mediation_list != nil && config.mediation_list.count > 0) {
         for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
             NSString *mediationName = mediation.name;
             NSString *unitId = mediation.unit_id;
-            if (mediationName != nil && unitId != nil) {
-                Yodo1MasAdapterBase *adapter = self.mediations[mediationName];
+            if (mediationName != nil && unitId != nil && [mediationName isEqualToString:key]) {
+                Yodo1MasAdapterBase *adapter = _mediations[mediationName];
                 if (adapter != nil) {
                     switch (type) {
                         case Yodo1MasAdTypeReward: {
@@ -257,7 +258,7 @@
         for (Yodo1MasNetworkWaterfall *waterfall in config.fallback_waterfall) {
             NSArray<Yodo1MasNetworkPlacement *> *placements = waterfall.placements;
             NSString *networkName = waterfall.network;
-            if (networkName != nil && networkName.length > 0 && placements != nil && placements.count > 0) {
+            if (networkName != nil && networkName.length > 0 && placements != nil && placements.count > 0  && [networkName isEqualToString:key]) {
                 Yodo1MasAdapterBase *adapter = _mediations[networkName];
                 if (adapter != nil) {
                     switch (type) {

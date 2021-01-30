@@ -22,7 +22,7 @@
 @implementation Yodo1MasAdMobAdapter
 
 - (NSString *)advertCode {
-    return @"AdMob";
+    return @"admob";
 }
 
 - (NSString *)sdkVersion {
@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.6-beta";
+    return @"0.0.0.20-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -95,7 +95,7 @@
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     
-    if ([self getRewardAdId] != nil) {
+    if ([self getRewardAdId] != nil && [self getRewardAdId].adId != nil) {
         self.rewardAd = [[GADRewardedAd alloc] initWithAdUnitID:[self getRewardAdId].adId];
     }
     
@@ -228,7 +228,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
 }
 
 - (void)interstitialWillPresentScreen:(nonnull GADInterstitial *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidReceiveAd:, ad: %@}", TAG, ad.adUnitID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialWillPresentScreen:, ad: %@}", TAG, ad.adUnitID];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
@@ -284,7 +284,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    [self showBannerAd:callback object:object];
+    [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", TAG];
         NSLog(message);

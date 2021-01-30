@@ -21,7 +21,7 @@
 @implementation Yodo1MasFacebookAdapter
 
 - (NSString *)advertCode {
-    return @"Facebook";
+    return @"facebook";
 }
 
 - (NSString *)sdkVersion {
@@ -29,7 +29,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"0.0.0.6-beta";
+    return @"0.0.0.20-beta";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
