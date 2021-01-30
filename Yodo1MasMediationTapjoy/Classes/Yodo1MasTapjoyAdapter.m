@@ -9,8 +9,6 @@
 #import <Tapjoy/Tapjoy.h>
 
 #define TAG @"[Yodo1MasTapjoyAdapter]"
-#define PLACEMENT_NAME_VIDEO        @"reward_advert"
-#define PLACEMENT_NAME_INTERSTITIAL @"interstitial_advert"
 
 @interface Yodo1MasTapjoyAdapter()<TJPlacementDelegate>
 
@@ -107,17 +105,24 @@
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
-    return _rewardAd != nil && [_rewardAd isContentAvailable];
+    return _rewardAd != nil && [_rewardAd isContentReady];
 }
 
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     
-    NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG];
-    NSLog(message);
-    _rewardAd = [TJPlacement placementWithName:PLACEMENT_NAME_VIDEO delegate:self];
-    [_rewardAd requestContent];
+    Yodo1MasAdId *adId = [self getRewardAdId];
+    if (adId != nil && adId.adId != nil && (_rewardAd == nil || ![adId.adId isEqualToString:_rewardAd.placementName])) {
+        _rewardAd = [TJPlacement placementWithName:adId.adId delegate:self];
+    }
+    
+    if (_rewardAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG];
+        NSLog(message);
+        
+        [_rewardAd requestContent];
+    }
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -135,17 +140,24 @@
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return _interstitialAd != nil && [_interstitialAd isContentAvailable];
+    return _interstitialAd != nil && [_interstitialAd isContentReady];
 }
 
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
-    NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG];
-    NSLog(message);
     
-    _interstitialAd = [TJPlacement placementWithName:PLACEMENT_NAME_INTERSTITIAL delegate:self];
-    [_interstitialAd requestContent];
+    
+    Yodo1MasAdId *adId = [self getInterstitialAdId];
+    if (adId != nil && adId.adId != nil && (_interstitialAd == nil || ![adId.adId isEqualToString:_interstitialAd.placementName])) {
+        _interstitialAd = [TJPlacement placementWithName:adId.adId delegate:self];
+    }
+    
+    if (_interstitialAd != nil) {
+        NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG];
+        NSLog(message);
+        [_interstitialAd requestContent];
+    }
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {

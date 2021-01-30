@@ -158,7 +158,7 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return self.bannerAd != nil;
+    return self.bannerAd != nil && [self getBannerAdId] != nil && self.bannerState == Yodo1MasBannerStateLoaded;
 }
 
 - (void)loadBannerAd {
@@ -172,10 +172,11 @@
         self.bannerAd.frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
         self.bannerAd.delegate = self;
     }
-    if (self.bannerAd != nil) {
+    if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd, loading banner ad...}", TAG];
         NSLog(message);
         [self.bannerAd loadAd];
+        self.bannerState = Yodo1MasBannerStateLoading;
     }
 }
 
@@ -206,19 +207,23 @@
 - (void)didLoadAd:(MAAd *)ad {
     NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@}", TAG, ad.adUnitIdentifier];
     NSLog(message);
+    if ([ad.adUnitIdentifier isEqualToString:[self getBannerAdId].adId]) {
+        self.bannerState = Yodo1MasBannerStateLoaded;
+    }
 }
 
 - (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withErrorCode:(NSInteger)errorCode {
     Yodo1MasAdType type;
-    if (adUnitIdentifier == [self getRewardAdId].adId) {
+    if ([adUnitIdentifier isEqualToString:[self getRewardAdId].adId]) {
         type = Yodo1MasAdTypeReward;
         [self nextReward];
-    } else if (adUnitIdentifier == [self getInterstitialAdId].adId) {
+    } else if ([adUnitIdentifier isEqualToString:[self getInterstitialAdId].adId]) {
         type = Yodo1MasAdTypeInterstitial;
         [self nextInterstitial];
-    } else if (adUnitIdentifier == [self getBannerAdId].adId) {
+    } else if ([adUnitIdentifier isEqualToString:[self getBannerAdId].adId]) {
         type = Yodo1MasAdTypeBanner;
         [self nextBanner];
+        self.bannerState = Yodo1MasBannerStateNone;
     } else {
         return;
     }
@@ -255,6 +260,7 @@
         type = Yodo1MasAdTypeInterstitial;
     } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdTypeBanner;
+        self.bannerState = Yodo1MasBannerStateNone;
     } else {
         return;
     }
@@ -282,6 +288,7 @@
     } else if (ad.format == MAAdFormat.banner) {
         type = Yodo1MasAdTypeBanner;
         [self nextBanner];
+        self.bannerState = Yodo1MasBannerStateNone;
     } else {
         return;
     }
@@ -322,6 +329,7 @@
 - (void)didCollapseAd:(MAAd *)ad {
     NSString *message = [NSString stringWithFormat:@"%@: {method:didCollapseAd, ad:%@}", TAG, ad.adUnitIdentifier];
     NSLog(message);
+    self.bannerState = Yodo1MasBannerStateNone;
     [self loadBannerAd];
 }
 

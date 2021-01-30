@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^Yodo1MasAdapterInitSuccessful)(NSString *);
 typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 
+typedef enum {
+    Yodo1MasBannerStateNone,
+    Yodo1MasBannerStateLoading,
+    Yodo1MasBannerStateLoaded
+} Yodo1MasBannerState;
+
 @interface Yodo1MasAdapterConfig : NSObject
 
 @property (nonatomic, copy) NSString *name;
@@ -51,6 +57,7 @@ typedef void(^Yodo1MasAdapterInitFail)(NSString *, NSError *);
 @property (nonatomic, copy, readonly) Yodo1MasAdCallback rewardCallback;
 @property (nonatomic, copy, readonly) Yodo1MasAdCallback interstitialCallback;
 @property (nonatomic, copy, readonly) Yodo1MasAdCallback bannerCallback;
+@property (nonatomic, assign) Yodo1MasBannerState bannerState;
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
 - (BOOL)isInitSDK;

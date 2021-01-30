@@ -221,7 +221,7 @@
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
             [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
             [self nextBanner];
-            [self loadBannerAd];
+            [self loadBannerAdDelayed];
         } else {
             UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
             [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];

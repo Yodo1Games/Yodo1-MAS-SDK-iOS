@@ -149,7 +149,7 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return [self getBannerAdId] != nil && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && self.bannerAd != nil && self.bannerState == Yodo1MasBannerStateLoaded;
 }
 
 - (void)loadBannerAd {
@@ -158,14 +158,16 @@
     if (self.bannerAd != nil) {
         [self.bannerAd removeFromSuperview];
     }
-    if ([self getBannerAdId] != nil) {
-        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:[self getBannerAdId].adId size:BANNER_SIZE_320_50];
+    Yodo1MasAdId *adId = [self getBannerAdId];
+    if (adId != nil && adId.adId != nil && (self.bannerAd == nil || ![adId.adId isEqualToString:self.bannerAd.placementId])) {
+        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:adId.adId size:BANNER_SIZE_320_50];
         self.bannerAd.delegate = self;
     }
-    if (self.bannerAd != nil) {
+    if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", TAG];
         NSLog(message);
         [self.bannerAd load];
+        self.bannerState = Yodo1MasBannerStateLoading;
     }
 }
 
@@ -270,6 +272,7 @@
 - (void)bannerViewDidLoad:(UADSBannerView *)bannerView {
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidLoad:, id: %@}", TAG, bannerView.placementId];
     NSLog(message);
+    self.bannerState = Yodo1MasBannerStateLoaded;
 }
 
 - (void)bannerViewDidClick:(UADSBannerView *)bannerView {
@@ -285,7 +288,8 @@
 - (void)bannerViewDidError:(UADSBannerView *)bannerView error:(UADSBannerError *)adError {
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidError:error:, id: %@, error: %@}", TAG, bannerView.placementId, adError];
     NSLog(message);
-
+    self.bannerState = Yodo1MasBannerStateNone;
+    
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];

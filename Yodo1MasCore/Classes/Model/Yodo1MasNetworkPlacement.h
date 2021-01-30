@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy) NSString *network_code;
 @property(nonatomic, copy) NSString *price_type;
-@property(nonatomic, assign) NSInteger price;
+@property(nonatomic, assign) double price;
 @property(nonatomic, copy) NSString *extra_params;
 
 @end

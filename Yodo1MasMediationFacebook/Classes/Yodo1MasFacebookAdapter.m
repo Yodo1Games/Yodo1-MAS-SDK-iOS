@@ -211,7 +211,7 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return self.bannerAd != nil && self.bannerAd.isAdValid;
+    return self.bannerAd != nil && self.bannerAd.isAdValid && self.bannerState == Yodo1MasBannerStateLoaded;
 }
 
 - (void)loadBannerAd {
@@ -221,14 +221,17 @@
     if (self.bannerAd != nil) {
         [self.bannerAd removeFromSuperview];
     }
-    if ([self getBannerAdId] != nil) {
-        self.bannerAd = [[FBAdView alloc] initWithPlacementID:[self getBannerAdId].adId adSize:kFBAdSize320x50 rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
+    
+    Yodo1MasAdId *adId = [self getBannerAdId];
+    if (adId != nil && adId.adId != nil && (self.bannerAd == nil || ![adId.adId isEqualToString:self.bannerAd.placementID])) {
+        self.bannerAd = [[FBAdView alloc] initWithPlacementID:adId.adId adSize:kFBAdSize320x50 rootViewController:[Yodo1MasFacebookAdapter getTopViewController]];
         self.bannerAd.delegate = self;
     }
-    if (self.bannerAd != nil) {
+    if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",TAG];
         NSLog(message);
         [self.bannerAd loadAd];
+        self.bannerState = Yodo1MasBannerStateLoading;
     }
 }
 
@@ -262,6 +265,7 @@
 - (void)adViewDidLoad:(FBAdView *)adView {
     NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidLoad:, banner: %@}",TAG, adView.placementID];
     NSLog(message);
+    self.bannerState = Yodo1MasBannerStateLoaded;
 }
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)facebookError {
@@ -270,7 +274,7 @@
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
-    
+    self.bannerState = Yodo1MasBannerStateNone;
     [self nextBanner];
     [self loadBannerAd];
 }
@@ -278,6 +282,7 @@
 - (void)adViewWillLogImpression:(FBAdView *)adView {
     NSString *message = [NSString stringWithFormat:@"%@: {method:adViewWillLogImpression:, banner: %@}",TAG, adView.placementID];
     NSLog(message);
+    self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
 }
 

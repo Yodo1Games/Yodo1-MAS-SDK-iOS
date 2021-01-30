@@ -171,7 +171,7 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return [self getBannerAdId] != nil && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && self.bannerAd != nil && self.bannerState == Yodo1MasBannerStateLoaded;
 }
 
 - (void)loadBannerAd {
@@ -180,14 +180,17 @@
     if (self.bannerAd != nil) {
         [self.bannerAd removeFromSuperview];
     }
-    if ([self getBannerAdId] != nil) {
-        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height) placementId:[[self getBannerAdId].adId longLongValue] delegate:self];
+    
+    Yodo1MasAdId *adId = [self getBannerAdId];
+    if (adId != nil && adId.adId != nil) {
+        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height) placementId:[adId.adId longLongValue] delegate:self];
     }
 
-    if (self.bannerAd != nil) {
+    if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",TAG];
         NSLog(message);
         [self.bannerAd load];
+        self.bannerState = Yodo1MasBannerStateLoading;
     }
 }
 
@@ -337,11 +340,13 @@
 - (void)banner:(IMBanner *)banner failedToGetSignalsWithError:(IMRequestStatus *)status {
     NSString *message = [NSString stringWithFormat:@"%@: {method:banner:failedToGetSignalsWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), status];
     NSLog(message);
+    self.bannerState = Yodo1MasBannerStateNone;
 }
 
 - (void)bannerDidFinishLoading:(IMBanner *)banner {
     NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidFinishLoading:, ad: %@}",TAG, @(banner.placementId)];
     NSLog(message);
+    self.bannerState = Yodo1MasBannerStateLoaded;
 }
 
 - (void)banner:(IMBanner*)banner didReceiveWithMetaInfo:(IMAdMetaInfo *)info {
@@ -352,7 +357,7 @@
 - (void)banner:(IMBanner*)banner didFailToReceiveWithError:(IMRequestStatus *)adError {
     NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToReceiveWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), adError];
     NSLog(message);
-
+    self.bannerState = Yodo1MasBannerStateNone;
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];
@@ -362,7 +367,7 @@
 - (void)banner:(IMBanner*)banner didFailToLoadWithError:(IMRequestStatus *)adError {
     NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToLoadWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), adError];
     NSLog(message);
-
+    self.bannerState = Yodo1MasBannerStateNone;
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];
@@ -399,7 +404,7 @@
 - (void)bannerDidDismissScreen:(IMBanner*)banner {
     NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidDismissScreen:, ad: %@}",TAG, @(banner.placementId)];
     NSLog(message);
-
+    self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
     [self loadBannerAd];
 }

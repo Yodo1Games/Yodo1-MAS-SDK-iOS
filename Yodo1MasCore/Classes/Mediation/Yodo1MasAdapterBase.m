@@ -57,6 +57,7 @@
         _interstitialAdIds = [NSMutableArray array];
         _currentBannerAdIdIndex = -1;
         _bannerAdIds = [NSMutableArray array];
+        _bannerState = Yodo1MasBannerStateNone;
     }
     return self;
 }
