@@ -196,7 +196,7 @@ static Yodo1AdsDelegate *delegate;
 }
 
 + (BOOL)videoIsReady {
-    [[Yodo1Mas sharedInstance] isRewardAdLoaded];
+    return [[Yodo1Mas sharedInstance] isRewardAdLoaded];
 }
 
 + (void)showVideo {
