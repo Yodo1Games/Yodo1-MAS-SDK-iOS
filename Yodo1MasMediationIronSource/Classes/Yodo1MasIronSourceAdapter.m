@@ -184,7 +184,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", TAG];
             NSLog(message);
-            [IronSource showISDemandOnlyRewardedVideo:controller instanceId: [self getInterstitialAdId].adId];
+            [IronSource showISDemandOnlyInterstitial:controller instanceId: [self getInterstitialAdId].adId];
         }
     }
 }
