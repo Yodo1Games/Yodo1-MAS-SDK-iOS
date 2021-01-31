@@ -38,7 +38,6 @@
     
     if (self.sdk == nil) {
         self.sdk = [GADMobileAds sharedInstance];
-        GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ @"7492a8ebb22c30185d7555c11ba97cea" ];
     }
     if (![self isInitSDK]) {
         if (!self.isMax) {
