@@ -87,10 +87,12 @@
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
-    if ([self getRewardAdId] != nil) {
+    
+    Yodo1MasAdId *adId = [self getRewardAdId];
+    if (adId != nil && adId.adId != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG];
         NSLog(message);
-        [IronSource loadISDemandOnlyRewardedVideo:[self getRewardAdId].adId];
+        [IronSource loadISDemandOnlyRewardedVideo:adId.adId];
     }
 }
 
@@ -170,10 +172,12 @@
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
-    if ( [self getInterstitialAdId] != nil) {
+    
+    Yodo1MasAdId *adId = [self getInterstitialAdId];
+    if (adId != nil && adId.adId != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG];
         NSLog(message);
-        [IronSource loadISDemandOnlyInterstitial:[self getInterstitialAdId].adId];
+        [IronSource loadISDemandOnlyInterstitial:adId.adId];
     }
 }
 

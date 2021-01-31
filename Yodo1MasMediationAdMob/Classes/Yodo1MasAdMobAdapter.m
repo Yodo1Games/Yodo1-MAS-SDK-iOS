@@ -38,6 +38,7 @@
     
     if (self.sdk == nil) {
         self.sdk = [GADMobileAds sharedInstance];
+        GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = @[ @"7492a8ebb22c30185d7555c11ba97cea" ];
     }
     if (![self isInitSDK]) {
         if (!self.isMax) {
@@ -219,7 +220,7 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
 
 - (void)interstitial:(nonnull GADInterstitial *)ad
 didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidReceiveAd:, ad: %@, error: %@}", TAG, ad.adUnitID, adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToReceiveAdWithError, ad: %@, error: %@}", TAG, ad.adUnitID, adError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
