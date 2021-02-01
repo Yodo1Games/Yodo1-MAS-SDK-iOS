@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.source_files = 'Yodo1MasMediationIronSource/Classes/**/*'
   s.public_header_files = 'Yodo1MasMediationIronSource/Classes/**/*.h'
-  s.vendored_frameworks = 'Yodo1MasMediationIronSourceMax/Lib/**/*.framework'
+  s.vendored_frameworks = 'Yodo1MasMediationIronSource/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
   s.dependency 'IronSourceSDK'
   
