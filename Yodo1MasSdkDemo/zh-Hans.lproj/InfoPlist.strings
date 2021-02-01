@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Yodo1MasSdkDemo
+
+  Created by 周玉震 on 2021/1/4.
+  
+*/
+
+"CFBundleDisplayName" = "Yodo1 MAS SDK";
+"NSUserTrackingUsageDescription" = "该标识符将用于向您投放个性化广告。";
+
