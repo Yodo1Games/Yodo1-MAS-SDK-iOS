@@ -31,6 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   
+  s.static_framework = true
   s.source_files = 'Yodo1MasMediationInMobi/Classes/**/*'
   s.public_header_files = 'Yodo1MasMediationInMobi/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'

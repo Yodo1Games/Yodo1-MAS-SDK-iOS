@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D64A4BE26A998FC23D08F1C /* libPods-Yodo1MasSdkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C431E54C50D7FC1C1C8A9C /* libPods-Yodo1MasSdkDemo.a */; };
 		B97FA73E25A3478C003BD4F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B97FA74025A3478C003BD4F0 /* InfoPlist.strings */; };
 		CB0E403325787EF7000ACB94 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0E403225787EF7000ACB94 /* MainViewController.m */; };
 		CB0E403C25787F61000ACB94 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0E403B25787F61000ACB94 /* DemoViewController.m */; };
@@ -17,7 +18,6 @@
 		CBC4767B256D466E00DB3CAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC4767A256D466E00DB3CAF /* main.m */; };
 		CBC47685256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC47684256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m */; };
 		CBC47690256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC4768F256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m */; };
-		D4D4D58424FED4C1EAFE5B19 /* libPods-Yodo1MasSdkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3C5FC38978C02AF644AC4C /* libPods-Yodo1MasSdkDemo.a */; };
 		E8C76377DFF2AD5130801D0F /* libPods-Yodo1MasSdkDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D85FFDDD76867E6ED55FBEC /* libPods-Yodo1MasSdkDemoTests.a */; };
 		FB277D6BF1A1D6035D4EB1B4 /* libPods-Yodo1MasSdkDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFC872A8A9E510E88A4265A /* libPods-Yodo1MasSdkDemoUITests.a */; };
 /* End PBXBuildFile section */
@@ -46,12 +46,12 @@
 		661A33E8D196735B0B43D8F0 /* Pods-Yodo1MasSdkDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemo.debug.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemo/Pods-Yodo1MasSdkDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8316AB6F88C5D4F2C77A895B /* Pods-Yodo1MasSdkDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemoUITests/Pods-Yodo1MasSdkDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9285BF1EEB32E6592C17577A /* Pods-Yodo1MasSdkDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemo.release.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemo/Pods-Yodo1MasSdkDemo.release.xcconfig"; sourceTree = "<group>"; };
+		A7C431E54C50D7FC1C1C8A9C /* libPods-Yodo1MasSdkDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yodo1MasSdkDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CC976DFB01613967BE3B80 /* Pods-Yodo1MasSdkDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemoTests/Pods-Yodo1MasSdkDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B950DEC825A3316300C7AC2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		B950DEC925A3316300C7AC2E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		B97FA73F25A3478C003BD4F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B97FA74425A347A0003BD4F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		BA3C5FC38978C02AF644AC4C /* libPods-Yodo1MasSdkDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yodo1MasSdkDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4950EEBDC757E58396699FF /* Pods-Yodo1MasSdkDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yodo1MasSdkDemoTests.release.xcconfig"; path = "Target Support Files/Pods-Yodo1MasSdkDemoTests/Pods-Yodo1MasSdkDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB0E403125787EF7000ACB94 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		CB0E403225787EF7000ACB94 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4D4D58424FED4C1EAFE5B19 /* libPods-Yodo1MasSdkDemo.a in Frameworks */,
+				7D64A4BE26A998FC23D08F1C /* libPods-Yodo1MasSdkDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,9 +117,9 @@
 		42429D399736B7B90CC152D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BA3C5FC38978C02AF644AC4C /* libPods-Yodo1MasSdkDemo.a */,
 				0D85FFDDD76867E6ED55FBEC /* libPods-Yodo1MasSdkDemoTests.a */,
 				3DFC872A8A9E510E88A4265A /* libPods-Yodo1MasSdkDemoUITests.a */,
+				A7C431E54C50D7FC1C1C8A9C /* libPods-Yodo1MasSdkDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -30,6 +30,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
+  s.static_framework = true
   s.source_files = 'Yodo1MasMediationAdMob/Classes/**/*'
   s.public_header_files = 'Yodo1MasMediationAdMob/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'

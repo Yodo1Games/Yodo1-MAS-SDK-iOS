@@ -32,6 +32,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
+  s.static_framework = true
   s.source_files = 'Yodo1MasMediationApplovinMax/Classes/**/*'
   s.public_header_files = 'Yodo1MasMediationApplovinMax/Classes/**/*.h'
   s.vendored_frameworks = 'Yodo1MasMediationApplovinMax/Lib/**/*.framework'

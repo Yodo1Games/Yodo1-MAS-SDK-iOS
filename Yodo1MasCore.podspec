@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ZhouYuzhen' => 'zhouyuzhen@yodo1.com' }
   s.source           = { :git => 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS.git', :tag => s.version.to_s }
-
+  s.static_framework = true
   s.ios.deployment_target = '9.0'
   s.info_plist = {
     'AppLovinSdkKey' => 'xcGD2fy-GdmiZQapx_kUSy5SMKyLoXBk8RyB5u9MVv34KetGdbl4XrXvAUFy0Qg9scKyVTI0NM4i_yzdXih4XE',
