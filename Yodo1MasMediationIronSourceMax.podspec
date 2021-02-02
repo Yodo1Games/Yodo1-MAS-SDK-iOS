@@ -29,6 +29,7 @@ TODO: Add long description of the pod here.
   s.author           = { 'ZhouYuzhen' => 'zhouyuzhen@yodo1.com' }
   s.source           = { :git => 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS.git', :tag => s.version.to_s }
 
+  s.static_framework = true
   s.ios.deployment_target = '9.0'
   s.resource = 'Yodo1MasMediationIronSourceMax/Assets/**/*.bundle'
   s.source_files = 'Yodo1MasMediationIronSourceMax/Classes/**/*'
