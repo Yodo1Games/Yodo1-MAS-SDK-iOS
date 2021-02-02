@@ -123,7 +123,9 @@
             weakSelf.masInitConfig = data.mas_init_config;
             weakSelf.masNetworkConfig = data.ad_network_config;
             if (data.mas_init_config && data.ad_network_config) {
-                NSLog(@"获取广告数据成功 - %@", responseObject);
+                if (debug) {
+                    NSLog(@"获取广告数据成功 - %@", responseObject);
+                }
                 [weakSelf doInitAdapter];
                 if (successful) {
                     successful();
