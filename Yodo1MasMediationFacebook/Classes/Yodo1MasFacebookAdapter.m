@@ -8,8 +8,6 @@
 #import "Yodo1MasFacebookAdapter.h"
 @import FBAudienceNetwork;
 
-#define TAG @"[Yodo1MasFacebookAdapter]"
-
 @interface Yodo1MasFacebookAdapter()<FBRewardedVideoAdDelegate, FBInterstitialAdDelegate, FBAdViewDelegate>
 
 @property (nonatomic, strong) FBRewardedVideoAd *rewardAd;
@@ -70,7 +68,7 @@
     }
     
     if (self.rewardAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}", self.TAG];
         NSLog(message);
         [self.rewardAd loadAd];
     }
@@ -82,7 +80,7 @@
         
         UIViewController * controller = [Yodo1MasFacebookAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd:, show reward ad...}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd:, show reward ad...}", self.TAG];
             NSLog(message);
             [self.rewardAd showAdFromRootViewController:controller animated:YES];
         }
@@ -95,19 +93,19 @@
 
 #pragma mark - FBRewardedVideoAdDelegate
 - (void)rewardedVideoAdDidClick:(FBRewardedVideoAd *)rewardedVideoAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidClick:, reward: %@}",TAG, rewardedVideoAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidClick:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
     NSLog(message);
 }
 
 - (void)rewardedVideoAdDidClose:(FBRewardedVideoAd *)rewardedVideoAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidClose:, reward: %@}",TAG, rewardedVideoAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidClose:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
     [self loadRewardAd];
 }
 
 - (void)rewardedVideoAd:(FBRewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)facebookError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAd:didFailWithError:, reward: %@, error: %@}",TAG, rewardedVideoAd.placementID, facebookError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAd:didFailWithError:, reward: %@, error: %@}",self.TAG, rewardedVideoAd.placementID, facebookError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
@@ -118,20 +116,20 @@
 }
 
 - (void)rewardedVideoAdVideoComplete:(FBRewardedVideoAd *)rewardedVideoAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdVideoComplete:, reward: %@}",TAG, rewardedVideoAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdVideoComplete:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
     NSLog(message);
     [self loadRewardAd];
 }
 
 - (void)rewardedVideoAdWillLogImpression:(FBRewardedVideoAd *)rewardedVideoAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdWillLogImpression:, reward: %@}",TAG, rewardedVideoAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdWillLogImpression:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedVideoAdServerRewardDidSucceed:(FBRewardedVideoAd *)rewardedVideoAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdServerRewardDidSucceed:, reward: %@}",TAG, rewardedVideoAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdServerRewardDidSucceed:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
@@ -153,7 +151,7 @@
     }
     
     if (self.interstitialAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, load interstitial ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, load interstitial ad...}",self.TAG];
         NSLog(message);
         [self.interstitialAd loadAd];
     }
@@ -165,7 +163,7 @@
         
         UIViewController *controller = [Yodo1MasFacebookAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}",TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}",self.TAG];
             NSLog(message);
             [self.interstitialAd showAdFromRootViewController:controller];
         }
@@ -178,12 +176,12 @@
 
 #pragma mark - FBInterstitialAdDelegate
 - (void)interstitialAdDidClick:(FBInterstitialAd *)interstitialAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdDidClick:, interstitial: %@}",TAG, interstitialAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdDidClick:, interstitial: %@}",self.TAG, interstitialAd.placementID];
     NSLog(message);
 }
 
 - (void)interstitialAdDidClose:(FBInterstitialAd *)interstitialAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdDidClose:, interstitial: %@}",TAG, interstitialAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdDidClose:, interstitial: %@}",self.TAG, interstitialAd.placementID];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
@@ -191,7 +189,7 @@
 }
 
 - (void)interstitialAd:(FBInterstitialAd *)interstitialAd didFailWithError:(NSError *)facebookError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAd:didFailWithError:, interstitial: %@, error: %@}",TAG, interstitialAd.placementID, facebookError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAd:didFailWithError:, interstitial: %@, error: %@}",self.TAG, interstitialAd.placementID, facebookError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
@@ -202,7 +200,7 @@
 }
 
 - (void)interstitialAdWillLogImpression:(FBInterstitialAd *)interstitialAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdWillLogImpression:, interstitial: %@}",TAG, interstitialAd.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdWillLogImpression:, interstitial: %@}",self.TAG, interstitialAd.placementID];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
@@ -228,7 +226,7 @@
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",self.TAG];
         NSLog(message);
         [self.bannerAd loadAd];
         self.bannerState = Yodo1MasBannerStateLoading;
@@ -238,38 +236,42 @@
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}",self.TAG];
         NSLog(message);
         UIViewController *controller = [Yodo1MasFacebookAdapter getTopViewController];
         [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
     }
 }
 
-- (void)dismissBannerAd {
-    [super dismissBannerAd];
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    [super dismissBannerAdWithDestroy:destroy];
     [Yodo1MasBanner removeBanner:self.bannerAd];
-    self.bannerAd = nil;
+    if (destroy) {
+        self.bannerAd = nil;
+        self.bannerState = Yodo1MasBannerStateNone;
+        [self loadBannerAd];
+    }
 }
 
 #pragma mark - FBAdViewDelegate
 - (void)adViewDidClick:(FBAdView *)adView {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidClick:, banner: %@}",TAG, adView.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidClick:, banner: %@}",self.TAG, adView.placementID];
     NSLog(message);
 }
 
 - (void)adViewDidFinishHandlingClick:(FBAdView *)adView {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidFinishHandlingClick:, banner: %@}",TAG, adView.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidFinishHandlingClick:, banner: %@}",self.TAG, adView.placementID];
     NSLog(message);
 }
 
 - (void)adViewDidLoad:(FBAdView *)adView {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidLoad:, banner: %@}",TAG, adView.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidLoad:, banner: %@}",self.TAG, adView.placementID];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateLoaded;
 }
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)facebookError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:adView:didFailWithError:, banner: %@, error: %@}",TAG, adView.placementID, facebookError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:adView:didFailWithError:, banner: %@, error: %@}",self.TAG, adView.placementID, facebookError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
@@ -280,7 +282,7 @@
 }
 
 - (void)adViewWillLogImpression:(FBAdView *)adView {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewWillLogImpression:, banner: %@}",TAG, adView.placementID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:adViewWillLogImpression:, banner: %@}",self.TAG, adView.placementID];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];

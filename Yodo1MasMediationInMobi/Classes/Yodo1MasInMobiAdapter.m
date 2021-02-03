@@ -8,8 +8,6 @@
 #import "Yodo1MasInMobiAdapter.h"
 @import InMobiSDK;
 
-#define TAG @"[Yodo1MasInMobiAdapter]"
-
 @interface Yodo1MasInMobiAdapter()<IMInterstitialDelegate, IMBannerDelegate>
 
 @property (nonatomic, assign) BOOL sdkInit;
@@ -42,7 +40,7 @@
             __weak __typeof(self)weakSelf = self;
             [IMSdk setLogLevel:kIMSDKLogLevelDebug];
             [IMSdk initWithAccountID:config.appId consentDictionary:nil andCompletionHandler:^(NSError * _Nullable adError) {
-                NSString *message = [NSString stringWithFormat:@"%@: {method:andCompletionHandler:, error: %@}",TAG, adError];
+                NSString *message = [NSString stringWithFormat:@"%@: {method:andCompletionHandler:, error: %@}",self.TAG, adError];
                 NSLog(message);
                 
                 if (adError == nil) {
@@ -62,7 +60,7 @@
                 }
             }];
         } else {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",self.TAG];
             NSLog(message);
             if (fail != nil) {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
@@ -106,7 +104,7 @@
     }
     
     if (self.rewardAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}",self.TAG];
         NSLog(message);
         [self.rewardAd load];
     }
@@ -118,7 +116,7 @@
         
         UIViewController *controller = [Yodo1MasInMobiAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd:, show reward ad...}",TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd:, show reward ad...}",self.TAG];
             NSLog(message);
             [self.rewardAd showFromViewController:controller];
         }
@@ -145,7 +143,7 @@
     }
     
     if (self.interstitialAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, loading interstitial ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, loading interstitial ad...}",self.TAG];
         NSLog(message);
         [self.interstitialAd load];
     }
@@ -157,7 +155,7 @@
         
         UIViewController *controller = [Yodo1MasInMobiAdapter getTopViewController];
         if (controller != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}",TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}",self.TAG];
             NSLog(message);
             [self.interstitialAd showFromViewController:controller];
         }
@@ -187,7 +185,7 @@
     }
 
     if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}",self.TAG];
         NSLog(message);
         [self.bannerAd load];
         self.bannerState = Yodo1MasBannerStateLoading;
@@ -197,27 +195,31 @@
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}",TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}",self.TAG];
         NSLog(message);
         UIViewController *controller = [Yodo1MasInMobiAdapter getTopViewController];
         [Yodo1MasBanner showBanner:self.bannerAd controller:controller object:object];
     }
 }
 
-- (void)dismissBannerAd {
-    [super dismissBannerAd];
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    [super dismissBannerAdWithDestroy:destroy];
     [Yodo1MasBanner removeBanner:self.bannerAd];
-    self.bannerAd = nil;
+    if (destroy) {
+        self.bannerAd = nil;
+        self.bannerState = Yodo1MasBannerStateNone;
+        [self loadBannerAd];
+    }
 }
 
 #pragma mark - IMInterstitialDelegate
 - (void)interstitial:(IMInterstitial *)interstitial didReceiveWithMetaInfo:(IMAdMetaInfo *)metaInfo {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didReceiveWithMetaInfo:, ad: %@, info: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", metaInfo.bidInfo];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didReceiveWithMetaInfo:, ad: %@, info: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", metaInfo.bidInfo];
     NSLog(message);
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial didFailToReceiveWithError:(NSError *)adError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToReceiveWithError:, ad: %@, error: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToReceiveWithError:, ad: %@, error: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", adError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
@@ -233,22 +235,22 @@
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial gotSignals:(NSData *)signals {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:gotSignals:, ad: %@, signals: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", signals];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:gotSignals:, ad: %@, signals: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", signals];
     NSLog(message);
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial failedToGetSignalsWithError:(IMRequestStatus *)error {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:failedToGetSignalsWithError:, ad: %@, error: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", error];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:failedToGetSignalsWithError:, ad: %@, error: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", error];
     NSLog(message);
 }
 
 - (void)interstitialDidFinishLoading:(IMInterstitial *)interstitial {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidFinishLoading:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidFinishLoading:, ad: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
     NSLog(message);
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial didFailToLoadWithError:(IMRequestStatus *)adError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToLoadWithError:, ad: %@, error: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToLoadWithError:, ad: %@, error: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", adError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
@@ -264,12 +266,12 @@
 }
 
 - (void)interstitialWillPresent:(IMInterstitial *)interstitial {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialWillPresent:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialWillPresent:, ad: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
     NSLog(message);
 }
 
 - (void)interstitialDidPresent:(IMInterstitial *)interstitial {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidPresent:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidPresent:, ad: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
     NSLog(message);
     
     if (interstitial == self.rewardAd) {
@@ -280,7 +282,7 @@
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial didFailToPresentWithError:(IMRequestStatus *)inMobiError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToPresentWithError:, ad: %@, error: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", inMobiError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didFailToPresentWithError:, ad: %@, error: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", inMobiError];
     NSLog(message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
@@ -296,12 +298,12 @@
 }
 
 - (void)interstitialWillDismiss:(IMInterstitial *)interstitial {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialWillDismiss:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialWillDismiss:, ad: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
     NSLog(message);
 }
 
 - (void)interstitialDidDismiss:(IMInterstitial *)interstitial {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidDismiss:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidDismiss:, ad: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
     NSLog(message);
     if (interstitial == _rewardAd) {
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
@@ -313,13 +315,13 @@
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial didInteractWithParams:(NSDictionary *)params {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidDismiss:didInteractWithParams:, ad: %@, params: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", params];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidDismiss:didInteractWithParams:, ad: %@, params: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", params];
     NSLog(message);
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial rewardActionCompletedWithRewards:(NSDictionary *)rewards {
     
-    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidDismiss:rewardActionCompletedWithRewards:, ad: %@, rewards: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", rewards];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidDismiss:rewardActionCompletedWithRewards:, ad: %@, rewards: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", rewards];
     NSLog(message);
     if (interstitial == _rewardAd) {
         [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
@@ -327,35 +329,35 @@
 }
 
 - (void)userWillLeaveApplicationFromInterstitial:(IMInterstitial *)interstitial {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:userWillLeaveApplicationFromInterstitial:, ad: %@}",TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:userWillLeaveApplicationFromInterstitial:, ad: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial"];
     NSLog(message);
 }
 
 #pragma mark - IMBannerDelegate
 - (void)banner:(IMBanner*)banner gotSignals:(NSData *)signals {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:gotSignals:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:gotSignals:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
 }
 
 - (void)banner:(IMBanner *)banner failedToGetSignalsWithError:(IMRequestStatus *)status {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:failedToGetSignalsWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), status];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:failedToGetSignalsWithError:, ad: %@, error: %@}",self.TAG, @(banner.placementId), status];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateNone;
 }
 
 - (void)bannerDidFinishLoading:(IMBanner *)banner {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidFinishLoading:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidFinishLoading:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateLoaded;
 }
 
 - (void)banner:(IMBanner*)banner didReceiveWithMetaInfo:(IMAdMetaInfo *)info {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didReceiveWithMetaInfo:, ad: %@, info: %@}",TAG, @(banner.placementId), info.creativeID];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didReceiveWithMetaInfo:, ad: %@, info: %@}",self.TAG, @(banner.placementId), info.creativeID];
     NSLog(message);
 }
 
 - (void)banner:(IMBanner*)banner didFailToReceiveWithError:(IMRequestStatus *)adError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToReceiveWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToReceiveWithError:, ad: %@, error: %@}",self.TAG, @(banner.placementId), adError];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateNone;
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
@@ -365,7 +367,7 @@
 }
 
 - (void)banner:(IMBanner*)banner didFailToLoadWithError:(IMRequestStatus *)adError {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToLoadWithError:, ad: %@, error: %@}",TAG, @(banner.placementId), adError];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didFailToLoadWithError:, ad: %@, error: %@}",self.TAG, @(banner.placementId), adError];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateNone;
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
@@ -375,34 +377,34 @@
 }
 
 - (void)banner:(IMBanner*)banner didInteractWithParams:(NSDictionary *)params {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didInteractWithParams:, ad: %@, params: %@}",TAG, @(banner.placementId), params];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:didInteractWithParams:, ad: %@, params: %@}",self.TAG, @(banner.placementId), params];
     NSLog(message);
 }
 
 - (void)userWillLeaveApplicationFromBanner:(IMBanner *)banner {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:userWillLeaveApplicationFromBanner:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:userWillLeaveApplicationFromBanner:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
 }
 
 - (void)bannerWillPresentScreen:(IMBanner*)banner {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerWillPresentScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerWillPresentScreen:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
 }
 
 - (void)bannerDidPresentScreen:(IMBanner*)banner {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidPresentScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidPresentScreen:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
 
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerWillDismissScreen:(IMBanner*)banner {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerWillDismissScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerWillDismissScreen:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
 }
 
 - (void)bannerDidDismissScreen:(IMBanner*)banner {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidDismissScreen:, ad: %@}",TAG, @(banner.placementId)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidDismissScreen:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
@@ -410,7 +412,7 @@
 }
 
 - (void)banner:(IMBanner*)banner rewardActionCompletedWithRewards:(NSDictionary *)rewards {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:rewardActionCompletedWithRewards:, ad: %@, rewards: %@}",TAG, @(banner.placementId), rewards];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:banner:rewardActionCompletedWithRewards:, ad: %@, rewards: %@}",self.TAG, @(banner.placementId), rewards];
     NSLog(message);
 }
 

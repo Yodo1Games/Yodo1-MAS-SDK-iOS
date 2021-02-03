@@ -58,6 +58,8 @@
         
         id ccpa = [defaults objectForKey:Yodo1MasCCPADoNotSell];
         _isCCPADoNotSell = ccpa != nil ? [ccpa boolValue] : NO;
+        
+        NSLog(@"Yodo1MasCore Version - %@", [Yodo1Mas sdkVersion]);
     }
     return self;
 }
@@ -657,6 +659,12 @@
 - (void)dismissBannerAd {
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];
+    }
+}
+
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    if (_currentAdapter != nil) {
+        [_currentAdapter dismissBannerAdWithDestroy:destroy];
     }
 }
 

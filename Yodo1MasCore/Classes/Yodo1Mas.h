@@ -71,6 +71,7 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 - (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy;
 
 @end
 

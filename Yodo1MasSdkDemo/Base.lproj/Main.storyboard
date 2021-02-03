@@ -110,8 +110,28 @@
                                     <action selector="onBannerClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="dmo-RH-swx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEb-wW-xUK">
+                                <rect key="frame" x="15" y="299" width="184.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="vwR-NS-hng"/>
+                                </constraints>
+                                <state key="normal" title="Hide Banner Ad"/>
+                                <connections>
+                                    <action selector="onHideBannerClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="n1U-8f-WMp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5l-QX-x0m">
+                                <rect key="frame" x="214.5" y="299" width="184.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="uBC-8h-vq5"/>
+                                </constraints>
+                                <state key="normal" title="Remove Banner Ad"/>
+                                <connections>
+                                    <action selector="onRemoveBannerClicked:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="pRY-Hg-T42"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V8-wJ-AsR">
-                                <rect key="frame" x="15" y="301" width="384" height="30"/>
+                                <rect key="frame" x="15" y="339" width="384" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="d3c-jC-TbF"/>
                                 </constraints>
@@ -121,7 +141,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtV-Lj-H0F">
-                                <rect key="frame" x="15" y="341" width="384" height="30"/>
+                                <rect key="frame" x="15" y="379" width="384" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="xT3-sH-UYd"/>
                                 </constraints>
@@ -131,37 +151,37 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set GDPR User Consent" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxG-0F-XML">
-                                <rect key="frame" x="15" y="397" width="183.5" height="21"/>
+                                <rect key="frame" x="15" y="435" width="183.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzj-8R-cfZ">
-                                <rect key="frame" x="350" y="392" width="51" height="31"/>
+                                <rect key="frame" x="350" y="430" width="51" height="31"/>
                                 <connections>
                                     <action selector="onGDPRChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="vrl-7J-snW"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set COPPA Age Restricted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KA-Dl-Arx">
-                                <rect key="frame" x="15" y="446" width="201.5" height="21"/>
+                                <rect key="frame" x="15" y="484" width="201.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBX-Bt-WWG">
-                                <rect key="frame" x="350" y="441" width="51" height="31"/>
+                                <rect key="frame" x="350" y="479" width="51" height="31"/>
                                 <connections>
                                     <action selector="onCOPPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="hcM-nG-bl2"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set CCPA Do Not Sell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWd-xF-H4O">
-                                <rect key="frame" x="15" y="497" width="163.5" height="21"/>
+                                <rect key="frame" x="15" y="535" width="163.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eip-RV-By3">
-                                <rect key="frame" x="350" y="492" width="51" height="31"/>
+                                <rect key="frame" x="350" y="530" width="51" height="31"/>
                                 <connections>
                                     <action selector="onCCPAChanged:" destination="s5c-XF-Bf6" eventType="valueChanged" id="grg-yo-5ym"/>
                                 </connections>
@@ -176,14 +196,20 @@
                             <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="9KA-Dl-Arx" secondAttribute="leading" id="2r2-mn-qdM"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="centerY" secondItem="9KA-Dl-Arx" secondAttribute="centerY" id="3Ax-xn-yao"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="tLK-zk-hTd" secondAttribute="trailing" constant="15" id="3Pk-pB-cd8"/>
+                            <constraint firstItem="s5l-QX-x0m" firstAttribute="width" secondItem="hEb-wW-xUK" secondAttribute="width" id="4cz-aE-zwR"/>
                             <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="DtV-Lj-H0F" secondAttribute="leading" id="4zk-KG-qTz"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rWd-xF-H4O" secondAttribute="trailing" constant="20" id="60Z-eA-Q8J"/>
+                            <constraint firstItem="s5l-QX-x0m" firstAttribute="top" secondItem="2BR-Fg-cfL" secondAttribute="bottom" constant="8" id="6Tm-iF-w4F"/>
                             <constraint firstItem="vP8-eW-RuD" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="8ep-QM-MFR"/>
+                            <constraint firstItem="hEb-wW-xUK" firstAttribute="top" secondItem="2BR-Fg-cfL" secondAttribute="bottom" constant="8" id="8vg-FT-EOR"/>
                             <constraint firstItem="8V8-wJ-AsR" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="9EH-xK-vTe"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="KII-W4-NV3" secondAttribute="trailing" constant="15" id="9eK-2i-MbB"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="eip-RV-By3" secondAttribute="trailing" constant="15" id="AUQ-Ii-79E"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="UTj-Do-9Qg" secondAttribute="trailing" constant="15" id="AgU-Uz-9Fa"/>
+                            <constraint firstItem="s5l-QX-x0m" firstAttribute="leading" secondItem="hEb-wW-xUK" secondAttribute="trailing" constant="15" id="BTY-HH-lJm"/>
+                            <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="s5l-QX-x0m" secondAttribute="trailing" constant="15" id="Ggy-yl-XwZ"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="qBX-Bt-WWG" secondAttribute="trailing" constant="15" id="Hmk-B0-QwD"/>
+                            <constraint firstItem="8V8-wJ-AsR" firstAttribute="top" secondItem="hEb-wW-xUK" secondAttribute="bottom" constant="10" id="JdA-A9-47U"/>
                             <constraint firstItem="rWd-xF-H4O" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="LME-7i-Cee"/>
                             <constraint firstItem="tLK-zk-hTd" firstAttribute="top" secondItem="vP8-eW-RuD" secondAttribute="bottom" constant="10" id="Pfh-kP-Sj7"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9KA-Dl-Arx" secondAttribute="trailing" constant="20" id="PjG-Q0-CTX"/>
@@ -191,10 +217,10 @@
                             <constraint firstItem="9KA-Dl-Arx" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="SF5-6H-7BH"/>
                             <constraint firstItem="2BR-Fg-cfL" firstAttribute="top" secondItem="tLK-zk-hTd" secondAttribute="bottom" constant="10" id="V9R-XF-77J"/>
                             <constraint firstItem="DtV-Lj-H0F" firstAttribute="top" secondItem="8V8-wJ-AsR" secondAttribute="bottom" constant="10" id="VnG-rU-Lb4"/>
+                            <constraint firstItem="hEb-wW-xUK" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="X5M-bA-LKt"/>
                             <constraint firstItem="xBk-rv-Hrx" firstAttribute="top" secondItem="KII-W4-NV3" secondAttribute="bottom" constant="10" id="Zs4-E6-3x2"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="centerY" secondItem="rWd-xF-H4O" secondAttribute="centerY" id="aly-z6-kAn"/>
                             <constraint firstItem="DxG-0F-XML" firstAttribute="top" secondItem="DtV-Lj-H0F" secondAttribute="bottom" constant="26" id="dDz-eb-XET"/>
-                            <constraint firstItem="8V8-wJ-AsR" firstAttribute="top" secondItem="2BR-Fg-cfL" secondAttribute="bottom" constant="10" id="dX6-ji-Pvw"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="2BR-Fg-cfL" secondAttribute="trailing" constant="15" id="dw0-3Z-C77"/>
                             <constraint firstAttribute="trailing" secondItem="vP8-eW-RuD" secondAttribute="trailing" constant="15" id="ei5-wL-pGc"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="xBk-rv-Hrx" secondAttribute="trailing" constant="15" id="gE0-2Q-E0i"/>

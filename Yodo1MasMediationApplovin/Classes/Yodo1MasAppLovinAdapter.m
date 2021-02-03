@@ -8,8 +8,6 @@
 #import "Yodo1MasAppLovinAdapter.h"
 @import  AppLovinSDK;
 
-#define TAG @"[Yodo1MasAppLovinAdapter]"
-
 @interface Yodo1MasAppLovinAdapter()<MARewardedAdDelegate, MAAdViewAdDelegate>
 
 @property (nonatomic, strong) ALSdk *sdk;
@@ -44,7 +42,7 @@
         __weak __typeof(self)weakSelf = self;
         [self.sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
             
-            NSString *message = [NSString stringWithFormat:@"%@: {method:ALSdkInitializationCompletionHandler}", TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:ALSdkInitializationCompletionHandler}", self.TAG];
             NSLog(message);
             
             [weakSelf updatePrivacy];
@@ -90,7 +88,7 @@
     }
     
     if (self.rewardAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadRewardAd, loading reward ad...}", self.TAG];
         NSLog(message);
         [self.rewardAd loadAd];
     }
@@ -99,7 +97,7 @@
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showRewardAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeReward callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd, show reward ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showRewardAd, show reward ad...}", self.TAG];
         NSLog(message);
         
         NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
@@ -130,7 +128,7 @@
     }
     
     if (self.interstitialAd != nil) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, loading interstitial ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, loading interstitial ad...}", self.TAG];
         NSLog(message);
         [self.interstitialAd loadAd];
     }
@@ -139,7 +137,7 @@
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showInterstitialAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, show interstitial ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadInterstitialAd, show interstitial ad...}", self.TAG];
         NSLog(message);
         
         NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
@@ -173,7 +171,7 @@
         self.bannerAd.delegate = self;
     }
     if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd, loading banner ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd, loading banner ad...}", self.TAG];
         NSLog(message);
         [self.bannerAd loadAd];
         self.bannerState = Yodo1MasBannerStateLoading;
@@ -184,7 +182,7 @@
     [super showBannerAd:callback object:object];
     
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
-        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", TAG];
+        NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", self.TAG];
         NSLog(message);
         
         NSString *placement = object != nil ? object[kArgumentPlacement] : nil;
@@ -197,15 +195,19 @@
     }
 }
 
-- (void)dismissBannerAd {
-    [super dismissBannerAd];
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    [super dismissBannerAdWithDestroy:destroy];
     [Yodo1MasBanner removeBanner:self.bannerAd];
-    self.bannerAd = nil;
+    if (destroy) {
+        self.bannerAd = nil;
+        self.bannerState = Yodo1MasBannerStateNone;
+        [self loadBannerAd];
+    }
 }
 
 #pragma mark - MAAdDelegate
 - (void)didLoadAd:(MAAd *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
     if ([ad.adUnitIdentifier isEqualToString:[self getBannerAdId].adId]) {
         self.bannerState = Yodo1MasBannerStateLoaded;
@@ -228,7 +230,7 @@
         return;
     }
 
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@, error: %@}", TAG, adUnitIdentifier, @(errorCode)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didLoadAd:, ad:%@, error: %@}", self.TAG, adUnitIdentifier, @(errorCode)];
     NSLog(message);
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:type];
@@ -247,7 +249,7 @@
         return;
     }
     
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didDisplayAd:, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didDisplayAd:, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:type];
 }
@@ -265,7 +267,7 @@
         return;
     }
     
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didHideAd:, ad:%@}",TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didHideAd:, ad:%@}",self.TAG, ad.adUnitIdentifier];
     NSLog(message);
 
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:type];
@@ -273,7 +275,7 @@
 }
 
 - (void)didClickAd:(MAAd *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didClickAd:, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didClickAd:, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
 }
 
@@ -293,7 +295,7 @@
         return;
     }
     
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didFailToDisplayAd:withErrorCode:, ad:%@, error:%@}", TAG, ad.adUnitIdentifier, @(errorCode)];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didFailToDisplayAd:withErrorCode:, ad:%@, error:%@}", self.TAG, ad.adUnitIdentifier, @(errorCode)];
     NSLog(message);
 
     [self loadAd:type];
@@ -304,17 +306,17 @@
 
 #pragma mark - MARewardedAdDelegate
 - (void)didStartRewardedVideoForAd:(MAAd *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didStartRewardedVideoForAd:, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didStartRewardedVideoForAd:, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
 }
 
 - (void)didCompleteRewardedVideoForAd:(MAAd *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didCompleteRewardedVideoForAd:, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didCompleteRewardedVideoForAd:, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
 }
 
 - (void)didRewardUserForAd:(MAAd *)ad withReward:(MAReward *)reward {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didRewardUserForAd:withReward:, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didRewardUserForAd:withReward:, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
     
     [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
@@ -322,12 +324,12 @@
 
 #pragma mark - MAAdViewAdDelegate
 - (void)didExpandAd:(MAAd *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didExpandAd, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didExpandAd, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
 }
 
 - (void)didCollapseAd:(MAAd *)ad {
-    NSString *message = [NSString stringWithFormat:@"%@: {method:didCollapseAd, ad:%@}", TAG, ad.adUnitIdentifier];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didCollapseAd, ad:%@}", self.TAG, ad.adUnitIdentifier];
     NSLog(message);
     self.bannerState = Yodo1MasBannerStateNone;
     [self loadBannerAd];

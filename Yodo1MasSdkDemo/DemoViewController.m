@@ -62,6 +62,14 @@
     }
 }
 
+- (IBAction)onHideBannerClicked:(id)sender {
+    [[Yodo1Mas sharedInstance] dismissBannerAd];
+}
+
+- (IBAction)onRemoveBannerClicked:(id)sender {
+    [[Yodo1Mas sharedInstance] dismissBannerAdWithDestroy:YES];
+}
+
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
     [GoogleMobileAdsMediationTestSuite presentForAdManagerOnViewController:self delegate:nil];
 }

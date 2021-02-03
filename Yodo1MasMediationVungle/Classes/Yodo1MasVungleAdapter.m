@@ -8,8 +8,6 @@
 #import "Yodo1MasVungleAdapter.h"
 #import <VungleSDK/VungleSDK.h>
 
-#define TAG @"[Yodo1MasVungleAdapter]"
-
 @interface Yodo1MasVungleAdapter()
 
 @property (nonatomic, strong) UIView *bannerAd;
@@ -38,7 +36,7 @@
         if (config.appId != nil && config.appId.length > 0) {
             NSError *adError;
             BOOL initSdk = [[VungleSDK sharedSDK] startWithAppId:config.appId error:&adError];
-            NSString *message = [NSString stringWithFormat:@"%@:{method:initWithConfig:, error: %@}", TAG, adError];
+            NSString *message = [NSString stringWithFormat:@"%@:{method:initWithConfig:, error: %@}", self.TAG, adError];
             
             NSLog(message);
             if (initSdk && adError == nil) {
@@ -57,7 +55,7 @@
                 }
             }
         } else {
-            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",TAG];
+            NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",self.TAG];
             NSLog(message);
             if (fail != nil) {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
@@ -96,12 +94,12 @@
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     if ([self getRewardAdId] != nil) {
-        NSLog([NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", TAG]);
+        NSLog([NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG]);
         
         NSError *adError = nil;
         BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:[self getRewardAdId].adId error:&adError];
         if (!request || adError != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, error: %@}", TAG, adError];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, error: %@}", self.TAG, adError];
             NSLog(message);
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
             [self callbackWithError:error type:Yodo1MasAdTypeReward];
@@ -117,12 +115,12 @@
         
         UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
         if (controller != nil) {
-            NSLog([NSString stringWithFormat:@"%@: {method: showRewardAd:, show reward ad...}", TAG]);
+            NSLog([NSString stringWithFormat:@"%@: {method: showRewardAd:, show reward ad...}", self.TAG]);
             
             NSError *adError = nil;
             BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:[self getRewardAdId].adId error:&adError];
             if (!show || adError != nil) {
-                NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd:callback:, error: %@}", TAG, adError];
+                NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd:callback:, error: %@}", self.TAG, adError];
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
                 [self callbackWithError:error type:Yodo1MasAdTypeReward];
                 [self nextReward];
@@ -146,12 +144,12 @@
     if (![self isInitSDK]) return;
     if ([self getInterstitialAdId] != nil) {
         
-        NSLog([NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", TAG]);
+        NSLog([NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", self.TAG]);
         
         NSError *adError = nil;
         BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:[self getInterstitialAdId].adId error:&adError];
         if (!request || adError != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, error:%@}", TAG, adError];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, error:%@}", self.TAG, adError];
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
             [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
             [self nextInterstitial];
@@ -166,12 +164,12 @@
         
         UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
         if (controller != nil) {
-            NSLog([NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", TAG]);
+            NSLog([NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", self.TAG]);
             
             NSError *adError = nil;
             BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:[self getInterstitialAdId].adId error:&adError];
             if (!show || adError != nil) {
-                NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:callback:, error: %@}", TAG, adError];
+                NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:callback:, error: %@}", self.TAG, adError];
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
                 [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
                 [self nextInterstitial];
@@ -195,11 +193,11 @@
         self.bannerAd = [[UIView alloc] init];
     }
     if ([self getBannerAdId] != nil) {
-        NSLog([NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", TAG]);
+        NSLog([NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", self.TAG]);
         NSError *adError;
         BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:[self getBannerAdId].adId withSize:VungleAdSizeBanner error:&adError];
         if (!request || adError != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAd, error: %@}", TAG, adError];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAd, error: %@}", self.TAG, adError];
             NSLog(message);
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
             [self callbackWithError:error type:Yodo1MasAdTypeBanner];
@@ -212,12 +210,12 @@
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
-        NSLog([NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}", TAG]);
+        NSLog([NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}", self.TAG]);
         NSError *adError;
         BOOL show = [[VungleSDK sharedSDK] addAdViewToView:self.bannerAd withOptions:nil placementID:[self getBannerAdId].adId error:&adError];
 
         if (!show || adError != nil) {
-            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:callback:, error: %@}", TAG, adError];
+            NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:callback:, error: %@}", self.TAG, adError];
             Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
             [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
             [self nextBanner];
@@ -230,14 +228,17 @@
     }
 }
 
-- (void)dismissBannerAd {
-    [super dismissBannerAd];
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    [super dismissBannerAdWithDestroy:destroy];
     [Yodo1MasBanner removeBanner:self.bannerAd];
-    if ([self getBannerAdId] != nil) {
-        [[VungleSDK sharedSDK] finishDisplayingAd:[self getBannerAdId].adId];
+    if (destroy) {
+        if ([self getBannerAdId] != nil) {
+            [[VungleSDK sharedSDK] finishDisplayingAd:[self getBannerAdId].adId];
+        }
+        self.bannerAd = nil;
+        self.bannerState = Yodo1MasBannerStateNone;
+        [self loadBannerAd];
     }
-    self.bannerAd = nil;
-    [self loadBannerAd];
 }
 
 @end

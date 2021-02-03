@@ -163,7 +163,7 @@ static Yodo1AdsDelegate *delegate;
 }
 
 + (void)removeBanner {
-    [[Yodo1Mas sharedInstance] dismissBannerAd];
+    [[Yodo1Mas sharedInstance] dismissBannerAdWithDestroy:YES];
 }
 
 
