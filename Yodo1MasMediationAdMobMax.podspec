@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationAdMobMax'
-  s.version          = '4.0.0.0'
+  s.version          = '4.0.0.1'
   s.summary          = 'Yodo1MasMediationAdMobMax'
   s.swift_version    = '5.0'
 
@@ -31,9 +31,9 @@ TODO: Add long description of the pod here.
   
   s.static_framework = true
   s.ios.deployment_target = '9.0'
-  s.source_files = 'Yodo1MasMediationAdMobMax/Classes/**/*'
-  s.public_header_files = 'Pod/Classes/**/*.h'
-  s.vendored_frameworks = 'Yodo1MasMediationAdMobMax/Lib/**/*.framework'
+  s.source_files = s.name + '/Classes/**/*'
+  s.public_header_files = s.name + '/Classes/**/*.h'
+  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasMediationAdMob'
   s.dependency 'Yodo1MasMediationApplovin'
   s.dependency 'Yodo1MasMediationIronSource'

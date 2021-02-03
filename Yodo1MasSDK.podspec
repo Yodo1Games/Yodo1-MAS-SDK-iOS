@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasSDK'
-  s.version          = '4.0.0.0'
+  s.version          = '4.0.0.1'
   s.summary          = 'Yodo1MasSDK'
   s.swift_version    = '5.0'
 
@@ -31,20 +31,21 @@ TODO: Add long description of the pod here.
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.ios.deployment_target = '9.0'
   s.static_framework = true
-  s.source_files = 'Yodo1MasSDK/Classes/**/*'
-  s.public_header_files = 'Yodo1MasSDK/Classes/**/*.h'
+  s.source_files = s.name + '/Classes/**/*'
+  s.public_header_files = s.name + '/Classes/**/*.h'
+  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationAdMobMax', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationAdMob', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationApplovinMax', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationApplovin', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationIronSourceMax', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationIronSource', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationFacebook', '4.0.0.0'
-  #s.dependency 'Yodo1MasMediationInMobi', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationTapjoy', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationUnityAds', '4.0.0.0'
-  s.dependency 'Yodo1MasMediationVungle', '4.0.0.0'
+  s.dependency 'Yodo1MasCore', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationAdMobMax', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationAdMob', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationApplovinMax', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationApplovin', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationIronSourceMax', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationIronSource', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationFacebook', '4.0.0.1'
+  #s.dependency 'Yodo1MasMediationInMobi', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationTapjoy', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationUnityAds', '4.0.0.1'
+  s.dependency 'Yodo1MasMediationVungle', '4.0.0.1'
   
 end

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationAdMob'
-  s.version          = '4.0.0.0'
+  s.version          = '4.0.0.1'
   s.summary          = 'Yodo1MasMediationAdMob'
   s.swift_version    = '5.0'
 
@@ -31,8 +31,10 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
   s.static_framework = true
-  s.source_files = 'Yodo1MasMediationAdMob/Classes/**/*'
-  s.public_header_files = 'Yodo1MasMediationAdMob/Classes/**/*.h'
+  s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
+  s.source_files = s.name + '/Classes/**/*'
+  s.public_header_files = s.name + '/Classes/**/*.h'
+  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
   s.dependency 'Google-Mobile-Ads-SDK', '~> 7.66.0'
   
