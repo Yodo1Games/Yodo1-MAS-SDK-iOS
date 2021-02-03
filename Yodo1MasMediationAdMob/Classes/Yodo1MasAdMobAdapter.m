@@ -272,8 +272,9 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     }
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.bannerAd == nil || ![adId.adId isEqualToString:self.bannerAd.adUnitID])) {
-        self.bannerAd == [[GADBannerView alloc]
+        self.bannerAd = [[GADBannerView alloc]
                             initWithAdSize:kGADAdSizeBanner];
+        self.bannerAd.rootViewController = [Yodo1MasAdMobAdapter getTopWindow];
         self.bannerAd.adUnitID = adId.adId;
         self.bannerAd.delegate = self;
     }
