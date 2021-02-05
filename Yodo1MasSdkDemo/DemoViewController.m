@@ -33,6 +33,13 @@
     [Yodo1Mas sharedInstance].rewardAdDelegate = self;
     [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
     [Yodo1Mas sharedInstance].bannerAdDelegate = self;
+    
+
+    [[Yodo1Mas sharedInstance] initWithAppId:@"qqiOsnhyOie" successful:^{
+        
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {

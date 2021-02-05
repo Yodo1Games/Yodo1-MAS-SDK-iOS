@@ -101,8 +101,8 @@ typedef enum {
 - (void)dismissBannerAd;
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy;
 
-+ (UIWindow *)getTopWindow;
-+ (UIViewController *)getTopViewController;
++ ( UIWindow * _Nullable )getTopWindow;
++ ( UIViewController * _Nullable )getTopViewController;
 
 @end
 

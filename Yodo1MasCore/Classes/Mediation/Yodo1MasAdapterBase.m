@@ -333,7 +333,7 @@
 }
 
 #pragma mark - Method
-+ (UIWindow *)getTopWindow {
++ (UIWindow * _Nullable)getTopWindow {
     UIWindow *rootWindow;
     NSArray<UIWindow *> *windows;
     
@@ -376,7 +376,7 @@
     return rootWindow;
 }
 
-+ (UIViewController *)getTopViewController {
++ (UIViewController * _Nullable)getTopViewController {
     UIWindow *window = [self getTopWindow];
     if (window) {
         return [self getTopViewController:window.rootViewController];
@@ -384,7 +384,7 @@
     return nil;
 }
 
-+ (UIViewController *)getTopViewController: (UIViewController *)controller {
++ (UIViewController * _Nullable)getTopViewController: (UIViewController *)controller {
     if (controller.presentedViewController) {
         return [self getTopViewController:controller.presentedViewController];
     } else if ([controller isKindOfClass:[UITabBarController class]]) {

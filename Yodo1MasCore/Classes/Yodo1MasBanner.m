@@ -10,26 +10,39 @@
 
 @implementation Yodo1MasBanner
 
-+ (void)showBanner:(UIView *)banner controller:(UIViewController *)controller object:(NSDictionary *)object {
-    
-    if (banner.superview != nil) {
-        [banner removeFromSuperview];
++ (void)addBanner:(UIView *)banner tag:(NSInteger)tag controller:(UIViewController *)controller {
+    UIView *contentView = [controller.view viewWithTag:tag];
+    if (contentView == nil) {
+        contentView = [[UIView alloc] initWithFrame:CGRectMake((controller.view.bounds.size.width - BANNER_SIZE_320_50.width) / 2, controller.view.bounds.size.height - BANNER_SIZE_320_50.height, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height)];
+        contentView.tag = tag;
+        contentView.alpha = 0;
+        [controller.view addSubview:contentView];
     }
-    
-    Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
-    CGPoint offset = CGPointZero;
-    if (object != nil) {
-        if (object[kArgumentBannerAlign] != nil) {
-            align = [object[kArgumentBannerAlign] integerValue];
+    if (banner.superview != contentView) {
+        if (banner.superview != nil) {
+            [banner removeFromSuperview];
+        }
+        [contentView addSubview:banner];
+    }
+    banner.frame = contentView.bounds;
+}
+
++ (void)showBannerWithTag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
+    UIView *contentView = [controller.view viewWithTag:tag];
+    if (contentView != nil) {
+        UIView *superview = contentView.superview;
+        Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
+        CGPoint offset = CGPointZero;
+        if (object != nil) {
+            if (object[kArgumentBannerAlign] != nil) {
+                align = [object[kArgumentBannerAlign] integerValue];
+            }
+            
+            if (object[kArgumentBannerOffset] != nil) {
+                offset = [object[kArgumentBannerOffset] CGPointValue];
+            }
         }
         
-        if (object[kArgumentBannerOffset] != nil) {
-            offset = [object[kArgumentBannerOffset] CGPointValue];
-        }
-    }
-    
-    UIView *superview = controller != nil? controller.view : [Yodo1MasAdapterBase getTopWindow];
-    if (superview != nil && banner != nil) {
         CGRect frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
         // horizontal
         if ((align & Yodo1MasAdBannerAlignLeft) == Yodo1MasAdBannerAlignLeft) {
@@ -61,13 +74,36 @@
         frame.origin.x += offset.x;
         frame.origin.y += offset.y;
         
-        banner.frame = frame;
-        [superview addSubview:banner];
+        contentView.frame = frame;
+        contentView.alpha = 1;
     }
 }
 
-+ (void)removeBanner:(UIView *)banner {
-    if (banner != nil) [banner removeFromSuperview];
++ (void)removeBanner:(UIView *)banner tag:(NSInteger)tag destroy:(BOOL)destroy {
+    UIViewController *controller = [Yodo1MasBanner viewController:banner];
+    if (controller == nil) return;
+    UIView *contentView = [controller.view viewWithTag:tag];
+    if (contentView != nil) {
+        if (destroy) {
+            NSArray *subviews = [NSArray arrayWithArray:contentView.subviews];
+            for (UIView *view in subviews) {
+                [view removeFromSuperview];
+            }
+            [contentView removeFromSuperview];
+        } else {
+            contentView.alpha = 0;
+        }
+    }
+}
+
++ (UIViewController *)viewController:(UIView *)banner {
+    for (UIView *view = banner; view; view = view.superview) {
+        UIResponder *nextResponder = [view nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 @end

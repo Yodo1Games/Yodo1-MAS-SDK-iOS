@@ -41,7 +41,7 @@
             [Tapjoy connect:config.appId];
         } else {
             NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",self.TAG];
-            NSLog(message);
+            NSLog(@"%@", message);
             if (fail != nil) {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
                 fail(self.advertCode, error);
@@ -56,7 +56,7 @@
 
 - (void)onTapjoyConnectSuccess:(NSNotification *)notification {
     NSString *message = [NSString stringWithFormat:@"%@: {method: onTapjoyConnectSuccess:, init successful}", self.TAG];
-    NSLog(message);
+    NSLog(@"%@", message);
     
     [self updatePrivacy];
     [self loadRewardAd];
@@ -69,7 +69,7 @@
 
 - (void)onTapjoyConnectFail:(NSNotification *)notification {
     NSString *message = [NSString stringWithFormat:@"%@: {method: onTapjoyConnectFail:, init failed, info: %@}", self.TAG, notification.userInfo];
-    NSLog(message);
+    NSLog(@"%@", message);
     if (self.initFailCallback != nil) {
         Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:message];
         self.initFailCallback(self.advertCode, error);
@@ -117,7 +117,7 @@
     
     if (_rewardAd != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG];
-        NSLog(message);
+        NSLog(@"%@", message);
         
         [_rewardAd requestContent];
     }
@@ -129,7 +129,7 @@
         UIViewController *controller = [Yodo1MasTapjoyAdapter getTopViewController];
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd:, show reward ad...}", self.TAG];
-            NSLog(message);
+            NSLog(@"%@", message);
             [_rewardAd showContentWithViewController:controller];
         }
     }
@@ -153,7 +153,7 @@
     
     if (_interstitialAd != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", self.TAG];
-        NSLog(message);
+        NSLog(@"%@", message);
         [_interstitialAd requestContent];
     }
 }
@@ -164,7 +164,7 @@
         UIViewController *controller = [Yodo1MasTapjoyAdapter getTopViewController];
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", self.TAG];
-            NSLog(message);
+            NSLog(@"%@", message);
             [_interstitialAd showContentWithViewController:controller];
         }
     }
@@ -190,12 +190,12 @@
 #pragma mark - TJPlacementDelegate
 - (void)requestDidSucceed:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: requestDidSucceed:, placement: %@}", self.TAG, placement.placementName];
-    NSLog(message);
+    NSLog(@"%@", message);
 }
 
 - (void)requestDidFail:(TJPlacement *)placement error:(NSError *)adError {
     NSString *message = [NSString stringWithFormat:@"%@: {method: requestDidFail:error:, placement: %@, error: %@}", self.TAG, placement.placementName, adError];
-    NSLog(message);
+    NSLog(@"%@", message);
     
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     if (placement == _rewardAd) {
@@ -211,12 +211,12 @@
 
 - (void)contentIsReady:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: contentIsReady:, placement: %@}", self.TAG, placement.placementName];
-    NSLog(message);
+    NSLog(@"%@", message);
 }
 
 - (void)contentDidAppear:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: contentDidAppear:, placement: %@}", self.TAG, placement.placementName];
-    NSLog(message);
+    NSLog(@"%@", message);
     
     if (placement == _rewardAd) {
         [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
@@ -227,7 +227,7 @@
 
 - (void)contentDidDisappear:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: contentDidDisappear:, placement: %@}", self.TAG, placement.placementName];
-    NSLog(message);
+    NSLog(@"%@", message);
     
     if (placement == _rewardAd) {
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
@@ -240,17 +240,17 @@
 
 - (void)didClick:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: didClick:, placement: %@}", self.TAG, placement.placementName];
-    NSLog(message);
+    NSLog(@"%@", message);
 }
 
 - (void)placement:(TJPlacement *)placement didRequestPurchase:(TJActionRequest*)request productId:(NSString *)productId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: placement:didRequestPurchase:productId:, placement: %@, request: %@, productId: %@}", self.TAG, placement.placementName, request.requestId, productId];
-    NSLog(message);
+    NSLog(@"%@", message);
 }
 
 - (void)placement:(TJPlacement *)placement didRequestReward:(TJActionRequest*)request itemId:(NSString *)itemId quantity:(int)quantity {
     NSString *message = [NSString stringWithFormat:@"%@: {method: placement:didRequestPurchase:productId:, placement: %@, request: %@, itemId: %@, quantity: %@}", self.TAG, placement.placementName, request.requestId, itemId, @(quantity)];
-    NSLog(message);
+    NSLog(@"%@", message);
     if (placement == _rewardAd) {
         [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
     }
