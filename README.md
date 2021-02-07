@@ -3,6 +3,10 @@
 >*  `SDK`要求`iOS`的最低版本为`iOS9.0`
 >*  最简便的方法就是使用`CocoaPods`, 如果您刚开始接触`CocoaPods`，请参阅其[官方文档](https://guides.cocoapods.org/using/using-cocoapods)，了解如何创建和使用`Podfile`
 
+**重要** 更新MAS Rivendell SDK
+- 从较旧的SDK升级到MAS SDK v2，您必须移除所有旧SDK的内容
+- 我们对新SDK的接口做出了修改，请仔细参照以下文档进行升级
+
 ## 集成步骤
 ### 1. 将`iOS SDK`添加到项目中
 #### 1.1 创建`Podfile`文件</br>
@@ -15,9 +19,12 @@ touch Podfile
 请打开项目的 `Podfile` 文件并将下面代码添加到应用的目标中：
 
 ```ruby
+use_frameworks!
+source 'https://cdn.cocoapods.org/' #source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
-pod 'Yodo1MasSDK', '~> 0.0.0.1-beta'
+pod 'Yodo1MasSDK', '~> 4.0.0.0'
 ```
 
 在`终端`中执行如下命令：</br>
@@ -26,7 +33,14 @@ pod install --repo-update
 ```
 
 ### 2. `Xcode`工程配置
-#### 2.1 `iOS9 App Transport Security`设置
+#### 2.1 添加AppLovin SDK Key
+请在`Xcode`工程的`Info.plist`中配置`AppLovinSdkKey`
+```xml
+<key>AppLovinSdkKey</key>
+<string>xcGD2fy-GdmiZQapx_kUSy5SMKyLoXBk8RyB5u9MVv34KetGdbl4XrXvAUFy0Qg9scKyVTI0NM4i_yzdXih4XE</string>
+```
+
+#### 2.2 `iOS9 App Transport Security`设置
 在`iOS9`中，苹果增加了关于`ATS`的控制。为了确保在所有中介网络上不间断地支持MAS广告，需要您在`Info.plist`文件中进行以下设置：
 
 * 添加`NSAppTransportSecurity`，类型为`Dictionary`
@@ -42,26 +56,26 @@ pod install --repo-update
 </dict>
 ```
 
-#### 2.2 `iOS14 AppTrackingTransparency`设置
+#### 2.3 `iOS14 AppTrackingTransparency`设置
 请在`Xcode`工程的`Info.plist`中配置`NSUserTrackingUsageDescription`及描述文案，并对描述文案进行多语言配置。描述文案的多语言配置可以通过如下操作完成：
 
 * 在`XCode`工程中创建名为`InfoPlist.strings`的文件，如图:
-<img src="../resource/ios-att-string.png" style="zoom:50%;" />
+<img src="./../../resource/ios-att-string.png" style="zoom:50%;" />
 
 * 选中`InfoPlist.string`在`Xcode`的右侧边栏找到`Localization`并点击`Localization`按钮，如图：
-<img src="../resource/ios-att-localization.png" style="zoom:50%;" />
+<img src="./../../resource/ios-att-localization.png" style="zoom:50%;" />
 
 * 在`XCode`工程中添加多语言，如图： 
-<img src="../resource/ios-att-add-language-1.png" style="zoom:50%;" />
-<img src="../resource/ios-att-add-language-2.png" style="zoom:50%;" />
+<img src="./../../resource/ios-att-add-language-1.png" style="zoom:50%;" />
+<img src="./../../resource/ios-att-add-language-2.png" style="zoom:50%;" />
 
 * 将`NSUserTrackingUsageDescription`对应的描述文案添加到InfoPlist.strings(xxx)文件中，如图：
-<img src="../resource/ios-att-add-language-3.png" style="zoom:50%;" />
+<img src="./../../resource/ios-att-add-language-3.png" style="zoom:50%;" />
 
 > 此标识符将用于向您发送个性广告
 > This identifier will be used to send you personalized ads
 
-#### 2.3 使用`S​​KAdNetwork`跟踪转化
+#### 2.4 使用`S​​KAdNetwork`跟踪转化
 使用`Apple`的转化跟踪`SKAdNetwork`，这意味着即使`IDFA`不可用，广告平台也可以通过这个获取应用安装归因。请参阅`Apple`的`SKAdNetwork`[官方文档](https://developer.apple.com/documentation/storekit/skadnetwork)，以了解更多信息。要启用此功能，您需要在`Info.plist`中添加`SKAdNetworkItems`。
 
 ```xml
@@ -73,67 +87,39 @@ pod install --repo-update
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>4DZT52R2T5.skadnetwork</string>
+    <string>2u9pt9hc89.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>SU67R6K2V3.skadnetwork</string>
+    <string>4468km3ulz.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>4PFYVQ9L8R.skadnetwork</string>
+    <string>4fzdc2evr5.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>ludvb6z3bs.skadnetwork</string>
+    <string>7ug5zh24hu.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>KBD757YWX3.skadnetwork</string>
+    <string>8s468mfl3y.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>F38H382JLK.skadnetwork</string>
+    <string>9rd848q2bz.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>4FZDC2EVR5.skadnetwork</string>
+    <string>9t245vhmpl.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>2U9PT9HC89.skadnetwork</string>
+    <string>av6w8kgt66.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>WZMMZ9FP6W.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>t38b2kh725.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>9T245VHMPL.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>7UG5ZH24HU.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>M8DBW4SV7C.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>mlmmfzh3r3.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>TL55SBB4FM.skadnetwork</string>
-</dict>
-<dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>YCLNXRL5PM.skadnetwork</string>
+    <string>f38h382jlk.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
@@ -141,47 +127,47 @@ pod install --repo-update
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>av6w8kgt66.skadnetwork</string>
+    <string>kbd757ywx3.skadnetwork</string>
 </dict>
- <dict>
+<dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>8s468mfl3y.skadnetwork</string>
+    <string>ludvb6z3bs.skadnetwork</string>
 </dict>
- <dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>m8dbw4sv7c.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>mlmmfzh3r3.skadnetwork</string>
+</dict>
+<dict>
     <key>SKAdNetworkIdentifier</key>
     <string>prcb7njmu6.skadnetwork</string>
 </dict>
- <dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>4468km3ulz.skadnetwork</string>
-</dict>
- <dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>9RD848Q2BZ.skadnetwork</string>
-</dict>   
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>238da6jt44.skadnetwork</string>
+    <string>t38b2kh725.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>22mmun2rn5.skadnetwork</string>
-</dict>
- <dict>
-    <key>SKAdNetworkIdentifier</key>
-    <string>bvpn9ufa9b.skadnetwork</string>
-</dict>     
-<dict>
-<key>SKAdNetworkIdentifier</key>
-    <string>58922NB4GD.skadnetwork</string>
+    <string>tl55sbb4fm.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>GTA9LK7P23.skadnetwork</string>
+    <string>wzmmz9fp6w.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>ecpz2srf59.skadnetwork</string>
+    <string>yclnxrl5pm.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ydx93a7ass.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>n38lu8286q.skadnetwork</string>
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
@@ -189,17 +175,153 @@ pod install --repo-update
 </dict>
 <dict>
     <key>SKAdNetworkIdentifier</key>
-    <string>n38lu8286q.skadnetwork</string>
+    <string>3sh42y64q3.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>44jx6755aq.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>4pfyvq9l8r.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>5l3tpt7t6e.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>5lm9lj6jb7.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>7rz58n8ntl.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>c6k4g5qg8m.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>cg4yq2srnc.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>f73kdq92p3.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ggvn48r87g.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>klf5c3l5u5.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>p78axxw29g.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ppxm28t8ap.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>uw77j35x4d.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>v72qych5uu.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>w9q455wk68.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>wg4vff78zm.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>su67r6k2v3.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>578prtvx9j.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>ecpz2srf59.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>22mmun2rn5.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>238da6jt44.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>3rd42ekr43.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>424m5254lk.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>44n7hlldy6.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>488r3q3dtq.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>4dzt52r2t5.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>5a6flpkh64.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>bvpn9ufa9b.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>glqzh8vgby.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>lr83yxwka7.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>v79kvwwj4g.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>zmvfpc5aq8.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>gta9lk7p23.skadnetwork</string>
+</dict>
+<dict>
+    <key>SKAdNetworkIdentifier</key>
+    <string>n9x2a789qt.skadnetwork</string>
 </dict>
 </array>
 
 ```
 
-#### 2.4 禁用`BitCode`
+#### 2.5 禁用`BitCode`
 为确保所有中介网络正常工作，请禁用bitcode，如下图所示:
-<img src="../resource/ios-bitcode-disable.png" style="zoom:50%;" />
+<img src="./../../resource/ios-bitcode-disable.png" style="zoom:50%;" />
 
-#### 2.5 添加AdMob App ID
+#### 2.6 添加AdMob App ID
 * 添加`GADApplicationIdentifier`字段到`Info.plist`文件中，类型为`String`。
 * 可以编辑`Info.plist`文件，使用`Open As Source Code`打开文件，并将`GADApplicationIdentifier`添加到文件中。示例:
 
@@ -232,79 +354,10 @@ pod install --repo-update
 }];
 ```
 
-## 开发模式
-在`Info.plist`文件中添加:
-
-``` xml
-<key>Yodo1MasConfig</key>
-<dict>
-	<key>Debug</key>
-	<true/>
-	<key>Api</key>
-	<string>https://rivendell-dev.explorer.yodo1.com/init/</string>
-	<key>sensors_debug_env</key>
-	<true/>
-    <?xml version="1.0" encoding="UTF-8"?>
-    <key>Config</key>
-    <dict>
-        <key>ad_network_config</key>
-        <dict>
-            <key>banner</key>
-            <dict>
-                <key>fallback_waterfall</key>
-                <array/>
-                <key>mediation_list</key>
-                <array>
-                    <dict>
-                        <key>name</key>
-                        <string>APPLOVIN</string>
-                        <key>unit_id</key>
-                        <string>8e39fc47dec9e97c</string>
-                    </dict>
-                </array>
-            </dict>
-            <key>interstitial</key>
-            <dict/>
-            <key>reward</key>
-            <dict/>
-        </dict>
-        <key>app_id</key>
-        <string>1</string>
-        <key>app_key</key>
-        <string>hrteskL2rDC</string>
-        <key>app_name</key>
-        <string>Digit snake</string>
-        <key>country</key>
-        <string>CN</string>
-        <key>init_config</key>
-        <dict>
-            <key>ad_network_list</key>
-            <array/>
-            <key>mediation_list</key>
-            <array>
-                <dict>
-                    <key>app_id</key>
-                    <string></string>
-                    <key>app_secret</key>
-                    <string></string>
-                    <key>name</key>
-                    <string>APPLOVIN</string>
-                </dict>
-            </array>
-        </dict>
-    </dict>
-</dict>
-```
-* Debug: 是否开启开发模式
-* Api: 开发模式下的Api地址
-* Config: Mock数据，请根据自己的需求修改，不需要时请删除或者改为其它名称
-* sensors\_debug\_env: 是否开启神策(Sensors)开发模式
-
-
 ## 插屏广告集成
 ### 1. 设置插屏广告代理方法
 ``` obj-c
-[Yodo1Mas sharedInstance].bannerAdDelegate = self; 
+[Yodo1Mas sharedInstance].interstitialAdDelegate = self; 
 
 #pragma mark - Interstitial Delegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {

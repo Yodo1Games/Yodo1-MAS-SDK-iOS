@@ -7,8 +7,6 @@
 
 #import "Yodo1MasAdapterBase.h"
 
-#define TAG @"[Yodo1MasAdapterBase]"
-
 @implementation Yodo1MasAdapterConfig
 
 @end
@@ -48,6 +46,13 @@
     return nil;
 }
 
+- (NSString *)TAG {
+    if (_TAG == nil) {
+        _TAG = [NSString stringWithFormat:@"[%@]", NSStringFromClass([self class])];
+    }
+    return _TAG;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -62,20 +67,20 @@
     return self;
 }
 
+
+
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
     _initSuccessfulCallback = successful;
     _initFailCallback = fail;
 }
 
 - (BOOL)isInitSDK {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: isInitSDK}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: isInitSDK}", self.TAG);
     return NO;
 }
 
 - (void)updatePrivacy {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: updatePrivacy}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: updatePrivacy}", self.TAG);
 }
 
 - (void)nextReward {
@@ -220,8 +225,7 @@
     if (event == nil) {
         return;
     }
-    NSString *message = [NSString stringWithFormat:@"%@: {method: callbackWtihEvent, event: %@}", TAG, [event getJsonObject]];
-    NSLog(message);
+    NSLog(@"%@: {method: callbackWtihEvent, event: %@}", self.TAG, [event getJsonObject]);
     switch (event.type) {
         case Yodo1MasAdTypeReward: {
             if (self.rewardCallback != nil) {
@@ -256,14 +260,12 @@
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: isRewardAdLoaded}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: isRewardAdLoaded}", self.TAG);
     return NO;
 }
 
 - (void)loadRewardAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: loadRewardAd}", self.TAG);
 }
 
 - (void)loadRewardAdDelayed {
@@ -271,8 +273,7 @@
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd:object:}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: showRewardAd:object:}", self.TAG);
     _rewardCallback = callback;
 }
 
@@ -282,14 +283,12 @@
 
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: isInterstitialAdLoaded}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: isInterstitialAdLoaded}", self.TAG);
     return NO;
 }
 
 - (void)loadInterstitialAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: loadInterstitialAd}", self.TAG);
 }
 
 - (void)loadInterstitialAdDelayed {
@@ -297,8 +296,7 @@
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:object:}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: showInterstitialAd:object:}", self.TAG);
     _interstitialCallback = callback;
 }
 
@@ -308,14 +306,12 @@
 
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: isBannerAdLoaded}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: isBannerAdLoaded}", self.TAG);
     return NO;
 }
 
 - (void)loadBannerAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAd}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: loadBannerAd}", self.TAG);
 }
 
 - (void)loadBannerAdDelayed {
@@ -323,18 +319,21 @@
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: showBannerAd:object:}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: showBannerAd:object:}", self.TAG);
     _bannerCallback = callback;
 }
 
 - (void)dismissBannerAd {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: dismissBannerAd}", TAG];
-    NSLog(message);
+    NSLog(@"%@: {method: dismissBannerAd}", self.TAG);
+    [self dismissBannerAdWithDestroy:NO];
+}
+
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    NSLog(@"%@: {method: dismissBannerAdWithDestroy:}, destroy: %@", self.TAG, @(destroy));
 }
 
 #pragma mark - Method
-+ (UIWindow *)getTopWindow {
++ (UIWindow * _Nullable)getTopWindow {
     UIWindow *rootWindow;
     NSArray<UIWindow *> *windows;
     
@@ -377,7 +376,7 @@
     return rootWindow;
 }
 
-+ (UIViewController *)getTopViewController {
++ (UIViewController * _Nullable)getTopViewController {
     UIWindow *window = [self getTopWindow];
     if (window) {
         return [self getTopViewController:window.rootViewController];
@@ -385,7 +384,7 @@
     return nil;
 }
 
-+ (UIViewController *)getTopViewController: (UIViewController *)controller {
++ (UIViewController * _Nullable)getTopViewController: (UIViewController *)controller {
     if (controller.presentedViewController) {
         return [self getTopViewController:controller.presentedViewController];
     } else if ([controller isKindOfClass:[UITabBarController class]]) {

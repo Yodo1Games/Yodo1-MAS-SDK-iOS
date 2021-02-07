@@ -33,6 +33,13 @@
     [Yodo1Mas sharedInstance].rewardAdDelegate = self;
     [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
     [Yodo1Mas sharedInstance].bannerAdDelegate = self;
+    
+
+    [[Yodo1Mas sharedInstance] initWithAppId:@"qqiOsnhyOie" successful:^{
+        
+    } fail:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
@@ -60,6 +67,14 @@
     } else {
         [[Yodo1Mas sharedInstance] showBannerAd];
     }
+}
+
+- (IBAction)onHideBannerClicked:(id)sender {
+    [[Yodo1Mas sharedInstance] dismissBannerAd];
+}
+
+- (IBAction)onRemoveBannerClicked:(id)sender {
+    [[Yodo1Mas sharedInstance] dismissBannerAdWithDestroy:YES];
 }
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {

@@ -1,10 +1,10 @@
-#use_frameworks!
+use_frameworks!
 source 'https://cdn.cocoapods.org/' #source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
-platform :ios, '10.0'
-inhibit_all_warnings!
+platform :ios, '11.0'
+#inhibit_all_warnings!
 target "Yodo1MasSdkDemo" do
 
 pod 'Toast'
@@ -12,6 +12,7 @@ pod 'Masonry'
 pod 'GoogleMobileAdsMediationTestSuite'
 
 # 开发时打开
+pod 'FBSDKCoreKit'
 pod 'Yodo1MasMediationAdMobMax', :path => './'
 pod 'Yodo1MasMediationAdMob', :path => './'
 pod 'Yodo1MasMediationApplovinMax', :path => './'

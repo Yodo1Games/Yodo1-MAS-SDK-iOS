@@ -6,6 +6,9 @@
 "KII-W4-NV3.normalTitle" = "显示激励广告";
 "vP8-eW-RuD.normalTitle" = "显示插屏广告";
 "2BR-Fg-cfL.normalTitle" = "显示横幅广告";
+"hEb-wW-xUK.normalTitle" = "隐藏横幅广告";
+"s5l-QX-x0m.normalTitle" = "销毁横幅广告";
+"8V8-wJ-AsR.normalTitle" = "AdMob Mediation Test Suite";
 "DtV-Lj-H0F.normalTitle" = "AppLovin Mediation Debugger";
 
 "DxG-0F-XML.text" = "设置GDPR User Consent";

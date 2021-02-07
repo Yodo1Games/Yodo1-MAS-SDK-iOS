@@ -42,7 +42,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.0.0";
+    return @"4.0.0.3";
 }
 
 - (instancetype)init {
@@ -58,6 +58,8 @@
         
         id ccpa = [defaults objectForKey:Yodo1MasCCPADoNotSell];
         _isCCPADoNotSell = ccpa != nil ? [ccpa boolValue] : NO;
+        
+        NSLog(@"Yodo1MasCore Version - %@", [Yodo1Mas sdkVersion]);
     }
     return self;
 }
@@ -99,7 +101,9 @@
         } else {
             [url appendString:@"https://rivendell-dev.explorer.yodo1.com/v1/init/"];
         }
-        parameters[@"country"] = [NSLocale currentLocale].countryCode;
+        if (@available(iOS 10.0, *)) {
+            parameters[@"country"] = [NSLocale currentLocale].countryCode;
+        }
     } else {
         [url appendString:@"https://sdk.mas.yodo1.com/v1/init/"];
         //[url appendString:@"https://rivendell.explorer.yodo1.com/v1/init/"];
@@ -657,6 +661,12 @@
 - (void)dismissBannerAd {
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];
+    }
+}
+
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    if (_currentAdapter != nil) {
+        [_currentAdapter dismissBannerAdWithDestroy:destroy];
     }
 }
 

@@ -47,6 +47,7 @@ typedef enum {
 @property (nonatomic, copy, readonly) NSString *advertCode;
 @property (nonatomic, copy, readonly) NSString *sdkVersion;
 @property (nonatomic, copy, readonly) NSString *mediationVersion;
+@property (nonatomic, copy) NSString *TAG;
 
 @property (nonatomic, strong) NSMutableArray<Yodo1MasAdId *> *rewardAdIds;
 @property (nonatomic, strong) NSMutableArray<Yodo1MasAdId *> *interstitialAdIds;
@@ -98,9 +99,10 @@ typedef enum {
 - (void)loadBannerAdDelayed;
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object;
 - (void)dismissBannerAd;
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy;
 
-+ (UIWindow *)getTopWindow;
-+ (UIViewController *)getTopViewController;
++ ( UIWindow * _Nullable )getTopWindow;
++ ( UIViewController * _Nullable )getTopViewController;
 
 @end
 

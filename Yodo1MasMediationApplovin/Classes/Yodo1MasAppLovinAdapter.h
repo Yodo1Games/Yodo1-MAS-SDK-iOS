@@ -5,7 +5,7 @@
 //  Created by ZhouYuzhen on 2020/12/3.
 //
 
-#import "Yodo1MasAdapterBase.h"
+#import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

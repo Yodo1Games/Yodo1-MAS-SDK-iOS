@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationIronSource'
-  s.version          = '4.0.0.0'
+  s.version          = '4.0.0.3'
   s.summary          = 'Yodo1MasMediationIronSource'
   s.swift_version    = '5.0'
 
@@ -26,14 +26,15 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'ZhouYuzhen' => 'zhouyuzhen@yodo1.com' }
+  s.author           = { 'Yodo1Games' => 'dev@yodo1.com' }
   s.source           = { :git => 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS.git', :tag => s.version.to_s }
   s.ios.deployment_target = '9.0'
   
   s.static_framework = true
-  s.source_files = 'Yodo1MasMediationIronSource/Classes/**/*'
-  s.public_header_files = 'Yodo1MasMediationIronSource/Classes/**/*.h'
-  s.vendored_frameworks = 'Yodo1MasMediationIronSource/Lib/**/*.framework'
+  s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
+  s.source_files = s.name + '/Classes/**/*'
+  s.public_header_files = s.name + '/Classes/**/*.h'
+  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
   s.dependency 'IronSourceSDK'
   
