@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasCore'
-  s.version          = '4.0.0.2'
+  s.version          = '4.0.0.3'
   s.summary          = 'Yodo1MasCore for iOS'
   s.swift_version    = '5.0'
 
@@ -95,7 +95,7 @@ TODO: Add long description of the pod here.
   }
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.source_files = s.name + '/Classes/**/*'
-  s.public_header_files = s.name + '/Classes/**/*.h'
+  s.public_header_files = s.name + '/Classes/*.h', s.name + '/Classes/Mediation/Yodo1MasAdapterBase.h'
   #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'AFNetworking'
