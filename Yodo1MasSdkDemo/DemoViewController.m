@@ -7,6 +7,7 @@
 
 #import "DemoViewController.h"
 #import <Yodo1MasCore/Yodo1Mas.h>
+#import <Yodo1Ads.h>
 #import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>

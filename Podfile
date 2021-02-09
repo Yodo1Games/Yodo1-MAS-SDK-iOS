@@ -1,6 +1,6 @@
 use_frameworks!
 source 'https://cdn.cocoapods.org/' #source 'https://github.com/CocoaPods/Specs.git'
-source 'https://github.com/Yodo1Games/Yodo1Spec.git'
+#source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
 platform :ios, '11.0'
@@ -29,7 +29,7 @@ pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasSDK', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasSDK', '~> 0.0.0.7-beta'
+#pod 'Yodo1MasSDK', '~> 4.0.0.3'
 
 end
 

@@ -45,6 +45,7 @@ static NSString* kYodo1MasMethodName;
 - (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy;
 @end
 
 @implementation Yodo1MasBridge
@@ -114,6 +115,11 @@ static NSString* kYodo1MasMethodName;
 - (void)dismissBannerAd
 {
     [[Yodo1Mas sharedInstance] dismissBannerAd];
+}
+
+- (void)dismissBannerAdWithDestroy:(BOOL)destroy
+{
+    [[Yodo1Mas sharedInstance] dismissBannerAdWithDestroy:destroy];
 }
 
 #pragma mark - Yodo1MasAdDelegate
@@ -359,6 +365,11 @@ void UnityShowBannerAdWithPlacementAndAlignAndOffset(const char* placementId, in
 void UnityDismissBannerAd()
 {
     [[Yodo1MasBridge sharedInstance] dismissBannerAd];
+}
+
+void UnityDismissBannerAdWithDestroy(bool destroy)
+{
+    [[Yodo1MasBridge sharedInstance] dismissBannerAdWithDestroy:destroy];
 }
 
 #pragma mark - Unity Interstitial
