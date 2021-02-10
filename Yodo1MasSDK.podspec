@@ -33,7 +33,7 @@ TODO: Add long description of the pod here.
   s.static_framework = true
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
+  #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore', '4.0.0.3'
   s.dependency 'Yodo1MasMediationAdMobMax', '4.0.0.3'
