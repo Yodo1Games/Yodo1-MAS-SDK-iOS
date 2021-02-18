@@ -21,12 +21,14 @@ pod 'Yodo1MasMediationInMobi', :path => './'
 pod 'Yodo1MasMediationTapjoy', :path => './'
 pod 'Yodo1MasMediationUnityAds', :path => './'
 pod 'Yodo1MasMediationVungle', :path => './'
+pod 'Yodo1MasMediationYandex', :path => './'
+pod 'Yodo1MasMediationMyTarget', :path => './'
 pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasSDK', :path => './'
 #pod 'Yodo1MasUnityBridge', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasSDK', '~> 4.0.0.5'
+#pod 'Yodo1MasSDK', '~> 4.0.0.6'
 
 end
 
