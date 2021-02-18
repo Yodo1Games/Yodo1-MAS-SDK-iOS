@@ -5,7 +5,7 @@
 //  Created by ZhouYuzhen on 2020/12/3.
 //
 
-#import <Yodo1MasMediationApplovin/Yodo1MasAppLovinAdapter.h>
+#import "Yodo1MasAppLovinAdapter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
