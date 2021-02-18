@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationVungle'
-  s.version          = '4.0.0.3'
+  s.version          = '4.0.0.5'
   s.summary          = 'Yodo1MasMediationVungle'
   s.swift_version    = '5.0'
 
@@ -35,9 +35,9 @@ TODO: Add long description of the pod here.
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
+  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'VungleSDK-iOS'
+  s.dependency 'VungleSDK-iOS', '~> 6.9.1'
   
 end
