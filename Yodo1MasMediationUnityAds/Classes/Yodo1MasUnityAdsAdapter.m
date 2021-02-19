@@ -297,7 +297,7 @@
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];
-    [self loadRewardAdDelayed];
+    [self loadBannerAdDelayed];
 }
 
 @end
