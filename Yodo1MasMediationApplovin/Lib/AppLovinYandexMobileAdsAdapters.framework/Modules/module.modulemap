@@ -1,0 +1,9 @@
+framework module AppLovinYandexMobileAdsAdapters {
+  umbrella header "AppLovinYandexMobileAdsAdapters-umbrella.h"
+
+  export *
+  module * { export * }
+  
+  header "YMAAppLovinVersion.h"
+
+}

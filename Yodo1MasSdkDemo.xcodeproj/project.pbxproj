@@ -623,7 +623,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 4.0.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
+				PRODUCT_BUNDLE_IDENTIFIER = com.game5mobile.popular;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -647,7 +647,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 4.0.0.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
+				PRODUCT_BUNDLE_IDENTIFIER = com.game5mobile.popular;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
