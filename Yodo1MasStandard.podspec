@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint Yodo1MasMediationYandex.podspec' to ensure this is a
+# Be sure to run `pod lib lint Yodo1MasStandard.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Yodo1MasMediationYandex'
+  s.name             = 'Yodo1MasStandard'
   s.version          = '4.0.0.6'
-  s.summary          = 'Yodo1MasMediationYandex'
+  s.summary          = 'Yodo1MasStandard'
   s.swift_version    = '5.0'
 
 # This description is used to generate tags and improve search results.
@@ -28,15 +28,23 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Yodo1Games' => 'devadmin@yodo1.com' }
   s.source           = { :git => 'https://github.com/Yodo1Games/Yodo1-MAS-SDK-iOS.git', :tag => s.version.to_s }
-
+  s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.ios.deployment_target = '9.0'
   s.static_framework = true
-  s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
-  s.resource = s.name + '/Assets/**/*.bundle'
-  s.source_files = s.name + '/Classes/**/*'
-  s.public_header_files = s.name + '/Classes/**/*.h'
-  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
-  s.dependency 'Yodo1MasCore'
-  s.dependency 'YandexMobileAds', '~> 2.20.0'
+  #s.source_files = s.name + '/Classes/**/*'
+  #s.public_header_files = s.name + '/Classes/**/*.h'
+  #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
+  s.frameworks = 'UIKit', 'Foundation'
+  s.dependency 'Yodo1MasCore', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationAdMob', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationApplovin', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationIronSource', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationYandex', '4.0.0.6'
   
+  s.dependency 'Yodo1MasMediationFacebook', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationInMobi', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationMyTarget', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationTapjoy', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationUnityAds', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationVungle', '4.0.0.6'
 end
