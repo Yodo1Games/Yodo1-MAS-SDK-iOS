@@ -18,16 +18,61 @@ touch Podfile
 #### 1.2 将iOS SDK导入项目</br>
 请打开项目的 `Podfile` 文件并将下面代码添加到应用的目标中：
 
+标准集成
+
 ```ruby
 use_frameworks!
 source 'https://cdn.cocoapods.org/' #source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
-pod 'Yodo1MasSDK', '~> 4.0.0.0'
+pod 'FBSDKCoreKit'
+pod 'Yodo1MasStandard', '~> 4.0.0.6'
+```
+
+完整集成
+
+```ruby
+use_frameworks!
+source 'https://cdn.cocoapods.org/' #source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Yodo1Games/Yodo1Spec.git'
+source 'https://github.com/Yodo1Games/MAS-Spec.git'
+
+pod 'FBSDKCoreKit'
+pod 'Yodo1MasFull', '~> 4.0.0.6'
+```
+
+如果标准集成和完整集成无法满足，也可以自由组合
+
+```ruby
+use_frameworks!
+source 'https://cdn.cocoapods.org/' #source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Yodo1Games/Yodo1Spec.git'
+source 'https://github.com/Yodo1Games/MAS-Spec.git'
+
+pod 'FBSDKCoreKit'
+pod 'Yodo1MasCore', '~> 4.0.0.6' # 必须
+# 以下请根据自己的需求选择，至少选择一个
+pod 'Yodo1MasMediationAdMob', '~> 4.0.0.6'
+pod 'Yodo1MasMediationApplovin', '~> 4.0.0.6'
+pod 'Yodo1MasMediationFyber', '~> 4.0.0.6'
+pod 'Yodo1MasMediationIronSource', '~> 4.0.0.6'
+pod 'Yodo1MasMediationYandex', '~> 4.0.0.6'
+
+pod 'Yodo1MasMediationAdColony', '~> 4.0.0.6'
+pod 'Yodo1MasMediationFacebook', '~> 4.0.0.6'
+pod 'Yodo1MasMediationInMobi', '~> 4.0.0.6'
+pod 'Yodo1MasMediationMintegral', '~> 4.0.0.6'
+pod 'Yodo1MasMediationMyTarget', '~> 4.0.0.6'
+pod 'Yodo1MasMediationPangle', '~> 4.0.0.6'
+pod 'Yodo1MasMediationTapjoy', '~> 4.0.0.6'
+pod 'Yodo1MasMediationTencent', '~> 4.0.0.6'
+pod 'Yodo1MasMediationUnityAds', '~> 4.0.0.6'
+pod 'Yodo1MasMediationVungle', '~> 4.0.0.6'
 ```
 
 在`终端`中执行如下命令：</br>
+
 ```ruby
 pod install --repo-update
 ```
