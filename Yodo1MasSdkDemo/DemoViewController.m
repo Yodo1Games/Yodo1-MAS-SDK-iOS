@@ -36,7 +36,7 @@
     [Yodo1Mas sharedInstance].bannerAdDelegate = self;
     
 
-    [[Yodo1Mas sharedInstance] initWithAppId:@"4fUfs1nNxcp" successful:^{
+    [[Yodo1Mas sharedInstance] initWithAppId:@"qqiOsnhyOie" successful:^{
         
     } fail:^(NSError * _Nonnull error) {
         
