@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationUnityAds'
-  s.version          = '4.0.0.5'
+  s.version          = '4.0.1.0'
   s.summary          = 'Yodo1MasMediationUnityAds'
   s.swift_version    = '5.0'
 
@@ -36,6 +36,6 @@ TODO: Add long description of the pod here.
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'UnityAds', '~> 3.5.1'
+  s.dependency 'UnityAds', '~> 3.6.0'
   
 end

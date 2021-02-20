@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.0.5";
+    return @"4.0.1.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -297,7 +297,7 @@
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];
-    [self loadRewardAdDelayed];
+    [self loadBannerAdDelayed];
 }
 
 @end

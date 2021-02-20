@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasSDK'
-  s.version          = '4.0.0.5'
+  s.version          = '4.0.0.6'
   s.summary          = 'Yodo1MasSDK'
   s.swift_version    = '5.0'
 
@@ -35,14 +35,16 @@ TODO: Add long description of the pod here.
   #s.public_header_files = s.name + '/Classes/**/*.h'
   #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationAdMob', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationApplovin', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationIronSource', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationFacebook', '4.0.0.5'
-  #s.dependency 'Yodo1MasMediationInMobi', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationTapjoy', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationUnityAds', '4.0.0.5'
-  s.dependency 'Yodo1MasMediationVungle', '4.0.0.5'
+  s.dependency 'Yodo1MasCore', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationAdMob', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationApplovin', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationIronSource', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationFacebook', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationInMobi', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationTapjoy', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationUnityAds', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationVungle', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationYandex', '4.0.0.6'
+  s.dependency 'Yodo1MasMediationMyTarget', '4.0.0.6'
   
 end

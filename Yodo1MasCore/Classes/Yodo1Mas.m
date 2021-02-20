@@ -42,7 +42,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.0.5";
+    return @"4.0.1.0";
 }
 
 - (instancetype)init {
@@ -157,18 +157,27 @@
     NSDictionary *mediations = @{
         @"ADMOB" : @"Yodo1MasAdMobMaxAdapter",
         @"APPLOVIN" : @"Yodo1MasAppLovinMaxAdapter",
-        @"IRONSOURCE" : @"Yodo1MasIronSourceMaxAdapter"
+        //@"FYBER" : @"Yodo1MasFyberAdapter",
+        @"IRONSOURCE" : @"Yodo1MasIronSourceMaxAdapter"//,
+        //@"YANDEX" : @"Yodo1MasYandexAdapter"
     };
     
     NSDictionary *networks = @{
+        //@"adcolony" : @"Yodo1MasAdColonyAdapter",
         @"admob" : @"Yodo1MasAdMobAdapter",
         @"applovin" : @"Yodo1MasAppLovinAdapter",
         @"facebook" : @"Yodo1MasFacebookAdapter",
+        //@"fyber" : @"Yodo1MasFyberAdapter",
         @"inmobi" : @"Yodo1MasInMobiAdapter",
         @"ironsource" : @"Yodo1MasIronSourceAdapter",
+        //@"mintegral" : @"Yodo1MasMintegralAdapter",
+        @"mytarget" : @"Yodo1MasMyTargetAdapter",
+        //@"pangle" : @"Yodo1MasPangleAdapter",
         @"tapjoy" : @"Yodo1MasTapjoyAdapter",
+        //@"tencent" : @"Yodo1MasTencentAdapter",
         @"unity" : @"Yodo1MasUnityAdsAdapter",
-        @"vungle" : @"Yodo1MasVungleAdapter"
+        @"vungle" : @"Yodo1MasVungleAdapter",
+        @"yandex" : @"Yodo1MasYandexAdapter"
     };
     
     if (self.masInitConfig.mediation_list != nil && self.masInitConfig.mediation_list.count > 0) {
