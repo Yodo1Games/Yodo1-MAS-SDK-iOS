@@ -57,11 +57,7 @@
             [options setPrivacyFrameworkOfType:ADC_CCPA isRequired:NO];
         }
         
-        if ([Yodo1Mas sharedInstance].isCOPPAAgeRestricted) {
-            [options setPrivacyFrameworkOfType:ADC_COPPA isRequired:YES];
-        }else{
-            [options setPrivacyFrameworkOfType:ADC_COPPA isRequired:NO];
-        }
+        [options setPrivacyFrameworkOfType:ADC_COPPA isRequired:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
         
         Yodo1MasAdId *rewardAdId = [self getRewardAdId];
         Yodo1MasAdId *intersAdId = [self getRewardAdId];
