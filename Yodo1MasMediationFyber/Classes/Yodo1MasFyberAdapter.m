@@ -6,22 +6,26 @@
 //
 
 #import "Yodo1MasFyberAdapter.h"
+#import <FairBidSDK/FairBidSDK.h>
 
 #define BANNER_TAG 10011
 
-@interface Yodo1MasFyberAdapter()
+@interface Yodo1MasFyberAdapter()<FYBRewardedDelegate,FYBInterstitialDelegate,FYBBannerDelegate>
 
+
+@property(nonatomic, assign) BOOL sdkInit;
+@property (nonatomic, strong) FYBBannerAdView *bannerAd;
 
 @end
 
 @implementation Yodo1MasFyberAdapter
 
 - (NSString *)advertCode {
-    return @"adcolony";
+    return @"fyber";
 }
 
 - (NSString *)sdkVersion {
-    return @"1.0.0";
+    return FairBid.version;
 }
 
 - (NSString *)mediationVersion {
@@ -32,7 +36,9 @@
     [super initWithConfig:config successful:successful fail:fail];
     
     if (![self isInitSDK]) {
-        
+        [self updatePrivacy];
+        [FairBid startWithAppId:config.appId];
+        self.sdkInit = YES;
     } else {
         if (successful != nil) {
             successful(self.advertCode);
@@ -41,24 +47,29 @@
 }
 
 - (BOOL)isInitSDK {
-    return [super isInitSDK];
+    [super isInitSDK];
+    return self.sdkInit;
 }
 
 - (void)updatePrivacy {
     [super updatePrivacy];
+    [FairBid user].GDPRConsent = [Yodo1Mas sharedInstance].isGDPRUserConsent;
+    FairBid.user.IABUSPrivacyString =  @"1YNN";
 }
 
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded {
-    return [super isRewardAdLoaded];
+    [super isRewardAdLoaded];
+    return [FYBRewarded isAvailable:[self getRewardAdId].adId];
 }
 
 - (void)loadRewardAd {
     [super loadRewardAd];
     if (![self isInitSDK]) return;
-    
     Yodo1MasAdId *adId = [self getRewardAdId];
+    FYBRewarded.delegate = self;
+    [FYBRewarded request:adId.adId];
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -67,6 +78,7 @@
         UIViewController *controller = [Yodo1MasFyberAdapter getTopViewController];
         if (controller != nil) {
             NSLog(@"%@:{method: showRewardAd, show reward ad...}", self.TAG);
+            [FYBRewarded show:[self getRewardAdId].adId];
         }
     }
 }
@@ -76,15 +88,18 @@
 }
 
 #pragma mark - 插屏广告
+
 - (BOOL)isInterstitialAdLoaded {
-    return [super isInterstitialAdLoaded];
+    [super isInterstitialAdLoaded];
+    return [FYBInterstitial isAvailable:[self getInterstitialAdId].adId];
 }
 
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
-    
     Yodo1MasAdId *adId = [self getInterstitialAdId];
+    FYBInterstitial.delegate = self;
+    [FYBInterstitial request:adId.adId];
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -96,6 +111,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}", self.TAG];
             NSLog(@"%@", message);
+            [FYBInterstitial show:[self getInterstitialAdId].adId];
         }
     }
 }
@@ -113,6 +129,13 @@
     [super loadBannerAd];
     if (![self isInitSDK]) return;
     Yodo1MasAdId *adId = [self getBannerAdId];
+    
+    FYBBanner.delegate = self;
+    FYBBannerOptions *bannerOptions = [[FYBBannerOptions alloc] init];
+    bannerOptions.placementId = adId.adId;
+    [FYBBanner showBannerInView:[Yodo1MasFyberAdapter getTopViewController].view
+                       position:FYBBannerAdViewPositionBottom
+                        options:bannerOptions];
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -131,12 +154,134 @@
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
     [super dismissBannerAdWithDestroy:destroy];
-    //[Yodo1MasBanner removeBanner:self.bannerAd tag:BANNER_TAG destroy:destroy];
+    [Yodo1MasBanner removeBanner:self.bannerAd tag:BANNER_TAG destroy:destroy];
     if (destroy) {
         //self.bannerAd = nil;
+        [FYBBanner destroy:[self getBannerAdId].adId];
         self.bannerState = Yodo1MasBannerStateNone;
         [self loadBannerAd];
     }
+}
+
+#pragma mark- FYBRewardedDelegate
+
+- (void)rewardedIsAvailable:(nonnull NSString *)placementId {
+    
+}
+
+- (void)rewardedIsUnavailable:(nonnull NSString *)placementId {
+    
+}
+
+- (void)rewardedDidShow:(nonnull NSString *)placementId impressionData:(nonnull FYBImpressionData *)impressionData {
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
+}
+
+- (void)rewardedDidFailToShow:(nonnull NSString *)placementId withError:(nonnull NSError *)error impressionData:(nonnull FYBImpressionData *)impressionData {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedDidFailToShow:withError:, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *fyberError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:fyberError type:Yodo1MasAdTypeReward];
+}
+
+- (void)rewardedDidClick:(nonnull NSString *)placementId {
+    
+}
+
+- (void)rewardedDidDismiss:(nonnull NSString *)placementId {
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+    [self nextReward];
+    [self loadRewardAd];
+}
+
+- (void)rewardedDidComplete:(nonnull NSString *)placementId userRewarded:(BOOL)userRewarded {
+    if (userRewarded) {
+        [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
+    }
+}
+
+- (void)rewardedWillRequest:(nonnull NSString *)placementId {
+    
+}
+
+#pragma mark - FYBInterstitialDelegate
+
+- (void)interstitialIsAvailable:(NSString *)placementId {
+}
+
+- (void)interstitialIsUnavailable:(NSString *)placementId {
+}
+
+- (void)interstitialDidShow:(NSString *)placementId impressionData:(FYBImpressionData *)impressionData {
+    
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
+}
+
+- (void)interstitialDidFailToShow:(NSString *)placementId withError:(NSError *)error impressionData:(FYBImpressionData *)impressionData {
+    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidFailToShow:withError:, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *fyberError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:fyberError type:Yodo1MasAdTypeInterstitial];
+}
+
+- (void)interstitialDidClick:(NSString *)placementId {
+    
+}
+
+- (void)interstitialDidDismiss:(NSString *)placementId {
+    
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+}
+
+- (void)interstitialWillRequest:(NSString *)placementId {
+    
+}
+
+#pragma mark- FYBBannerDelegate
+
+- (void)bannerDidLoad:(FYBBannerAdView *)banner {
+    self.bannerAd = banner;
+}
+
+- (void)bannerDidFailToLoad:(NSString *)placementId withError:(NSError *)error {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidFailToLoad:, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *fyberError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    [self callbackWithError:fyberError type:Yodo1MasAdTypeBanner];
+    [self nextBanner];
+    [self loadBannerAdDelayed];
+}
+
+- (void)bannerDidShow:(FYBBannerAdView *)banner impressionData:(FYBImpressionData *)impressionData {
+    
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
+}
+
+- (void)bannerDidClick:(FYBBannerAdView *)banner {
+    
+}
+
+- (void)bannerWillPresentModalView:(FYBBannerAdView *)banner {
+    
+}
+
+- (void)bannerDidDismissModalView:(FYBBannerAdView *)banner {
+    
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
+    [self loadBannerAd];
+}
+
+- (void)bannerWillLeaveApplication:(FYBBannerAdView *)banner {
+    
+}
+
+- (void)banner:(FYBBannerAdView *)banner didResizeToFrame:(CGRect)frame {
+    
+}
+
+- (void)bannerWillRequest:(NSString *)placementId {
+    
 }
 
 @end

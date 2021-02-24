@@ -230,10 +230,12 @@
     if (self.rewardAd == interstitialAd) {
         self.rewardAd = nil;
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+        [self nextReward];
         [self loadRewardAd];
     }else if (self.interstitialAd == interstitialAd){
         self.interstitialAd = nil;
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+        [self nextInterstitial];
         [self loadInterstitialAd];
     }
 }

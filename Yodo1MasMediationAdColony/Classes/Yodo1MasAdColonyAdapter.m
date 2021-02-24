@@ -247,9 +247,11 @@
             isCompleted = NO;
         }
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+        [self nextReward];
         [self loadRewardAd];
     }else if ([interstitial.zoneID isEqualToString:[self getInterstitialAdId].adId]){
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+        [self nextReward];
         [self loadInterstitialAd];
     }
     
