@@ -10,15 +10,20 @@
 
 #define BANNER_TAG 10011
 
-@interface Yodo1MasPangleAdapter()<BURewardedVideoAdDelegate> {
+@interface Yodo1MasPangleAdapter()<
+BURewardedVideoAdDelegate,
+BUFullscreenVideoAdDelegate,
+BUNativeExpressBannerViewDelegate
+> {
+    BOOL isBanerAdReady;
     BOOL isRewardAdReady;
     BOOL isInterstitialAdReady;
 }
 
 
 @property(nonatomic, assign) BOOL sdkInit;
-//@property (nonatomic, strong) MTRGAdView *bannerAd;
-//@property (nonatomic, strong) MTRGInterstitialAd *interstitialAd;
+@property (nonatomic, strong) BUNativeExpressBannerView *bannerAd;
+@property (nonatomic, strong) BUFullscreenVideoAd *interstitialAd;
 @property (nonatomic, strong) BURewardedVideoAd *rewardAd;
 @property (nonatomic,strong) BURewardedVideoModel *rewardModel;
 
@@ -66,6 +71,19 @@
 
 
 #pragma mark - 激励广告
+
+- (BURewardedVideoAd *)rewardAd {
+    if (!_rewardAd) {
+        _rewardModel = [[BURewardedVideoModel alloc] init];
+        _rewardModel.userId = @"";
+        Yodo1MasAdId *adId = [self getRewardAdId];
+        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId
+                                           rewardedVideoModel:_rewardModel];
+        _rewardAd.delegate = self;
+    }
+    return _rewardAd;
+}
+
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
     return isRewardAdReady;
@@ -92,37 +110,37 @@
     
 }
 
-- (BURewardedVideoAd *)rewardAd {
-    if (!_rewardAd) {
-       _rewardModel = [[BURewardedVideoModel alloc] init];
-        _rewardModel.userId = @"";
-        Yodo1MasAdId *adId = [self getRewardAdId];
-        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId
-                                           rewardedVideoModel:_rewardModel];
-        _rewardAd.delegate = self;
+#pragma mark - 插屏广告
+
+- (BUFullscreenVideoAd *)interstitialAd {
+    if (!_interstitialAd) {
+        Yodo1MasAdId *adId = [self getInterstitialAdId];
+        _interstitialAd = [[BUFullscreenVideoAd alloc] initWithSlotID:adId.adId];
+        _interstitialAd.delegate = self;
     }
-    return _rewardAd;
+    return _interstitialAd;
 }
 
-#pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
-    return [super isInterstitialAdLoaded];
+    [super isInterstitialAdLoaded];
+    return isInterstitialAdReady;
 }
 
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
+    [self.interstitialAd loadAdData];
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
     [super showInterstitialAd:callback object:object];
     
     if ([self isCanShow:Yodo1MasAdTypeInterstitial callback:callback]) {
-        
         UIViewController *controller = [Yodo1MasPangleAdapter getTopViewController];
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}", self.TAG];
             NSLog(@"%@", message);
+            [self.interstitialAd showAdFromRootViewController:controller];
         }
     }
 }
@@ -132,14 +150,30 @@
 }
 
 #pragma mark - 横幅广告
+
+- (BUNativeExpressBannerView *)bannerAd {
+    if (!_bannerAd) {
+        Yodo1MasAdId *adId = [self getBannerAdId];
+        UIViewController *controller = [Yodo1MasPangleAdapter getTopViewController];
+        CGSize size = BANNER_SIZE_320_50;
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            size = CGSizeMake(720, 90);
+        }
+        _bannerAd = [[BUNativeExpressBannerView alloc] initWithSlotID:adId.adId rootViewController:controller adSize:size interval:15];
+        _bannerAd.delegate = self;
+    }
+    return _bannerAd;
+}
+
 - (BOOL)isBannerAdLoaded {
-    return [super isBannerAdLoaded];
+    [super isBannerAdLoaded];
+    return isBanerAdReady;
 }
 
 - (void)loadBannerAd {
     [super loadBannerAd];
     if (![self isInitSDK]) return;
-    Yodo1MasAdId *adId = [self getBannerAdId];
+    [self.bannerAd loadAdData];
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -147,10 +181,9 @@
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", self.TAG];
         NSLog(@"%@", message);
-        
         UIViewController *controller = [Yodo1MasPangleAdapter getTopViewController];
         if (controller != nil) {
-            
+            [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
         }
         [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
     }
@@ -158,9 +191,9 @@
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
     [super dismissBannerAdWithDestroy:destroy];
-    //[Yodo1MasBanner removeBanner:self.bannerAd tag:BANNER_TAG destroy:destroy];
+    [Yodo1MasBanner removeBanner:self.bannerAd tag:BANNER_TAG destroy:destroy];
     if (destroy) {
-        //self.bannerAd = nil;
+        self.bannerAd = nil;
         self.bannerState = Yodo1MasBannerStateNone;
         [self loadBannerAd];
     }
@@ -172,7 +205,6 @@
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
     isRewardAdReady = YES;
 }
-
 
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
     isRewardAdReady = NO;
@@ -196,25 +228,91 @@
     [self loadRewardAd];
 }
 
-
-/// 激励视频广告播放完成或发生错误
-- (void)rewardedVideoAdDidPlayFinish:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
-     
-}
-
-- (void)rewardedVideoAdServerRewardDidFail:(BURewardedVideoAd *)rewardedVideoAd error:(NSError *)error {
-   
-}
-
 - (void)rewardedVideoAdServerRewardDidSucceed:(BURewardedVideoAd *)rewardedVideoAd verify:(BOOL)verify{
     if (verify) {
         [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
     }
 }
 
-/// 激励视频广告点击
-- (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
-   
+#pragma mark - BUFullscreenVideoAdDelegate
+
+- (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    isInterstitialAdReady = YES;
+}
+
+- (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
+}
+
+- (void)fullscreenVideoAdDidClose:(BUFullscreenVideoAd *)fullscreenVideoAd {
+    self.interstitialAd = nil;
+    isInterstitialAdReady = YES;
+    [self nextInterstitial];
+    [self loadInterstitialAd];
+    [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+}
+
+- (void)fullscreenVideoAd:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
+    isInterstitialAdReady = NO;
+    NSString *message = [NSString stringWithFormat:@"%@: {method: fullscreenVideoAd:didFailWithError:, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
+    [self loadInterstitialAd];
+}
+
+- (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: fullscreenVideoAd:didFailWithError:, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
+}
+
+#pragma BUNativeExpressBannerViewDelegate
+- (void)nativeExpressBannerAdViewDidLoad:(BUNativeExpressBannerView *)bannerAdView {
+    self.bannerAd = bannerAdView;
+    CGSize size = BANNER_SIZE_320_50;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        size = CGSizeMake(720, 90);
+    }
+    self.bannerAd.frame = CGRectMake(0,0,size.width,size.height);
+    isBanerAdReady = YES;
+}
+
+- (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {
+    isBanerAdReady = NO;
+    NSString *message = [NSString stringWithFormat:@"%@: {method: nativeExpressBannerAdView:didLoadFailWithError, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    [self callbackWithError:pangleError type:Yodo1MasAdTypeBanner];
+    [self nextBanner];
+    [self loadBannerAdDelayed];
+}
+
+- (void)nativeExpressBannerAdViewRenderFail:(BUNativeExpressBannerView *)bannerAdView error:(NSError *)error {
+    NSString *message = [NSString stringWithFormat:@"%@: {method: nativeExpressBannerAdViewRenderFail:error, error: %@}", self.TAG, error.localizedDescription];
+    NSLog(@"%@", message);
+    Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:pangleError type:Yodo1MasAdTypeBanner];
+}
+
+- (void)nativeExpressBannerAdViewWillBecomVisible:(BUNativeExpressBannerView *)bannerAdView {
+    
+    NSString *message = [NSString stringWithFormat:@"%@: {method: nativeExpressBannerAdViewWillBecomVisible}", self.TAG];
+    NSLog(@"%@", message);
+    [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
+}
+
+- (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView dislikeWithReason:(NSArray<BUDislikeWords *> *)filterwords {
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        bannerAdView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [bannerAdView removeFromSuperview];
+        self.bannerAd = nil;
+    }];
+    isBanerAdReady = NO;
 }
 
 

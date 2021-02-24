@@ -243,6 +243,7 @@ MTGInterstitialVideoDelegate>
 - (void)onVideoAdDidClosed:(nullable NSString *)placementId
                     unitId:(nullable NSString *)unitId {
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+    [self nextReward];
     [self loadRewardAd];
 }
 
@@ -285,6 +286,7 @@ MTGInterstitialVideoDelegate>
 - (void) onInterstitialVideoAdDidClosed:(MTGInterstitialVideoAdManager *_Nonnull)adManager {
     self.interstitialAd = nil;
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
     [self loadInterstitialAd];
 }
 
