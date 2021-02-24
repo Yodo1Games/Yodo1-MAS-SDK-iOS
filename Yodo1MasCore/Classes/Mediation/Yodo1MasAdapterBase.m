@@ -53,6 +53,11 @@
     return _TAG;
 }
 
+- (CGSize)adSize {
+    BOOL isPad = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+    return isPad ? BANNER_SIZE_728_90 : BANNER_SIZE_320_50;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {

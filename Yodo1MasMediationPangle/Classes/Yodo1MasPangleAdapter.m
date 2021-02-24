@@ -155,11 +155,7 @@ BUNativeExpressBannerViewDelegate
     if (!_bannerAd) {
         Yodo1MasAdId *adId = [self getBannerAdId];
         UIViewController *controller = [Yodo1MasPangleAdapter getTopViewController];
-        CGSize size = BANNER_SIZE_320_50;
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            size = CGSizeMake(720, 90);
-        }
-        _bannerAd = [[BUNativeExpressBannerView alloc] initWithSlotID:adId.adId rootViewController:controller adSize:size interval:15];
+        _bannerAd = [[BUNativeExpressBannerView alloc] initWithSlotID:adId.adId rootViewController:controller adSize:self.adSize interval:15];
         _bannerAd.delegate = self;
     }
     return _bannerAd;
@@ -272,11 +268,7 @@ BUNativeExpressBannerViewDelegate
 #pragma BUNativeExpressBannerViewDelegate
 - (void)nativeExpressBannerAdViewDidLoad:(BUNativeExpressBannerView *)bannerAdView {
     self.bannerAd = bannerAdView;
-    CGSize size = BANNER_SIZE_320_50;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        size = CGSizeMake(720, 90);
-    }
-    self.bannerAd.frame = CGRectMake(0,0,size.width,size.height);
+    self.bannerAd.frame = CGRectMake(0,0,self.adSize.width,self.adSize.height);
     isBanerAdReady = YES;
 }
 

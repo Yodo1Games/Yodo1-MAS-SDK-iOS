@@ -160,7 +160,7 @@
     }
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.bannerAd == nil || ![adId.adId isEqualToString:self.bannerAd.placementId])) {
-        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:adId.adId size:BANNER_SIZE_320_50];
+        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:adId.adId size:self.adSize];
         self.bannerAd.delegate = self;
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:[Yodo1MasUnityAdsAdapter getTopViewController]];
     }

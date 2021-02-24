@@ -60,6 +60,8 @@ typedef enum {
 @property (nonatomic, copy, readonly) Yodo1MasAdCallback bannerCallback;
 @property (nonatomic, assign) Yodo1MasBannerState bannerState;
 
+@property (nonatomic, assign, readonly) CGSize adSize;
+
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
 - (BOOL)isInitSDK;
 - (void)updatePrivacy;

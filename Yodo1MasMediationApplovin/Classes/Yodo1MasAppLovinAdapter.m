@@ -162,7 +162,7 @@
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.currentBannerUnitId == nil || ![adId.adId isEqualToString:self.currentBannerUnitId])) {
         self.bannerAd = [[MAAdView alloc] initWithAdUnitIdentifier:[self getBannerAdId].adId];
-        self.bannerAd.frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
+        self.bannerAd.frame = CGRectMake(0, 0, self.adSize.width, self.adSize.height);
         self.bannerAd.delegate = self;
         self.currentBannerUnitId = adId.adId;
     }

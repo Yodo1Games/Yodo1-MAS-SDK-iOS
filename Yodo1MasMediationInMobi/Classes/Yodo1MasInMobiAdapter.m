@@ -181,7 +181,7 @@
 
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.currentBannerId == nil || ![self.currentBannerId isEqualToString:adId.adId])) {
-        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height) placementId:[adId.adId longLongValue] delegate:self];
+        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, self.adSize.width, self.adSize.height) placementId:[adId.adId longLongValue] delegate:self];
         self.currentBannerId = adId.adId;
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:[Yodo1MasInMobiAdapter getTopViewController]];
     }
