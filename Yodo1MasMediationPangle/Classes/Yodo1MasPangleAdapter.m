@@ -8,7 +8,7 @@
 #import "Yodo1MasPangleAdapter.h"
 #import <BUAdSDK/BUAdSDK.h>
 
-#define BANNER_TAG 10011
+#define BANNER_TAG 10014
 
 @interface Yodo1MasPangleAdapter()<
 BURewardedVideoAdDelegate,

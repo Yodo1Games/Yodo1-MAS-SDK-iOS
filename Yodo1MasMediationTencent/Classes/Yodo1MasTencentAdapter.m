@@ -12,7 +12,7 @@
 #import "GDTSplashAd.h"
 #import "GDTRewardVideoAd.h"
 
-#define BANNER_TAG 10011
+#define BANNER_TAG 10015
 
 @interface Yodo1MasTencentAdapter()
 <GDTUnifiedBannerViewDelegate,

@@ -8,7 +8,7 @@
 #import "Yodo1MasFyberAdapter.h"
 #import <FairBidSDK/FairBidSDK.h>
 
-#define BANNER_TAG 10011
+#define BANNER_TAG 10012
 
 @interface Yodo1MasFyberAdapter()<FYBRewardedDelegate,FYBInterstitialDelegate,FYBBannerDelegate>
 

@@ -11,7 +11,7 @@
 #import <MTGSDK/MTGRewardAdInfo.h>
 #import <MTGSDKInterstitialVideo/MTGInterstitialVideoAdManager.h>
 
-#define BANNER_TAG 10011
+#define BANNER_TAG 10013
 
 @interface Yodo1MasMintegralAdapter()<
 MTGRewardAdLoadDelegate,

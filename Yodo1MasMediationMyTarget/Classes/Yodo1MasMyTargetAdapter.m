@@ -8,7 +8,7 @@
 #import "Yodo1MasMyTargetAdapter.h"
 #import <MyTargetSDK/MyTargetSDK.h>
 
-#define BANNER_TAG 10011
+#define BANNER_TAG 10010
 
 
 @interface Yodo1MasMyTargetAdapter()<MTRGInterstitialAdDelegate,MTRGAdViewDelegate> {
