@@ -26,6 +26,7 @@
 @property (nonatomic, strong) Yodo1MasNetworkConfig *masNetworkConfig;
 @property (nonatomic, strong) NSMutableDictionary *mediations;
 @property (nonatomic, strong) Yodo1MasAdapterBase *currentAdapter;
+@property (nonatomic, assign) BOOL isRequesting;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 
 @end
@@ -72,8 +73,8 @@
         }];
     }
 #endif
+    
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
-    BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
     BOOL sensorsDebugEnv = yodo1Config[@"sensors_debug_env"] && [yodo1Config[@"sensors_debug_env"] boolValue];
 
     __weak __typeof(self)weakSelf = self;
@@ -92,6 +93,31 @@
                                               @"sdkVersion": [Yodo1Mas sdkVersion]}];
     [Yodo1SaManager track:@"adInit" properties:nil];
     
+    [self doInit:appId successful:successful fail:fail];
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        [weakSelf doInit:appId successful:successful fail:fail];
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
+- (void)doInit:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+    __weak __typeof(self)weakSelf = self;
+    if (![AFNetworkReachabilityManager sharedManager].reachable || _isRequesting) {
+        Yodo1MasError *error;
+        if (_isRequesting) {
+            error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Initializing, please wait a moment"];
+        } else {
+            error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
+        }
+        if (fail != nil) {
+            fail(error);
+        }
+        return;
+    }
+    
+    NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
+    BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSMutableString *url = [NSMutableString string];
     if (debug) {
@@ -113,10 +139,13 @@
     
     NSLog(@"request - %@", url);
     
+    _isRequesting = YES;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url parameters:parameters headers:@{@"sdk-version" : [Yodo1Mas sdkVersion]} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        weakSelf.isRequesting = NO;
+        
         Yodo1MasInitData *data;
         if (debug && yodo1Config[@"Config"] != nil) {
             data = [Yodo1MasInitData yy_modelWithJSON:yodo1Config[@"Config"]];
@@ -146,6 +175,8 @@
             NSLog(@"获取广告配置失败 - 解释配置数据失败");
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        weakSelf.isRequesting = NO;
+        
         if (fail) {
             fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:error.localizedDescription]);
         }
