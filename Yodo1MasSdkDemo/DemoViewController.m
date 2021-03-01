@@ -11,6 +11,7 @@
 #import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 @import GoogleMobileAdsMediationTestSuite;
 
 @interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>

@@ -38,8 +38,8 @@ pod 'Yodo1MasMediationVungle', :path => './'
 #pod 'Yodo1MasUnityBridge', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasStandard', '~> 4.0.1.0'
-#pod 'Yodo1MasFull', '~> 4.0.1.0'
+#pod 'Yodo1MasStandard', '~> 4.0.1.1'
+#pod 'Yodo1MasFull', '~> 4.0.1.1'
 
 end
 
