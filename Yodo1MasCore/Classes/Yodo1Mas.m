@@ -26,6 +26,7 @@
 @property (nonatomic, strong) Yodo1MasNetworkConfig *masNetworkConfig;
 @property (nonatomic, strong) NSMutableDictionary *mediations;
 @property (nonatomic, strong) Yodo1MasAdapterBase *currentAdapter;
+@property (nonatomic, assign) BOOL isInit;
 @property (nonatomic, assign) BOOL isRequesting;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 
@@ -43,7 +44,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.1.0";
+    return @"4.0.1.1";
 }
 
 - (instancetype)init {
@@ -96,6 +97,10 @@
     [self doInit:appId successful:successful fail:fail];
     
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (weakSelf.isInit) return;
+        
+        if (status == AFNetworkReachabilityStatusNotReachable) return;
+        
         [weakSelf doInit:appId successful:successful fail:fail];
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
@@ -103,15 +108,21 @@
 
 - (void)doInit:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
     __weak __typeof(self)weakSelf = self;
-    if (![AFNetworkReachabilityManager sharedManager].reachable || _isRequesting) {
-        Yodo1MasError *error;
-        if (_isRequesting) {
-            error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Initializing, please wait a moment"];
+    if (_isInit || ![AFNetworkReachabilityManager sharedManager].reachable || _isRequesting) {
+        if (_isInit) {
+            if (successful != nil) {
+                successful();
+            }
         } else {
-            error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
-        }
-        if (fail != nil) {
-            fail(error);
+            Yodo1MasError *error;
+            if (_isRequesting) {
+                error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Initializing, please wait a moment"];
+            } else {
+                error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
+            }
+            if (fail != nil) {
+                fail(error);
+            }
         }
         return;
     }
@@ -144,8 +155,6 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:url parameters:parameters headers:@{@"sdk-version" : [Yodo1Mas sdkVersion]} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        weakSelf.isRequesting = NO;
-        
         Yodo1MasInitData *data;
         if (debug && yodo1Config[@"Config"] != nil) {
             data = [Yodo1MasInitData yy_modelWithJSON:yodo1Config[@"Config"]];
@@ -160,6 +169,7 @@
                     NSLog(@"获取广告数据成功 - %@", responseObject);
                 }
                 [weakSelf doInitAdapter];
+                weakSelf.isInit = YES;
                 if (successful) {
                     successful();
                 }
@@ -174,6 +184,8 @@
             }
             NSLog(@"获取广告配置失败 - 解释配置数据失败");
         }
+        
+        weakSelf.isRequesting = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         weakSelf.isRequesting = NO;
         
