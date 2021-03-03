@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationFacebook'
-  s.version          = '4.0.1.1'
+  s.version          = '4.0.1.2'
   s.summary          = 'Yodo1MasMediationFacebook'
   s.swift_version    = '5.0'
 
@@ -38,7 +38,6 @@ TODO: Add long description of the pod here.
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
   #s.dependency 'FBSDKCoreKit'
-  #s.dependency 'Yodo1FBSDKCoreKit', '~> 5.0.0'
   #s.dependency 'FBAudienceNetwork'
   
 end

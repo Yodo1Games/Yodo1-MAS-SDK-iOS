@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationTapjoy'
-  s.version          = '4.0.1.1'
+  s.version          = '4.0.1.2'
   s.summary          = 'Yodo1MasMediationTapjoy'
   s.swift_version    = '5.0'
 
@@ -35,7 +35,6 @@ TODO: Add long description of the pod here.
   s.resource = s.name + '/Assets/**/*.bundle'
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasCore'
   s.dependency 'TapjoySDK', '~> 12.7.1'
   

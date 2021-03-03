@@ -44,7 +44,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.1.1";
+    return @"4.0.1.2";
 }
 
 - (instancetype)init {
@@ -201,8 +201,7 @@
         @"ADMOB" : @"Yodo1MasAdMobMaxAdapter",
         @"APPLOVIN" : @"Yodo1MasAppLovinMaxAdapter",
         //@"FYBER" : @"Yodo1MasFyberAdapter",
-        @"IRONSOURCE" : @"Yodo1MasIronSourceMaxAdapter"//,
-        //@"YANDEX" : @"Yodo1MasYandexAdapter"
+        @"IRONSOURCE" : @"Yodo1MasIronSourceMaxAdapter"
     };
     
     NSDictionary *networks = @{
