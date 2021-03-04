@@ -249,7 +249,7 @@ jobs:
     name: Publish Yandex Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_yandex]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -264,7 +264,7 @@ jobs:
     name: Publish Facebook Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_facebook]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -278,7 +278,7 @@ jobs:
     name: Publish InMobi Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_inmobi]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -292,7 +292,7 @@ jobs:
     name: Publish MyTarget Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_mytarget]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -306,7 +306,7 @@ jobs:
     name: Publish Tapjoy Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_tapjoy]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -320,7 +320,7 @@ jobs:
     name: Publish UnityAds Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_unityads]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -334,7 +334,7 @@ jobs:
     name: Publish Vungle Max
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_vungle]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
