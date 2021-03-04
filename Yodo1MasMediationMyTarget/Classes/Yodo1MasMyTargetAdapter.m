@@ -41,11 +41,11 @@
     [super initWithConfig:config successful:successful fail:fail];
     
     if (![self isInitSDK]) {
+        self.sdkInit = YES;
         [self updatePrivacy];
         [self loadBannerAd];
         [self loadInterstitialAd];
         [self loadRewardAd];
-        self.sdkInit = YES;
     } else {
         if (successful != nil) {
             successful(self.advertCode);
@@ -93,7 +93,11 @@
     if (!_rewardAd) {
         Yodo1MasAdId *adId = [self getRewardAdId];
         if (adId != nil && adId.adId != nil) {
-            _rewardAd = [[MTRGInterstitialAd alloc] initWithSlotId:[adId.adId intValue]];
+            NSInteger slotId = [adId.adId intValue];
+#ifdef DEBUG
+            slotId = 45102;
+#endif
+            _rewardAd = [[MTRGInterstitialAd alloc] initWithSlotId:slotId];
             _rewardAd.delegate = self;
         }
     }
@@ -128,7 +132,11 @@
     if (!_interstitialAd) {
         Yodo1MasAdId *adId = [self getInterstitialAdId];
         if (adId != nil && adId.adId != nil) {
-            _interstitialAd = [[MTRGInterstitialAd alloc] initWithSlotId:[adId.adId intValue]];
+            NSInteger slotId = [adId.adId intValue];
+#ifdef DEBUG
+            slotId = 6498;
+#endif
+            _interstitialAd = [[MTRGInterstitialAd alloc] initWithSlotId:slotId];
             _interstitialAd.delegate = self;
         }
     }
@@ -143,11 +151,8 @@
 
 - (void)loadBannerAd {
     [super loadBannerAd];
-    if (self.bannerAd.superview) {
-        [self.bannerAd removeFromSuperview];
-        self.bannerAd.delegate = nil;
-        self.bannerAd = nil;
-    }
+    UIViewController *controller = [Yodo1MasMyTargetAdapter getTopViewController];
+    [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
     [self.bannerAd load];
 }
 
@@ -157,7 +162,6 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}", self.TAG];
         NSLog(@"%@", message);
         UIViewController *controller = [Yodo1MasMyTargetAdapter getTopViewController];
-        [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
         [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
     }
 }
@@ -176,9 +180,15 @@
     if (!_bannerAd) {
         MTRGAdSize *_adSize = MTRGAdSize.adSize320x50;
         Yodo1MasAdId *adId = [self getBannerAdId];
-        int slotId = [adId.adId intValue];
+        NSInteger slotId = [adId.adId intValue];
+#ifdef DEBUG
+        slotId = 30269;
+#endif
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             _adSize = MTRGAdSize.adSize728x90;
+#ifdef DEBUG
+            slotId = 81621;
+#endif
         }
         _bannerAd = [MTRGAdView adViewWithSlotId:slotId shouldRefreshAd:YES];
         _bannerAd.adSize = _adSize;
@@ -277,7 +287,7 @@
 - (void)onNoAdWithReason:(nonnull NSString *)reason adView:(nonnull MTRGAdView *)adView {
     NSString *message = [NSString stringWithFormat:@"%@: {method: onNoAdWithReason:, error: %@}", self.TAG, reason];
     NSLog(@"%@", message);
-
+    
     Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];
@@ -302,7 +312,7 @@
 - (void)onDismissModalWithAdView:(MTRGAdView *)adView {
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidDismissScreen}", self.TAG];
     NSLog(@"%@", message);
-
+    
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
     [self loadBannerAd];
 }
