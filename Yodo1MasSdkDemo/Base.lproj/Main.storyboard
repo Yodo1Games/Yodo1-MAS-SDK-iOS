@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="qqiOsnhyOie" borderStyle="bezel" placeholder="Please enter AppId" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qov-rk-RX4">
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="4fUfs1nNxcp" borderStyle="bezel" placeholder="Please enter AppId" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qov-rk-RX4">
                                 <rect key="frame" x="15" y="64" width="384" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="QBq-8G-CPp"/>

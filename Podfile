@@ -13,6 +13,7 @@ pod 'GoogleMobileAdsMediationTestSuite'
 
 # 开发时打开
 pod 'FBSDKCoreKit'
+pod 'FBSDKShareKit'
 pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasStandard', :path => './'
 pod 'Yodo1MasFull', :path => './'
