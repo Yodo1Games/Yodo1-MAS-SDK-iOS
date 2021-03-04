@@ -94,9 +94,6 @@
         Yodo1MasAdId *adId = [self getRewardAdId];
         if (adId != nil && adId.adId != nil) {
             NSInteger slotId = [adId.adId intValue];
-#ifdef DEBUG
-            slotId = 45102;
-#endif
             _rewardAd = [[MTRGInterstitialAd alloc] initWithSlotId:slotId];
             _rewardAd.delegate = self;
         }
@@ -133,9 +130,6 @@
         Yodo1MasAdId *adId = [self getInterstitialAdId];
         if (adId != nil && adId.adId != nil) {
             NSInteger slotId = [adId.adId intValue];
-#ifdef DEBUG
-            slotId = 6498;
-#endif
             _interstitialAd = [[MTRGInterstitialAd alloc] initWithSlotId:slotId];
             _interstitialAd.delegate = self;
         }
@@ -181,14 +175,8 @@
         MTRGAdSize *_adSize = MTRGAdSize.adSize320x50;
         Yodo1MasAdId *adId = [self getBannerAdId];
         NSInteger slotId = [adId.adId intValue];
-#ifdef DEBUG
-        slotId = 30269;
-#endif
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             _adSize = MTRGAdSize.adSize728x90;
-#ifdef DEBUG
-            slotId = 81621;
-#endif
         }
         _bannerAd = [MTRGAdView adViewWithSlotId:slotId shouldRefreshAd:YES];
         _bannerAd.adSize = _adSize;
