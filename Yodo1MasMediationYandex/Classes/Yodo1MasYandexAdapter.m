@@ -168,7 +168,7 @@
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
     if ([self isInitSDK]) {
-        return self.adBanner;
+        return self.adBanner != nil && self.bannerState == Yodo1MasBannerStateLoaded;
     }
     return NO;
 }
@@ -194,6 +194,8 @@
 - (void)adViewDidLoad:(YMAAdView *)adView {
     NSLog(@"%@: {method: %s",self.TAG,__func__);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    UIViewController *controller = [Yodo1MasYandexAdapter getTopViewController];
+    [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
 }
 
 - (void)adViewDidFailLoading:(YMAAdView *)adView error:(NSError *)error {
@@ -203,6 +205,7 @@
 
     Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:err type:Yodo1MasAdTypeBanner];
+    self.adBanner = nil;
     [self nextBanner];
     [self loadBannerAdDelayed];
 }
@@ -213,6 +216,9 @@
 
 - (void)adViewDidDismissScreen:(UIViewController *)viewController {
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
+    self.adBanner = nil;
+    self.bannerState = Yodo1MasBannerStateNone;
+    [self loadBannerAd];
 }
 
 //#pragma mark YMAInterstitialDelegate //API Version 3.x
@@ -256,6 +262,7 @@
     NSLog(@"%@", message);
     Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:err type:Yodo1MasAdTypeInterstitial];
+    self.interstitialAd = nil;
     [self nextInterstitial];
     [self loadInterstitialAdDelayed];
 }
@@ -277,6 +284,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidDisappear:, placementId: %@}", self.TAG, interstitial.blockID];
     NSLog(@"%@", message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+    [self loadInterstitialAd];
 }
 
 #pragma mark - YMARewardedAdDelegate
@@ -298,6 +306,7 @@
 
     Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:err type:Yodo1MasAdTypeReward];
+    self.rewardVideoAd = nil;
     [self nextReward];
     [self loadRewardAdDelayed];
 }
@@ -306,6 +315,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedAdDidDisappear:, placementId: %@}", self.TAG, rewardedAd.blockID];
     NSLog(@"%@", message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+    [self loadRewardAd];
 }
 
 - (void)rewardedAd:(YMARewardedAd *)rewardedAd willPresentScreen:(UIViewController *)viewController {

@@ -142,6 +142,7 @@ GDTRewardedVideoAdDelegate>
     NSLog(@"%@", message);
     Yodo1MasError *rewardError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:rewardError type:Yodo1MasAdTypeReward];
+    self.rewardVideoAd = nil;
     [self nextReward];
     [self loadRewardAd];
 }
@@ -152,7 +153,6 @@ GDTRewardedVideoAdDelegate>
 
 - (void)gdt_rewardVideoAdDidClose:(GDTRewardVideoAd *)rewardedVideoAd {
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
-    [self nextReward];
     [self loadRewardAd];
 }
 
@@ -199,6 +199,7 @@ GDTRewardedVideoAdDelegate>
     NSLog(@"%@", message);
     Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
+    self.interstitialAd = nil;
     [self nextInterstitial];
     [self loadInterstitialAd];
 }
@@ -215,10 +216,9 @@ GDTRewardedVideoAdDelegate>
 }
 
 - (void)unifiedInterstitialDidDismissScreen:(GDTUnifiedInterstitialAd *)unifiedInterstitial {
-    self.interstitialAd = nil;
-    [self nextInterstitial];
-    [self loadInterstitialAd];
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+    self.interstitialAd = nil;
+    [self loadInterstitialAd];
 }
 
 #pragma mark - 横幅广告
@@ -284,6 +284,9 @@ GDTRewardedVideoAdDelegate>
     NSString *message = [NSString stringWithFormat:@"%@: {method: unifiedBannerViewWillClose}", self.TAG];
     NSLog(@"%@", message);
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
+    self.adBanner = nil;
+    self.bannerState = Yodo1MasBannerStateNone;
+    [self loadBannerAd];
 }
 
 @end

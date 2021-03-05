@@ -16,7 +16,7 @@
 - (instancetype)initWitId:(NSString *)adId object:(id)object {
     self = [super init];
     if (self) {
-        _adId = adId;
+        _adId = adId ? : @"";
         _object = object;
     }
     return self;
