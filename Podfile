@@ -50,3 +50,20 @@ end
 target "Yodo1MasSdkDemoUITests" do
   
 end
+
+target "MasStandard" do
+
+  pod 'Yodo1MasCore', :path => './'
+
+  pod 'Yodo1MasMediationAdMob', :path => './'
+  pod 'Yodo1MasMediationApplovin', :path => './'
+  pod 'Yodo1MasMediationIronSource',:path => './'
+  pod 'Yodo1MasMediationYandex', :path => './'
+  
+  pod 'Yodo1MasMediationFacebook',:path => './'
+  pod 'Yodo1MasMediationInMobi', :path => './'
+  pod 'Yodo1MasMediationMyTarget', :path => './'
+  pod 'Yodo1MasMediationTapjoy', :path => './'
+  pod 'Yodo1MasMediationUnityAds', :path => './'
+  pod 'Yodo1MasMediationVungle', :path => './'
+end

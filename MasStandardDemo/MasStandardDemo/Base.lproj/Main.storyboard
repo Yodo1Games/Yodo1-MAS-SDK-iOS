@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ph7-XB-Hcb" userLabel="Show Video">
+                                <rect key="frame" x="166.5" y="299" width="81" height="30"/>
+                                <state key="normal" title="Show Video"/>
+                                <connections>
+                                    <action selector="didShowVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OPf-al-jH9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pn-pp-PRJ">
+                                <rect key="frame" x="166.5" y="394" width="81" height="30"/>
+                                <state key="normal" title="Show Inters"/>
+                                <connections>
+                                    <action selector="didShowInters:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CyE-nH-qez"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="255-bT-rfH">
+                                <rect key="frame" x="161.5" y="484" width="91" height="30"/>
+                                <state key="normal" title="Show Banner"/>
+                                <connections>
+                                    <action selector="didShowBanner:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lKd-n0-trv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ph7-XB-Hcb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5bU-3s-E2q"/>
+                            <constraint firstItem="3pn-pp-PRJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="85N-Jx-yF6"/>
+                            <constraint firstItem="3pn-pp-PRJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-39" id="Fpy-hV-pW4"/>
+                            <constraint firstItem="255-bT-rfH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GMA-cL-ZlK"/>
+                            <constraint firstItem="255-bT-rfH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="51" id="GmB-dg-51a"/>
+                            <constraint firstItem="255-bT-rfH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JDm-y5-Htv"/>
+                            <constraint firstItem="ph7-XB-Hcb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-134" id="JQG-Ja-mgb"/>
+                            <constraint firstItem="255-bT-rfH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="51" id="PvB-c7-Lq1"/>
+                            <constraint firstItem="3pn-pp-PRJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TRP-NM-1pE"/>
+                            <constraint firstItem="ph7-XB-Hcb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ta3-0s-Bni"/>
+                            <constraint firstItem="ph7-XB-Hcb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-134" id="c5S-jt-TG0"/>
+                            <constraint firstItem="3pn-pp-PRJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-39" id="qgG-sd-4FQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="94"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

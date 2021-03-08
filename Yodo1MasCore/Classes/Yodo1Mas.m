@@ -14,7 +14,7 @@
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 #endif
 #import <AdSupport/AdSupport.h>
-#import "Yodo1SaManager.h"
+#import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
