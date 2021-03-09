@@ -186,7 +186,7 @@ MTGInterstitialVideoDelegate>
 
 - (void)onVideoAdLoadSuccess:(nullable NSString *)placementId
                       unitId:(nullable NSString *)unitId {
-    
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)onVideoAdLoadFailed:(nullable NSString *)placementId
@@ -252,7 +252,7 @@ MTGInterstitialVideoDelegate>
 #pragma mark- MTGInterstitialVideoDelegate
 
 - (void) onInterstitialVideoLoadSuccess:(MTGInterstitialVideoAdManager *_Nonnull)adManager {
-    
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void) onInterstitialVideoLoadFail:(nonnull NSError *)error adManager:(MTGInterstitialVideoAdManager *_Nonnull)adManager {

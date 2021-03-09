@@ -193,8 +193,10 @@
 - (void)onLoadWithInterstitialAd:(nonnull MTRGInterstitialAd *)interstitialAd {
     if (self.rewardAd == interstitialAd) {
         isRewardAdReady = YES;
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
     }else if (self.interstitialAd == interstitialAd){
         isInterstitialAdReady = YES;
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
     }
     NSString *message = [NSString stringWithFormat:@"%@: {method: onLoadWithInterstitialAd:, instanceId: %@}", self.TAG, interstitialAd];
     NSLog(@"%@", message);
@@ -274,6 +276,7 @@
     self.bannerAd = adView;
     NSString *message = [NSString stringWithFormat:@"%@: {method: onLoadWithAdView:, banner: %@}", self.TAG, adView];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)onNoAdWithReason:(nonnull NSString *)reason adView:(nonnull MTRGAdView *)adView {

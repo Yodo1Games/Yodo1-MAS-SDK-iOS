@@ -210,6 +210,13 @@
     if ([ad.adUnitIdentifier isEqualToString:[self getBannerAdId].adId]) {
         self.bannerState = Yodo1MasBannerStateLoaded;
     }
+    if (ad.format == MAAdFormat.rewarded) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if (ad.format == MAAdFormat.interstitial) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    } else if (ad.format == MAAdFormat.banner) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    }
 }
 
 - (void)didFailToLoadAdForAdUnitIdentifier:(NSString *)adUnitIdentifier withErrorCode:(NSInteger)errorCode {

@@ -166,7 +166,7 @@
 #pragma mark- FYBRewardedDelegate
 
 - (void)rewardedIsAvailable:(nonnull NSString *)placementId {
-    
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedIsUnavailable:(nonnull NSString *)placementId {
@@ -207,6 +207,7 @@
 #pragma mark - FYBInterstitialDelegate
 
 - (void)interstitialIsAvailable:(NSString *)placementId {
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialIsUnavailable:(NSString *)placementId {
@@ -242,6 +243,7 @@
 
 - (void)bannerDidLoad:(FYBBannerAdView *)banner {
     self.bannerAd = banner;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidFailToLoad:(NSString *)placementId withError:(NSError *)error {

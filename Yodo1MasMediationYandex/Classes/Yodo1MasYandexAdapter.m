@@ -196,6 +196,7 @@
     self.bannerState = Yodo1MasBannerStateLoaded;
     UIViewController *controller = [Yodo1MasYandexAdapter getTopViewController];
     [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)adViewDidFailLoading:(YMAAdView *)adView error:(NSError *)error {
@@ -255,6 +256,7 @@
 - (void)interstitialDidLoadAd:(YMAInterstitialController *)interstitial {
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialAdDidLoad:, placementId: %@}", self.TAG, interstitial.blockID];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialDidFailToLoadAd:(YMAInterstitialController *)interstitial error:(NSError *)error {
@@ -298,6 +300,7 @@
 - (void)rewardedAdDidLoadAd:(YMARewardedAd *)rewardedAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedAdDidLoadAd:, placementId: %@}", self.TAG, rewardedAd.blockID];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedAdDidFailToLoadAd:(YMARewardedAd *)rewardedAd error:(NSError *)error {

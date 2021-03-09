@@ -137,6 +137,10 @@ GDTRewardedVideoAdDelegate>
 
 #pragma mark- GDTRewardVideoAdDelegate
 
+- (void)gdt_rewardVideoAdDidLoad:(GDTRewardVideoAd *)rewardedVideoAd {
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+}
+
 - (void)gdt_rewardVideoAd:(GDTRewardVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
     NSString *message = [NSString stringWithFormat:@"%@: {method: gdt_rewardVideoAd:didFailWithError:, error: %@}", self.TAG, error.localizedDescription];
     NSLog(@"%@", message);
@@ -193,6 +197,10 @@ GDTRewardedVideoAdDelegate>
 }
 
 #pragma  mark- GDTUnifiedInterstitialAdDelegate
+
+- (void)unifiedInterstitialSuccessToLoadAd:(GDTUnifiedInterstitialAd *)unifiedInterstitial {
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+}
 
 - (void)unifiedInterstitialFailToLoadAd:(GDTUnifiedInterstitialAd *)unifiedInterstitial error:(NSError *)error {
     NSString *message = [NSString stringWithFormat:@"%@: {method: unifiedInterstitialFailToLoadAd:error:, error: %@}", self.TAG, error.localizedDescription];
@@ -264,6 +272,11 @@ GDTRewardedVideoAdDelegate>
 }
 
 #pragma mark GDTUnifiedBannerViewDelegate
+
+- (void)unifiedBannerViewDidLoad:(GDTUnifiedBannerView *)unifiedBannerView {
+    self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+}
 
 - (void)unifiedBannerViewFailedToLoad:(GDTUnifiedBannerView *)unifiedBannerView error:(NSError *)error {
     NSString *message = [NSString stringWithFormat:@"%@: {method: unifiedBannerViewFailedToLoad:error, error: %@}", self.TAG, error.localizedDescription];

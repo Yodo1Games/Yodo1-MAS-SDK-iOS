@@ -212,12 +212,13 @@
     if ([interstitial.zoneID isEqualToString:[self getRewardAdId].adId]) {
         self.rewardAd = interstitial;
         isRewardAdReady = YES;
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
     }else if ([interstitial.zoneID isEqualToString:[self getInterstitialAdId].adId]){
         self.interstitialAd = interstitial;
         isInterstitialAdReady = YES;
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
     }
 }
-
 
 - (void)adColonyInterstitialExpired:(AdColonyInterstitial *)interstitial {
     if ([interstitial.zoneID isEqualToString:[self getRewardAdId].adId]) {

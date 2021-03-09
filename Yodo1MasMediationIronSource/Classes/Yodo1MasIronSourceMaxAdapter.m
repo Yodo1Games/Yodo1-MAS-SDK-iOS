@@ -115,6 +115,9 @@
 - (void)rewardedVideoHasChangedAvailability:(BOOL)available {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoHasChangedAvailability:, available: %@}", self.TAG, @(available)];
     NSLog(@"%@", message);
+    if (available) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    }
 }
 
 - (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo {
@@ -203,6 +206,7 @@
 - (void)interstitialDidLoad {
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidLoad}", self.TAG];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialDidFailToLoadWithError:(NSError *)ironSourceError {
@@ -293,6 +297,7 @@
     self.bannerAd = bannerView;
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidLoad:, banner: %@}", self.TAG, bannerView];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidFailToLoadWithError:(NSError *)adError {

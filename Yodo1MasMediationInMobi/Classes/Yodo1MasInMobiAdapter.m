@@ -219,6 +219,11 @@
 - (void)interstitial:(IMInterstitial *)interstitial didReceiveWithMetaInfo:(IMAdMetaInfo *)metaInfo {
     NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didReceiveWithMetaInfo:, ad: %@, info: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", metaInfo.bidInfo];
     NSLog(@"%@", message);
+    if (interstitial == _rewardAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if (interstitial == _interstitialAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    }
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial didFailToReceiveWithError:(NSError *)adError {
@@ -352,6 +357,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidFinishLoading:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)banner:(IMBanner*)banner didReceiveWithMetaInfo:(IMAdMetaInfo *)info {

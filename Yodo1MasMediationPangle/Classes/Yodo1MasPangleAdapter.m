@@ -200,6 +200,7 @@ BUNativeExpressBannerViewDelegate
 
 - (void)rewardedVideoAdVideoDidLoad:(BURewardedVideoAd *)rewardedVideoAd {
     isRewardAdReady = YES;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedVideoAd:(BURewardedVideoAd *)rewardedVideoAd didFailWithError:(NSError *)error {
@@ -234,6 +235,7 @@ BUNativeExpressBannerViewDelegate
 
 - (void)fullscreenVideoAdVideoDataDidLoad:(BUFullscreenVideoAd *)fullscreenVideoAd {
     isInterstitialAdReady = YES;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)fullscreenVideoAdWillVisible:(BUFullscreenVideoAd *)fullscreenVideoAd {
@@ -270,6 +272,7 @@ BUNativeExpressBannerViewDelegate
     self.bannerAd = bannerAdView;
     self.bannerAd.frame = CGRectMake(0,0,self.adSize.width,self.adSize.height);
     isBanerAdReady = YES;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {

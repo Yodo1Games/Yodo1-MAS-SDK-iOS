@@ -94,6 +94,13 @@
 }
 
 #pragma mark - FBRewardedVideoAdDelegate
+
+- (void)rewardedVideoAdDidLoad:(FBRewardedVideoAd *)rewardedVideoAd {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidLoad:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
+    NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+}
+
 - (void)rewardedVideoAdDidClick:(FBRewardedVideoAd *)rewardedVideoAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method:rewardedVideoAdDidClick:, reward: %@}",self.TAG, rewardedVideoAd.placementID];
     NSLog(@"%@", message);
@@ -177,6 +184,12 @@
 }
 
 #pragma mark - FBInterstitialAdDelegate
+- (void)interstitialAdDidLoad:(FBInterstitialAd *)interstitialAd {
+    NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdDidLoad:, interstitial: %@}",self.TAG, interstitialAd.placementID];
+    NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+}
+
 - (void)interstitialAdDidClick:(FBInterstitialAd *)interstitialAd {
     NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialAdDidClick:, interstitial: %@}",self.TAG, interstitialAd.placementID];
     NSLog(@"%@", message);
@@ -268,6 +281,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidLoad:, banner: %@}",self.TAG, adView.placementID];
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)facebookError {

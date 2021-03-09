@@ -197,6 +197,11 @@
 - (void)unityAdsAdLoaded:(NSString *)placementId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsAdLoaded:, placementId: %@}", self.TAG, placementId];
     NSLog(@"%@", message);
+    if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    }
 }
 
 - (void)unityAdsAdFailedToLoad:(NSString *)placementId {
@@ -277,6 +282,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidLoad:, id: %@}", self.TAG, bannerView.placementId];
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerViewDidClick:(UADSBannerView *)bannerView {
