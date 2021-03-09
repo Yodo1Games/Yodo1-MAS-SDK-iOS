@@ -186,11 +186,6 @@
 		ECEE853225F60DA900D8EEF5 /* FacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850F25F60DA900D8EEF5 /* FacebookAdapter.framework */; };
 		ECEE853325F60DA900D8EEF5 /* ISFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851025F60DA900D8EEF5 /* ISFacebookAdapter.framework */; };
 		ECEE853425F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851125F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework */; };
-		ECEE853525F60DA900D8EEF5 /* FacebookYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851325F60DA900D8EEF5 /* FacebookYandexMobileAdsAdapters.framework */; };
-		ECEE853625F60DA900D8EEF5 /* AppLovinYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851425F60DA900D8EEF5 /* AppLovinYandexMobileAdsAdapters.framework */; };
-		ECEE853725F60DA900D8EEF5 /* IronSourceYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851525F60DA900D8EEF5 /* IronSourceYandexMobileAdsAdapters.framework */; };
-		ECEE853825F60DA900D8EEF5 /* MyTargetYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851625F60DA900D8EEF5 /* MyTargetYandexMobileAdsAdapters.framework */; };
-		ECEE853925F60DA900D8EEF5 /* UnityAdsYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851725F60DA900D8EEF5 /* UnityAdsYandexMobileAdsAdapters.framework */; };
 		ECEE853A25F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851825F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework */; };
 		ECEE853B25F60DA900D8EEF5 /* IronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851A25F60DA900D8EEF5 /* IronSourceAdapter.framework */; };
 		ECEE853C25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851B25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework */; };
@@ -417,11 +412,6 @@
 		ECEE850F25F60DA900D8EEF5 /* FacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookAdapter.framework; sourceTree = "<group>"; };
 		ECEE851025F60DA900D8EEF5 /* ISFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISFacebookAdapter.framework; sourceTree = "<group>"; };
 		ECEE851125F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationFacebookAdapter.framework; sourceTree = "<group>"; };
-		ECEE851325F60DA900D8EEF5 /* FacebookYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECEE851425F60DA900D8EEF5 /* AppLovinYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECEE851525F60DA900D8EEF5 /* IronSourceYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSourceYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECEE851625F60DA900D8EEF5 /* MyTargetYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECEE851725F60DA900D8EEF5 /* UnityAdsYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAdsYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
 		ECEE851825F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationYandexAdapter.framework; sourceTree = "<group>"; };
 		ECEE851A25F60DA900D8EEF5 /* IronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSourceAdapter.framework; sourceTree = "<group>"; };
 		ECEE851B25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationIronSourceAdapter.framework; sourceTree = "<group>"; };
@@ -481,8 +471,6 @@
 				AC24426CBF90E99C4CA2683C /* MessageUI.framework in Frameworks */,
 				7CC1497FA8709DD535467B43 /* CoreLocation.framework in Frameworks */,
 				ECEE842F25F6028900D8EEF5 /* MyTargetSDK.framework in Frameworks */,
-				ECEE853625F60DA900D8EEF5 /* AppLovinYandexMobileAdsAdapters.framework in Frameworks */,
-				ECEE853825F60DA900D8EEF5 /* MyTargetYandexMobileAdsAdapters.framework in Frameworks */,
 				ECEE851D25F60DA900D8EEF5 /* ISUnityAdsAdapter.framework in Frameworks */,
 				ECEE853025F60DA900D8EEF5 /* ISMyTargetAdapter.framework in Frameworks */,
 				ECEE852225F60DA900D8EEF5 /* AppLovinMediationInMobiAdapter.framework in Frameworks */,
@@ -494,7 +482,6 @@
 				ECEE852F25F60DA900D8EEF5 /* MyTargetAdapter.framework in Frameworks */,
 				ECEE84AB25F6033500D8EEF5 /* FBAudienceNetwork.framework in Frameworks */,
 				ECEE851E25F60DA900D8EEF5 /* UnityAdapter.framework in Frameworks */,
-				ECEE853725F60DA900D8EEF5 /* IronSourceYandexMobileAdsAdapters.framework in Frameworks */,
 				ECEE852A25F60DA900D8EEF5 /* ISAppLovinAdapter.framework in Frameworks */,
 				ECEE844325F6028900D8EEF5 /* GoogleUtilities.framework in Frameworks */,
 				ECEE848C25F6028900D8EEF5 /* VungleSDK.framework in Frameworks */,
@@ -503,7 +490,6 @@
 				ECEE848B25F6028900D8EEF5 /* INMMoatMobileAppKit.framework in Frameworks */,
 				ECEE852325F60DA900D8EEF5 /* InMobiAdapter.framework in Frameworks */,
 				B8D0492BAAC306D866534B04 /* AVFoundation.framework in Frameworks */,
-				ECEE853925F60DA900D8EEF5 /* UnityAdsYandexMobileAdsAdapters.framework in Frameworks */,
 				77A04FC0A64DBD2EF7201FE4 /* CoreMedia.framework in Frameworks */,
 				296D48EC912F657FD39BD651 /* CoreMotion.framework in Frameworks */,
 				A04F48A983D75F8E87823B24 /* WebKit.framework in Frameworks */,
@@ -517,7 +503,6 @@
 				AE754B6B8FE0C46727E3681A /* libz.tbd in Frameworks */,
 				D1F2468D97C8E2CCDE9B91F0 /* libz.1.2.5.tbd in Frameworks */,
 				ECEE852025F60DA900D8EEF5 /* ISVungleAdapter.framework in Frameworks */,
-				ECEE853525F60DA900D8EEF5 /* FacebookYandexMobileAdsAdapters.framework in Frameworks */,
 				74C0478F958CB2E95D9E7499 /* libresolv.tbd in Frameworks */,
 				ECEE844225F6028900D8EEF5 /* PersonalizedAdConsent.framework in Frameworks */,
 				CF34448AA3E5A5E73DDC4839 /* libicucore.tbd in Frameworks */,
@@ -1436,11 +1421,6 @@
 		ECEE851225F60DA900D8EEF5 /* yandex */ = {
 			isa = PBXGroup;
 			children = (
-				ECEE851325F60DA900D8EEF5 /* FacebookYandexMobileAdsAdapters.framework */,
-				ECEE851425F60DA900D8EEF5 /* AppLovinYandexMobileAdsAdapters.framework */,
-				ECEE851525F60DA900D8EEF5 /* IronSourceYandexMobileAdsAdapters.framework */,
-				ECEE851625F60DA900D8EEF5 /* MyTargetYandexMobileAdsAdapters.framework */,
-				ECEE851725F60DA900D8EEF5 /* UnityAdsYandexMobileAdsAdapters.framework */,
 				ECEE851825F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework */,
 			);
 			path = yandex;
