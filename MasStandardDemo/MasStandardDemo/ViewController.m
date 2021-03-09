@@ -25,7 +25,7 @@
     [[Yodo1Mas sharedInstance] initWithAppId:@"qqiOsnhyOie" successful:^{
         
     } fail:^(NSError * _Nonnull error) {
-        
+        NSLog(@"%@",error);
     }];
 }
 
