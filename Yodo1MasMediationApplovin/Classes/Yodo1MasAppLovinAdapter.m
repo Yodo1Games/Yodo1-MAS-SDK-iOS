@@ -31,6 +31,7 @@
 #pragma mark - ALAdLoadDelegate
 - (void)adService:(ALAdService *)adService didLoadAd:(ALAd *)ad {
     NSLog(@"%@: {method:adService:didLoadAd:,Reward, ad:%@}", _adapter.TAG, ad.adIdNumber);
+    [_adapter callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)adService:(ALAdService *)adService didFailToLoadAdWithError:(int)code {
@@ -109,6 +110,7 @@
 - (void)adService:(ALAdService *)adService didLoadAd:(ALAd *)ad {
     NSLog(@"%@: {method:adService:didLoadAd:, Interstitial, ad:%@}", _adapter.TAG, ad.adIdNumber);
     _adapter.interstitialState = Yodo1MasBannerStateLoaded;
+    [_adapter callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)adService:(ALAdService *)adService didFailToLoadAdWithError:(int)code {
@@ -173,6 +175,7 @@
 - (void)adService:(ALAdService *)adService didLoadAd:(ALAd *)ad {
     NSLog(@"%@: {method:adService:didLoadAd:, Banner, ad:%@}", _adapter.TAG, ad.adIdNumber);
     _adapter.bannerState = Yodo1MasBannerStateLoaded;
+    [_adapter callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)adService:(ALAdService *)adService didFailToLoadAdWithError:(int)code {
@@ -264,7 +267,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.2";
+    return @"4.0.2.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {

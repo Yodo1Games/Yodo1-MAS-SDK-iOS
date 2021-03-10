@@ -44,7 +44,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.1.2";
+    return @"4.0.2.0";
 }
 
 - (instancetype)init {
@@ -198,7 +198,6 @@
     NSDictionary *mediations = @{
         @"ADMOB" : @"Yodo1MasAdMobMaxAdapter",
         @"APPLOVIN" : @"Yodo1MasAppLovinMaxAdapter",
-        //@"FYBER" : @"Yodo1MasFyberAdapter",
         @"IRONSOURCE" : @"Yodo1MasIronSourceMaxAdapter"
     };
     

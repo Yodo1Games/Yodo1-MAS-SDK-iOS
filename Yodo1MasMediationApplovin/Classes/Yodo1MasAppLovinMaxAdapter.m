@@ -32,7 +32,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.2";
+    return @"4.0.2.0";
 }
 
 - (BOOL)isMax {
@@ -166,7 +166,7 @@
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.currentBannerUnitId == nil || ![adId.adId isEqualToString:self.currentBannerUnitId])) {
         self.bannerAd = [[MAAdView alloc] initWithAdUnitIdentifier:[self getBannerAdId].adId];
-        self.bannerAd.frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
+        self.bannerAd.frame = CGRectMake(0, 0, self.adSize.width, self.adSize.height);
         self.bannerAd.delegate = self;
         self.currentBannerUnitId = adId.adId;
     }
@@ -213,6 +213,13 @@
     NSLog(@"%@: {method:didLoadAd:, ad:%@}", self.TAG, ad.adUnitIdentifier);
     if ([ad.adUnitIdentifier isEqualToString:[self getBannerAdId].adId]) {
         self.bannerState = Yodo1MasBannerStateLoaded;
+    }
+    if (ad.format == MAAdFormat.rewarded) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if (ad.format == MAAdFormat.interstitial) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    } else if (ad.format == MAAdFormat.banner) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
     }
 }
 
