@@ -8,7 +8,7 @@
 #import "Yodo1MasMyTargetAdapter.h"
 #import <MyTargetSDK/MyTargetSDK.h>
 
-#define BANNER_TAG 10011
+#define BANNER_TAG 10010
 
 
 @interface Yodo1MasMyTargetAdapter()<MTRGInterstitialAdDelegate,MTRGAdViewDelegate> {
@@ -193,8 +193,10 @@
 - (void)onLoadWithInterstitialAd:(nonnull MTRGInterstitialAd *)interstitialAd {
     if (self.rewardAd == interstitialAd) {
         isRewardAdReady = YES;
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
     }else if (self.interstitialAd == interstitialAd){
         isInterstitialAdReady = YES;
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
     }
     NSString *message = [NSString stringWithFormat:@"%@: {method: onLoadWithInterstitialAd:, instanceId: %@}", self.TAG, interstitialAd];
     NSLog(@"%@", message);
@@ -230,10 +232,12 @@
     if (self.rewardAd == interstitialAd) {
         self.rewardAd = nil;
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+        [self nextReward];
         [self loadRewardAd];
     }else if (self.interstitialAd == interstitialAd){
         self.interstitialAd = nil;
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+        [self nextInterstitial];
         [self loadInterstitialAd];
     }
 }
@@ -272,6 +276,7 @@
     self.bannerAd = adView;
     NSString *message = [NSString stringWithFormat:@"%@: {method: onLoadWithAdView:, banner: %@}", self.TAG, adView];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)onNoAdWithReason:(nonnull NSString *)reason adView:(nonnull MTRGAdView *)adView {

@@ -60,6 +60,10 @@ typedef enum {
 @property (nonatomic, copy, readonly) Yodo1MasAdCallback bannerCallback;
 @property (nonatomic, assign) Yodo1MasBannerState bannerState;
 
+@property (nonatomic, assign, readonly) CGSize adSize;
+
+@property (nonatomic, copy) NSString * placement;
+
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail;
 - (BOOL)isInitSDK;
 - (void)updatePrivacy;
@@ -78,6 +82,7 @@ typedef enum {
 - (BOOL)isCanShow:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback;
 - (void)callbackWithEvent:(Yodo1MasAdEventCode)code type:(Yodo1MasAdType)type;
 - (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdType)type;
+- (void)callbackWithAdLoadSuccess:(Yodo1MasAdType)type;
 
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded;

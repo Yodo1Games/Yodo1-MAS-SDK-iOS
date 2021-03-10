@@ -181,7 +181,7 @@
 
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.currentBannerId == nil || ![self.currentBannerId isEqualToString:adId.adId])) {
-        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height) placementId:[adId.adId longLongValue] delegate:self];
+        self.bannerAd = [[IMBanner alloc] initWithFrame:CGRectMake(0, 0, self.adSize.width, self.adSize.height) placementId:[adId.adId longLongValue] delegate:self];
         self.currentBannerId = adId.adId;
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:[Yodo1MasInMobiAdapter getTopViewController]];
     }
@@ -219,6 +219,11 @@
 - (void)interstitial:(IMInterstitial *)interstitial didReceiveWithMetaInfo:(IMAdMetaInfo *)metaInfo {
     NSString *message = [NSString stringWithFormat:@"%@: {method:interstitial:didReceiveWithMetaInfo:, ad: %@, info: %@}",self.TAG, interstitial == _rewardAd ? @"reward" : @"interstitial", metaInfo.bidInfo];
     NSLog(@"%@", message);
+    if (interstitial == _rewardAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if (interstitial == _interstitialAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    }
 }
 
 - (void)interstitial:(IMInterstitial *)interstitial didFailToReceiveWithError:(NSError *)adError {
@@ -352,6 +357,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method:bannerDidFinishLoading:, ad: %@}",self.TAG, @(banner.placementId)];
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)banner:(IMBanner*)banner didReceiveWithMetaInfo:(IMAdMetaInfo *)info {

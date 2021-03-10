@@ -191,6 +191,11 @@
 - (void)requestDidSucceed:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: requestDidSucceed:, placement: %@}", self.TAG, placement.placementName];
     NSLog(@"%@", message);
+    if (placement == _rewardAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if (placement == _interstitialAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    }
 }
 
 - (void)requestDidFail:(TJPlacement *)placement error:(NSError *)adError {

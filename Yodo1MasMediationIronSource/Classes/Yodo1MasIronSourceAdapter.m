@@ -117,6 +117,7 @@
 - (void)rewardedVideoDidLoad:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidLoad:, instanceId: %@}", self.TAG, instanceId];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedVideoDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
@@ -202,6 +203,7 @@
 - (void)interstitialDidLoad:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidLoad:, show instanceId: %@}", self.TAG, instanceId];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
@@ -289,6 +291,7 @@
     self.bannerAd = bannerView;
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidLoad:, banner: %@}", self.TAG, bannerView];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidFailToLoadWithError:(NSError *)adError {
