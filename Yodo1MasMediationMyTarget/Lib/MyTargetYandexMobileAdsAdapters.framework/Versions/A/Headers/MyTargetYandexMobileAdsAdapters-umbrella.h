@@ -1,1 +1,0 @@
-#import "YMAMyTargetVersion.h"
