@@ -26,7 +26,7 @@
 @implementation Yodo1MasMyTargetAdapter
 
 - (NSString *)advertCode {
-    return @"myTarget";
+    return @"mytarget";
 }
 
 - (NSString *)sdkVersion {

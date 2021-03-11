@@ -65,7 +65,7 @@
 }
 
 - (NSString *)advertCode {
-    return @"Yandex";
+    return @"yandex";
 }
 
 - (NSString *)sdkVersion {

@@ -23,7 +23,7 @@
 @implementation Yodo1MasInMobiAdapter
 
 - (NSString *)advertCode {
-    return @"InMobi";
+    return @"inmobi";
 }
 
 - (NSString *)sdkVersion {
