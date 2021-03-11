@@ -44,7 +44,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.1.1";
+    return @"4.0.1.2";
 }
 
 - (instancetype)init {
@@ -93,8 +93,6 @@
                                               @"publishChannelCode": @"appstore",
                                               @"sdkVersion": [Yodo1Mas sdkVersion]}];
     [Yodo1SaManager track:@"adInit" properties:nil];
-    
-    [self doInit:appId successful:successful fail:fail];
     
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (weakSelf.isInit) return;
