@@ -44,7 +44,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.2.0";
+    return @"4.0.2.1";
 }
 
 - (instancetype)init {
