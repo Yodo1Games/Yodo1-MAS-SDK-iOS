@@ -45,7 +45,7 @@ jobs:
   job_publish_core:
     name: publish core
     runs-on: macos-latest
-    needs: job_build
+    #needs: job_build
     steps:
       - name: Checkout
         uses: actions/checkout@v2
