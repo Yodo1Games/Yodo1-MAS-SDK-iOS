@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasCore'
-  s.version          = '4.0.1.1'
+  s.version          = '4.0.2.1'
   s.summary          = 'Yodo1MasCore for iOS'
   s.swift_version    = '5.0'
 
@@ -33,6 +33,7 @@ TODO: Yodo1MasCore
   s.info_plist = {
     'AppLovinSdkKey' => 'xcGD2fy-GdmiZQapx_kUSy5SMKyLoXBk8RyB5u9MVv34KetGdbl4XrXvAUFy0Qg9scKyVTI0NM4i_yzdXih4XE',
     'SKAdNetworkItems' => [
+    {'SKAdNetworkIdentifier' => '275upjj5gd.skadnetwork'},
     {'SKAdNetworkIdentifier' => '2u9pt9hc89.skadnetwork'},
     {'SKAdNetworkIdentifier' => '3rd42ekr43.skadnetwork'},
     {'SKAdNetworkIdentifier' => '4468km3ulz.skadnetwork'},
@@ -40,13 +41,17 @@ TODO: Yodo1MasCore
     {'SKAdNetworkIdentifier' => '4fzdc2evr5.skadnetwork'},
     {'SKAdNetworkIdentifier' => '4pfyvq9l8r.skadnetwork'},
     {'SKAdNetworkIdentifier' => '5lm9lj6jb7.skadnetwork'},
+    {'SKAdNetworkIdentifier' => '6g9af3uyq4.skadnetwork'},
     {'SKAdNetworkIdentifier' => '7rz58n8ntl.skadnetwork'},
     {'SKAdNetworkIdentifier' => '7ug5zh24hu.skadnetwork'},
     {'SKAdNetworkIdentifier' => '8s468mfl3y.skadnetwork'},
+    {'SKAdNetworkIdentifier' => '9nlqeag3gk.skadnetwork'},
     {'SKAdNetworkIdentifier' => '9rd848q2bz.skadnetwork'},
     {'SKAdNetworkIdentifier' => '9t245vhmpl.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'c6k4g5qg8m.skadnetwork'},
+    {'SKAdNetworkIdentifier' => 'cg4yq2srnc.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'ejvt5qm6ak.skadnetwork'},
+    {'SKAdNetworkIdentifier' => 'g28c52eehv.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'hs6bdukanm.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'klf5c3l5u5.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'm8dbw4sv7c.skadnetwork'},
@@ -54,8 +59,11 @@ TODO: Yodo1MasCore
     {'SKAdNetworkIdentifier' => 'mtkv5xtk9e.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'ppxm28t8ap.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'prcb7njmu6.skadnetwork'},
+    {'SKAdNetworkIdentifier' => 'rx5hdcabgc.skadnetwork'},
     {'SKAdNetworkIdentifier' => 't38b2kh725.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'tl55sbb4fm.skadnetwork'},
+    {'SKAdNetworkIdentifier' => 'u679fj5vs4.skadnetwork'},
+    {'SKAdNetworkIdentifier' => 'uw77j35x4d.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'v72qych5uu.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'yclnxrl5pm.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'cstr6suwn9.skadnetwork'},
@@ -74,12 +82,9 @@ TODO: Yodo1MasCore
     {'SKAdNetworkIdentifier' => '5a6flpkh64.skadnetwork'},
     {'SKAdNetworkIdentifier' => '5l3tpt7t6e.skadnetwork'},
     {'SKAdNetworkIdentifier' => '9g2aggbj52.skadnetwork'},
-    {'SKAdNetworkIdentifier' => 'cg4yq2srnc.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'dzg6xy7pwj.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'f73kdq92p3.skadnetwork'},
-    {'SKAdNetworkIdentifier' => 'g28c52eehv.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'hdw39hrw9y.skadnetwork'},
-    {'SKAdNetworkIdentifier' => 'uw77j35x4d.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'wg4vff78zm.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'y45688jllp.skadnetwork'},
     {'SKAdNetworkIdentifier' => '424m5254lk.skadnetwork'},
@@ -90,6 +95,7 @@ TODO: Yodo1MasCore
     {'SKAdNetworkIdentifier' => '6xzpu9s2p8.skadnetwork'},
     {'SKAdNetworkIdentifier' => '737z793b9f.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'glqzh8vgby.skadnetwork'},
+    {'SKAdNetworkIdentifier' => 'n9x2a789qt.skadnetwork'},
     {'SKAdNetworkIdentifier' => '578prtvx9j.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'ecpz2srf59.skadnetwork'},
     {'SKAdNetworkIdentifier' => '22mmun2rn5.skadnetwork'},
@@ -102,8 +108,7 @@ TODO: Yodo1MasCore
     {'SKAdNetworkIdentifier' => 's39g8k73mm.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'v79kvwwj4g.skadnetwork'},
     {'SKAdNetworkIdentifier' => 'zmvfpc5aq8.skadnetwork'},
-    {'SKAdNetworkIdentifier' => 'gta9lk7p23.skadnetwork'},
-    {'SKAdNetworkIdentifier' => 'n9x2a789qt.skadnetwork'}
+    {'SKAdNetworkIdentifier' => 'gta9lk7p23.skadnetwork'}
     ]
   }
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
