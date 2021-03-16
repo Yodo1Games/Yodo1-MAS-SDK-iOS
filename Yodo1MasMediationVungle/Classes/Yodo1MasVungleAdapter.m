@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.1";
+    return @"4.0.2.1";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -107,6 +107,8 @@
             [self callbackWithError:error type:Yodo1MasAdTypeReward];
             [self nextReward];
             [self loadRewardAdDelayed];
+        }else{
+            [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
         }
     }
 }
@@ -156,6 +158,8 @@
             [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
             [self nextInterstitial];
             [self loadInterstitialAdDelayed];
+        }else{
+            [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
         }
     }
 }
@@ -209,6 +213,8 @@
             [self callbackWithError:error type:Yodo1MasAdTypeBanner];
             [self nextBanner];
             [self loadRewardAdDelayed];
+        }else{
+            [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
         }
     }
 }

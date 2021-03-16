@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.1";
+    return @"4.0.2.1";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -111,6 +111,7 @@
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
                 [weakSelf callbackWithError:error type:Yodo1MasAdTypeReward];
                 [weakSelf loadRewardAdDelayed];
+                [weakSelf callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
             }
         }];
     }
@@ -212,6 +213,7 @@ didFailToPresentWithError:(nonnull NSError *)adMobError {
 - (void)interstitialDidReceiveAd:(nonnull GADInterstitial *)ad {
     NSString *message = [NSString stringWithFormat:@"%@: {method:interstitialDidReceiveAd, ad: %@}", self.TAG, ad.adUnitID];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitial:(nonnull GADInterstitial *)ad
@@ -315,6 +317,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
     NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidReceiveAd:, banner: %@}", self.TAG, bannerView.adUnitID];
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)adView:(nonnull GADBannerView *)bannerView

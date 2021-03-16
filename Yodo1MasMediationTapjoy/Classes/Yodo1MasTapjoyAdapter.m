@@ -26,7 +26,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.1";
+    return @"4.0.2.1";
 }
 
 -(void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail  {
@@ -191,6 +191,11 @@
 - (void)requestDidSucceed:(TJPlacement *)placement {
     NSString *message = [NSString stringWithFormat:@"%@: {method: requestDidSucceed:, placement: %@}", self.TAG, placement.placementName];
     NSLog(@"%@", message);
+    if (placement == _rewardAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if (placement == _interstitialAd) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    }
 }
 
 - (void)requestDidFail:(TJPlacement *)placement error:(NSError *)adError {
