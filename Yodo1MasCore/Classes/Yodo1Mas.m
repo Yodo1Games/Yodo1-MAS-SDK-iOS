@@ -15,6 +15,7 @@
 #endif
 #import <AdSupport/AdSupport.h>
 #import "Yodo1SaManager.h"
+#import "YD1AdsManager.h"
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
@@ -29,6 +30,7 @@
 @property (nonatomic, assign) BOOL isInit;
 @property (nonatomic, assign) BOOL isRequesting;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
+@property (nonatomic, assign) int test_mode;
 
 @end
 
@@ -162,9 +164,13 @@
         if (data != nil) {
             weakSelf.masInitConfig = data.mas_init_config;
             weakSelf.masNetworkConfig = data.ad_network_config;
+            weakSelf.test_mode = data.test_mode;
             if (data.mas_init_config && data.ad_network_config) {
                 if (debug) {
                     NSLog(@"获取广告数据成功 - %@", responseObject);
+                }
+                if (weakSelf.test_mode == 1) {
+                    [YD1AdsManager.sharedInstance initAdvert];
                 }
                 [weakSelf doInitAdapter];
                 weakSelf.isInit = YES;
@@ -379,6 +385,21 @@
 
 - (BOOL)isAdvertLoaded:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdType)type {
     BOOL isLoaded = NO;
+    if (self.test_mode == 1) {
+        switch (type) {
+            case Yodo1MasAdTypeReward:
+                isLoaded = [YD1AdsManager.sharedInstance isVideoReady];
+                break;
+            case Yodo1MasAdTypeInterstitial:
+                isLoaded = [YD1AdsManager.sharedInstance isInterstitialReady];
+                break;
+            case Yodo1MasAdTypeBanner:
+                isLoaded = [YD1AdsManager.sharedInstance isBannerReady];
+                break;
+        }
+        return isLoaded;
+    }
+    
     if (config != nil) {
         if (config.mediation_list != nil && config.mediation_list.count > 0) {
             for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
@@ -469,6 +490,20 @@
 }
 
 - (void)showAdvert:(Yodo1MasAdType)type object:(NSDictionary *)object {
+    if (self.test_mode == 1) {
+        switch (type) {
+            case Yodo1MasAdTypeReward:
+                [YD1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
+                break;
+            case Yodo1MasAdTypeInterstitial:
+                [YD1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
+                break;
+            case Yodo1MasAdTypeBanner:
+                
+                break;
+        }
+        return;
+    }
     Yodo1MasNetworkAdvert *config = nil;
     switch (type) {
         case Yodo1MasAdTypeReward:

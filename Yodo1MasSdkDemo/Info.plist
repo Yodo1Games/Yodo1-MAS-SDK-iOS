@@ -367,9 +367,7 @@
 	<dict>
 		<key>Api</key>
 		<string>https://rivendell-dev.explorer.yodo1.com/v1/init/</string>
-		<key>Debug</key>
-		<true/>
-		<key>Yodo1Config</key>
+		<key>Config</key>
 		<dict>
 			<key>ad_network_config</key>
 			<dict>
@@ -406,7 +404,7 @@
 									<key>network_code</key>
 									<string>2348427</string>
 									<key>price</key>
-									<real>15.3</real>
+									<real>15.300000000000001</real>
 									<key>price_type</key>
 									<string>manual</string>
 								</dict>
@@ -450,7 +448,11 @@
 					</dict>
 				</array>
 			</dict>
+			<key>test_mode</key>
+			<integer>1</integer>
 		</dict>
+		<key>Debug</key>
+		<true/>
 		<key>sensors_debug_env</key>
 		<string>1</string>
 	</dict>
