@@ -79,6 +79,10 @@ static YD1AdsManager* _instance = nil;
                 if (weakSelfBanner.kBannerCallbak) {
                     weakSelfBanner.kBannerCallbak(kYD1BannerStateClicked);
                 }
+            }else if (state == kYD1BannerStateShow){
+                if (weakSelfBanner.kBannerCallbak) {
+                    weakSelfBanner.kBannerCallbak(kYD1BannerStateShow);
+                }
             }
         });
     }];

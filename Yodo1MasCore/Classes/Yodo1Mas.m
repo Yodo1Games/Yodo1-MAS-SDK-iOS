@@ -79,7 +79,7 @@
     
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL sensorsDebugEnv = yodo1Config[@"sensors_debug_env"] && [yodo1Config[@"sensors_debug_env"] boolValue];
-
+    
     __weak __typeof(self)weakSelf = self;
     
     NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=production";
@@ -244,24 +244,36 @@
     [YD1AdsManager.sharedInstance bannerCallback:^(YD1BannerState state) {
         switch (state) {
             case kYD1BannerStateFail:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:nil];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
-                    [self.bannerAdDelegate onAdError:nil error:nil];
+                    [self.bannerAdDelegate onAdError:event error:error];
                 }
+            }
                 break;
-            case kYD1BannerStateShow:
+            case kYD1BannerStateClicked:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
-                    [self.bannerAdDelegate onAdOpened:nil];
+                    [self.bannerAdDelegate onAdOpened:event];
                 }
+            }
                 break;
             case kYD1BannerStateClose:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
-                    [self.bannerAdDelegate onAdClosed:nil];
+                    [self.bannerAdDelegate onAdClosed:event];
                 }
+            }
                 break;
             default:
                 break;
         }
     }];
+    UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
+    [Yodo1MasBanner addBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
     
     [YD1AdsManager.sharedInstance videoCallback:^(YD1VideoState state) {
         
@@ -587,13 +599,20 @@
     if (self.test_mode == 1) {
         switch (type) {
             case Yodo1MasAdTypeReward:
+            {
                 [YD1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
+            }
                 break;
             case Yodo1MasAdTypeInterstitial:
+            {
                 [YD1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
+            }
                 break;
             case Yodo1MasAdTypeBanner:
-                
+            {
+                UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
+                [Yodo1MasBanner showBannerWithTag:131415 controller:controller object:object];
+            }
                 break;
         }
         return;
@@ -627,10 +646,10 @@
                         [adapters removeObjectAtIndex:0];
                     }
                     if (adapters.count > 0) {
-                        _currentAdapter = adapters.firstObject;
-                        [adapters.firstObject showAd:type callback:_adBlock object:object];
+                        self->_currentAdapter = adapters.firstObject;
+                        [adapters.firstObject showAd:type callback:self->_adBlock object:object];
                     } else {
-                        _adBlock = nil;
+                        self->_adBlock = nil;
                         [self callbackWithEvent:event];
                     }
                     break;
@@ -836,12 +855,18 @@
 }
 
 - (void)dismissBannerAd {
+    if (self.test_mode == 1) {
+        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+    }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];
     }
 }
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    if (self.test_mode == 1) {
+        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:destroy];
+    }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAdWithDestroy:destroy];
     }
