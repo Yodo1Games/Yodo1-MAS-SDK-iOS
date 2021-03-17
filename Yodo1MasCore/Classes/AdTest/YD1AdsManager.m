@@ -96,6 +96,10 @@ static YD1AdsManager* _instance = nil;
                 }
                 [weakSelfVideo.kVideoViewController dismissViewControllerAnimated:YES
                                                                      completion:nil];
+            }else if (state == kYD1VideoStateFinished){
+                if (weakSelfVideo.kVideoCallbak) {
+                    weakSelfVideo.kVideoCallbak(kYD1VideoStateFinished);
+                }
             }
         });
     }];
