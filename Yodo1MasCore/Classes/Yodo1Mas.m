@@ -214,6 +214,7 @@
         //@"pangle" : @"Yodo1MasPangleAdapter",
         @"tapjoy" : @"Yodo1MasTapjoyAdapter",
         //@"tencent" : @"Yodo1MasTencentAdapter",
+        @"baidu" : @"Yodo1MasBaiduAdapter",
         @"unity" : @"Yodo1MasUnityAdsAdapter",
         @"vungle" : @"Yodo1MasVungleAdapter",
         @"yandex" : @"Yodo1MasYandexAdapter"
