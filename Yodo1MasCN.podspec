@@ -40,5 +40,5 @@ TODO: Add long description of the pod here.
   s.dependency 'Yodo1MasMediationMintegralMax', '4.0.2.1'
   s.dependency 'Yodo1MasMediationPangleMax', '4.0.2.1'
   s.dependency 'Yodo1MasMediationTencentMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationBaibu', '4.0.2.1'
+  s.dependency 'Yodo1MasMediationBaidu', '4.0.2.1'
 end
