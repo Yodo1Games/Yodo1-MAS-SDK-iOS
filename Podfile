@@ -48,6 +48,7 @@ pod 'Yodo1MasMediationVungle', :path => './'
 pod 'Yodo1MasMediationVungleMax', :path => './'
 pod 'Yodo1MasMediationYandex', :path => './'
 pod 'Yodo1MasMediationYandexMax', :path => './'
+pod 'Yodo1MasMediationBaidu', :path => './'
 
 #pod 'Yodo1MasUnityBridge', :path => './'
 

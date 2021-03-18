@@ -85,7 +85,8 @@ BaiduMobAdRewardVideoDelegate>
             [BaiduMobAdSetting sharedInstance].supportHttps = YES;
             
             _publisherId = config.appId;
-            
+            self.sdkInit = YES;
+
             [self updatePrivacy];
             [self loadRewardAd];
             [self loadInterstitialAd];
@@ -93,7 +94,6 @@ BaiduMobAdRewardVideoDelegate>
             if (self.initSuccessfulCallback != nil) {
                 self.initSuccessfulCallback(self.advertCode);
             }
-            self.sdkInit = YES;
         } else {
             NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",self.TAG];
             NSLog(@"%@", message);
@@ -271,12 +271,7 @@ BaiduMobAdRewardVideoDelegate>
     [super loadBannerAd];
     if (![self isInitSDK]) return;
     if ([self isBannerAdLoaded]) {return;}
-    if (self.adBanner.superview) {
-        [self.adBanner removeFromSuperview];
-        self.adBanner.delegate = nil;
-        self.adBanner = nil;
-    }
-    [self.adBanner setFrame:CGRectMake(0, 0, [super adSize].width, [super adSize].height)];
+    self.bannerState = Yodo1MasBannerStateLoading;
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -306,26 +301,33 @@ BaiduMobAdRewardVideoDelegate>
 #pragma mark BaiduMobAdViewDelegate
 
 - (void)willDisplayAd:(BaiduMobAdView *)adview {
-    
+    NSString *message = [NSString stringWithFormat:@"%@: {method:willDisplayAd:, banner: %@}",self.TAG, adview.AdUnitTag];
+    NSLog(@"%@", message);
+    self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)failedDisplayAd:(BaiduMobFailReason)reason {
     NSString *message = [NSString stringWithFormat:@"%@: {method: failedDisplayAd:error, reason: %u}", self.TAG, reason];
     NSLog(@"%@", message);
-    Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
-    [self callbackWithError:pangleError type:Yodo1MasAdTypeBanner];
+    
+    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
+    [self callbackWithError:error type:Yodo1MasAdTypeBanner];
+    self.bannerState = Yodo1MasBannerStateNone;
     [self nextBanner];
     [self loadBannerAdDelayed];
 }
 
 - (void)didAdImpressed {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: didAdImpressed}", self.TAG];
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didAdImpressed:, banner}",self.TAG];
     NSLog(@"%@", message);
+    self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
 }
 
 - (void)didAdClicked {
-
+    NSString *message = [NSString stringWithFormat:@"%@: {method:didAdClicked:, banner}",self.TAG];
+    NSLog(@"%@", message);
 }
 
 - (void)didAdClose {
