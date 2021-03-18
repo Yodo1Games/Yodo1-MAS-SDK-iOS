@@ -50,7 +50,6 @@ BaiduMobAdRewardVideoDelegate>
         _adBanner.AdType = BaiduMobAdViewTypeBanner;
         _adBanner.AdUnitTag = [self getBannerAdId].adId;
         [_adBanner setFrame:rect];
-        [_adBanner start];
     }
     return _adBanner;
 }
@@ -158,7 +157,7 @@ BaiduMobAdRewardVideoDelegate>
     [self callbackWithError:rewardError type:Yodo1MasAdTypeReward];
     self.rewardVideoAd = nil;
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)rewardedVideoAdDidStarted:(BaiduMobAdRewardVideo *)video {
@@ -170,6 +169,9 @@ BaiduMobAdRewardVideoDelegate>
     NSLog(@"%@", message);
     Yodo1MasError *baiduError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:baiduError type:Yodo1MasAdTypeReward];
+    self.rewardVideoAd = nil;
+    [self nextReward];
+    [self loadRewardAdDelayed];
 }
 
 - (void)rewardedVideoAdDidPlayFinish:(BaiduMobAdRewardVideo *)video {
@@ -229,7 +231,7 @@ BaiduMobAdRewardVideoDelegate>
     [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
     self.interstitialAd = nil;
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)interstitialWillPresentScreen:(BaiduMobAdInterstitial *)interstitial {
@@ -245,6 +247,9 @@ BaiduMobAdRewardVideoDelegate>
     NSLog(@"%@", message);
     Yodo1MasError *baiduError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:baiduError type:Yodo1MasAdTypeInterstitial];
+    self.interstitialAd = nil;
+    [self nextInterstitial];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)interstitialDidAdClicked:(BaiduMobAdInterstitial *)interstitial {
@@ -272,6 +277,11 @@ BaiduMobAdRewardVideoDelegate>
     if (![self isInitSDK]) return;
     if ([self isBannerAdLoaded]) {return;}
     self.bannerState = Yodo1MasBannerStateLoading;
+    UIViewController *controller = [Yodo1MasBaiduAdapter getTopViewController];
+    if (controller != nil) {
+        [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
+        [self.adBanner start];
+    }
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -279,11 +289,7 @@ BaiduMobAdRewardVideoDelegate>
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", self.TAG];
         NSLog(@"%@", message);
-        
         UIViewController *controller = [Yodo1MasBaiduAdapter getTopViewController];
-        if (controller != nil) {
-            [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
-        }
         [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
     }
 }

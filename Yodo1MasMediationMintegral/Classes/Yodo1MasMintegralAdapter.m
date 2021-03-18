@@ -45,6 +45,12 @@ MTGInterstitialVideoDelegate>
         [self updatePrivacy];
         [[MTGSDK sharedInstance]setAppID:config.appId ApiKey:config.appKey];
         self.sdkInit = YES;
+        [self loadRewardAd];
+        [self loadInterstitialAd];
+        [self loadBannerAd];
+        if (successful != nil) {
+            successful(self.advertCode);
+        }
     } else {
         if (successful != nil) {
             successful(self.advertCode);
