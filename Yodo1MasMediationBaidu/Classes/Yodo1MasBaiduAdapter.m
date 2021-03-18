@@ -50,6 +50,7 @@ BaiduMobAdRewardVideoDelegate>
         _adBanner.AdType = BaiduMobAdViewTypeBanner;
         _adBanner.AdUnitTag = [self getBannerAdId].adId;
         [_adBanner setFrame:rect];
+        [self.adBanner start];
     }
     return _adBanner;
 }
@@ -280,7 +281,6 @@ BaiduMobAdRewardVideoDelegate>
     UIViewController *controller = [Yodo1MasBaiduAdapter getTopViewController];
     if (controller != nil) {
         [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
-        [self.adBanner start];
     }
 }
 
@@ -327,7 +327,6 @@ BaiduMobAdRewardVideoDelegate>
 - (void)didAdImpressed {
     NSString *message = [NSString stringWithFormat:@"%@: {method:didAdImpressed:, banner}",self.TAG];
     NSLog(@"%@", message);
-    self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
 }
 
