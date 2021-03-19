@@ -120,9 +120,9 @@
             } else {
                 error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
             }
-            if (fail != nil) {
-                fail(error);
-            }
+//            if (fail != nil) {
+//                fail(error);
+//            }
         }
         return;
     }
