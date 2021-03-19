@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint Yodo1MasFull.podspec' to ensure this is a
+# Be sure to run `pod lib lint Yodo1MasCN.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Yodo1MasFull'
+  s.name             = 'Yodo1MasCN'
   s.version          = '4.0.2.1'
-  s.summary          = 'Yodo1MasFull'
+  s.summary          = 'Yodo1MasCN'
   s.swift_version    = '5.0'
 
 # This description is used to generate tags and improve search results.
@@ -35,21 +35,10 @@ TODO: Add long description of the pod here.
   #s.public_header_files = s.name + '/Classes/**/*.h'
   #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '~> 4.0.2.1'
-  s.dependency 'Yodo1MasMediationAdMobMax', '4.0.2.1'
+  s.dependency 'Yodo1MasCore', '~> 4.0.2.2'
   s.dependency 'Yodo1MasMediationApplovinMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationFyberMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationIronSourceMax', '4.0.2.1'
-  
-  s.dependency 'Yodo1MasMediationAdColonyMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationFacebookMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationInMobiMax', '4.0.2.1'
   s.dependency 'Yodo1MasMediationMintegralMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationMyTargetMax', '4.0.2.1'
   s.dependency 'Yodo1MasMediationPangleMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationTapjoyMax', '4.0.2.1'
   s.dependency 'Yodo1MasMediationTencentMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationUnityAdsMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationVungleMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationYandexMax', '4.0.2.1'
+  s.dependency 'Yodo1MasMediationBaidu', '4.0.2.2'
 end

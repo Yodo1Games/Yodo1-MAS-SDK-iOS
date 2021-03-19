@@ -59,6 +59,7 @@
         
         [options setPrivacyFrameworkOfType:ADC_COPPA isRequired:[Yodo1Mas sharedInstance].isCOPPAAgeRestricted];
         
+        __weak __typeof(self)weakSelf = self;
         Yodo1MasAdId *rewardAdId = [self getRewardAdId];
         Yodo1MasAdId *intersAdId = [self getRewardAdId];
         [AdColony configureWithAppID:config.appId
@@ -74,6 +75,13 @@
                 }
             }
             self->sdkInit = YES;
+            [weakSelf loadRewardAd];
+            [weakSelf loadInterstitialAd];
+            [weakSelf loadBannerAd];
+            
+            if (successful != nil) {
+                successful(self.advertCode);
+            }
         }];
     } else {
         if (successful != nil) {

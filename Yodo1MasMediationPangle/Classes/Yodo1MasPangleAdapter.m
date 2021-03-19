@@ -51,6 +51,12 @@ BUNativeExpressBannerViewDelegate
         [BUAdSDKManager setAppID:config.appId];
         [BUAdSDKManager setIsPaidApp:NO];
         self.sdkInit = YES;
+        [self loadRewardAd];
+        [self loadInterstitialAd];
+        [self loadBannerAd];
+        if (successful != nil) {
+            successful(self.advertCode);
+        }
     } else {
         if (successful != nil) {
             successful(self.advertCode);

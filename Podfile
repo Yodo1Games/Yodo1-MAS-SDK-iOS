@@ -15,6 +15,7 @@ pod 'GoogleMobileAdsMediationTestSuite'
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'Yodo1MasCore', :path => './'
+pod 'Yodo1MasCN', :path => './'
 pod 'Yodo1MasStandard', :path => './'
 pod 'Yodo1MasFull', :path => './'
 
@@ -35,7 +36,10 @@ pod 'Yodo1MasMediationTapjoy', :path => './'
 pod 'Yodo1MasMediationTencent', :path => './'
 pod 'Yodo1MasMediationUnityAds', :path => './'
 pod 'Yodo1MasMediationVungle', :path => './'
-
+pod 'Yodo1MasMediationVungleMax', :path => './'
+pod 'Yodo1MasMediationYandex', :path => './'
+pod 'Yodo1MasMediationYandexMax', :path => './'
+pod 'Yodo1MasMediationBaidu', :path => './'
 
 #pod 'Yodo1MasUnityBridge', :path => './'
 

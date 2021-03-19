@@ -46,7 +46,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.2.1";
+    return @"4.0.2.2";
 }
 
 - (instancetype)init {
@@ -211,6 +211,7 @@
         //@"adcolony" : @"Yodo1MasAdColonyAdapter",
         @"admob" : @"Yodo1MasAdMobAdapter",
         @"applovin" : @"Yodo1MasAppLovinAdapter",
+        @"baidu" : @"Yodo1MasBaiduAdapter",
         @"facebook" : @"Yodo1MasFacebookAdapter",
         //@"fyber" : @"Yodo1MasFyberAdapter",
         @"inmobi" : @"Yodo1MasInMobiAdapter",

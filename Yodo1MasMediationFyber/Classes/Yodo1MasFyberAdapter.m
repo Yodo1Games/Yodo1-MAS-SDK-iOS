@@ -39,6 +39,12 @@
         [self updatePrivacy];
         [FairBid startWithAppId:config.appId];
         self.sdkInit = YES;
+        [self loadRewardAd];
+        [self loadInterstitialAd];
+        [self loadBannerAd];
+        if (successful != nil) {
+            successful(self.advertCode);
+        }
     } else {
         if (successful != nil) {
             successful(self.advertCode);

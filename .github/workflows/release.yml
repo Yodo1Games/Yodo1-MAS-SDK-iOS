@@ -98,6 +98,20 @@ jobs:
       - name: publish applovin
         run: pod repo push Yodo1Mas Yodo1MasMediationApplovin.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
 
+  job_publish_baidu:
+    name: Publish Baidu
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish baidu
+        run: pod repo push Yodo1Mas Yodo1MasMediationBaidu.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
   job_publish_facebook:
     name: Publish Facebook
     runs-on: macos-latest
@@ -477,6 +491,20 @@ jobs:
       - name: publish yandex
         run: pod repo push Yodo1Mas Yodo1MasMediationYandexMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
   
+  job_publish_cn:
+    name: Publish CN
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_applovin_max, job_publish_baidu, job_publish_mintegral_max, job_publish_pangle_max, job_publish_tencent_max]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish cn
+        run: pod repo push Yodo1Mas Yodo1MasCN.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
   job_publish_standard:
     name: Publish Standard
     runs-on: macos-latest
