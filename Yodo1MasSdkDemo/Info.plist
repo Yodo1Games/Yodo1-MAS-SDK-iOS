@@ -366,7 +366,7 @@
 	<key>Yodo1MasConfig</key>
 	<dict>
 		<key>Api</key>
-		<string>https://rivendell-dev.explorer.yodo1.com/v1/init/</string>
+		<string>https://sdk.mas.yodo1.me/v1/init/</string>
 		<key>Debug</key>
 		<true/>
 		<key>Yodo1Config</key>

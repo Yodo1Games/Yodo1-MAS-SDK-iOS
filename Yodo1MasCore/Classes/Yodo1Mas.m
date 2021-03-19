@@ -136,7 +136,7 @@
         if (api != nil && api.length > 0) {
             [url appendString:api];
         } else {
-            [url appendString:@"https://rivendell-dev.explorer.yodo1.com/v1/init/"];
+            [url appendString:@"https://sdk.mas.yodo1.me/v1/init/"];
         }
         if (@available(iOS 10.0, *)) {
             parameters[@"country"] = [NSLocale currentLocale].countryCode;
