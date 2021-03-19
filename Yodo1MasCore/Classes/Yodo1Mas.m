@@ -865,7 +865,7 @@
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
     if (self.test_mode == 1) {
-        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:destroy];
+        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAdWithDestroy:destroy];
