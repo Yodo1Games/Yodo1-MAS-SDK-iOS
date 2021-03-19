@@ -245,8 +245,8 @@
         switch (state) {
             case kYD1BannerStateFail:
             {
-                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:nil];
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:error];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.bannerAdDelegate onAdError:event error:error];
                 }
@@ -280,8 +280,8 @@
         switch (state) {
             case kYD1VideoStateFail:
             {
-                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeReward message:@"" error:nil];
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeReward message:@"" error:error];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.rewardAdDelegate onAdError:event error:error];
                 }
@@ -319,8 +319,9 @@
         switch (state) {
             case kYD1InterstitialStateFail:
             {
-                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeInterstitial message:@"" error:nil];
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                
+                    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeInterstitial message:@"" error:error];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.interstitialAdDelegate onAdError:event error:error];
                 }
