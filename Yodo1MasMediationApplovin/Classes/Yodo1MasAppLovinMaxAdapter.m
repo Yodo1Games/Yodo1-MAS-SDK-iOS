@@ -46,6 +46,16 @@
         if ([self isMax]) {
             self.sdk.mediationProvider = @"max";
         }
+        
+        // Facebook设置
+        Class fbAdSettings = NSClassFromString(@"FBAdSettings");
+        if (fbAdSettings) {
+            SEL sel = NSSelectorFromString(@"setAdvertiserTrackingEnabled:");
+            if (sel && [fbAdSettings respondsToSelector:sel]) {
+                [fbAdSettings performSelector:sel withObject:@(YES) afterDelay:0];
+            }
+        }
+        
         __weak __typeof(self)weakSelf = self;
         [self.sdk initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
             NSLog(@"%@: {method:ALSdkInitializationCompletionHandler}", self.TAG);
