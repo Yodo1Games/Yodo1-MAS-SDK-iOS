@@ -29,12 +29,12 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.2.1";
+    return @"4.0.3.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
     [super initWithConfig:config successful:successful fail:fail];
-    
+    [FBAdSettings setAdvertiserTrackingEnabled:YES];
     [self updatePrivacy];
     [self loadRewardAd];
     [self loadInterstitialAd];

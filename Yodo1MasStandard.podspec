@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasStandard'
-  s.version          = '4.0.2.1'
+  s.version          = '4.0.3.0'
   s.summary          = 'Yodo1MasStandard'
   s.swift_version    = '5.0'
 
@@ -35,16 +35,16 @@ TODO: Add long description of the pod here.
   #s.public_header_files = s.name + '/Classes/**/*.h'
   #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationAdMobMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationApplovinMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationIronSourceMax', '4.0.2.1'
+  s.dependency 'Yodo1MasCore', '~> 4.0.3.0'
+  s.dependency 'Yodo1MasMediationAdMobMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationApplovinMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationIronSourceMax', '4.0.3.0'
   
-  s.dependency 'Yodo1MasMediationFacebookMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationInMobiMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationMyTargetMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationTapjoyMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationUnityAdsMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationVungleMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationYandexMax', '4.0.2.1'
+  s.dependency 'Yodo1MasMediationFacebookMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationInMobiMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationMyTargetMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationTapjoyMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationUnityAdsMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationVungleMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationYandexMax', '4.0.3.0'
 end

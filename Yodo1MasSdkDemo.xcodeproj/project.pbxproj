@@ -622,11 +622,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
+				MARKETING_VERSION = 4.0.3.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yodo1.demo.just4test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7s";
 			};
 			name = Debug;
 		};
@@ -647,11 +646,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.2.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
+				MARKETING_VERSION = 4.0.3.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yodo1.demo.just4test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7s";
 			};
 			name = Release;
 		};

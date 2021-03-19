@@ -37,7 +37,7 @@ GDTRewardedVideoAdDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.2.1";
+    return @"4.0.3.0";
 }
 
 -(GDTUnifiedBannerView *)adBanner {
@@ -75,7 +75,7 @@ GDTRewardedVideoAdDelegate>
             [GDTSDKConfig registerAppId:config.appId];
             [GDTSDKConfig enableDefaultAudioSessionSetting:NO];
             [GDTSDKConfig setChannel:14];
-            
+            self.sdkInit = YES;
             [self updatePrivacy];
             [self loadRewardAd];
             [self loadInterstitialAd];
@@ -83,7 +83,9 @@ GDTRewardedVideoAdDelegate>
             if (self.initSuccessfulCallback != nil) {
                 self.initSuccessfulCallback(self.advertCode);
             }
-            self.sdkInit = YES;
+            if (successful != nil) {
+                successful(self.advertCode);
+            }
         } else {
             NSString *message = [NSString stringWithFormat:@"%@: {method:initWithConfig:, error: config.appId is null}",self.TAG];
             NSLog(@"%@", message);

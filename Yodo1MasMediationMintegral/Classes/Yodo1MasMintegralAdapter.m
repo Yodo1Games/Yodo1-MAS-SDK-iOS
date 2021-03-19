@@ -35,7 +35,7 @@ MTGInterstitialVideoDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.2.1";
+    return @"4.0.3.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -45,6 +45,12 @@ MTGInterstitialVideoDelegate>
         [self updatePrivacy];
         [[MTGSDK sharedInstance]setAppID:config.appId ApiKey:config.appKey];
         self.sdkInit = YES;
+        [self loadRewardAd];
+        [self loadInterstitialAd];
+        [self loadBannerAd];
+        if (successful != nil) {
+            successful(self.advertCode);
+        }
     } else {
         if (successful != nil) {
             successful(self.advertCode);

@@ -15,6 +15,7 @@
 #endif
 #import <AdSupport/AdSupport.h>
 #import "Yodo1SaManager.h"
+#import "YD1AdsManager.h"
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
@@ -29,6 +30,7 @@
 @property (nonatomic, assign) BOOL isInit;
 @property (nonatomic, assign) BOOL isRequesting;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
+@property (nonatomic, assign) int test_mode;
 
 @end
 
@@ -44,7 +46,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.2.1";
+    return @"4.0.3.0";
 }
 
 - (instancetype)init {
@@ -77,7 +79,7 @@
     
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL sensorsDebugEnv = yodo1Config[@"sensors_debug_env"] && [yodo1Config[@"sensors_debug_env"] boolValue];
-
+    
     __weak __typeof(self)weakSelf = self;
     
     NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=production";
@@ -118,9 +120,9 @@
             } else {
                 error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
             }
-            if (fail != nil) {
-                fail(error);
-            }
+//            if (fail != nil) {
+//                fail(error);
+//            }
         }
         return;
     }
@@ -134,7 +136,7 @@
         if (api != nil && api.length > 0) {
             [url appendString:api];
         } else {
-            [url appendString:@"https://rivendell-dev.explorer.yodo1.com/v1/init/"];
+            [url appendString:@"https://sdk.mas.yodo1.me/v1/init/"];
         }
         if (@available(iOS 10.0, *)) {
             parameters[@"country"] = [NSLocale currentLocale].countryCode;
@@ -162,9 +164,13 @@
         if (data != nil) {
             weakSelf.masInitConfig = data.mas_init_config;
             weakSelf.masNetworkConfig = data.ad_network_config;
+            weakSelf.test_mode = data.test_mode;
             if (data.mas_init_config && data.ad_network_config) {
                 if (debug) {
                     NSLog(@"获取广告数据成功 - %@", responseObject);
+                }
+                if (weakSelf.test_mode == 1) {
+                    [YD1AdsManager.sharedInstance initAdvert];
                 }
                 [weakSelf doInitAdapter];
                 weakSelf.isInit = YES;
@@ -205,6 +211,7 @@
         //@"adcolony" : @"Yodo1MasAdColonyAdapter",
         @"admob" : @"Yodo1MasAdMobAdapter",
         @"applovin" : @"Yodo1MasAppLovinAdapter",
+        @"baidu" : @"Yodo1MasBaiduAdapter",
         @"facebook" : @"Yodo1MasFacebookAdapter",
         //@"fyber" : @"Yodo1MasFyberAdapter",
         @"inmobi" : @"Yodo1MasInMobiAdapter",
@@ -234,6 +241,113 @@
             [self doInitAdapter:key value:value appId:info.ad_network_app_id appKey:info.ad_network_app_key];
         }
     }
+    
+    [YD1AdsManager.sharedInstance bannerCallback:^(YD1BannerState state) {
+        switch (state) {
+            case kYD1BannerStateFail:
+            {
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:error];
+                if ([self.bannerAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
+                    [self.bannerAdDelegate onAdError:event error:error];
+                }
+            }
+                break;
+            case kYD1BannerStateClicked:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
+                if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                    [self.bannerAdDelegate onAdOpened:event];
+                }
+            }
+                break;
+            case kYD1BannerStateClose:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
+                if ([self.bannerAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
+                    [self.bannerAdDelegate onAdClosed:event];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }];
+    UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
+    [Yodo1MasBanner addBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
+    
+    [YD1AdsManager.sharedInstance videoCallback:^(YD1VideoState state) {
+        
+        switch (state) {
+            case kYD1VideoStateFail:
+            {
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeReward message:@"" error:error];
+                if ([self.rewardAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
+                    [self.rewardAdDelegate onAdError:event error:error];
+                }
+            }
+                break;
+            case kYD1VideoStateFinished:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
+                if ([self.rewardAdDelegate respondsToSelector:@selector(onAdRewardEarned:)]) {
+                    [self.rewardAdDelegate onAdRewardEarned:event];
+                }
+            }
+                break;
+            case kYD1VideoStateShow:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
+                if ([self.rewardAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                    [self.rewardAdDelegate onAdOpened:event];
+                }
+            }
+                break;
+            case kYD1VideoStateClose:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
+                if ([self.rewardAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
+                    [self.rewardAdDelegate onAdClosed:event];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }];
+    [YD1AdsManager.sharedInstance intersCallback:^(YD1InterstitialState state) {
+        switch (state) {
+            case kYD1InterstitialStateFail:
+            {
+                
+                    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeInterstitial message:@"" error:error];
+                if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
+                    [self.interstitialAdDelegate onAdError:event error:error];
+                }
+            }
+                break;
+            case kYD1InterstitialStateShow:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
+                if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                    [self.interstitialAdDelegate onAdOpened:event];
+                }
+            }
+                break;
+            case kYD1InterstitialStateClose:
+            {
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
+                if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
+                    [self.interstitialAdDelegate onAdClosed:event];
+                }
+            }
+                break;
+            default:
+                break;
+        }
+    }];
 }
 
 - (void)doInitAdapter:(NSString *)key value:(NSString *)value appId:(NSString *)appId appKey:(NSString *)appKey {
@@ -379,6 +493,21 @@
 
 - (BOOL)isAdvertLoaded:(Yodo1MasNetworkAdvert *)config type:(Yodo1MasAdType)type {
     BOOL isLoaded = NO;
+    if (self.test_mode == 1) {
+        switch (type) {
+            case Yodo1MasAdTypeReward:
+                isLoaded = [YD1AdsManager.sharedInstance isVideoReady];
+                break;
+            case Yodo1MasAdTypeInterstitial:
+                isLoaded = [YD1AdsManager.sharedInstance isInterstitialReady];
+                break;
+            case Yodo1MasAdTypeBanner:
+                isLoaded = [YD1AdsManager.sharedInstance isBannerReady];
+                break;
+        }
+        return isLoaded;
+    }
+    
     if (config != nil) {
         if (config.mediation_list != nil && config.mediation_list.count > 0) {
             for (Yodo1MasNetworkMediation *mediation in config.mediation_list) {
@@ -469,6 +598,27 @@
 }
 
 - (void)showAdvert:(Yodo1MasAdType)type object:(NSDictionary *)object {
+    if (self.test_mode == 1) {
+        switch (type) {
+            case Yodo1MasAdTypeReward:
+            {
+                [YD1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
+            }
+                break;
+            case Yodo1MasAdTypeInterstitial:
+            {
+                [YD1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
+            }
+                break;
+            case Yodo1MasAdTypeBanner:
+            {
+                UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
+                [Yodo1MasBanner showBannerWithTag:131415 controller:controller object:object];
+            }
+                break;
+        }
+        return;
+    }
     Yodo1MasNetworkAdvert *config = nil;
     switch (type) {
         case Yodo1MasAdTypeReward:
@@ -498,10 +648,10 @@
                         [adapters removeObjectAtIndex:0];
                     }
                     if (adapters.count > 0) {
-                        _currentAdapter = adapters.firstObject;
-                        [adapters.firstObject showAd:type callback:_adBlock object:object];
+                        self->_currentAdapter = adapters.firstObject;
+                        [adapters.firstObject showAd:type callback:self->_adBlock object:object];
                     } else {
-                        _adBlock = nil;
+                        self->_adBlock = nil;
                         [self callbackWithEvent:event];
                     }
                     break;
@@ -707,12 +857,18 @@
 }
 
 - (void)dismissBannerAd {
+    if (self.test_mode == 1) {
+        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+    }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];
     }
 }
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    if (self.test_mode == 1) {
+        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+    }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAdWithDestroy:destroy];
     }
