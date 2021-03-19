@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasCN'
-  s.version          = '4.0.2.1'
+  s.version          = '4.0.3.0'
   s.summary          = 'Yodo1MasCN'
   s.swift_version    = '5.0'
 
@@ -35,10 +35,10 @@ TODO: Add long description of the pod here.
   #s.public_header_files = s.name + '/Classes/**/*.h'
   #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '~> 4.0.2.2'
-  s.dependency 'Yodo1MasMediationApplovinMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationMintegralMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationPangleMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationTencentMax', '4.0.2.1'
-  s.dependency 'Yodo1MasMediationBaidu', '4.0.2.2'
+  s.dependency 'Yodo1MasCore', '~> 4.0.3.0'
+  s.dependency 'Yodo1MasMediationApplovinMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationMintegralMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationPangleMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationTencentMax', '4.0.3.0'
+  s.dependency 'Yodo1MasMediationBaidu', '4.0.3.0'
 end
