@@ -1,9 +1,0 @@
-framework module AdMobYandexMobileAdsAdapters {
-  umbrella header "AdMobYandexMobileAdsAdapters-umbrella.h"
-
-  export *
-  module * { export * }
-  
-  header "YMAAdMobVersion.h"
-
-}

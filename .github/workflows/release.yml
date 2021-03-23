@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   job_build:
@@ -48,15 +45,30 @@ jobs:
   job_publish_core:
     name: publish core
     runs-on: macos-latest
-    needs: job_build
+    #needs: job_build
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: push core
-        run: pod repo push Yodo1Mas Yodo1MasCore.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org'
+        run: pod repo push Yodo1Mas Yodo1MasCore.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git'
+
+  ### Network
+  job_publish_adcolony:
+    name: Publish AdColony
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish adcolony
+        run: pod repo push Yodo1Mas Yodo1MasMediationAdColony.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
 
   job_publish_admob:
     name: Publish AdMob
@@ -68,9 +80,9 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish admob
-        run: pod repo push Yodo1Mas Yodo1MasMediationAdMob.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
+        run: pod repo push Yodo1Mas Yodo1MasMediationAdMob.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
     
   job_publish_applovin:
     name: Publish AppLovin
@@ -82,12 +94,12 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish applovin
-        run: pod repo push Yodo1Mas Yodo1MasMediationApplovin.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-      
-  job_publish_ironsource:
-    name: Publish IronSource
+        run: pod repo push Yodo1Mas Yodo1MasMediationApplovin.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_baidu:
+    name: Publish Baidu
     runs-on: macos-latest
     if: always()
     needs: job_publish_core
@@ -96,25 +108,9 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
-      - name: publish ironsource
-        run: pod repo push Yodo1Mas Yodo1MasMediationIronSource.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-      
-
-  job_publish_yandex:
-    name: Publish Yandex
-    runs-on: macos-latest
-    if: always()
-    needs: job_publish_core
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: add yodo1mas repo
-        run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
-      - name: publish yandex
-        run: pod repo push Yodo1Mas Yodo1MasMediationYandex.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish baidu
+        run: pod repo push Yodo1Mas Yodo1MasMediationBaidu.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
 
   job_publish_facebook:
     name: Publish Facebook
@@ -126,10 +122,24 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish facebook
-        run: pod repo push Yodo1Mas Yodo1MasMediationFacebook.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-      
+        run: pod repo push Yodo1Mas Yodo1MasMediationFacebook.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_fyber:
+    name: Publish Fyber
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish fyber
+        run: pod repo push Yodo1Mas Yodo1MasMediationFyber.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
   job_publish_inmobi:
     name: Publish InMobi
     runs-on: macos-latest
@@ -140,10 +150,38 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish inmobi
-        run: pod repo push Yodo1Mas Yodo1MasMediationInMobi.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
+        run: pod repo push Yodo1Mas Yodo1MasMediationInMobi.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_ironsource:
+    name: Publish IronSource
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish ironsource
+        run: pod repo push Yodo1Mas Yodo1MasMediationIronSource.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
       
+  job_publish_mintegral:
+    name: Publish Mintegral
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish mintegral
+        run: pod repo push Yodo1Mas Yodo1MasMediationMintegral.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
   job_publish_mytarget:
     name: Publish MyTarget
     runs-on: macos-latest
@@ -154,10 +192,24 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish mytarget
-        run: pod repo push Yodo1Mas Yodo1MasMediationMyTarget.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-      
+        run: pod repo push Yodo1Mas Yodo1MasMediationMyTarget.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_pangle:
+    name: Publish Pangle
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish pangle
+        run: pod repo push Yodo1Mas Yodo1MasMediationPangle.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
   job_publish_tapjoy:
     name: Publish Tapjoy
     runs-on: macos-latest
@@ -168,9 +220,23 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish tapjoy
-        run: pod repo push Yodo1Mas Yodo1MasMediationTapjoy.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
+        run: pod repo push Yodo1Mas Yodo1MasMediationTapjoy.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_tencent:
+    name: Publish Tencent
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish tencent
+        run: pod repo push Yodo1Mas Yodo1MasMediationTencent.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
       
   job_publish_unityads:
     name: Publish UnityAds
@@ -182,10 +248,10 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish unityads
-        run: pod repo push Yodo1Mas Yodo1MasMediationUnityAds.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-      
+        run: pod repo push Yodo1Mas Yodo1MasMediationUnityAds.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
   job_publish_vungle:
     name: Publish Vungle
     runs-on: macos-latest
@@ -196,20 +262,273 @@ jobs:
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish vungle
-        run: pod repo push Yodo1Mas Yodo1MasMediationVungle.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
-      
-  job_publish_standard:
-    name: Publish Standard
+        run: pod repo push Yodo1Mas Yodo1MasMediationVungle.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_yandex:
+    name: Publish Yandex
     runs-on: macos-latest
     if: always()
-    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_yandex, job_publish_facebook, job_publish_inmobi, job_publish_mytarget, job_publish_tapjoy, job_publish_unityads, job_publish_vungle]
+    needs: job_publish_core
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: add yodo1mas repo
         run: 
-          pod repo add Yodo1Mas https://940549652%40qq.com:${{ secrets.MAS_PWD }}@github.com/Yodo1Games/MAS-Spec.git
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish yandex
+        run: pod repo push Yodo1Mas Yodo1MasMediationYandex.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  ### MAX
+  job_publish_adcolony_max:
+    name: Publish AdColony Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_adcolony]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish adcolony
+        run: pod repo push Yodo1Mas Yodo1MasMediationAdColonyMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+   
+  job_publish_admob_max:
+    name: Publish AdMob Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish admob
+        run: pod repo push Yodo1Mas Yodo1MasMediationAdMobMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+    
+  job_publish_applovin_max:
+    name: Publish AppLovin Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish applovin
+        run: pod repo push Yodo1Mas Yodo1MasMediationApplovinMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_facebook_max:
+    name: Publish Facebook Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_facebook]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish facebook
+        run: pod repo push Yodo1Mas Yodo1MasMediationFacebookMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+   
+  job_publish_fyber_max:
+    name: Publish Fyber Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_fyber]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish fyber
+        run: pod repo push Yodo1Mas Yodo1MasMediationFyberMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_inmobi_max:
+    name: Publish InMobi Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_inmobi]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish inmobi
+        run: pod repo push Yodo1Mas Yodo1MasMediationInMobiMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+   
+  job_publish_ironsource_max:
+    name: Publish IronSource Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish ironsource
+        run: pod repo push Yodo1Mas Yodo1MasMediationIronSourceMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+      
+  job_publish_mintegral_max:
+    name: Publish Mintegral Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_applovin, job_publish_mintegral]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish mintegral
+        run: pod repo push Yodo1Mas Yodo1MasMediationMintegralMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_mytarget_max:
+    name: Publish MyTarget Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_mytarget]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish mytarget
+        run: pod repo push Yodo1Mas Yodo1MasMediationMyTargetMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_pangle_max:
+    name: Publish Pangle Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_applovin, job_publish_ironsource, job_publish_pangle]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish pangle
+        run: pod repo push Yodo1Mas Yodo1MasMediationPangleMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+   
+  job_publish_tapjoy_max:
+    name: Publish Tapjoy Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_tapjoy]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish tapjoy
+        run: pod repo push Yodo1Mas Yodo1MasMediationTapjoyMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_tencent_max:
+    name: Publish Tencent Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_applovin, job_publish_tencent]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish tencent
+        run: pod repo push Yodo1Mas Yodo1MasMediationTencentMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_unityads_max:
+    name: Publish UnityAds Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_unityads]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish unityads
+        run: pod repo push Yodo1Mas Yodo1MasMediationUnityAdsMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_vungle_max:
+    name: Publish Vungle Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob, job_publish_applovin, job_publish_ironsource, job_publish_vungle]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish vungle
+        run: pod repo push Yodo1Mas Yodo1MasMediationVungleMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_yandex_max:
+    name: Publish Yandex Max
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_applovin, job_publish_yandex]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish yandex
+        run: pod repo push Yodo1Mas Yodo1MasMediationYandexMax.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+  
+  job_publish_cn:
+    name: Publish CN
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_applovin_max, job_publish_baidu, job_publish_mintegral_max, job_publish_pangle_max, job_publish_tencent_max]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish cn
+        run: pod repo push Yodo1Mas Yodo1MasCN.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_standard:
+    name: Publish Standard
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_admob_max, job_publish_applovin_max, job_publish_facebook_max, job_publish_inmobi_max, job_publish_ironsource_max, job_publish_mytarget_max, job_publish_tapjoy_max, job_publish_unityads_max, job_publish_vungle_max, job_publish_yandex_max]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
       - name: publish standard
-        run: pod repo push Yodo1Mas Yodo1MasStandard.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/MAS-Spec.git'
+        run: pod repo push Yodo1Mas Yodo1MasStandard.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'
+
+  job_publish_full:
+    name: Publish Full
+    runs-on: macos-latest
+    if: always()
+    needs: [job_publish_adcolony_max, job_publish_admob_max, job_publish_applovin_max, job_publish_facebook_max, job_publish_fyber_max, job_publish_inmobi_max, job_publish_ironsource_max, job_publish_mintegral_max, job_publish_mytarget_max, job_publish_pangle_max, job_publish_tapjoy_max, job_publish_tencent_max, job_publish_unityads_max, job_publish_vungle_max, job_publish_yandex_max]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec.git
+      - name: publish full
+        run: pod repo push Yodo1Mas Yodo1MasFull.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec.git'

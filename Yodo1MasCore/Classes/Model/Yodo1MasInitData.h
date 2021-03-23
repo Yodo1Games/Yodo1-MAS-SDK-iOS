@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *country;
 @property(nonatomic, strong) Yodo1MasInitConfig *mas_init_config;
 @property(nonatomic, strong) Yodo1MasNetworkConfig *ad_network_config;
+@property (nonatomic, assign) int test_mode;
 
 @end
 

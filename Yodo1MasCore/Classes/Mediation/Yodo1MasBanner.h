@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define BANNER_SIZE_320_50  CGSizeMake(320, 50)
+#define BANNER_SIZE_728_90  CGSizeMake(728, 90)
 
 @interface Yodo1MasBanner : NSObject
 
