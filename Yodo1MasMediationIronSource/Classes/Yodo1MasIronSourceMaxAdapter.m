@@ -274,7 +274,7 @@
         NSLog(@"%@", message);
         UIViewController *controller = [Yodo1MasIronSourceMaxAdapter getTopViewController];
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
     }
 }
 

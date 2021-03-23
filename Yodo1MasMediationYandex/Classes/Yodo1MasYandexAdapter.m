@@ -185,7 +185,7 @@
     [super showBannerAd:callback object:object];
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         UIViewController *controller = [Yodo1MasYandexAdapter getTopViewController];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.adBanner tag:BANNER_TAG controller:controller object:object];
     }
 }
 

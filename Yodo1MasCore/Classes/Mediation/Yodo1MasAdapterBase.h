@@ -38,7 +38,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *adId;
 @property (nonatomic, strong) id object;
 
-- (instancetype)initWitId:(NSString *)adId object:(id)object;
+- (instancetype)initWitId:(NSString *)adId object:(id __nullable)object;
 
 @end
 

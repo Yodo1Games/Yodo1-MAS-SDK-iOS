@@ -66,10 +66,10 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 
 - (BOOL)isBannerAdLoaded;
 - (void)showBannerAd;
-- (void)showBannerAdWithPlacement:(NSString *)placement;
+- (void)showBannerAdWithPlacement:(NSString * __nullable)placement;
 - (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align;
 - (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
-- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
+- (void)showBannerAdWithPlacement:(NSString * __nullable)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy;
 
