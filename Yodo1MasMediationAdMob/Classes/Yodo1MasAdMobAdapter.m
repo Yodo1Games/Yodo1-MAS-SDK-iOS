@@ -30,7 +30,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.0";
+    return @"4.0.3.1";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -298,7 +298,7 @@ didFailToReceiveAdWithError:(nonnull GADRequestError *)adError {
         if (controller != nil) {
             self.bannerAd.rootViewController = controller;
         }
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
     }
 }
 

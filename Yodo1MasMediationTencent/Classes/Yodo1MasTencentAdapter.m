@@ -37,7 +37,7 @@ GDTRewardedVideoAdDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.0";
+    return @"4.0.3.1";
 }
 
 -(GDTUnifiedBannerView *)adBanner {
@@ -259,7 +259,7 @@ GDTRewardedVideoAdDelegate>
         if (controller != nil) {
             [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
         }
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.adBanner tag:BANNER_TAG controller:controller object:object];
     }
 }
 

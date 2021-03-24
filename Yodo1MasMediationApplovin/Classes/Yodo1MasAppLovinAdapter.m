@@ -267,7 +267,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.0";
+    return @"4.0.3.1";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -412,7 +412,7 @@
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSLog(@"%@: {method:showBannerAd:, show banner ad...}", self.TAG);
         UIViewController *controller = [Yodo1MasAppLovinAdapter getTopViewController];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
     }
 }
 

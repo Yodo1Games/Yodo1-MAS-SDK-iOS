@@ -29,7 +29,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.0";
+    return @"4.0.3.1";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -252,7 +252,7 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}",self.TAG];
         NSLog(@"%@", message);
         UIViewController *controller = [Yodo1MasFacebookAdapter getTopViewController];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
     }
 }
 

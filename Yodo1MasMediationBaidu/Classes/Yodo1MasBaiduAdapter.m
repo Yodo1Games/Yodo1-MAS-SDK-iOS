@@ -39,7 +39,7 @@ BaiduMobAdRewardVideoDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.0";
+    return @"4.0.3.1";
 }
 
 -(BaiduMobAdView *)adBanner {
@@ -290,7 +290,7 @@ BaiduMobAdRewardVideoDelegate>
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", self.TAG];
         NSLog(@"%@", message);
         UIViewController *controller = [Yodo1MasBaiduAdapter getTopViewController];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.adBanner tag:BANNER_TAG controller:controller object:object];
     }
 }
 

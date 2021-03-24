@@ -32,7 +32,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.0";
+    return @"4.0.3.1";
 }
 
 - (BOOL)isMax {
@@ -199,7 +199,7 @@
             self.bannerAd.placement = placement;
         }
         UIViewController *controller = [Yodo1MasAppLovinMaxAdapter getTopViewController];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
         [self.bannerAd startAutoRefresh];
     }
 }

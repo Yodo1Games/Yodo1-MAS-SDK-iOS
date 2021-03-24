@@ -32,10 +32,16 @@
     banner.frame = contentView.bounds;
 }
 
-+ (void)showBannerWithTag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
-    UIView *contentView = [controller.view viewWithTag:tag];
++ (void)showBanner:(UIView *)banner tag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
+    
+    UIView *contentView = (banner != nil && banner.superview != nil) ? banner.superview : [controller.view viewWithTag:tag];
     if (contentView != nil) {
         UIView *superview = contentView.superview;
+        if (superview != controller.view) {
+            [superview removeFromSuperview];
+            [controller.view addSubview:contentView];
+        }
+        
         Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
         CGPoint offset = CGPointZero;
         if (object != nil) {
@@ -82,6 +88,11 @@
         contentView.frame = frame;
         contentView.alpha = 1;
     }
+}
+
++ (void)showBannerWithTag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
+    UIView *contentView = [controller.view viewWithTag:tag];
+    [self showBanner:nil tag:tag controller:controller object:object];
 }
 
 + (void)removeBanner:(UIView *)banner tag:(NSInteger)tag destroy:(BOOL)destroy {
