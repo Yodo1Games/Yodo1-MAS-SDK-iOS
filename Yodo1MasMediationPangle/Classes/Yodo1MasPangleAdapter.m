@@ -187,7 +187,7 @@ BUNativeExpressBannerViewDelegate
         if (controller != nil) {
             [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
         }
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
     }
 }
 

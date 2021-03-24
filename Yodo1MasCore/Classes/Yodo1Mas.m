@@ -321,7 +321,7 @@
             case kYD1InterstitialStateFail:
             {
                 
-                    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeInterstitial message:@"" error:error];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.interstitialAdDelegate onAdError:event error:error];
@@ -613,7 +613,7 @@
             case Yodo1MasAdTypeBanner:
             {
                 UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
-                [Yodo1MasBanner showBannerWithTag:131415 controller:controller object:object];
+                [Yodo1MasBanner showBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
             }
                 break;
         }
@@ -635,12 +635,13 @@
     
     if (config != nil) {
         _currentAdapter = nil;
+        __weak __typeof(self)weakSelf = self;
         NSMutableArray<Yodo1MasAdapterBase *> *adapters = [self getAdapters:config];
         _adBlock = ^(Yodo1MasAdEvent *event) {
             switch (event.code) {
                 case Yodo1MasAdEventCodeOpened: {
                     [adapters removeAllObjects];
-                    [self callbackWithEvent:event];
+                    [weakSelf callbackWithEvent:event];
                     break;
                 }
                 case Yodo1MasAdEventCodeError: {
@@ -648,16 +649,16 @@
                         [adapters removeObjectAtIndex:0];
                     }
                     if (adapters.count > 0) {
-                        self->_currentAdapter = adapters.firstObject;
+                        weakSelf.currentAdapter = adapters.firstObject;
                         [adapters.firstObject showAd:type callback:self->_adBlock object:object];
                     } else {
-                        self->_adBlock = nil;
+                        weakSelf.adBlock = nil;
                         [self callbackWithEvent:event];
                     }
                     break;
                 }
                 default: {
-                    [self callbackWithEvent:event];
+                    [weakSelf callbackWithEvent:event];
                     break;
                 }
             }
@@ -834,7 +835,7 @@
     [self showBannerAdWithPlacement:nil align:Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter offset:CGPointZero];
 }
 
-- (void)showBannerAdWithPlacement:(NSString *)placement {
+- (void)showBannerAdWithPlacement:(NSString * __nullable)placement {
     [self showBannerAdWithPlacement:placement align:Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter offset:CGPointZero];
 }
 
@@ -846,7 +847,7 @@
     [self showBannerAdWithPlacement:nil align:align offset:offset];
 }
 
-- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
+- (void)showBannerAdWithPlacement:(NSString * __nullable)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset {
     NSMutableDictionary *object = [NSMutableDictionary dictionary];
     if (placement != nil && placement.length > 0) {
         object[kArgumentPlacement] = placement;

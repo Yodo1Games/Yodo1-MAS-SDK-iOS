@@ -167,12 +167,6 @@ MTGInterstitialVideoDelegate>
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:, show banner ad...}", self.TAG];
         NSLog(@"%@", message);
-        
-        UIViewController *controller = [Yodo1MasMintegralAdapter getTopViewController];
-        if (controller != nil) {
-            
-        }
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
     }
 }
 

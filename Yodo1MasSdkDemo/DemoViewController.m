@@ -11,6 +11,7 @@
 #import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
+#import "BannerController.h"
 
 @import GoogleMobileAdsMediationTestSuite;
 
@@ -42,6 +43,13 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([[Yodo1Mas sharedInstance] isBannerAdLoaded]) {
+        [[Yodo1Mas sharedInstance] showBannerAd];
+    }
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
@@ -97,6 +105,12 @@
 
 - (IBAction)onCCPAChanged:(UISwitch *)sender {
     [Yodo1Mas sharedInstance].isCCPADoNotSell = sender.isOn;
+}
+
+- (IBAction)onNextBannerController:(id)sender {
+    BannerController *controller = [[BannerController alloc] init];
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self showViewController:controller sender:nil];
 }
 
 #pragma mark - Yodo1MasAdDelegate

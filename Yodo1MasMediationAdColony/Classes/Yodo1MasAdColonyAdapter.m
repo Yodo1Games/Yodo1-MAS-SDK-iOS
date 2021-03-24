@@ -179,7 +179,6 @@
         if (controller != nil) {
             
         }
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
     }
 }
 

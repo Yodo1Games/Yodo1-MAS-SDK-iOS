@@ -14,7 +14,7 @@
 
 @implementation Yodo1MasAdId
 
-- (instancetype)initWitId:(NSString *)adId object:(id)object {
+- (instancetype)initWitId:(NSString *)adId object:(id __nullable)object {
     self = [super init];
     if (self) {
         _adId = adId ? : @"";
