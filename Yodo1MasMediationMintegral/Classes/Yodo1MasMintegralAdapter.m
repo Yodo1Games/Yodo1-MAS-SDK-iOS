@@ -35,7 +35,7 @@ MTGInterstitialVideoDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.3.1";
+    return @"4.0.4";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {

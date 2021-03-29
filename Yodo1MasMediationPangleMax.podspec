@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationPangleMax'
-  s.version          = '4.0.3.1'
+  s.version          = '4.0.4'
   s.summary          = 'Yodo1MasMediationPangleMax'
   s.swift_version    = '5.0'
 
