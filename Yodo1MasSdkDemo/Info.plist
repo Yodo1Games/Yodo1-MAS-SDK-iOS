@@ -364,8 +364,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>Yodo1MasAppkey</key>
-	<string>qqiOsnhyOie</string>
 	<key>Yodo1MasConfig</key>
 	<dict>
 		<key>Api</key>
