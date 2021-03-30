@@ -37,8 +37,9 @@
     [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
     [Yodo1Mas sharedInstance].bannerAdDelegate = self;
     
-
-    [[Yodo1Mas sharedInstance] initWithAppId:@"kU35srYo1Y6" successful:^{
+    NSString * appid = [NSBundle mainBundle].infoDictionary[@"Yodo1MasAppkey"];
+    if (!appid.length) {appid = @"qqiOsnhyOie";}
+    [[Yodo1Mas sharedInstance] initWithAppId:appid successful:^{
         
     } fail:^(NSError * _Nonnull error) {
         
