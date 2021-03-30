@@ -407,7 +407,7 @@
 									<key>network_code</key>
 									<string>2348427</string>
 									<key>price</key>
-									<real>15.300000000000001</real>
+									<real>15.3</real>
 									<key>price_type</key>
 									<string>manual</string>
 								</dict>
@@ -457,5 +457,7 @@
 		<key>sensors_debug_env</key>
 		<string>1</string>
 	</dict>
+	<key>Yodo1MasAppkey</key>
+	<string>qqiOsnhyOie</string>
 </dict>
 </plist>
