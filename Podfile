@@ -63,11 +63,3 @@ pod 'Yodo1MasMediationBaidu', :path => './'
 #pod 'Yodo1MasFull', '~> 4.0.1.1'
 
 end
-
-target "Yodo1MasSdkDemoTests" do
-  
-end
-
-target "Yodo1MasSdkDemoUITests" do
-  
-end
