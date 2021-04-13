@@ -5,7 +5,7 @@ on:
     branches:
       - 4.0.6
 
-jobs:
+jobs: 
   job_build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
