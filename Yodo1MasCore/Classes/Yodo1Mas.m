@@ -143,6 +143,7 @@
     }
     [_appInfo setValue:appKey forKey:kYodo1MasAppKey];
     [_appInfo setValue:[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] forKey:kYodo1MasAppVersion];
+    [_appInfo setValue:[NSBundle.mainBundle objectForInfoDictionaryKey:@"GADApplicationIdentifier"] forKey:kYodo1MasAdMobId];
     [_appInfo setValue:bundleId forKey:kYodo1MasAppBundleId];
     
     NSString *idfa = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -254,7 +255,7 @@
                 }
                 
                 [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-                [weakSelf.appInfo setValue:@"Init failed(response:config is null)" forKey:kYodo1MasInitMsg];
+                [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,config is null)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
                 [weakSelf printInitLog];
             }
         } else {
@@ -262,7 +263,7 @@
                 fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:@"get config failed"]);
             }
             [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-            [weakSelf.appInfo setValue:@"Init failed(response:body is null)" forKey:kYodo1MasInitMsg];
+            [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,body is null)", @(Yodo1MasErrorCodeConfigServer)] forKey:kYodo1MasInitMsg];
             [weakSelf printInitLog];
         }
         
@@ -274,9 +275,8 @@
             fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:error.localizedDescription]);
         }
         
-        
         [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-        [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(response:%@)", error.localizedDescription] forKey:kYodo1MasInitMsg];
+        [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,%@)", @(Yodo1MasErrorCodeConfigServer), error.localizedDescription] forKey:kYodo1MasInitMsg];
         [weakSelf printInitLog];
 
     }];
@@ -296,9 +296,15 @@
     }
     
     if (_appInfo[kYodo1MasIDFA]) {
-        [ms appendFormat:@"IDFA is: %@\n", _appInfo[kYodo1MasIDFA]];
+        [ms appendFormat:@"IDFA is: %@（use this for  test devices）\n", _appInfo[kYodo1MasIDFA]];
     } else {
         [ms appendString:@"IDFA is: Get IDFA failed(Unauthorized)\n"];
+    }
+    
+    if (_appInfo[kYodo1MasAdMobId]) {
+        [ms appendFormat:@"AdMob ID is: %@\n", _appInfo[kYodo1MasAdMobId]];
+    } else {
+        [ms appendString:@"AdMob ID is: None（please fill correct  AppKey）\n"];
     }
     
     if (_appInfo[kYodo1MasTestMode]) {
