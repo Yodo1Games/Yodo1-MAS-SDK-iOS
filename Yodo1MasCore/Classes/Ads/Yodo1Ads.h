@@ -48,7 +48,7 @@ typedef void (^Yodo1RewardGameCallback)(NSString *reward, NSError* error);
 + (NSString *)sdkVersion DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sdkVersion]");
 
 //Init Yodo1Ads with appkey.
-+ (void)initWithAppKey:(NSString *)appKey DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance] initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail");
++ (void)initWithAppKey:(NSString *)appKey DEPRECATED_MSG_ATTRIBUTE("Please use [Yodo1Mas sharedInstance] initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail");
 
 #pragma mark- Banner
 //Set banner's call back

@@ -14,10 +14,9 @@ pod 'GoogleMobileAdsMediationTestSuite'
 
 # 开发时打开
 pod 'FBSDKCoreKit'
-pod 'FBSDKShareKit'
 pod 'Yodo1MasCore', :path => './'
-pod 'Yodo1MasCN', :path => './'
-pod 'Yodo1MasStandard', :path => './'
+#pod 'Yodo1MasCN', :path => './'
+#pod 'Yodo1MasStandard', :path => './'
 pod 'Yodo1MasFull', :path => './'
 
 # Mediation
@@ -59,7 +58,7 @@ pod 'Yodo1MasMediationBaidu', :path => './'
 #pod 'Yodo1MasUnityBridge', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasStandard', '~> 4.0.1.1'
-#pod 'Yodo1MasFull', '~> 4.0.1.1'
+#pod 'Yodo1MasStandard', '~> 4.0.4'
+#pod 'Yodo1MasFull', '~> 4.0.4'
 
 end

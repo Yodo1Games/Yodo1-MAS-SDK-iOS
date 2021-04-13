@@ -69,6 +69,17 @@
 }
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+    [self initWithAppKey:appId successful:successful fail:fail];
+}
+
+- (void)initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+    if (!appKey|| !appKey.length) {
+        if (fail) {
+            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:@"appKey is invalid"]);
+        }
+        return;
+    }
+    
 #if defined(__IPHONE_14_0)
     if (@available(iOS 14, *)) {
         [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
@@ -89,7 +100,7 @@
     //init Sa SDK,debugMode:0 close debug, 1 is debug,2 is debug and data import
     [Yodo1SaManager initializeSdkServerURL: serverURL debug:0];
     NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-    [Yodo1SaManager registerSuperProperties:@{@"gameKey": appId,
+    [Yodo1SaManager registerSuperProperties:@{@"gameKey": appKey,
                                               @"gameBundleId": bundleId,
                                               @"sdkType": @"mas_global",
                                               @"publishChannelCode": @"appstore",
@@ -101,28 +112,17 @@
         
         if (status == AFNetworkReachabilityStatusNotReachable) return;
         
-        [weakSelf doInit:appId successful:successful fail:fail];
+        [weakSelf doInit:appKey successful:successful fail:fail];
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [self getLogVersion];
 }
 
-- (void)doInit:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+- (void)doInit:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
     __weak __typeof(self)weakSelf = self;
     if (_isInit || ![AFNetworkReachabilityManager sharedManager].reachable || _isRequesting) {
-        if (_isInit) {
-            if (successful != nil) {
-                successful();
-            }
-        } else {
-            Yodo1MasError *error;
-            if (_isRequesting) {
-                error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Initializing, please wait a moment"];
-            } else {
-                error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
-            }
-//            if (fail != nil) {
-//                fail(error);
-//            }
+        if (_isInit && successful != nil) {
+            successful();
         }
         return;
     }
@@ -146,7 +146,7 @@
         //[url appendString:@"https://rivendell.explorer.yodo1.com/v1/init/"];
     }
     
-    [url appendString:appId];
+    [url appendString:appKey];
     
     NSLog(@"request - %@", url);
     
@@ -167,12 +167,13 @@
             weakSelf.test_mode = data.test_mode;
             if (data.mas_init_config && data.ad_network_config) {
                 if (debug) {
-                    NSLog(@"获取广告数据成功 - %@", responseObject);
+                    NSLog(@"get config successful - %@", responseObject);
                 }
                 if (weakSelf.test_mode == 1) {
                     [YD1AdsManager.sharedInstance initAdvert];
                 }
                 [weakSelf doInitAdapter];
+                [weakSelf printLog:appKey msg:@"Init successfully (AppKey & Bundle ID Verifyed)"];
                 weakSelf.isInit = YES;
                 if (successful) {
                     successful();
@@ -181,12 +182,13 @@
                 if (fail) {
                     fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"get config failed"]);
                 }
+                [weakSelf printLog:appKey msg:@"Init failed(response:config is null)"];
             }
         } else {
             if (fail) {
                 fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:@"get config failed"]);
             }
-            NSLog(@"获取广告配置失败 - 解释配置数据失败");
+            [weakSelf printLog:appKey msg:@"Init failed(response:body is null)"];
         }
         
         weakSelf.isRequesting = NO;
@@ -196,8 +198,50 @@
         if (fail) {
             fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:error.localizedDescription]);
         }
-        NSLog(@"获取广告配置失败 - %@", error.localizedDescription);
+        [weakSelf printLog:appKey msg:[NSString stringWithFormat:@"Init failed(response:%@)", error.localizedDescription]];
     }];
+}
+
+- (NSString *)getLogVersion {
+    NSString *version = [Yodo1Mas sdkVersion];
+    NSDictionary *yodo1mas = [[NSDictionary alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"yodo1mas" withExtension:@"plist"]];
+    if (yodo1mas != nil) {
+        version = yodo1mas[@"sdkVersion"];
+        NSInteger code = [yodo1mas[@"sdkTypeCode"] integerValue];
+        NSString *type;
+        switch (code) {
+            case 1:
+                type = @"Full";
+                break;
+            case 2:
+                type = @"Standard";
+                break;
+            case 3:
+                type = @"China";
+                break;
+            default:
+                type = nil;
+                break;
+        }
+        if (type) {
+            version = [version stringByAppendingFormat:@"-%@", type];
+        }
+    }
+    return version;
+}
+
+- (void)printLog:(NSString *)appKey msg:(NSString *)msg {
+    NSMutableString *ms = [NSMutableString string];
+    [ms appendString:@"******************************************\n"];
+    [ms appendFormat:@"MAS SDK Version: %@\n", [self getLogVersion]];
+    [ms appendFormat:@"AppKey: %@ \n", appKey];
+    [ms appendFormat:@"Bundle ID: %@ \n", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"]];
+    [ms appendFormat:@"Init Status: %@\n", msg];
+    [ms appendFormat:@"IDFA is: %@\n", [[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    [ms appendFormat:@"Test Device: %@\n", self.test_mode == 1 ? @"On" : @"Off"];
+    [ms appendFormat:@"Test Ad: %@\n", self.test_mode == 1 ? @"On" : @"Off"];
+    [ms appendString:@"******************************************"];
+    NSLog(@"[Yodo1Mas]:\n%@", ms);
 }
 
 - (void)doInitAdapter {
@@ -364,9 +408,9 @@
             [self doInitAdvert: key];
             
             [adapter initWithConfig:config successful:^(NSString *advertCode) {
-                NSLog(@"Adapter初始化成功 - %@:%@", key, value);
+                NSLog(@"Adapter init successful - %@:%@", key, value);
             } fail:^(NSString *advertCode, NSError *error) {
-                NSLog(@"Adapter初始化失败 - %@:%@, %@", key, value, error.description);
+                NSLog(@"Adapter init failed - %@:%@, %@", key, value, error.description);
             }];
         } else {
             if (o == nil) {

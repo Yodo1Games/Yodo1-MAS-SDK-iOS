@@ -23,6 +23,7 @@ typedef enum {
 
 typedef enum {
     Yodo1MasErrorCodeUnknown = -1,
+    Yodo1MasErrorCodeAppKeyIllegal = -2,
     Yodo1MasErrorCodeConfigGet = -1000,
     Yodo1MasErrorCodeConfigNetwork = -1001,
     Yodo1MasErrorCodeConfigServer = -1002,
