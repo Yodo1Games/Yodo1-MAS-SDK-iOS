@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationBaidu'
-  s.version          = '4.0.4'
+  s.version          = '4.0.6'
   s.summary          = 'Yodo1MasMediationBaidu'
   s.swift_version    = '5.0'
 
@@ -35,6 +35,6 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'BaiduMobAdSDK', '~> 4.75'
+  s.dependency 'BaiduMobAdSDK', '4.75'
   
 end

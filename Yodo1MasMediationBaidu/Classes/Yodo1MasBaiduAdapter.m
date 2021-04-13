@@ -39,7 +39,7 @@ BaiduMobAdRewardVideoDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.4";
+    return @"4.0.6";
 }
 
 -(BaiduMobAdView *)adBanner {
