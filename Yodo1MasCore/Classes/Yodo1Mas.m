@@ -233,7 +233,7 @@
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
                 }
                 
-                if (data.test_device == 1) {
+                if (data.test_mode == 1) {
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestDevice];
                 } else {
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestDevice];
@@ -272,11 +272,11 @@
         weakSelf.isRequesting = NO;
         
         if (fail) {
-            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:error.localizedDescription]);
+            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:error.localizedDescription]);
         }
         
         [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-        [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,%@)", @(Yodo1MasErrorCodeConfigServer), error.localizedDescription] forKey:kYodo1MasInitMsg];
+        [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,%@)", @(Yodo1MasErrorCodeConfigNetwork), error.localizedDescription] forKey:kYodo1MasInitMsg];
         [weakSelf printInitLog];
 
     }];
