@@ -31,6 +31,7 @@
 #define kYodo1MasTestDevice         @"Yodo1MasTestDevice"
 #define kYodo1MasInitStatus         @"Yodo1MasInitStatus"
 #define kYodo1MasInitMsg            @"Yodo1MasInitMsg"
+#define kYodo1MasInitTime           @"Yodo1MasInitTime"
 
 @interface Yodo1Mas()
 
@@ -119,7 +120,7 @@
                                               @"publishChannelCode": @"appstore",
                                               @"sdkVersion": sdkVersion}];
     [Yodo1SaManager track:@"adInit" properties:nil];
-    
+
     if (@available(iOS 14, *)) {
         [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
             
@@ -171,6 +172,7 @@
         return;
     }
     
+    
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
     
@@ -188,8 +190,8 @@
     
     [url appendString:appKey];
         
-    if (@available(iOS 10.0, *) && debug) {
-        [url appendFormat:@"?country=%@", [NSLocale currentLocale].countryCode];
+    if (@available(iOS 10.0, *)) {
+        if (debug)[url appendFormat:@"?country=%@", [NSLocale currentLocale].countryCode];
     }
     
     NSLog(@"request - %@", url);
@@ -204,10 +206,12 @@
         [parameters setValue:_appInfo[kYodo1MasIDFA] forKey:@"idfa"];
     }
     
+    [self trackInitStart];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager POST:url parameters:parameters headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakSelf trackInitEnd:YES];
         Yodo1MasInitData *data;
         if (debug && yodo1Config[@"Config"] != nil) {
             data = [Yodo1MasInitData yy_modelWithJSON:yodo1Config[@"Config"]];
@@ -270,7 +274,7 @@
         weakSelf.isRequesting = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         weakSelf.isRequesting = NO;
-        
+        [weakSelf trackInitEnd:NO];
         if (fail) {
             fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:error.localizedDescription]);
         }
@@ -280,6 +284,18 @@
         [weakSelf printInitLog];
 
     }];
+}
+
+- (void)trackInitStart {
+    long long start = [NSDate date].timeIntervalSince1970;
+    [_appInfo setValue:@(start) forKey:kYodo1MasInitTime];
+    [Yodo1SaManager track:@"adInit" properties:@{@"action": @"request", @"time": @(start)}];
+}
+
+- (void)trackInitEnd:(BOOL)successful {
+    long long start = [_appInfo[kYodo1MasInitTime] longLongValue];
+    long long end = [NSDate date].timeIntervalSince1970;
+    [Yodo1SaManager track:@"adInit" properties:@{@"action": successful ? @"response" : @"error", @"time": @(end), @"duration" : @(end - start)}];
 }
 
 - (void)printInitLog {

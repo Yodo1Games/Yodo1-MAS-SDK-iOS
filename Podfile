@@ -4,7 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
-platform :ios, '11.0'
+platform :ios, '9.0'
 #inhibit_all_warnings!
 target "Yodo1MasSdkDemo" do
 
