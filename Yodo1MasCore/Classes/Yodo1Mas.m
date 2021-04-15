@@ -289,13 +289,13 @@
 - (void)trackInitStart {
     long long start = [NSDate date].timeIntervalSince1970;
     [_appInfo setValue:@(start) forKey:kYodo1MasInitTime];
-    [Yodo1SaManager track:@"adInit" properties:@{@"action": @"request", @"time": @(start)}];
+    [Yodo1SaManager track:@"adInit" properties:@{@"initAction": @"request", @"initTime": @(start)}];
 }
 
 - (void)trackInitEnd:(BOOL)successful {
     long long start = [_appInfo[kYodo1MasInitTime] longLongValue];
     long long end = [NSDate date].timeIntervalSince1970;
-    [Yodo1SaManager track:@"adInit" properties:@{@"action": successful ? @"response" : @"error", @"time": @(end), @"duration" : @(end - start)}];
+    [Yodo1SaManager track:@"adInit" properties:@{@"initAction": successful ? @"response" : @"error", @"initTime": @(end), @"initDuration" : @(end - start)}];
 }
 
 - (void)printInitLog {
