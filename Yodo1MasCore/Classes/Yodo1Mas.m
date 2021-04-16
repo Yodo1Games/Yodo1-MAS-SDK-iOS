@@ -147,9 +147,12 @@
     [_appInfo setValue:[NSBundle.mainBundle objectForInfoDictionaryKey:@"GADApplicationIdentifier"] forKey:kYodo1MasAdMobId];
     [_appInfo setValue:bundleId forKey:kYodo1MasAppBundleId];
     
-    NSString *idfa = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    if (!idfa || !idfa.length || [idfa isEqualToString:@"00000000-0000-0000-0000-000000000000"]) {
+//        idfa = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//    }
     if (![@"00000000-0000-0000-0000-000000000000" isEqualToString:idfa]) {
-        [_appInfo setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:kYodo1MasIDFA];
+        [_appInfo setValue:idfa forKey:kYodo1MasIDFA];
     }
     
     // request config
