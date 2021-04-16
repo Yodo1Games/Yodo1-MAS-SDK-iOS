@@ -394,7 +394,7 @@ static void *kYD1UIViewLayoutMethodPropertyRightGap = &kYD1UIViewLayoutMethodPro
 
 - (void)setSize:(CGSize)size screenType:(YD1UIScreenType)screenType
 {
-    CGFloat ratio = YD1SCREEN_WIDTH / screenType;
+    CGFloat ratio = YODO1SCREEN_WIDTH / screenType;
     self.frame = CGRectMake(self.ct_x, self.ct_y, size.width * ratio, size.height * ratio);
 }
 

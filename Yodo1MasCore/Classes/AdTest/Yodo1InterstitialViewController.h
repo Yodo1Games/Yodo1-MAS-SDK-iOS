@@ -6,7 +6,7 @@
 @interface Yodo1InterstitialViewController : UIViewController
 
 
-@property (nonatomic,copy) YD1InterstitialCallback callbak;
+@property (nonatomic,copy) YODO1InterstitialCallback callbak;
 @property(nonatomic,strong)NSString* path;
 
 - (void)configInterstitial;

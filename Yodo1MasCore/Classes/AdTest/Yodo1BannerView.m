@@ -69,7 +69,7 @@ NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 - (void)clickBanner:(UITapGestureRecognizer*)tapRecognizer {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.com"]];
     if (self.callbak) {
-        self.callbak(kYD1BannerStateClicked);
+        self.callbak(kYODO1BannerStateClicked);
     }
 }
 

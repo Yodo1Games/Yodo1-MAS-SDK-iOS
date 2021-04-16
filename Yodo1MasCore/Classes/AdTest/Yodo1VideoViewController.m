@@ -221,19 +221,19 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
 - (void)yd1VideoDidLoaded {
     if (self.callbak) {
-        self.callbak(kYD1VideoStateLoaded);
+        self.callbak(kYODO1VideoStateLoaded);
     }
 }
 
 - (void)yd1VideoDidFail:(NSError*)error {
     if (self.callbak) {
-        self.callbak(kYD1VideoStateFail);
+        self.callbak(kYODO1VideoStateFail);
     }
 }
 
 - (void)yd1VideoDidStart {
     if (self.callbak) {
-        self.callbak(kYD1VideoStateShow);
+        self.callbak(kYODO1VideoStateShow);
     }
 }
 
@@ -249,7 +249,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     [self stopProgressTimer];
     [self createVideoEndPageView];
     if (self.callbak) {
-        self.callbak(kYD1VideoStateFinished);
+        self.callbak(kYODO1VideoStateFinished);
     }
 }
 
@@ -266,7 +266,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     [videoEndPageViewBackground removeFromSuperview];
     videoEndPageViewBackground = nil;
     if (self.callbak) {
-        self.callbak(kYD1VideoStateClose);
+        self.callbak(kYODO1VideoStateClose);
     }
 }
 

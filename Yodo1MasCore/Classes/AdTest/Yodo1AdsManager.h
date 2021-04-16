@@ -17,7 +17,7 @@
 
 - (BOOL)isInterstitialReady;
 
-- (void)intersCallback:(YD1InterstitialCallback)callback;
+- (void)intersCallback:(YODO1InterstitialCallback)callback;
 
 - (void)showInterstitial:(UIViewController *)viewController;
 

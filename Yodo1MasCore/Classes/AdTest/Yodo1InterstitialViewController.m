@@ -131,7 +131,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 - (void)bigMap:(UITapGestureRecognizer*)tapRecognizer {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.com"]];
     if (self.callbak) {
-        self.callbak(kYD1InterstitialStateClicked);
+        self.callbak(kYODO1InterstitialStateClicked);
     }
 }
 
@@ -141,7 +141,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     }
     isClosed = YES;
     if (self.callbak) {
-        self.callbak(kYD1InterstitialStateClose);
+        self.callbak(kYODO1InterstitialStateClose);
     }
 }
 

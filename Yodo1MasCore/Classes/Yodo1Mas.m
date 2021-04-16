@@ -385,9 +385,9 @@
         }
     }
     
-    [Yodo1AdsManager.sharedInstance bannerCallback:^(YD1BannerState state) {
+    [Yodo1AdsManager.sharedInstance bannerCallback:^(YODO1BannerState state) {
         switch (state) {
-            case kYD1BannerStateFail:
+            case kYODO1BannerStateFail:
             {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:error];
@@ -396,7 +396,7 @@
                 }
             }
                 break;
-            case kYD1BannerStateClicked:
+            case kYODO1BannerStateClicked:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -404,7 +404,7 @@
                 }
             }
                 break;
-            case kYD1BannerStateClose:
+            case kYODO1BannerStateClose:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
@@ -419,10 +419,10 @@
     UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
     [Yodo1MasBanner addBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
     
-    [Yodo1AdsManager.sharedInstance videoCallback:^(YD1VideoState state) {
+    [Yodo1AdsManager.sharedInstance videoCallback:^(YODO1VideoState state) {
         
         switch (state) {
-            case kYD1VideoStateFail:
+            case kYODO1VideoStateFail:
             {
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeReward message:@"" error:error];
@@ -431,7 +431,7 @@
                 }
             }
                 break;
-            case kYD1VideoStateFinished:
+            case kYODO1VideoStateFinished:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdRewardEarned:)]) {
@@ -439,7 +439,7 @@
                 }
             }
                 break;
-            case kYD1VideoStateShow:
+            case kYODO1VideoStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -447,7 +447,7 @@
                 }
             }
                 break;
-            case kYD1VideoStateClose:
+            case kYODO1VideoStateClose:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
@@ -459,9 +459,9 @@
                 break;
         }
     }];
-    [Yodo1AdsManager.sharedInstance intersCallback:^(YD1InterstitialState state) {
+    [Yodo1AdsManager.sharedInstance intersCallback:^(YODO1InterstitialState state) {
         switch (state) {
-            case kYD1InterstitialStateFail:
+            case kYODO1InterstitialStateFail:
             {
                 
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
@@ -471,7 +471,7 @@
                 }
             }
                 break;
-            case kYD1InterstitialStateShow:
+            case kYODO1InterstitialStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -479,7 +479,7 @@
                 }
             }
                 break;
-            case kYD1InterstitialStateClose:
+            case kYODO1InterstitialStateClose:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
