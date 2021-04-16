@@ -35,5 +35,5 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'IronSourceSDK', '~> 7.1.0'
+  s.dependency 'IronSourceSDK', '7.1.5'
 end

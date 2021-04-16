@@ -15,7 +15,7 @@
 #endif
 #import <AdSupport/AdSupport.h>
 #import "Yodo1SaManager.h"
-#import "YD1AdsManager.h"
+#import "Yodo1AdsManager.h"
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
@@ -230,7 +230,7 @@
                     NSLog(@"get config successful - %@", responseObject);
                 }
                 if (weakSelf.test_mode == 1) {
-                    [YD1AdsManager.sharedInstance initAdvert];
+                    [Yodo1AdsManager.sharedInstance initAdvert];
                 }
                 [weakSelf doInitAdapter];
                 
@@ -385,7 +385,7 @@
         }
     }
     
-    [YD1AdsManager.sharedInstance bannerCallback:^(YD1BannerState state) {
+    [Yodo1AdsManager.sharedInstance bannerCallback:^(YD1BannerState state) {
         switch (state) {
             case kYD1BannerStateFail:
             {
@@ -417,9 +417,9 @@
         }
     }];
     UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
-    [Yodo1MasBanner addBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
+    [Yodo1MasBanner addBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
     
-    [YD1AdsManager.sharedInstance videoCallback:^(YD1VideoState state) {
+    [Yodo1AdsManager.sharedInstance videoCallback:^(YD1VideoState state) {
         
         switch (state) {
             case kYD1VideoStateFail:
@@ -459,7 +459,7 @@
                 break;
         }
     }];
-    [YD1AdsManager.sharedInstance intersCallback:^(YD1InterstitialState state) {
+    [Yodo1AdsManager.sharedInstance intersCallback:^(YD1InterstitialState state) {
         switch (state) {
             case kYD1InterstitialStateFail:
             {
@@ -639,13 +639,13 @@
     if (self.test_mode == 1) {
         switch (type) {
             case Yodo1MasAdTypeReward:
-                isLoaded = [YD1AdsManager.sharedInstance isVideoReady];
+                isLoaded = [Yodo1AdsManager.sharedInstance isVideoReady];
                 break;
             case Yodo1MasAdTypeInterstitial:
-                isLoaded = [YD1AdsManager.sharedInstance isInterstitialReady];
+                isLoaded = [Yodo1AdsManager.sharedInstance isInterstitialReady];
                 break;
             case Yodo1MasAdTypeBanner:
-                isLoaded = [YD1AdsManager.sharedInstance isBannerReady];
+                isLoaded = [Yodo1AdsManager.sharedInstance isBannerReady];
                 break;
         }
         return isLoaded;
@@ -745,18 +745,18 @@
         switch (type) {
             case Yodo1MasAdTypeReward:
             {
-                [YD1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
+                [Yodo1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
             }
                 break;
             case Yodo1MasAdTypeInterstitial:
             {
-                [YD1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
+                [Yodo1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
             }
                 break;
             case Yodo1MasAdTypeBanner:
             {
                 UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
-                [Yodo1MasBanner showBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
+                [Yodo1MasBanner showBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
             }
                 break;
         }
@@ -1010,7 +1010,7 @@
 
 - (void)dismissBannerAd {
     if (self.test_mode == 1) {
-        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+        [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];
@@ -1019,7 +1019,7 @@
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
     if (self.test_mode == 1) {
-        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+        [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAdWithDestroy:destroy];

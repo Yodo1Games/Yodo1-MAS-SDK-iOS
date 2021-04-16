@@ -1,32 +1,32 @@
-#import "YD1AdsManager.h"
-#import "YD1InterstitialViewController.h"
-#import "YD1BannerView.h"
-#import "YD1VideoViewController.h"
+#import "Yodo1AdsManager.h"
+#import "Yodo1InterstitialViewController.h"
+#import "Yodo1BannerView.h"
+#import "Yodo1VideoViewController.h"
 
-@interface YD1AdsManager ()  {
+@interface Yodo1AdsManager ()  {
     
     BOOL isInited;
 }
 
 @property (nonatomic, strong) YD1VideoCallback kVideoCallbak;
 @property (nonatomic, strong) YD1InterstitialCallback kIntersCallbak;
-@property (nonatomic, strong) YD1BannerCallback kBannerCallbak;
+@property (nonatomic, strong) Yodo1BannerCallback kBannerCallbak;
 
-@property (nonatomic, strong) YD1InterstitialViewController *kInterstitialView;
-@property (nonatomic, strong) YD1BannerView *kBannerView;
-@property (nonatomic, strong) YD1VideoViewController *kVideoViewController;
+@property (nonatomic, strong) Yodo1InterstitialViewController *kInterstitialView;
+@property (nonatomic, strong) Yodo1BannerView *kBannerView;
+@property (nonatomic, strong) Yodo1VideoViewController *kVideoViewController;
 
 - (BOOL)isLandscape;
 
 @end
 
-@implementation YD1AdsManager
+@implementation Yodo1AdsManager
 
-static YD1AdsManager* _instance = nil;
-+ (YD1AdsManager*)sharedInstance {
+static Yodo1AdsManager* _instance = nil;
++ (Yodo1AdsManager*)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _instance = [[YD1AdsManager alloc]init];
+        _instance = [[Yodo1AdsManager alloc]init];
     });
     return _instance;
 }
@@ -47,7 +47,7 @@ static YD1AdsManager* _instance = nil;
 
     
     //Interstitial
-    __weak YD1AdsManager *weakSelfInters = self;
+    __weak Yodo1AdsManager *weakSelfInters = self;
     [self.kInterstitialView setCallbak:^(YD1InterstitialState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (state == kYD1InterstitialStateShow) {
@@ -72,7 +72,7 @@ static YD1AdsManager* _instance = nil;
     }];
     
     //Banner
-     __weak YD1AdsManager *weakSelfBanner = self;
+     __weak Yodo1AdsManager *weakSelfBanner = self;
     [self.kBannerView setCallbak:^(YD1BannerState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (state == kYD1BannerStateClicked) {
@@ -87,7 +87,7 @@ static YD1AdsManager* _instance = nil;
         });
     }];
     
-    __weak YD1AdsManager *weakSelfVideo = self;
+    __weak Yodo1AdsManager *weakSelfVideo = self;
     [self.kVideoViewController setCallbak:^(YD1VideoState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (state == kYD1VideoStateShow) {
@@ -111,9 +111,9 @@ static YD1AdsManager* _instance = nil;
 
 #pragma mark- video
 
-- (YD1VideoViewController*)kVideoViewController {
+- (Yodo1VideoViewController*)kVideoViewController {
     if (_kVideoViewController == nil) {
-        _kVideoViewController = [[YD1VideoViewController alloc]init];
+        _kVideoViewController = [[Yodo1VideoViewController alloc]init];
         [_kVideoViewController configVideo];
     }
     return _kVideoViewController;
@@ -151,9 +151,9 @@ static YD1AdsManager* _instance = nil;
 
 #pragma mark- Interstitial
 
-- (YD1InterstitialViewController*)kInterstitialView {
+- (Yodo1InterstitialViewController*)kInterstitialView {
     if (_kInterstitialView == nil) {
-        _kInterstitialView = [[YD1InterstitialViewController alloc]init];
+        _kInterstitialView = [[Yodo1InterstitialViewController alloc]init];
         [_kInterstitialView configInterstitial];
     }
     return _kInterstitialView;
@@ -187,14 +187,14 @@ static YD1AdsManager* _instance = nil;
 
 #pragma mark- Banner
 
-- (YD1BannerView*)kBannerView {
+- (Yodo1BannerView*)kBannerView {
     if (_kBannerView == nil) {
-        _kBannerView = [[YD1BannerView alloc]init];
+        _kBannerView = [[Yodo1BannerView alloc]init];
     }
     return _kBannerView;
 }
 
-- (void)bannerCallback:(YD1BannerCallback)callback {
+- (void)bannerCallback:(Yodo1BannerCallback)callback {
      self.kBannerCallbak = callback;
 }
 

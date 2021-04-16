@@ -21,7 +21,7 @@ static YD1UIScreenType YD1UIScreenType_iPhone5 = 320.0f;
 static YD1UIScreenType YD1UIScreenType_iPhone6 = 375.0f;
 static YD1UIScreenType YD1UIScreenType_iPhone6P = 414.0f;
 
-@interface UIView (YD1LayoutMethods)
+@interface UIView (Yodo1LayoutMethods)
 
 // coordinator getters
 - (CGFloat)ct_height;

@@ -31,4 +31,4 @@ typedef NS_ENUM(NSInteger, YD1BannerState) {
     kYD1BannerStateClose,
 };
 
-typedef void(^YD1BannerCallback)(YD1BannerState state);
+typedef void(^Yodo1BannerCallback)(YD1BannerState state);
