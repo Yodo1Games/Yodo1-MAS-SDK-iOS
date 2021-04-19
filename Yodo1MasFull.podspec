@@ -45,7 +45,7 @@ TODO: Add long description of the pod here.
   s.dependency 'Yodo1MasMediationAdColonyMax', '4.1.0'
   s.dependency 'Yodo1MasMediationFacebookMax', '4.1.0'
   s.dependency 'Yodo1MasMediationInMobiMax', '4.1.0'
-  s.dependency 'Yodo1MasMediationMintegralMax', '4.1.0'
+  #s.dependency 'Yodo1MasMediationMintegralMax', '4.1.0'
   s.dependency 'Yodo1MasMediationMyTargetMax', '4.1.0'
   s.dependency 'Yodo1MasMediationPangleMax', '4.1.0'
   s.dependency 'Yodo1MasMediationTapjoyMax', '4.1.0'

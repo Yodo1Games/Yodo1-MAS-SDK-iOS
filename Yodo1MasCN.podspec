@@ -38,7 +38,7 @@ TODO: Add long description of the pod here.
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore', '4.1.0'
   s.dependency 'Yodo1MasMediationApplovinMax', '4.1.0'
-  s.dependency 'Yodo1MasMediationMintegralMax', '4.1.0'
+  #s.dependency 'Yodo1MasMediationMintegralMax', '4.1.0'
   s.dependency 'Yodo1MasMediationPangleMax', '4.1.0'
   s.dependency 'Yodo1MasMediationTencentMax', '4.1.0'
   s.dependency 'Yodo1MasMediationBaidu', '4.1.0'
