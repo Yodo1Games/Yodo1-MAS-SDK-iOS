@@ -1,12 +1,12 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "YD1AdvertConstant.h"
+#import "Yodo1AdvertConstant.h"
 
 
-@interface YD1InterstitialViewController : UIViewController
+@interface Yodo1InterstitialViewController : UIViewController
 
 
-@property (nonatomic,copy) YD1InterstitialCallback callbak;
+@property (nonatomic,copy) YODO1InterstitialCallback callbak;
 @property(nonatomic,strong)NSString* path;
 
 - (void)configInterstitial;

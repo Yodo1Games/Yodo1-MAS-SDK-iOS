@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationInMobi'
-  s.version          = '4.0.4'
+  s.version          = '4.1.0'
   s.summary          = 'Yodo1MasMediationInMobi'
   s.swift_version    = '5.0'
 
@@ -35,6 +35,6 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'InMobiSDK/Core'
+  s.dependency 'InMobiSDK/Core', '9.1.7'
   
 end

@@ -1,11 +1,11 @@
-#import "YD1BannerView.h"
-#import "YD1ImageHelp.h"
-#import "UIView+YD1LayoutMethods.h"
+#import "Yodo1MasBannerView.h"
+#import "Yodo1ImageHelp.h"
+#import "UIView+Yodo1LayoutMethods.h"
 
 
 NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
-@interface YD1BannerView() {
+@interface Yodo1MasBannerView() {
     UITapGestureRecognizer *bannerRecognizer;
     UIImageView *bannerImageView;
     __block UIImage* _image;
@@ -15,7 +15,7 @@ NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
 @end
 
-@implementation YD1BannerView
+@implementation Yodo1MasBannerView
 
 - (instancetype)init {
     self = [super init];
@@ -38,7 +38,7 @@ NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
         if (_image) {
              [bannerImageView setImage:_image];
          }else{
-             [YD1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
+             [Yodo1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
                  if (image) {
                      self->_image = image;
                      [self->bannerImageView setImage:self->_image];
@@ -69,7 +69,7 @@ NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 - (void)clickBanner:(UITapGestureRecognizer*)tapRecognizer {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.com"]];
     if (self.callbak) {
-        self.callbak(kYD1BannerStateClicked);
+        self.callbak(kYODO1BannerStateClicked);
     }
 }
 
@@ -77,7 +77,7 @@ NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     if (self->_image) {
         return YES;
     }
-    [YD1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
+    [Yodo1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
       if (image) {
           self->_image = image;
       }else{

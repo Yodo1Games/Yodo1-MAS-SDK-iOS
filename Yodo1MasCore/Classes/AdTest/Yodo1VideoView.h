@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface YD1VideoView : UIView
+@interface Yodo1VideoView : UIView
 
 @property (nonatomic) AVPlayer *player;
 

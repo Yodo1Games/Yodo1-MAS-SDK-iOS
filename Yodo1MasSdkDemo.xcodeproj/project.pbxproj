@@ -417,8 +417,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.3.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yodo1.adsdemo;
+				MARKETING_VERSION = 4.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -443,9 +443,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.3.1;
+				MARKETING_VERSION = 4.1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yodo1.adsdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,14 +1,14 @@
 
 #import <AVFoundation/AVFoundation.h>
-#import "YD1VideoDelegate.h"
+#import "Yodo1VideoDelegate.h"
 
-@interface YD1AVPlayer : AVPlayer
+@interface Yodo1AVPlayer : AVPlayer
 
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, assign) int progressInterval;
 @property (nonatomic, assign) BOOL isPlaying;
 @property (nonatomic, assign) BOOL isReadyPlay;
-@property (nonatomic, assign) id <YD1VideoDelegate>delegate;
+@property (nonatomic, assign) id <Yodo1VideoDelegate>delegate;
 @property (nonatomic, assign) float videoDuration;
 
 - (void)setProgressEventInterval:(int)progressEventInterval;

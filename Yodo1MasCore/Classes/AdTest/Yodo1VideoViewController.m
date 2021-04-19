@@ -1,10 +1,10 @@
-#import "YD1VideoViewController.h"
-#import "YD1ImageHelp.h"
-#import "UIView+YD1LayoutMethods.h"
+#import "Yodo1VideoViewController.h"
+#import "Yodo1ImageHelp.h"
+#import "UIView+Yodo1LayoutMethods.h"
 
 NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
-@interface YD1VideoViewController() <YD1VideoDelegate> {
+@interface Yodo1VideoViewController() <Yodo1VideoDelegate> {
     @private
     UITapGestureRecognizer *videoRecognizer;
     UIView* videoBackground;
@@ -22,7 +22,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
 @end
 
-@implementation YD1VideoViewController
+@implementation Yodo1VideoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +36,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 }
 
 - (void)configVideo {
-    [YD1ImageHelp imageWithURL:[self imagePath] block:^(UIImage *image) {
+    [Yodo1ImageHelp imageWithURL:[self imagePath] block:^(UIImage *image) {
         if (image) {
             self->_image = image;
         }else{
@@ -44,12 +44,12 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
         }
     }];
     if (_videoPlayer == nil) {
-        _videoPlayer = [[YD1AVPlayer alloc]init];
+        _videoPlayer = [[Yodo1AVPlayer alloc]init];
     }
     _videoPlayer.delegate = self;
     [_videoPlayer prepare:[self videoPath] initialVolume:1 timeout:3000];
     if (_videoView == nil) {
-        _videoView = [[YD1VideoView alloc] initWithFrame:self.view.frame];
+        _videoView = [[Yodo1VideoView alloc] initWithFrame:self.view.frame];
     }
     [_videoView setVideoFillMode:AVLayerVideoGravityResize];
     [_videoView setPlayer:_videoPlayer];
@@ -113,7 +113,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     if (self->_image) {
         [endImageView setImage:self->_image];
     }else{
-        [YD1ImageHelp imageWithURL:[self imagePath] block:^(UIImage *image) {
+        [Yodo1ImageHelp imageWithURL:[self imagePath] block:^(UIImage *image) {
             if (image) {
                 [self->endImageView setImage:image];
             }
@@ -194,8 +194,8 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     if (self.videoPlayer && [self.videoPlayer isReadyPlay] && self->_image) {
         return YES;
     }
-    [YD1ImageHelp imageWithURL:[self imagePath]
-                         block:^(UIImage *image) {
+    [Yodo1ImageHelp imageWithURL:[self imagePath]
+                           block:^(UIImage *image) {
         if (image) {
             self->_image = image;
         }else{
@@ -221,19 +221,19 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
 - (void)yd1VideoDidLoaded {
     if (self.callbak) {
-        self.callbak(kYD1VideoStateLoaded);
+        self.callbak(kYODO1VideoStateLoaded);
     }
 }
 
 - (void)yd1VideoDidFail:(NSError*)error {
     if (self.callbak) {
-        self.callbak(kYD1VideoStateFail);
+        self.callbak(kYODO1VideoStateFail);
     }
 }
 
 - (void)yd1VideoDidStart {
     if (self.callbak) {
-        self.callbak(kYD1VideoStateShow);
+        self.callbak(kYODO1VideoStateShow);
     }
 }
 
@@ -249,7 +249,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     [self stopProgressTimer];
     [self createVideoEndPageView];
     if (self.callbak) {
-        self.callbak(kYD1VideoStateFinished);
+        self.callbak(kYODO1VideoStateFinished);
     }
 }
 
@@ -266,7 +266,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     [videoEndPageViewBackground removeFromSuperview];
     videoEndPageViewBackground = nil;
     if (self.callbak) {
-        self.callbak(kYD1VideoStateClose);
+        self.callbak(kYODO1VideoStateClose);
     }
 }
 

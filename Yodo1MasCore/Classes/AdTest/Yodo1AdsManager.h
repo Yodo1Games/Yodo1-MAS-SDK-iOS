@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "YD1AdvertConstant.h"
+#import "Yodo1AdvertConstant.h"
 
 
-@interface YD1AdsManager : NSObject
+@interface Yodo1AdsManager : NSObject
 
-+ (YD1AdsManager*)sharedInstance;
++ (Yodo1AdsManager*)sharedInstance;
 
 - (void)initAdvert;
 
@@ -17,13 +17,13 @@
 
 - (BOOL)isInterstitialReady;
 
-- (void)intersCallback:(YD1InterstitialCallback)callback;
+- (void)intersCallback:(YODO1InterstitialCallback)callback;
 
 - (void)showInterstitial:(UIViewController *)viewController;
 
 - (BOOL)isBannerReady;
 
-- (void)bannerCallback:(YD1BannerCallback)callback;
+- (void)bannerCallback:(Yodo1BannerCallback)callback;
 
 - (UIView*)bannerView;
 

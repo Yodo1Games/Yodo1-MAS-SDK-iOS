@@ -1,6 +1,6 @@
-#import "YD1ImageHelp.h"
+#import "Yodo1ImageHelp.h"
 
-@implementation YD1ImageHelp
+@implementation Yodo1ImageHelp
 
 + (void)imageWithURL:(NSString *)url
                block:(void (^)(UIImage *))block {

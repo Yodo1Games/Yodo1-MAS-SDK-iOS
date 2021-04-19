@@ -5,7 +5,7 @@
 //  Copyright (c) 2014年 casa. All rights reserved.
 //
 
-#import "UIView+YD1LayoutMethods.h"
+#import "UIView+Yodo1LayoutMethods.h"
 #import <objc/runtime.h>
 
 static void *kYD1UIViewLayoutMethodPropertyBottomGap = &kYD1UIViewLayoutMethodPropertyBottomGap;
@@ -13,7 +13,7 @@ static void *kYD1UIViewLayoutMethodPropertyTopGap = &kYD1UIViewLayoutMethodPrope
 static void *kYD1UIViewLayoutMethodPropertyLeftGap = &kYD1UIViewLayoutMethodPropertyLeftGap;
 static void *kYD1UIViewLayoutMethodPropertyRightGap = &kYD1UIViewLayoutMethodPropertyRightGap;
 
-@implementation UIView (YD1LayoutMethods)
+@implementation UIView (Yodo1LayoutMethods)
 
 // coordinator getters
 - (CGFloat)ct_height
@@ -394,7 +394,7 @@ static void *kYD1UIViewLayoutMethodPropertyRightGap = &kYD1UIViewLayoutMethodPro
 
 - (void)setSize:(CGSize)size screenType:(YD1UIScreenType)screenType
 {
-    CGFloat ratio = YD1SCREEN_WIDTH / screenType;
+    CGFloat ratio = YODO1SCREEN_WIDTH / screenType;
     self.frame = CGRectMake(self.ct_x, self.ct_y, size.width * ratio, size.height * ratio);
 }
 

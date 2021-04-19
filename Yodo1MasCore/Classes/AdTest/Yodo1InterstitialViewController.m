@@ -1,10 +1,10 @@
-#import "YD1InterstitialViewController.h"
-#import "UIView+YD1LayoutMethods.h"
-#import "YD1ImageHelp.h"
+#import "Yodo1InterstitialViewController.h"
+#import "UIView+Yodo1LayoutMethods.h"
+#import "Yodo1ImageHelp.h"
 
 NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
-@interface YD1InterstitialViewController() {
+@interface Yodo1InterstitialViewController() {
     UITapGestureRecognizer *recognizer;
     UIImageView *intersImageView;
     UIButton *closeBt;
@@ -14,7 +14,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
 @end
 
-@implementation YD1InterstitialViewController
+@implementation Yodo1InterstitialViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,7 +24,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     if (_image) {
         [intersImageView setImage:_image];
     }else{
-        [YD1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
+        [Yodo1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
             if (image) {
                 self->_image = image;
                 [self->intersImageView setImage:self->_image];
@@ -73,7 +73,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 }
 
 - (void)configInterstitial {
-     [YD1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
+     [Yodo1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
         if (image) {
           self->_image = image;
         }else{
@@ -131,7 +131,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 - (void)bigMap:(UITapGestureRecognizer*)tapRecognizer {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.yodo1.com"]];
     if (self.callbak) {
-        self.callbak(kYD1InterstitialStateClicked);
+        self.callbak(kYODO1InterstitialStateClicked);
     }
 }
 
@@ -141,7 +141,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     }
     isClosed = YES;
     if (self.callbak) {
-        self.callbak(kYD1InterstitialStateClose);
+        self.callbak(kYODO1InterstitialStateClose);
     }
 }
 
@@ -149,7 +149,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
     if (self->_image) {
         return YES;
     }
-    [YD1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
+    [Yodo1ImageHelp imageWithURL:self.path block:^(UIImage *image) {
        if (image) {
          self->_image = image;
        }else{

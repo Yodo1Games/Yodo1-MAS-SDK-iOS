@@ -1,32 +1,32 @@
-#import "YD1AdsManager.h"
-#import "YD1InterstitialViewController.h"
-#import "YD1BannerView.h"
-#import "YD1VideoViewController.h"
+#import "Yodo1AdsManager.h"
+#import "Yodo1InterstitialViewController.h"
+#import "Yodo1MasBannerView.h"
+#import "Yodo1VideoViewController.h"
 
-@interface YD1AdsManager ()  {
+@interface Yodo1AdsManager ()  {
     
     BOOL isInited;
 }
 
 @property (nonatomic, strong) YD1VideoCallback kVideoCallbak;
-@property (nonatomic, strong) YD1InterstitialCallback kIntersCallbak;
-@property (nonatomic, strong) YD1BannerCallback kBannerCallbak;
+@property (nonatomic, strong) YODO1InterstitialCallback kIntersCallbak;
+@property (nonatomic, strong) Yodo1BannerCallback kBannerCallbak;
 
-@property (nonatomic, strong) YD1InterstitialViewController *kInterstitialView;
-@property (nonatomic, strong) YD1BannerView *kBannerView;
-@property (nonatomic, strong) YD1VideoViewController *kVideoViewController;
+@property (nonatomic, strong) Yodo1InterstitialViewController *kInterstitialView;
+@property (nonatomic, strong) Yodo1MasBannerView *kBannerView;
+@property (nonatomic, strong) Yodo1VideoViewController *kVideoViewController;
 
 - (BOOL)isLandscape;
 
 @end
 
-@implementation YD1AdsManager
+@implementation Yodo1AdsManager
 
-static YD1AdsManager* _instance = nil;
-+ (YD1AdsManager*)sharedInstance {
+static Yodo1AdsManager* _instance = nil;
++ (Yodo1AdsManager*)sharedInstance {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _instance = [[YD1AdsManager alloc]init];
+        _instance = [[Yodo1AdsManager alloc]init];
     });
     return _instance;
 }
@@ -47,23 +47,23 @@ static YD1AdsManager* _instance = nil;
 
     
     //Interstitial
-    __weak YD1AdsManager *weakSelfInters = self;
-    [self.kInterstitialView setCallbak:^(YD1InterstitialState state) {
+    __weak Yodo1AdsManager *weakSelfInters = self;
+    [self.kInterstitialView setCallbak:^(YODO1InterstitialState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (state == kYD1InterstitialStateShow) {
+            if (state == kYODO1InterstitialStateShow) {
                 if (weakSelfInters.kIntersCallbak) {
-                    weakSelfInters.kIntersCallbak(kYD1InterstitialStateShow);
+                    weakSelfInters.kIntersCallbak(kYODO1InterstitialStateShow);
                 }
-            }else if (state == kYD1InterstitialStateClose) {
+            }else if (state == kYODO1InterstitialStateClose) {
                 if (weakSelfInters.kIntersCallbak) {
-                    weakSelfInters.kIntersCallbak(kYD1InterstitialStateClose);
+                    weakSelfInters.kIntersCallbak(kYODO1InterstitialStateClose);
                 }
                 [weakSelfInters.kInterstitialView dismissViewControllerAnimated:YES
                                                                      completion:nil];
-            }else if (state == kYD1InterstitialStateClicked) {
+            }else if (state == kYODO1InterstitialStateClicked) {
                 if (weakSelfInters.kIntersCallbak) {
-                    weakSelfInters.kIntersCallbak(kYD1InterstitialStateClicked);
-                    weakSelfInters.kIntersCallbak(kYD1InterstitialStateClose);
+                    weakSelfInters.kIntersCallbak(kYODO1InterstitialStateClicked);
+                    weakSelfInters.kIntersCallbak(kYODO1InterstitialStateClose);
                 }
                 [weakSelfInters.kInterstitialView dismissViewControllerAnimated:YES
                                                                      completion:nil];
@@ -72,37 +72,37 @@ static YD1AdsManager* _instance = nil;
     }];
     
     //Banner
-     __weak YD1AdsManager *weakSelfBanner = self;
-    [self.kBannerView setCallbak:^(YD1BannerState state) {
+     __weak Yodo1AdsManager *weakSelfBanner = self;
+    [self.kBannerView setCallbak:^(YODO1BannerState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (state == kYD1BannerStateClicked) {
+            if (state == kYODO1BannerStateClicked) {
                 if (weakSelfBanner.kBannerCallbak) {
-                    weakSelfBanner.kBannerCallbak(kYD1BannerStateClicked);
+                    weakSelfBanner.kBannerCallbak(kYODO1BannerStateClicked);
                 }
-            }else if (state == kYD1BannerStateShow){
+            }else if (state == kYODO1BannerStateShow){
                 if (weakSelfBanner.kBannerCallbak) {
-                    weakSelfBanner.kBannerCallbak(kYD1BannerStateShow);
+                    weakSelfBanner.kBannerCallbak(kYODO1BannerStateShow);
                 }
             }
         });
     }];
     
-    __weak YD1AdsManager *weakSelfVideo = self;
-    [self.kVideoViewController setCallbak:^(YD1VideoState state) {
+    __weak Yodo1AdsManager *weakSelfVideo = self;
+    [self.kVideoViewController setCallbak:^(YODO1VideoState state) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (state == kYD1VideoStateShow) {
+            if (state == kYODO1VideoStateShow) {
                 if (weakSelfVideo.kVideoCallbak) {
-                    weakSelfVideo.kVideoCallbak(kYD1VideoStateShow);
+                    weakSelfVideo.kVideoCallbak(kYODO1VideoStateShow);
                 }
-            }else if (state == kYD1VideoStateClose) {
+            }else if (state == kYODO1VideoStateClose) {
                 if (weakSelfVideo.kVideoCallbak) {
-                    weakSelfVideo.kVideoCallbak(kYD1VideoStateClose);
+                    weakSelfVideo.kVideoCallbak(kYODO1VideoStateClose);
                 }
                 [weakSelfVideo.kVideoViewController dismissViewControllerAnimated:YES
                                                                      completion:nil];
-            }else if (state == kYD1VideoStateFinished){
+            }else if (state == kYODO1VideoStateFinished){
                 if (weakSelfVideo.kVideoCallbak) {
-                    weakSelfVideo.kVideoCallbak(kYD1VideoStateFinished);
+                    weakSelfVideo.kVideoCallbak(kYODO1VideoStateFinished);
                 }
             }
         });
@@ -111,9 +111,9 @@ static YD1AdsManager* _instance = nil;
 
 #pragma mark- video
 
-- (YD1VideoViewController*)kVideoViewController {
+- (Yodo1VideoViewController*)kVideoViewController {
     if (_kVideoViewController == nil) {
-        _kVideoViewController = [[YD1VideoViewController alloc]init];
+        _kVideoViewController = [[Yodo1VideoViewController alloc]init];
         [_kVideoViewController configVideo];
     }
     return _kVideoViewController;
@@ -137,7 +137,7 @@ static YD1AdsManager* _instance = nil;
         [self.kVideoViewController.videoPlayer play];
     }else{
         if (self.kVideoCallbak) {
-            self.kVideoCallbak(kYD1VideoStateFail);
+            self.kVideoCallbak(kYODO1VideoStateFail);
         }
     }
 }
@@ -151,9 +151,9 @@ static YD1AdsManager* _instance = nil;
 
 #pragma mark- Interstitial
 
-- (YD1InterstitialViewController*)kInterstitialView {
+- (Yodo1InterstitialViewController*)kInterstitialView {
     if (_kInterstitialView == nil) {
-        _kInterstitialView = [[YD1InterstitialViewController alloc]init];
+        _kInterstitialView = [[Yodo1InterstitialViewController alloc]init];
         [_kInterstitialView configInterstitial];
     }
     return _kInterstitialView;
@@ -163,7 +163,7 @@ static YD1AdsManager* _instance = nil;
     return [self.kInterstitialView isInterstitialReady];
 }
 
-- (void)intersCallback:(YD1InterstitialCallback)callback {
+- (void)intersCallback:(YODO1InterstitialCallback)callback {
     self.kIntersCallbak = [callback copy];
 }
 
@@ -176,25 +176,25 @@ static YD1AdsManager* _instance = nil;
                                        completion:nil];
         }
         if (self.kIntersCallbak) {
-            self.kIntersCallbak(kYD1InterstitialStateShow);
+            self.kIntersCallbak(kYODO1InterstitialStateShow);
         }
     }else{
         if (self.kIntersCallbak) {
-            self.kIntersCallbak(kYD1InterstitialStateFail);
+            self.kIntersCallbak(kYODO1InterstitialStateFail);
         }
     }
 }
 
 #pragma mark- Banner
 
-- (YD1BannerView*)kBannerView {
+- (Yodo1MasBannerView*)kBannerView {
     if (_kBannerView == nil) {
-        _kBannerView = [[YD1BannerView alloc]init];
+        _kBannerView = [[Yodo1MasBannerView alloc]init];
     }
     return _kBannerView;
 }
 
-- (void)bannerCallback:(YD1BannerCallback)callback {
+- (void)bannerCallback:(Yodo1BannerCallback)callback {
      self.kBannerCallbak = callback;
 }
 
