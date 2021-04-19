@@ -119,7 +119,7 @@
                                               @"sdkType": @"mas_global",
                                               @"publishChannelCode": @"appstore",
                                               @"sdkVersion": sdkVersion}];
-    [Yodo1SaManager track:@"adInit" properties:nil];
+    //[Yodo1SaManager track:@"adInit" properties:nil];
 
     if (@available(iOS 14, *)) {
         [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
@@ -292,13 +292,13 @@
 - (void)trackInitStart {
     long long start = [NSDate date].timeIntervalSince1970;
     [_appInfo setValue:@(start) forKey:kYodo1MasInitTime];
-    [Yodo1SaManager track:@"adInit" properties:@{@"initAction": @"request", @"initTime": @(start)}];
+    //[Yodo1SaManager track:@"adInit" properties:@{@"initAction": @"request"}];
 }
 
 - (void)trackInitEnd:(BOOL)successful {
     long long start = [_appInfo[kYodo1MasInitTime] longLongValue];
     long long end = [NSDate date].timeIntervalSince1970;
-    [Yodo1SaManager track:@"adInit" properties:@{@"initAction": successful ? @"response" : @"error", @"initTime": @(end), @"initDuration" : @(end - start)}];
+    [Yodo1SaManager track:@"adInit" properties:@{@"initAction": successful ? @"response" : @"error", @"initDuration" : @(end - start)}];
 }
 
 - (void)printInitLog {
