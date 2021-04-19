@@ -513,13 +513,13 @@
             }];
         } else {
             if (o == nil) {
-                NSLog(@"未集成相应Adapter -  %@", value);
+                NSLog(@"The adapter is not integrated -  %@", value);
             } else {
-                NSLog(@"Adapter未继承Yodo1MasAdapterBase - %@", key);
+                NSLog(@"The adapter is not Yodo1MasAdapterBase subclass - %@", key);
             }
         }
     } else {
-        NSLog(@"初始化Adapter - 未找到指定Adapter,SDK版本过低: - %@", key);
+        NSLog(@"Adapter Init - the adapter does not found or SDK verson is too low: - %@", key);
     }
 }
 
