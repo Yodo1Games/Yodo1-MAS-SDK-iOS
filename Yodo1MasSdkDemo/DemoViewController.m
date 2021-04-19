@@ -12,10 +12,9 @@
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
 #import "BannerController.h"
+#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
 
-@import GoogleMobileAdsMediationTestSuite;
-
-@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
+@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate, GMTSMediationTestSuiteDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *rewardField;
 @property (weak, nonatomic) IBOutlet UITextField *intersititialField;
@@ -91,7 +90,7 @@
 }
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
-    [GoogleMobileAdsMediationTestSuite presentForAdManagerOnViewController:self delegate:nil];
+    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
@@ -139,5 +138,11 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Earned" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
+
+#pragma mark - GMTSMediationTestSuiteDelegate
+- (void)mediationTestSuiteWasDismissed {
+    
+}
+
 
 @end
