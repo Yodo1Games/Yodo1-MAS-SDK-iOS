@@ -1,11 +1,11 @@
-#import "Yodo1BannerView.h"
+#import "Yodo1MasBannerView.h"
 #import "Yodo1ImageHelp.h"
 #import "UIView+Yodo1LayoutMethods.h"
 
 
 NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
-@interface Yodo1BannerView() {
+@interface Yodo1MasBannerView() {
     UITapGestureRecognizer *bannerRecognizer;
     UIImageView *bannerImageView;
     __block UIImage* _image;
@@ -15,7 +15,7 @@ NSString* const kBannerUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
 
 @end
 
-@implementation Yodo1BannerView
+@implementation Yodo1MasBannerView
 
 - (instancetype)init {
     self = [super init];

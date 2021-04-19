@@ -1,6 +1,6 @@
 #import "Yodo1AdsManager.h"
 #import "Yodo1InterstitialViewController.h"
-#import "Yodo1BannerView.h"
+#import "Yodo1MasBannerView.h"
 #import "Yodo1VideoViewController.h"
 
 @interface Yodo1AdsManager ()  {
@@ -13,7 +13,7 @@
 @property (nonatomic, strong) Yodo1BannerCallback kBannerCallbak;
 
 @property (nonatomic, strong) Yodo1InterstitialViewController *kInterstitialView;
-@property (nonatomic, strong) Yodo1BannerView *kBannerView;
+@property (nonatomic, strong) Yodo1MasBannerView *kBannerView;
 @property (nonatomic, strong) Yodo1VideoViewController *kVideoViewController;
 
 - (BOOL)isLandscape;
@@ -187,9 +187,9 @@ static Yodo1AdsManager* _instance = nil;
 
 #pragma mark- Banner
 
-- (Yodo1BannerView*)kBannerView {
+- (Yodo1MasBannerView*)kBannerView {
     if (_kBannerView == nil) {
-        _kBannerView = [[Yodo1BannerView alloc]init];
+        _kBannerView = [[Yodo1MasBannerView alloc]init];
     }
     return _kBannerView;
 }

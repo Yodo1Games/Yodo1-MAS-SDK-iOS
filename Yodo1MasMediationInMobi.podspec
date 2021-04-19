@@ -35,6 +35,6 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'InMobiSDK/Core'
+  s.dependency 'InMobiSDK/Core', '9.1.7'
   
 end

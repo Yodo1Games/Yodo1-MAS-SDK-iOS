@@ -3,7 +3,7 @@
 #import "Yodo1AdvertConstant.h"
 
 
-@interface Yodo1BannerView : UIView
+@interface Yodo1MasBannerView : UIView
 
 @property (nonatomic,copy) Yodo1BannerCallback callbak;
 
