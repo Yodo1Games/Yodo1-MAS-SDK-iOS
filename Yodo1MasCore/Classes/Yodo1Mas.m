@@ -88,7 +88,7 @@
 - (void)initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
     if (!appKey|| !appKey.length) {
         if (fail) {
-            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:@"appKey is invalid"]);
+            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:@"Invalid AppKey or Wrong AppKey"]);
         }
         return;
     }
@@ -249,7 +249,7 @@
                 if ([weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
                     [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
                 } else {
-                    [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Unverified)" forKey:kYodo1MasInitMsg];
+                    [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)] forKey:kYodo1MasInitMsg];
                 }
                 [weakSelf printInitLog];
                 weakSelf.isInit = YES;
@@ -258,19 +258,19 @@
                 }
             } else {
                 if (fail) {
-                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"get config failed"]);
+                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Data parsing failed"]);
                 }
                 
                 [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-                [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,config is null)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
+                [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
                 [weakSelf printInitLog];
             }
         } else {
             if (fail) {
-                fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:@"get config failed"]);
+                fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Data parsing failed"]);
             }
             [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-            [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,body is null)", @(Yodo1MasErrorCodeConfigServer)] forKey:kYodo1MasInitMsg];
+            [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
             [weakSelf printInitLog];
         }
         
@@ -389,7 +389,7 @@
         switch (state) {
             case kYODO1BannerStateFail:
             {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:error];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.bannerAdDelegate onAdError:event error:error];
@@ -424,7 +424,7 @@
         switch (state) {
             case kYODO1VideoStateFail:
             {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeReward message:@"" error:error];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.rewardAdDelegate onAdError:event error:error];
@@ -464,7 +464,7 @@
             case kYODO1InterstitialStateFail:
             {
                 
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeInterstitial message:@"" error:error];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.interstitialAdDelegate onAdError:event error:error];
@@ -810,12 +810,12 @@
             _currentAdapter = adapters.firstObject;
             [adapters.firstObject showAd:type callback:_adBlock object:object];
         } else {
-            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"ad adapters is null"];
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:@"ad adapters is null"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
             [self callbackWithEvent:event];
         }
     } else {
-        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdConfigNull message:@"ad config is null"];
+        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdConfigNull message:@"Wrong ad type call.Please check your app profile on MAS to ensure you have selected the correct ad type."];
         Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
         [self callbackWithEvent:event];
     }
