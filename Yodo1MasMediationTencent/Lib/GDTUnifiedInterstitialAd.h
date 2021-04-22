@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)eCPMLevel;
 
 /**
- *  非 WiFi 网络，是否自动播放。默认 NO。loadAd 前设置。
+ *  非 WiFi 网络，是否自动播放。默认 YES。loadAd 前设置。
  */
 
 @property (nonatomic, assign) BOOL videoAutoPlayOnWWAN;

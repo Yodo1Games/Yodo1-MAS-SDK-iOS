@@ -21,11 +21,11 @@ BUNativeExpressBannerViewDelegate
 }
 
 
-@property(nonatomic, assign) BOOL sdkInit;
+@property (nonatomic, assign) BOOL sdkInit;
 @property (nonatomic, strong) BUNativeExpressBannerView *bannerAd;
 @property (nonatomic, strong) BUFullscreenVideoAd *interstitialAd;
 @property (nonatomic, strong) BURewardedVideoAd *rewardAd;
-@property (nonatomic,strong) BURewardedVideoModel *rewardModel;
+@property (nonatomic, strong) BURewardedVideoModel *rewardModel;
 
 @end
 

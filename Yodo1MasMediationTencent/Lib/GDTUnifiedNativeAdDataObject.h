@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "GDTVideoConfig.h"
+#import "GDTSDKDefines.h"
 
 typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
     GDTVastAdEventTypeUnknow,
@@ -37,11 +38,6 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
 @property (nonatomic, copy, readonly) NSString *desc;
 
 /**
- 广告大图Url
- */
-@property (nonatomic, copy, readonly) NSString *imageUrl;
-
-/**
  素材宽度，单图广告代表大图 imageUrl 宽度、多图广告代表小图 mediaUrlList 宽度
  */
 @property (nonatomic, readonly) NSInteger imageWidth;
@@ -55,11 +51,6 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
  应用类广告App 图标Url
  */
 @property (nonatomic, copy, readonly) NSString *iconUrl;
-
-/**
- 三小图广告的图片Url集合
- */
-@property (nonatomic, copy, readonly) NSArray *mediaUrlList;
 
 /**
  应用类广告的星级（5星制度）
@@ -147,5 +138,23 @@ typedef NS_ENUM(NSInteger, GDTVastAdEventType) {
  @return YES or NO
  */
 - (BOOL)equalsAdData:(GDTUnifiedNativeAdDataObject *)dataObject;
+
+/**
+ * 绑定展示的图片视图
+ *
+ * @param imageViews     进行渲染的 imageView
+ * @param placeholder     图片加载过程中的占位图
+ */
+- (void)bindImageViews:(NSArray<UIImageView *> *)imageViews placeholder:(UIImage *)placeholder;
+
+/**
+ 广告大图Url
+ */
+@property (nonatomic, copy, readonly) NSString *imageUrl GDT_DEPRECATED_MSG_ATTRIBUTE("属性即将废弃，请使用 bindImageViews:placeholder: 方法");
+
+/**
+ 三小图广告的图片Url集合
+ */
+@property (nonatomic, copy, readonly) NSArray *mediaUrlList GDT_DEPRECATED_MSG_ATTRIBUTE("属性即将废弃，请使用 bindImageViews:placeholder: 方法");
 
 @end
