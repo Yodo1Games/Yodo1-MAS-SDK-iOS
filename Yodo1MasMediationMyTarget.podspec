@@ -35,6 +35,6 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'myTargetSDK', '~> 5.9.11'
+  s.dependency 'myTargetSDK', '5.9.11'
   
 end

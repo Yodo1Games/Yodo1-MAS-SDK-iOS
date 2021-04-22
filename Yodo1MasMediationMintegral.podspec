@@ -35,5 +35,5 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'MintegralAdSDK', '~> 6.7.6.0'
+  s.dependency 'MintegralAdSDK', '6.7.6.0'
 end

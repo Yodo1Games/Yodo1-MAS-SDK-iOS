@@ -37,6 +37,6 @@ TODO: Add long description of the pod here.
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasCore'
-  s.dependency 'VungleSDK-iOS', '~> 6.9.2'
+  s.dependency 'VungleSDK-iOS', '6.9.2'
   
 end
