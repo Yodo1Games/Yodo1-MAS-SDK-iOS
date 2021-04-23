@@ -232,7 +232,6 @@
                 if (weakSelf.test_mode == 1) {
                     [Yodo1AdsManager.sharedInstance initAdvert];
                 }
-                [weakSelf doInitAdapter];
                 
                 if (data.test_mode == 1) {
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestMode];
@@ -247,15 +246,23 @@
                 }
                 [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
                 if ([weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
+                    
+                    [weakSelf doInitAdapter];
+                    weakSelf.isInit = YES;
                     [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
+                    
+                    if (successful) {
+                        successful();
+                    }
                 } else {
-                    [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)] forKey:kYodo1MasInitMsg];
+                    NSString *msg = [NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)];
+                    [weakSelf.appInfo setValue:msg forKey:kYodo1MasInitMsg];
+                    
+                    if (fail) {
+                        fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:msg]);
+                    }
                 }
                 [weakSelf printInitLog];
-                weakSelf.isInit = YES;
-                if (successful) {
-                    successful();
-                }
             } else {
                 if (fail) {
                     fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Data parsing failed"]);
@@ -305,7 +312,12 @@
     NSMutableString *ms = [NSMutableString string];
     [ms appendString:@"******************************************\n"];
     [ms appendString:@"Yodo1MasSdk\n"];
-    [ms appendFormat:@"MAS SDK Version: %@\n", [NSString stringWithFormat:@"%@-%@", _appInfo[kYodo1MasSdkVersion], _appInfo[kYodo1MasSdkType]]];
+    
+    NSString *version = _appInfo[kYodo1MasSdkVersion];
+    if (_appInfo[kYodo1MasSdkType]) {
+        version = [version stringByAppendingFormat:@"-%@", _appInfo[kYodo1MasSdkType]];
+    }
+    [ms appendFormat:@"MAS SDK Version: %@\n", version];
     [ms appendFormat:@"AppKey: %@ \n", _appInfo[kYodo1MasAppKey]];
     [ms appendFormat:@"Bundle ID: %@ \n", _appInfo[kYodo1MasAppBundleId]];
     if (_appInfo[kYodo1MasInitStatus]) {
