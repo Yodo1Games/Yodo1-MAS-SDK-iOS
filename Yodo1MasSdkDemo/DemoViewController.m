@@ -6,15 +6,15 @@
 //
 
 #import "DemoViewController.h"
-#import <Yodo1MasCore/Yodo1Mas.h>
+#import "Yodo1Mas.h"
 #import <Yodo1Ads.h>
 #import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
-//#import <FBSDKShareKit/FBSDKShareKit.h>
-@import GoogleMobileAdsMediationTestSuite;
+#import "BannerController.h"
+#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
 
-@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
+@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate, GMTSMediationTestSuiteDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *rewardField;
 @property (weak, nonatomic) IBOutlet UITextField *intersititialField;
@@ -36,12 +36,22 @@
     [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
     [Yodo1Mas sharedInstance].bannerAdDelegate = self;
     
-
-    [[Yodo1Mas sharedInstance] initWithAppId:@"qqiOsnhyOie" successful:^{
+    NSString * appKey = [NSBundle mainBundle].infoDictionary[@"Yodo1MasAppkey"];
+    if (!appKey.length) {
+        appKey = @"qqiOsnhyOie";
+    }
+    [[Yodo1Mas sharedInstance] initWithAppKey:appKey successful:^{
         
     } fail:^(NSError * _Nonnull error) {
         
     }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([[Yodo1Mas sharedInstance] isBannerAdLoaded]) {
+        [[Yodo1Mas sharedInstance] showBannerAd];
+    }
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
@@ -80,7 +90,7 @@
 }
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
-    [GoogleMobileAdsMediationTestSuite presentForAdManagerOnViewController:self delegate:nil];
+    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
@@ -97,6 +107,12 @@
 
 - (IBAction)onCCPAChanged:(UISwitch *)sender {
     [Yodo1Mas sharedInstance].isCCPADoNotSell = sender.isOn;
+}
+
+- (IBAction)onNextBannerController:(id)sender {
+    BannerController *controller = [[BannerController alloc] init];
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self showViewController:controller sender:nil];
 }
 
 #pragma mark - Yodo1MasAdDelegate
@@ -122,5 +138,11 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Earned" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
+
+#pragma mark - GMTSMediationTestSuiteDelegate
+- (void)mediationTestSuiteWasDismissed {
+    
+}
+
 
 @end

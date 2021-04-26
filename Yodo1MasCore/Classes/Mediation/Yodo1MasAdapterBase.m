@@ -6,6 +6,8 @@
 //
 
 #import "Yodo1MasAdapterBase.h"
+#import <Yodo1SaAnalyticsSDK/Yodo1SaManager.h>
+//#import "Yodo1SaManager.h"
 
 @implementation Yodo1MasAdapterConfig
 
@@ -13,10 +15,10 @@
 
 @implementation Yodo1MasAdId
 
-- (instancetype)initWitId:(NSString *)adId object:(id)object {
+- (instancetype)initWitId:(NSString *)adId object:(id __nullable)object {
     self = [super init];
     if (self) {
-        _adId = adId;
+        _adId = adId ? : @"";
         _object = object;
     }
     return self;
@@ -29,6 +31,8 @@
 @property (nonatomic, assign) NSInteger currentRewardAdIdIndex;
 @property (nonatomic, assign) NSInteger currentInterstitialAdIdIndex;
 @property (nonatomic, assign) NSInteger currentBannerAdIdIndex;
+
+@property (nonatomic, assign) BOOL isReward;
 
 @end
 
@@ -51,6 +55,11 @@
         _TAG = [NSString stringWithFormat:@"[%@]", NSStringFromClass([self class])];
     }
     return _TAG;
+}
+
+- (CGSize)adSize {
+    BOOL isPad = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+    return isPad ? BANNER_SIZE_728_90 : BANNER_SIZE_320_50;
 }
 
 - (instancetype)init {
@@ -156,6 +165,7 @@
     switch (type) {
         case Yodo1MasAdTypeReward: {
             [self loadRewardAd];
+            self.isReward = NO;
             break;
         }
         case Yodo1MasAdTypeInterstitial: {
@@ -201,6 +211,7 @@
             break;
         }
     }
+    self.placement = object[kArgumentPlacement];
 }
 
 - (BOOL)isCanShow:(Yodo1MasAdType)type callback:(Yodo1MasAdCallback)callback {
@@ -208,7 +219,7 @@
         if ([self isAdLoaded:type]) {
             return YES;
         } else {
-            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdNoLoaded message:@"ad has not been cached"];
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdNoLoaded message:@"Ad not avaliable,no cache"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
             if(callback != nil) callback(event);
             return NO;
@@ -246,6 +257,77 @@
             break;
         }
     }
+    if (event.code == Yodo1MasAdEventCodeError) {
+        if (event.error.code == Yodo1MasErrorCodeAdLoadFail) {
+            [self dataAnalyticsRequest:event.type success:NO];
+        }
+    }else{
+        [self dataAnalyticsImpression:event];
+    }
+}
+
+- (void)dataAnalyticsImpression:(Yodo1MasAdEvent *)event {
+    switch (event.code) {
+        case Yodo1MasAdEventCodeOpened: {
+            ///Banner 没有关闭事件，在展示时触发上传事件
+            if (event.type == Yodo1MasAdTypeBanner) {
+                [self trackEventImpression:event success:YES];
+            }
+        } break;
+        case Yodo1MasAdEventCodeClosed: {
+            [self trackEventImpression:event success:YES];
+        } break;
+        case Yodo1MasAdEventCodeRewardEarned:{
+            self.isReward = YES;
+        } break;
+        case Yodo1MasAdEventCodeError: {
+            [self trackEventImpression:event success:NO];
+        } break;
+        default: break;
+    }
+}
+
+- (void)dataAnalyticsRequest:(Yodo1MasAdType)type success:(BOOL)suc {
+    NSMutableDictionary * dic = @{@"adType":[self type2string:type],
+                                  @"adResult":suc ? @"success" : @"fail",
+                                  @"adNetwork":self.advertCode ? : @"",
+                                  @"adNetworkVersion":self.sdkVersion ? : @""}.mutableCopy;;
+    [Yodo1SaManager track:@"adRequest" properties:dic];
+}
+
+- (void)trackEventImpression:(Yodo1MasAdEvent *)event success:(BOOL)suc {
+    NSMutableDictionary * dic = @{@"adType":[self type2string:event.type],
+                                  @"adResult":suc ? @"success" : @"fail",
+                                  @"adNetwork":self.advertCode ? : @"",
+                                  @"adPlacement":self.placement ? : [self defaultPlacement:event.type],
+                                  @"adNetworkVersion":self.sdkVersion ? : @""}.mutableCopy;;
+    if (suc) {
+        if (event.type != Yodo1MasAdTypeBanner) {
+            dic[@"adClose"] = @(YES);
+        }
+        if (event.type == Yodo1MasAdTypeReward) {
+            dic[@"adComplete"] = @(self.isReward);
+        }
+    }
+    [Yodo1SaManager track:@"adImpression" properties:dic];
+}
+
+- (NSString *)type2string:(Yodo1MasAdType)type {
+    switch (type) {
+        case Yodo1MasAdTypeBanner:          return @"bannerAd";    
+        case Yodo1MasAdTypeInterstitial:    return @"interstitialAd";
+        case Yodo1MasAdTypeReward:          return @"videoAd";
+        default:                            return @"";
+    }
+}
+
+- (NSString *)defaultPlacement:(Yodo1MasAdType)type {
+    switch (type) {
+        case Yodo1MasAdTypeBanner:          return @"defaultBanner";
+        case Yodo1MasAdTypeInterstitial:    return @"defaultINTER";
+        case Yodo1MasAdTypeReward:          return @"defaultRV";
+        default:                            return @"";
+    }
 }
 
 - (void)callbackWithEvent:(Yodo1MasAdEventCode)code type:(Yodo1MasAdType)type {
@@ -256,6 +338,10 @@
 - (void)callbackWithError:(Yodo1MasError *)error type:(Yodo1MasAdType)type {
     Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type error:error];
     [self callbackWithEvent:event];
+}
+
+- (void)callbackWithAdLoadSuccess:(Yodo1MasAdType)type {
+    [self dataAnalyticsRequest:type success:YES];
 }
 
 #pragma mark - 激励广告

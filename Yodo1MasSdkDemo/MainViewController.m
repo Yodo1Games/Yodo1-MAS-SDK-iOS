@@ -6,7 +6,7 @@
 //
 
 #import "MainViewController.h"
-#import <Yodo1MasCore/Yodo1Mas.h>
+#import "Yodo1Mas.h"
 #import <Toast/Toast.h>
 
 @interface MainViewController ()<UITextFieldDelegate>

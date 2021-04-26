@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.1";
+    return @"4.1.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -107,6 +107,8 @@
             [self callbackWithError:error type:Yodo1MasAdTypeReward];
             [self nextReward];
             [self loadRewardAdDelayed];
+        }else{
+            [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
         }
     }
 }
@@ -156,6 +158,8 @@
             [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
             [self nextInterstitial];
             [self loadInterstitialAdDelayed];
+        }else{
+            [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
         }
     }
 }
@@ -209,6 +213,8 @@
             [self callbackWithError:error type:Yodo1MasAdTypeBanner];
             [self nextBanner];
             [self loadRewardAdDelayed];
+        }else{
+            [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
         }
     }
 }
@@ -229,7 +235,7 @@
             [self loadBannerAdDelayed];
         } else {
             UIViewController *controller = [Yodo1MasVungleAdapter getTopViewController];
-            [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+            [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
             [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
         }
     }

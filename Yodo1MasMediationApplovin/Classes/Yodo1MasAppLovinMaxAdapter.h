@@ -5,11 +5,13 @@
 //  Created by ZhouYuzhen on 2020/12/3.
 //
 
-#import "Yodo1MasAppLovinAdapter.h"
+#import <Yodo1MasCore/Yodo1MasAdapterBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Yodo1MasAppLovinMaxAdapter : Yodo1MasAppLovinAdapter
+@interface Yodo1MasAppLovinMaxAdapter : Yodo1MasAdapterBase
+
+@property (nonatomic, assign, readonly) BOOL isMax;
 
 @end
 

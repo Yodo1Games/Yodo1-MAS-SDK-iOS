@@ -23,15 +23,18 @@ typedef enum {
 
 typedef enum {
     Yodo1MasErrorCodeUnknown = -1,
-    Yodo1MasErrorCodeConfigGet = -1000,
-    Yodo1MasErrorCodeConfigNetwork = -1001,
-    Yodo1MasErrorCodeConfigServer = -1002,
-    Yodo1MasErrorCodeAdConfigNull = -2001, // ad adapter is null
-    Yodo1MasErrorCodeAdAdapterNull = -2002, // ad adapter is null
-    Yodo1MasErrorCodeAdUninitialized = -2003, // ad adapter uninitialized
-    Yodo1MasErrorCodeAdNoLoaded = -2004, // ad no loaded
-    Yodo1MasErrorCodeAdLoadFail = -2005, // ad load error
-    Yodo1MasErrorCodeAdShowFail = -2006
+    
+    Yodo1MasErrorCodeConfigNetwork = -100000, //No WIFI/4G or Request Timeout
+    Yodo1MasErrorCodeConfigGet = -100501, //Data parsing failed
+    
+    Yodo1MasErrorCodeAppKeyIllegal = -400000, //Invalid AppKey or Wrong AppKey
+    Yodo1MasErrorCodeAppKeyUnverified = -400001, //AppKey Bundle ID Admob ID not match please check your app profile
+    
+    Yodo1MasErrorCodeAdConfigNull = -600000, // Wrong ad type call.Please check your app profile on MAS to ensure you have selected the correct ad type.
+    Yodo1MasErrorCodeAdUninitialized = -600001, // Ad adapter error
+    Yodo1MasErrorCodeAdNoLoaded = -600200, // Ad not avaliable,no cache
+    Yodo1MasErrorCodeAdShowFail = -600201, //Ad not avaliable,unable to show
+    Yodo1MasErrorCodeAdLoadFail = -600202 // Ad download failed
 } Yodo1MasErrorCode;
 
 typedef enum {

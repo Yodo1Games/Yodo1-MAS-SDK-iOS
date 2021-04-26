@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.1";
+    return @"4.1.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -160,7 +160,7 @@
     }
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.bannerAd == nil || ![adId.adId isEqualToString:self.bannerAd.placementId])) {
-        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:adId.adId size:BANNER_SIZE_320_50];
+        self.bannerAd = [[UADSBannerView alloc] initWithPlacementId:adId.adId size:self.adSize];
         self.bannerAd.delegate = self;
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:[Yodo1MasUnityAdsAdapter getTopViewController]];
     }
@@ -178,7 +178,7 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method:showBannerAd:align:, show banner ad...}", self.TAG];
         NSLog(@"%@", message);
         UIViewController *controller = [Yodo1MasUnityAdsAdapter getTopViewController];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
         [self callbackWithEvent:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
     }
 }
@@ -197,6 +197,11 @@
 - (void)unityAdsAdLoaded:(NSString *)placementId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsAdLoaded:, placementId: %@}", self.TAG, placementId];
     NSLog(@"%@", message);
+    if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
+    } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
+        [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
+    }
 }
 
 - (void)unityAdsAdFailedToLoad:(NSString *)placementId {
@@ -277,6 +282,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerViewDidLoad:, id: %@}", self.TAG, bannerView.placementId];
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerViewDidClick:(UADSBannerView *)bannerView {

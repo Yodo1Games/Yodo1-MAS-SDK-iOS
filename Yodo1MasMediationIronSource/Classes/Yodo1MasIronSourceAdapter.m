@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.0.1.1";
+    return @"4.1.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -117,6 +117,7 @@
 - (void)rewardedVideoDidLoad:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: rewardedVideoDidLoad:, instanceId: %@}", self.TAG, instanceId];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
 }
 
 - (void)rewardedVideoDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
@@ -202,6 +203,7 @@
 - (void)interstitialDidLoad:(NSString *)instanceId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: interstitialDidLoad:, show instanceId: %@}", self.TAG, instanceId];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
 }
 
 - (void)interstitialDidFailToLoadWithError:(NSError *)adError instanceId:(NSString *)instanceId {
@@ -266,7 +268,7 @@
         NSLog(@"%@", message);
         UIViewController *controller = [Yodo1MasIronSourceAdapter getTopViewController];
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
-        [Yodo1MasBanner showBannerWithTag:BANNER_TAG controller:controller object:object];
+        [Yodo1MasBanner showBanner:self.bannerAd tag:BANNER_TAG controller:controller object:object];
     }
 }
 
@@ -289,6 +291,7 @@
     self.bannerAd = bannerView;
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidLoad:, banner: %@}", self.TAG, bannerView];
     NSLog(@"%@", message);
+    [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidFailToLoadWithError:(NSError *)adError {
@@ -324,5 +327,10 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerWillLeaveApplication}", self.TAG];
     NSLog(@"%@", message);
 }
+
+- (void)bannerDidShow {
+    
+}
+
 
 @end

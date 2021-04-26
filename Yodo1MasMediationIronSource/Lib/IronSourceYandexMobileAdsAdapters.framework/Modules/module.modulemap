@@ -1,9 +1,0 @@
-framework module IronSourceYandexMobileAdsAdapters {
-  umbrella header "IronSourceYandexMobileAdsAdapters-umbrella.h"
-
-  export *
-  module * { export * }
-  
-  header "YMAIronSourceVersion.h"
-
-}

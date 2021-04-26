@@ -10,10 +10,15 @@
 
 @implementation Yodo1MasBanner
 
++ (CGSize)adSize {
+    BOOL isPad = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
+    return isPad ? BANNER_SIZE_728_90 : BANNER_SIZE_320_50;
+}
+
 + (void)addBanner:(UIView *)banner tag:(NSInteger)tag controller:(UIViewController *)controller {
     UIView *contentView = [controller.view viewWithTag:tag];
     if (contentView == nil) {
-        contentView = [[UIView alloc] initWithFrame:CGRectMake((controller.view.bounds.size.width - BANNER_SIZE_320_50.width) / 2, controller.view.bounds.size.height - BANNER_SIZE_320_50.height, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height)];
+        contentView = [[UIView alloc] initWithFrame:CGRectMake((controller.view.bounds.size.width - [self adSize].width) / 2, controller.view.bounds.size.height - [self adSize].height, [self adSize].width, [self adSize].height)];
         contentView.tag = tag;
         contentView.alpha = 0;
         [controller.view addSubview:contentView];
@@ -27,10 +32,16 @@
     banner.frame = contentView.bounds;
 }
 
-+ (void)showBannerWithTag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
-    UIView *contentView = [controller.view viewWithTag:tag];
++ (void)showBanner:(UIView *)banner tag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
+    
+    UIView *contentView = (banner != nil && banner.superview != nil) ? banner.superview : [controller.view viewWithTag:tag];
     if (contentView != nil) {
         UIView *superview = contentView.superview;
+        if (superview != controller.view) {
+            [superview removeFromSuperview];
+            [controller.view addSubview:contentView];
+        }
+        
         Yodo1MasAdBannerAlign align = Yodo1MasAdBannerAlignBottom | Yodo1MasAdBannerAlignHorizontalCenter;
         CGPoint offset = CGPointZero;
         if (object != nil) {
@@ -43,7 +54,7 @@
             }
         }
         
-        CGRect frame = CGRectMake(0, 0, BANNER_SIZE_320_50.width, BANNER_SIZE_320_50.height);
+        CGRect frame = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
         // horizontal
         if ((align & Yodo1MasAdBannerAlignLeft) == Yodo1MasAdBannerAlignLeft) {
             frame.origin.x = 0;
@@ -77,6 +88,11 @@
         contentView.frame = frame;
         contentView.alpha = 1;
     }
+}
+
++ (void)showBannerWithTag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
+    UIView *contentView = [controller.view viewWithTag:tag];
+    [self showBanner:nil tag:tag controller:controller object:object];
 }
 
 + (void)removeBanner:(UIView *)banner tag:(NSInteger)tag destroy:(BOOL)destroy {

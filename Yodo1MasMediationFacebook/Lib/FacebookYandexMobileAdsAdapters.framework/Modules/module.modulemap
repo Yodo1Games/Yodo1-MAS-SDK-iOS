@@ -1,9 +1,0 @@
-framework module FacebookYandexMobileAdsAdapters {
-  umbrella header "FacebookYandexMobileAdsAdapters-umbrella.h"
-
-  export *
-  module * { export * }
-  
-  header "YMAFacebookVersion.h"
-
-}
