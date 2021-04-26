@@ -17,8 +17,6 @@
 		CBC47675256D466E00DB3CAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBC47674256D466E00DB3CAF /* Assets.xcassets */; };
 		CBC47678256D466E00DB3CAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBC47676256D466E00DB3CAF /* LaunchScreen.storyboard */; };
 		CBC4767B256D466E00DB3CAF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC4767A256D466E00DB3CAF /* main.m */; };
-		CBC47685256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC47684256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m */; };
-		CBC47690256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC4768F256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m */; };
 		EC2EC7A4263658070031E03A /* Yodo1InterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC792263658070031E03A /* Yodo1InterstitialViewController.m */; };
 		EC2EC7A5263658070031E03A /* Yodo1MasBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC793263658070031E03A /* Yodo1MasBannerView.m */; };
 		EC2EC7A6263658070031E03A /* Yodo1ImageHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC798263658070031E03A /* Yodo1ImageHelp.m */; };
@@ -135,12 +133,6 @@
 		CBC47677256D466E00DB3CAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CBC47679256D466E00DB3CAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBC4767A256D466E00DB3CAF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CBC47680256D466E00DB3CAF /* Yodo1MasSdkDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Yodo1MasSdkDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBC47684256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasSdkDemoTests.m; sourceTree = "<group>"; };
-		CBC47686256D466E00DB3CAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBC4768B256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Yodo1MasSdkDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBC4768F256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasSdkDemoUITests.m; sourceTree = "<group>"; };
-		CBC47691256D466E00DB3CAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4F12585FE8D703B7043EAC3 /* Pods-MasStandard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MasStandard.release.xcconfig"; path = "Target Support Files/Pods-MasStandard/Pods-MasStandard.release.xcconfig"; sourceTree = "<group>"; };
 		D8134EADF893A37668F29A0B /* Pods_Yodo1MasSdkDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yodo1MasSdkDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC2EC792263658070031E03A /* Yodo1InterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1InterstitialViewController.m; sourceTree = "<group>"; };
@@ -264,20 +256,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBC4767D256D466E00DB3CAF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBC47688256D466E00DB3CAF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ECB98CC625F5F1CA0050D7C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,8 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				CBC47667256D466A00DB3CAF /* Yodo1MasSdkDemo */,
-				CBC47683256D466E00DB3CAF /* Yodo1MasSdkDemoTests */,
-				CBC4768E256D466E00DB3CAF /* Yodo1MasSdkDemoUITests */,
 				ECB98CCA25F5F1CA0050D7C5 /* MasStandard */,
 				CBC47666256D466A00DB3CAF /* Products */,
 				2693C84541427286AD0FCDBD /* Pods */,
@@ -359,8 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				CBC47665256D466A00DB3CAF /* Yodo1MasSdkDemo.app */,
-				CBC47680256D466E00DB3CAF /* Yodo1MasSdkDemoTests.xctest */,
-				CBC4768B256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.xctest */,
 				ECB98CC925F5F1CA0050D7C5 /* libMasStandard.a */,
 			);
 			name = Products;
@@ -385,24 +359,6 @@
 				CBC4767A256D466E00DB3CAF /* main.m */,
 			);
 			path = Yodo1MasSdkDemo;
-			sourceTree = "<group>";
-		};
-		CBC47683256D466E00DB3CAF /* Yodo1MasSdkDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				CBC47684256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m */,
-				CBC47686256D466E00DB3CAF /* Info.plist */,
-			);
-			path = Yodo1MasSdkDemoTests;
-			sourceTree = "<group>";
-		};
-		CBC4768E256D466E00DB3CAF /* Yodo1MasSdkDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				CBC4768F256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m */,
-				CBC47691256D466E00DB3CAF /* Info.plist */,
-			);
-			path = Yodo1MasSdkDemoUITests;
 			sourceTree = "<group>";
 		};
 		EC2EC791263658070031E03A /* AdTest */ = {
@@ -864,38 +820,6 @@
 			productReference = CBC47665256D466A00DB3CAF /* Yodo1MasSdkDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CBC4767F256D466E00DB3CAF /* Yodo1MasSdkDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CBC47697256D466E00DB3CAF /* Build configuration list for PBXNativeTarget "Yodo1MasSdkDemoTests" */;
-			buildPhases = (
-				CBC4767C256D466E00DB3CAF /* Sources */,
-				CBC4767D256D466E00DB3CAF /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Yodo1MasSdkDemoTests;
-			productName = Yodo1MasSdkDemoTests;
-			productReference = CBC47680256D466E00DB3CAF /* Yodo1MasSdkDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		CBC4768A256D466E00DB3CAF /* Yodo1MasSdkDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CBC4769A256D466E00DB3CAF /* Build configuration list for PBXNativeTarget "Yodo1MasSdkDemoUITests" */;
-			buildPhases = (
-				CBC47687256D466E00DB3CAF /* Sources */,
-				CBC47688256D466E00DB3CAF /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Yodo1MasSdkDemoUITests;
-			productName = Yodo1MasSdkDemoUITests;
-			productReference = CBC4768B256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		ECB98CC825F5F1CA0050D7C5 /* MasStandard */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECB98CD125F5F1CA0050D7C5 /* Build configuration list for PBXNativeTarget "MasStandard" */;
@@ -925,14 +849,6 @@
 					CBC47664256D466A00DB3CAF = {
 						CreatedOnToolsVersion = 12.2;
 					};
-					CBC4767F256D466E00DB3CAF = {
-						CreatedOnToolsVersion = 12.2;
-						TestTargetID = CBC47664256D466A00DB3CAF;
-					};
-					CBC4768A256D466E00DB3CAF = {
-						CreatedOnToolsVersion = 12.2;
-						TestTargetID = CBC47664256D466A00DB3CAF;
-					};
 					ECB98CC825F5F1CA0050D7C5 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -953,8 +869,6 @@
 			projectRoot = "";
 			targets = (
 				CBC47664256D466A00DB3CAF /* Yodo1MasSdkDemo */,
-				CBC4767F256D466E00DB3CAF /* Yodo1MasSdkDemoTests */,
-				CBC4768A256D466E00DB3CAF /* Yodo1MasSdkDemoUITests */,
 				ECB98CC825F5F1CA0050D7C5 /* MasStandard */,
 			);
 		};
@@ -1064,22 +978,6 @@
 				CBC4767B256D466E00DB3CAF /* main.m in Sources */,
 				CB0E403325787EF7000ACB94 /* MainViewController.m in Sources */,
 				CB0E403C25787F61000ACB94 /* DemoViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBC4767C256D466E00DB3CAF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBC47685256D466E00DB3CAF /* Yodo1MasSdkDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBC47687256D466E00DB3CAF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBC47690256D466E00DB3CAF /* Yodo1MasSdkDemoUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,82 +1224,6 @@
 			};
 			name = Release;
 		};
-		CBC47698256D466E00DB3CAF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QK52KGCUT2;
-				INFOPLIST_FILE = Yodo1MasSdkDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yodo1--Beijing--Technology-Co.--Ltd..Yodo1MasSdkDemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Yodo1MasSdkDemo.app/Yodo1MasSdkDemo";
-			};
-			name = Debug;
-		};
-		CBC47699256D466E00DB3CAF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QK52KGCUT2;
-				INFOPLIST_FILE = Yodo1MasSdkDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yodo1--Beijing--Technology-Co.--Ltd..Yodo1MasSdkDemoTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Yodo1MasSdkDemo.app/Yodo1MasSdkDemo";
-			};
-			name = Release;
-		};
-		CBC4769B256D466E00DB3CAF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QK52KGCUT2;
-				INFOPLIST_FILE = Yodo1MasSdkDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yodo1--Beijing--Technology-Co.--Ltd..Yodo1MasSdkDemoUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Yodo1MasSdkDemo;
-			};
-			name = Debug;
-		};
-		CBC4769C256D466E00DB3CAF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QK52KGCUT2;
-				INFOPLIST_FILE = Yodo1MasSdkDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yodo1--Beijing--Technology-Co.--Ltd..Yodo1MasSdkDemoUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Yodo1MasSdkDemo;
-			};
-			name = Release;
-		};
 		ECB98CCF25F5F1CA0050D7C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 763504B0003169DFB4AA40D7 /* Pods-MasStandard.debug.xcconfig */;
@@ -1485,24 +1307,6 @@
 			buildConfigurations = (
 				CBC47695256D466E00DB3CAF /* Debug */,
 				CBC47696256D466E00DB3CAF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CBC47697256D466E00DB3CAF /* Build configuration list for PBXNativeTarget "Yodo1MasSdkDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CBC47698256D466E00DB3CAF /* Debug */,
-				CBC47699256D466E00DB3CAF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CBC4769A256D466E00DB3CAF /* Build configuration list for PBXNativeTarget "Yodo1MasSdkDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CBC4769B256D466E00DB3CAF /* Debug */,
-				CBC4769C256D466E00DB3CAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
