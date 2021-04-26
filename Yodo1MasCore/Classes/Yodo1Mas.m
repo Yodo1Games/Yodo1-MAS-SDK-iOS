@@ -59,7 +59,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.1.0";
+    return @"4.1.0-NoAdMob";
 }
 
 - (instancetype)init {

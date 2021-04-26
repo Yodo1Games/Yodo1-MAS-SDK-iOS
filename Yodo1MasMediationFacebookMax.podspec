@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationFacebookMax'
-  s.version          = '4.1.0'
+  s.version          = '4.1.0-NoAdMob'
   s.summary          = 'Yodo1MasMediationFacebookMax'
   s.swift_version    = '5.0'
 
@@ -35,7 +35,7 @@ TODO: Add long description of the pod here.
   s.static_framework = true
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.dependency 'Yodo1MasMediationFacebook'
-  s.dependency 'Yodo1MasMediationAdMob'
+  #s.dependency 'Yodo1MasMediationAdMob'
   s.dependency 'Yodo1MasMediationApplovin'
   s.dependency 'Yodo1MasMediationIronSource'
   

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationVungleMax'
-  s.version          = '4.1.0'
+  s.version          = '4.1.0-NoAdMob'
   s.summary          = 'Yodo1MasMediationVungleMax'
   s.swift_version    = '5.0'
 
@@ -36,7 +36,7 @@ TODO: Add long description of the pod here.
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'Yodo1MasMediationVungle'
-  s.dependency 'Yodo1MasMediationAdMob'
+  #ss.dependency 'Yodo1MasMediationAdMob'
   s.dependency 'Yodo1MasMediationApplovin'
   s.dependency 'Yodo1MasMediationIronSource'
 end
