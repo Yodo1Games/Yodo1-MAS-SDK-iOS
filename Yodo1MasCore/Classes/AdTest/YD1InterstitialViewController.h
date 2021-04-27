@@ -4,7 +4,7 @@
 
 
 @interface YD1InterstitialViewController : UIViewController
-
+@property(nonatomic,assign) BOOL isShowing;
 
 @property (nonatomic,copy) YD1InterstitialCallback callbak;
 @property(nonatomic,strong)NSString* path;

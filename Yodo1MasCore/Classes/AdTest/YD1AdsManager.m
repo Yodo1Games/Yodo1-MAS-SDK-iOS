@@ -124,11 +124,14 @@ static YD1AdsManager* _instance = nil;
 }
 
 - (void)showVideo:(UIViewController *)viewController {
-    
+    if (self.kVideoViewController.isShowing) {
+        return;
+    }
     if ([self.kVideoViewController isVideoReady]) {
         [self.kVideoViewController createVideoView:viewController];
         [self.kVideoViewController startProgressTimer];
         if (viewController) {
+            self.kVideoViewController.isShowing = YES;
             [viewController presentViewController:self.kVideoViewController
                                          animated:YES
                                        completion:nil];
@@ -168,9 +171,12 @@ static YD1AdsManager* _instance = nil;
 }
 
 - (void)showInterstitial:(UIViewController *)viewController {
-    
+    if (self.kInterstitialView.isShowing) {
+        return;
+    }
     if ([self isInterstitialReady]) {
         if (viewController) {
+            self.kInterstitialView.isShowing = YES;
             [viewController presentViewController:self.kInterstitialView
                                          animated:YES
                                        completion:nil];

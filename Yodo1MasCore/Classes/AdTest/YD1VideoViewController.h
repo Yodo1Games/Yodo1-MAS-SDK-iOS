@@ -5,7 +5,7 @@
 #import "YD1AVPlayer.h"
 
 @interface YD1VideoViewController : UIViewController
-
+@property(nonatomic,assign) BOOL isShowing;
 
 @property (nonatomic,copy) YD1VideoCallback callbak;
 @property (nonatomic, strong) YD1AVPlayer *videoPlayer;
