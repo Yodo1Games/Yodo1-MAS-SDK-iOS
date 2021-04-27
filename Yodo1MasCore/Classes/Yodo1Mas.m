@@ -226,7 +226,7 @@
                 NSLog(@"get config successful - %@", responseObject);
             }
             
-            if (data.bundle_id == nil || [weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
+            if ([@"null" isEqualToString:data.bundle_id] || [weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
                 // 如果不需要匹配BundleId或者BundleId匹配成功
                 weakSelf.masInitConfig = data.mas_init_config;
                 weakSelf.masNetworkConfig = data.ad_network_config;
@@ -237,11 +237,10 @@
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestMode];
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestDevice];
                 } else {
+                    [weakSelf doInitAdapter];
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestDevice];
                 }
-                    
-                [weakSelf doInitAdapter];
                 weakSelf.isInit = YES;
                 [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
                 [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
