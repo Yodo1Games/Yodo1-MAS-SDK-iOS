@@ -126,6 +126,7 @@ NSString* const kIntersUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
                [self endViewClose];
         }
     }
+    self.isShowing = NO;
 }
 
 - (void)bigMap:(UITapGestureRecognizer*)tapRecognizer {
