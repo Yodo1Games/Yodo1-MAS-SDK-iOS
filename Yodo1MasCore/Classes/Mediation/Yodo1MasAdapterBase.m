@@ -218,7 +218,7 @@
         if ([self isAdLoaded:type]) {
             return YES;
         } else {
-            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdNoLoaded message:@"ad has not been cached"];
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdNoLoaded message:@"Ad not avaliable,no cache"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
             if(callback != nil) callback(event);
             return NO;

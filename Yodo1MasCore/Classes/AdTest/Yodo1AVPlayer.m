@@ -1,13 +1,13 @@
 
-#import "YD1AVPlayer.h"
+#import "Yodo1AVPlayer.h"
 
-@interface YD1AVPlayer ()
+@interface Yodo1AVPlayer ()
     @property (nonatomic, strong) NSTimer* progressTimer;
     @property (nonatomic, strong) NSTimer* prepareTimeoutTimer;
     @property (nonatomic, assign) BOOL isObservingCompletion;
 @end
 
-@implementation YD1AVPlayer
+@implementation Yodo1AVPlayer
 
 static void *kYD1PlaybackLikelyToKeepUpKVOToken = &kYD1PlaybackLikelyToKeepUpKVOToken;
 static void *kYD1PlaybackBufferEmpty = &kYD1PlaybackBufferEmpty;

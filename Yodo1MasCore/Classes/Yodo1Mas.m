@@ -15,11 +15,23 @@
 #endif
 #import <AdSupport/AdSupport.h>
 #import "Yodo1SaManager.h"
-#import "YD1AdsManager.h"
+#import "Yodo1AdsManager.h"
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
 #define Yodo1MasCCPADoNotSell       @"Yodo1MasCCPADoNotSell"
+#define kYodo1MasSdkVersion         @"Yodo1MasSdkVersion"
+#define kYodo1MasSdkType            @"Yodo1MasSdkType"
+#define kYodo1MasAppKey             @"Yodo1MasAppKey"
+#define kYodo1MasAppVersion         @"Yodo1MasAppVersion"
+#define kYodo1MasAppBundleId        @"Yodo1MasAppBundleId"
+#define kYodo1MasIDFA               @"Yodo1MasIDFA"
+#define kYodo1MasAdMobId            @"Yodo1MasAdMobId"
+#define kYodo1MasTestMode           @"Yodo1MasTestMode"
+#define kYodo1MasTestDevice         @"Yodo1MasTestDevice"
+#define kYodo1MasInitStatus         @"Yodo1MasInitStatus"
+#define kYodo1MasInitMsg            @"Yodo1MasInitMsg"
+#define kYodo1MasInitTime           @"Yodo1MasInitTime"
 
 @interface Yodo1Mas()
 
@@ -29,8 +41,9 @@
 @property (nonatomic, strong) Yodo1MasAdapterBase *currentAdapter;
 @property (nonatomic, assign) BOOL isInit;
 @property (nonatomic, assign) BOOL isRequesting;
-@property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, assign) int test_mode;
+@property (nonatomic, copy) Yodo1MasAdCallback adBlock;
+@property (nonatomic, strong) NSMutableDictionary *appInfo;
 
 @end
 
@@ -46,7 +59,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.0.4";
+    return @"4.1.0";
 }
 
 - (instancetype)init {
@@ -63,73 +76,109 @@
         id ccpa = [defaults objectForKey:Yodo1MasCCPADoNotSell];
         _isCCPADoNotSell = ccpa != nil ? [ccpa boolValue] : NO;
         
-        NSLog(@"Yodo1MasCore Version - %@", [Yodo1Mas sdkVersion]);
+        _appInfo = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
-#if defined(__IPHONE_14_0)
-    if (@available(iOS 14, *)) {
-        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
-            
-        }];
+    [self initWithAppKey:appId successful:successful fail:fail];
+}
+
+- (void)initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+    if (!appKey|| !appKey.length) {
+        if (fail) {
+            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:@"Invalid AppKey or Wrong AppKey"]);
+        }
+        return;
     }
-#endif
-    
+
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL sensorsDebugEnv = yodo1Config[@"sensors_debug_env"] && [yodo1Config[@"sensors_debug_env"] boolValue];
     
     __weak __typeof(self)weakSelf = self;
     
+    // init sa sdk
     NSString *serverURL = @"https://sensors.yodo1api.com/sa?project=production";
     if (sensorsDebugEnv) {
         serverURL = @"https://sensors.yodo1api.com/sa?project=default";
     }
     //init Sa SDK,debugMode:0 close debug, 1 is debug,2 is debug and data import
     [Yodo1SaManager initializeSdkServerURL: serverURL debug:0];
-    NSString* bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-    [Yodo1SaManager registerSuperProperties:@{@"gameKey": appId,
+    
+    NSDictionary *sdkConfig = [[NSDictionary alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"yodo1mas" withExtension:@"plist"]];
+    
+    NSString *sdkVersion = sdkConfig[@"sdkVersion"];
+    if (!sdkVersion || !sdkVersion.length) {
+        sdkVersion = [Yodo1Mas sdkVersion];
+    }
+    
+    NSString *bundleId = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+    [Yodo1SaManager registerSuperProperties:@{@"gameKey": appKey,
                                               @"gameBundleId": bundleId,
                                               @"sdkType": @"mas_global",
                                               @"publishChannelCode": @"appstore",
-                                              @"sdkVersion": [Yodo1Mas sdkVersion]}];
-    [Yodo1SaManager track:@"adInit" properties:nil];
+                                              @"sdkVersion": sdkVersion}];
+    //[Yodo1SaManager track:@"adInit" properties:nil];
+
+    if (@available(iOS 14, *)) {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            
+        }];
+    }
+    // app info
+    NSInteger sdkType = [sdkConfig[@"sdkTypeCode"] integerValue];
+    [_appInfo setValue:sdkVersion forKey:kYodo1MasSdkVersion];
+    switch (sdkType) {
+        case 1:
+            [_appInfo setValue:@"Full" forKey:kYodo1MasSdkType];
+            break;
+        case 2:
+            [_appInfo setValue:@"Standrad" forKey:kYodo1MasSdkType];
+            break;
+        case 3:
+            [_appInfo setValue:@"CN" forKey:kYodo1MasSdkType];
+            break;
+        default:
+            break;
+    }
+    [_appInfo setValue:appKey forKey:kYodo1MasAppKey];
+    [_appInfo setValue:[NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] forKey:kYodo1MasAppVersion];
+    [_appInfo setValue:[NSBundle.mainBundle objectForInfoDictionaryKey:@"GADApplicationIdentifier"] forKey:kYodo1MasAdMobId];
+    [_appInfo setValue:bundleId forKey:kYodo1MasAppBundleId];
     
+    NSString *idfa = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//    if (!idfa || !idfa.length || [idfa isEqualToString:@"00000000-0000-0000-0000-000000000000"]) {
+//        idfa = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+//    }
+    if (![@"00000000-0000-0000-0000-000000000000" isEqualToString:idfa]) {
+        [_appInfo setValue:idfa forKey:kYodo1MasIDFA];
+    }
+    
+    // request config
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (weakSelf.isInit) return;
         
         if (status == AFNetworkReachabilityStatusNotReachable) return;
         
-        [weakSelf doInit:appId successful:successful fail:fail];
+        [weakSelf doInit:appKey successful:successful fail:fail];
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
 
-- (void)doInit:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
+- (void)doInit:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
     __weak __typeof(self)weakSelf = self;
     if (_isInit || ![AFNetworkReachabilityManager sharedManager].reachable || _isRequesting) {
-        if (_isInit) {
-            if (successful != nil) {
-                successful();
-            }
-        } else {
-            Yodo1MasError *error;
-            if (_isRequesting) {
-                error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Initializing, please wait a moment"];
-            } else {
-                error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:@"Network is not visible"];
-            }
-//            if (fail != nil) {
-//                fail(error);
-//            }
+        if (_isInit && successful != nil) {
+            successful();
         }
         return;
     }
     
+    
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    
     NSMutableString *url = [NSMutableString string];
     if (debug) {
         NSString *api = yodo1Config[@"Api"];
@@ -138,66 +187,154 @@
         } else {
             [url appendString:@"https://sdk.mas.yodo1.me/v1/init/"];
         }
-        if (@available(iOS 10.0, *)) {
-            parameters[@"country"] = [NSLocale currentLocale].countryCode;
-        }
     } else {
         [url appendString:@"https://sdk.mas.yodo1.com/v1/init/"];
-        //[url appendString:@"https://rivendell.explorer.yodo1.com/v1/init/"];
     }
     
-    [url appendString:appId];
+    [url appendString:appKey];
+        
+    if (@available(iOS 10.0, *)) {
+        if (debug)[url appendFormat:@"?country=%@", [NSLocale currentLocale].countryCode];
+    }
     
     NSLog(@"request - %@", url);
     
     _isRequesting = YES;
+    
+    NSDictionary *headers = @{@"sdk-version" : _appInfo[kYodo1MasSdkVersion]};
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:_appInfo[kYodo1MasSdkVersion] forKey:@"sdk_version"];
+    [parameters setValue:_appInfo[kYodo1MasAppVersion] forKey:@"app_version"];
+    if (_appInfo[kYodo1MasIDFA]) {
+        [parameters setValue:_appInfo[kYodo1MasIDFA] forKey:@"idfa"];
+    }
+    
+    [self trackInitStart];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager GET:url parameters:parameters headers:@{@"sdk-version" : [Yodo1Mas sdkVersion]} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:url parameters:parameters headers:headers progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [weakSelf trackInitEnd:YES];
         Yodo1MasInitData *data;
         if (debug && yodo1Config[@"Config"] != nil) {
             data = [Yodo1MasInitData yy_modelWithJSON:yodo1Config[@"Config"]];
         } else {
             data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
         }
-        if (data != nil) {
-            weakSelf.masInitConfig = data.mas_init_config;
-            weakSelf.masNetworkConfig = data.ad_network_config;
-            weakSelf.test_mode = data.test_mode;
-            if (data.mas_init_config && data.ad_network_config) {
-                if (debug) {
-                    NSLog(@"获取广告数据成功 - %@", responseObject);
+        if (data != nil && data.mas_init_config != nil && data.ad_network_config != nil) {
+            if (debug) {
+                NSLog(@"get config successful - %@", responseObject);
+            }
+            
+            if ([@"null" isEqualToString:data.bundle_id] || [weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
+                // 如果不需要匹配BundleId或者BundleId匹配成功
+                weakSelf.masInitConfig = data.mas_init_config;
+                weakSelf.masNetworkConfig = data.ad_network_config;
+                weakSelf.test_mode = data.test_mode;
+                
+                if (data.test_mode == 1) {
+                    [Yodo1AdsManager.sharedInstance initAdvert];
+                    [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestMode];
+                    [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestDevice];
+                } else {
+                    [weakSelf doInitAdapter];
+                    [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
+                    [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestDevice];
                 }
-                if (weakSelf.test_mode == 1) {
-                    [YD1AdsManager.sharedInstance initAdvert];
-                }
-                [weakSelf doInitAdapter];
                 weakSelf.isInit = YES;
+                [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
+                [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
                 if (successful) {
                     successful();
                 }
             } else {
+                [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
+                NSString *msg = [NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)];
+                [weakSelf.appInfo setValue:msg forKey:kYodo1MasInitMsg];
                 if (fail) {
-                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"get config failed"]);
+                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:msg]);
                 }
             }
         } else {
             if (fail) {
-                fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:@"get config failed"]);
+                fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Data parsing failed"]);
             }
-            NSLog(@"获取广告配置失败 - 解释配置数据失败");
+            [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
+            [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
         }
         
+        [weakSelf printInitLog];
         weakSelf.isRequesting = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         weakSelf.isRequesting = NO;
-        
+        [weakSelf trackInitEnd:NO];
         if (fail) {
-            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigServer message:error.localizedDescription]);
+            fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigNetwork message:error.localizedDescription]);
         }
-        NSLog(@"获取广告配置失败 - %@", error.localizedDescription);
+        
+        [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
+        [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,%@)", @(Yodo1MasErrorCodeConfigNetwork), error.localizedDescription] forKey:kYodo1MasInitMsg];
+        [weakSelf printInitLog];
     }];
+}
+
+- (void)trackInitStart {
+    long long start = [NSDate date].timeIntervalSince1970;
+    [_appInfo setValue:@(start) forKey:kYodo1MasInitTime];
+    //[Yodo1SaManager track:@"adInit" properties:@{@"initAction": @"request"}];
+}
+
+- (void)trackInitEnd:(BOOL)successful {
+    long long start = [_appInfo[kYodo1MasInitTime] longLongValue];
+    long long end = [NSDate date].timeIntervalSince1970;
+    [Yodo1SaManager track:@"adInit" properties:@{@"initAction": successful ? @"response" : @"error", @"initDuration" : @(end - start)}];
+}
+
+- (void)printInitLog {
+    NSMutableString *ms = [NSMutableString string];
+    [ms appendString:@"******************************************\n"];
+    [ms appendString:@"Yodo1MasSdk\n"];
+    
+    NSString *version = _appInfo[kYodo1MasSdkVersion];
+    if (_appInfo[kYodo1MasSdkType]) {
+        version = [version stringByAppendingFormat:@"-%@", _appInfo[kYodo1MasSdkType]];
+    }
+    [ms appendFormat:@"MAS SDK Version: %@\n", version];
+    [ms appendFormat:@"AppKey: %@ \n", _appInfo[kYodo1MasAppKey]];
+    [ms appendFormat:@"Bundle ID: %@ \n", _appInfo[kYodo1MasAppBundleId]];
+    if (_appInfo[kYodo1MasInitStatus]) {
+        [ms appendFormat:@"Init Status: %@\n", _appInfo[kYodo1MasInitMsg]];
+    } else {
+        [ms appendString:@"Init Status: None\n"];
+    }
+    
+    if (_appInfo[kYodo1MasIDFA]) {
+        [ms appendFormat:@"IDFA is: %@（use this for  test devices）\n", _appInfo[kYodo1MasIDFA]];
+    } else {
+        [ms appendString:@"IDFA is: Get IDFA failed(Unauthorized)\n"];
+    }
+    
+    if (_appInfo[kYodo1MasAdMobId]) {
+        [ms appendFormat:@"AdMob ID is: %@\n", _appInfo[kYodo1MasAdMobId]];
+    } else {
+        [ms appendString:@"AdMob ID is: None（please fill correct  AppKey）\n"];
+    }
+    
+    if (_appInfo[kYodo1MasTestMode]) {
+        [ms appendFormat:@"Test Device: %@\n", _appInfo[kYodo1MasTestMode]];
+    } else {
+        [ms appendString:@"Test Device: None\n"];
+    }
+    
+    if (_appInfo[kYodo1MasTestDevice]) {
+        [ms appendFormat:@"Test Ad: %@\n", _appInfo[kYodo1MasTestDevice]];
+    } else {
+        [ms appendString:@"Test Ad: None\n"];
+    }
+    
+    
+    [ms appendString:@"******************************************"];
+    NSLog(@"[Yodo1Mas]:\n%@", ms);
 }
 
 - (void)doInitAdapter {
@@ -242,18 +379,18 @@
         }
     }
     
-    [YD1AdsManager.sharedInstance bannerCallback:^(YD1BannerState state) {
+    [Yodo1AdsManager.sharedInstance bannerCallback:^(YODO1BannerState state) {
         switch (state) {
-            case kYD1BannerStateFail:
+            case kYODO1BannerStateFail:
             {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeBanner message:@"" error:error];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.bannerAdDelegate onAdError:event error:error];
                 }
             }
                 break;
-            case kYD1BannerStateClicked:
+            case kYODO1BannerStateClicked:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -261,7 +398,7 @@
                 }
             }
                 break;
-            case kYD1BannerStateClose:
+            case kYODO1BannerStateClose:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
@@ -274,21 +411,21 @@
         }
     }];
     UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
-    [Yodo1MasBanner addBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
+    [Yodo1MasBanner addBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
     
-    [YD1AdsManager.sharedInstance videoCallback:^(YD1VideoState state) {
+    [Yodo1AdsManager.sharedInstance videoCallback:^(YODO1VideoState state) {
         
         switch (state) {
-            case kYD1VideoStateFail:
+            case kYODO1VideoStateFail:
             {
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeReward message:@"" error:error];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.rewardAdDelegate onAdError:event error:error];
                 }
             }
                 break;
-            case kYD1VideoStateFinished:
+            case kYODO1VideoStateFinished:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdRewardEarned:)]) {
@@ -296,7 +433,7 @@
                 }
             }
                 break;
-            case kYD1VideoStateShow:
+            case kYODO1VideoStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeReward];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -304,7 +441,7 @@
                 }
             }
                 break;
-            case kYD1VideoStateClose:
+            case kYODO1VideoStateClose:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
                 if ([self.rewardAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
@@ -316,19 +453,19 @@
                 break;
         }
     }];
-    [YD1AdsManager.sharedInstance intersCallback:^(YD1InterstitialState state) {
+    [Yodo1AdsManager.sharedInstance intersCallback:^(YODO1InterstitialState state) {
         switch (state) {
-            case kYD1InterstitialStateFail:
+            case kYODO1InterstitialStateFail:
             {
                 
-                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"load of error!"];
+                Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:@"load of error!"];
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:Yodo1MasAdTypeInterstitial message:@"" error:error];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdError:error:)]) {
                     [self.interstitialAdDelegate onAdError:event error:error];
                 }
             }
                 break;
-            case kYD1InterstitialStateShow:
+            case kYODO1InterstitialStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeInterstitial];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -336,7 +473,7 @@
                 }
             }
                 break;
-            case kYD1InterstitialStateClose:
+            case kYODO1InterstitialStateClose:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
                 if ([self.interstitialAdDelegate respondsToSelector:@selector(onAdClosed:)]) {
@@ -364,19 +501,19 @@
             [self doInitAdvert: key];
             
             [adapter initWithConfig:config successful:^(NSString *advertCode) {
-                NSLog(@"Adapter初始化成功 - %@:%@", key, value);
+                NSLog(@"Adapter init successful - %@:%@", key, value);
             } fail:^(NSString *advertCode, NSError *error) {
-                NSLog(@"Adapter初始化失败 - %@:%@, %@", key, value, error.description);
+                NSLog(@"Adapter init failed - %@:%@, %@", key, value, error.description);
             }];
         } else {
             if (o == nil) {
-                NSLog(@"未集成相应Adapter -  %@", value);
+                NSLog(@"The adapter is not integrated -  %@", value);
             } else {
-                NSLog(@"Adapter未继承Yodo1MasAdapterBase - %@", key);
+                NSLog(@"The adapter is not Yodo1MasAdapterBase subclass - %@", key);
             }
         }
     } else {
-        NSLog(@"初始化Adapter - 未找到指定Adapter,SDK版本过低: - %@", key);
+        NSLog(@"Adapter Init - the adapter does not found or SDK verson is too low: - %@", key);
     }
 }
 
@@ -496,13 +633,13 @@
     if (self.test_mode == 1) {
         switch (type) {
             case Yodo1MasAdTypeReward:
-                isLoaded = [YD1AdsManager.sharedInstance isVideoReady];
+                isLoaded = [Yodo1AdsManager.sharedInstance isVideoReady];
                 break;
             case Yodo1MasAdTypeInterstitial:
-                isLoaded = [YD1AdsManager.sharedInstance isInterstitialReady];
+                isLoaded = [Yodo1AdsManager.sharedInstance isInterstitialReady];
                 break;
             case Yodo1MasAdTypeBanner:
-                isLoaded = [YD1AdsManager.sharedInstance isBannerReady];
+                isLoaded = [Yodo1AdsManager.sharedInstance isBannerReady];
                 break;
         }
         return isLoaded;
@@ -602,18 +739,18 @@
         switch (type) {
             case Yodo1MasAdTypeReward:
             {
-                [YD1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
+                [Yodo1AdsManager.sharedInstance showVideo:[Yodo1MasAdapterBase getTopViewController]];
             }
                 break;
             case Yodo1MasAdTypeInterstitial:
             {
-                [YD1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
+                [Yodo1AdsManager.sharedInstance showInterstitial:[Yodo1MasAdapterBase getTopViewController]];
             }
                 break;
             case Yodo1MasAdTypeBanner:
             {
                 UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
-                [Yodo1MasBanner showBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
+                [Yodo1MasBanner showBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
             }
                 break;
         }
@@ -650,10 +787,10 @@
                     }
                     if (adapters.count > 0) {
                         weakSelf.currentAdapter = adapters.firstObject;
-                        [adapters.firstObject showAd:type callback:self->_adBlock object:object];
+                        [adapters.firstObject showAd:type callback:weakSelf.adBlock object:object];
                     } else {
                         weakSelf.adBlock = nil;
-                        [self callbackWithEvent:event];
+                        [weakSelf callbackWithEvent:event];
                     }
                     break;
                 }
@@ -667,12 +804,12 @@
             _currentAdapter = adapters.firstObject;
             [adapters.firstObject showAd:type callback:_adBlock object:object];
         } else {
-            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdAdapterNull message:@"ad adapters is null"];
+            Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdUninitialized message:@"ad adapters is null"];
             Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
             [self callbackWithEvent:event];
         }
     } else {
-        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdConfigNull message:@"ad config is null"];
+        Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdConfigNull message:@"Wrong ad type call.Please check your app profile on MAS to ensure you have selected the correct ad type."];
         Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeError type:type message:@"" error:error];
         [self callbackWithEvent:event];
     }
@@ -735,6 +872,10 @@
                         }
                         break;
                     }
+                    case Yodo1MasAdEventCodeRewardEarned: {
+                        
+                        break;
+                    }
                 }
             }
             break;
@@ -759,6 +900,10 @@
                         if ([delegate respondsToSelector:@selector(onAdError:error:)]) {
                             [delegate onAdError:event error:event.error];
                         }
+                        break;
+                    }
+                    case Yodo1MasAdEventCodeRewardEarned: {
+                        
                         break;
                     }
                 }
@@ -859,7 +1004,7 @@
 
 - (void)dismissBannerAd {
     if (self.test_mode == 1) {
-        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+        [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAd];
@@ -868,7 +1013,7 @@
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
     if (self.test_mode == 1) {
-        [Yodo1MasBanner removeBanner:YD1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
+        [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }
     if (_currentAdapter != nil) {
         [_currentAdapter dismissBannerAdWithDestroy:destroy];

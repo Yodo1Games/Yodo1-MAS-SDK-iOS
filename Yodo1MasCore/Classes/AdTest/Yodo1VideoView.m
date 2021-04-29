@@ -1,6 +1,6 @@
-#import "YD1VideoView.h"
+#import "Yodo1VideoView.h"
 
-@implementation YD1VideoView
+@implementation Yodo1VideoView
 
 + (Class)layerClass {
     return [AVPlayerLayer class];

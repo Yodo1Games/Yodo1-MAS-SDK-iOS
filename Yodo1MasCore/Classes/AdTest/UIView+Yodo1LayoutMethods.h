@@ -7,13 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
-#define YD1SCREEN_WIDTH ([[UIScreen mainScreen]bounds].size.width)
-#define YD1SCREEN_HEIGHT ([[UIScreen mainScreen]bounds].size.height)
+#define YODO1SCREEN_WIDTH ([[UIScreen mainScreen]bounds].size.width)
+#define YODO1SCREEN_HEIGHT ([[UIScreen mainScreen]bounds].size.height)
 
-#define kHPercentage(a) (YD1SCREEN_HEIGHT*((a)/667.00))
-#define kWPercentage(a) (YD1SCREEN_WIDTH *((a)/375.00))
+#define kYODO1HPercentage(a) (YODO1SCREEN_HEIGHT*((a)/667.00))
+#define kYODO1WPercentage(a) (YODO1SCREEN_WIDTH *((a)/375.00))
 
-#define YD1SCREEN_WITHOUT_STATUS_HEIGHT (SCREEN_HEIGHT - [[UIApplication sharedApplication] statusBarFrame].size.height)
+#define YODO1SCREEN_WITHOUT_STATUS_HEIGHT (SCREEN_HEIGHT - [[UIApplication sharedApplication] statusBarFrame].size.height)
 
 typedef CGFloat YD1UIScreenType;
 
@@ -21,7 +21,7 @@ static YD1UIScreenType YD1UIScreenType_iPhone5 = 320.0f;
 static YD1UIScreenType YD1UIScreenType_iPhone6 = 375.0f;
 static YD1UIScreenType YD1UIScreenType_iPhone6P = 414.0f;
 
-@interface UIView (YD1LayoutMethods)
+@interface UIView (Yodo1LayoutMethods)
 
 // coordinator getters
 - (CGFloat)ct_height;
