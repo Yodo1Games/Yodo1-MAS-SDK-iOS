@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
   s.weak_frameworks = 'WebKit'
   s.libraries = 'xml2', 'z'
   s.vendored_libraries = s.name + '/Lib/*.a'
-  s.dependency 'Yodo1MasCore'
+  s.dependency 'Yodo1MasCore', '4.1.0'
   
 end

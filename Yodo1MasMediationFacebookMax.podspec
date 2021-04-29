@@ -34,9 +34,9 @@ TODO: Add long description of the pod here.
   
   s.static_framework = true
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
-  s.dependency 'Yodo1MasMediationFacebook'
-  s.dependency 'Yodo1MasMediationAdMob'
-  s.dependency 'Yodo1MasMediationApplovin'
-  s.dependency 'Yodo1MasMediationIronSource'
+  s.dependency 'Yodo1MasMediationFacebook', '4.1.0'
+  s.dependency 'Yodo1MasMediationAdMob', '4.1.0'
+  s.dependency 'Yodo1MasMediationApplovin', '4.1.0'
+  s.dependency 'Yodo1MasMediationIronSource', '4.1.0'
   
 end

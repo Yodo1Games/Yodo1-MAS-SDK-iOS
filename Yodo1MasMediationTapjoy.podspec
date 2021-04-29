@@ -35,7 +35,7 @@ TODO: Add long description of the pod here.
   s.resource = s.name + '/Assets/**/*.bundle'
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  s.dependency 'Yodo1MasCore'
+  s.dependency 'Yodo1MasCore', '4.1.0'
   s.dependency 'TapjoySDK', '12.7.1'
   
 end
