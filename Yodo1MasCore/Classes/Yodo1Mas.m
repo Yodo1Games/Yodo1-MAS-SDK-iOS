@@ -221,56 +221,39 @@
         } else {
             data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
         }
-        if (data != nil) {
-            weakSelf.masInitConfig = data.mas_init_config;
-            weakSelf.masNetworkConfig = data.ad_network_config;
-            weakSelf.test_mode = data.test_mode;
-            if (data.mas_init_config && data.ad_network_config) {
-                if (debug) {
-                    NSLog(@"get config successful - %@", responseObject);
-                }
-                if (weakSelf.test_mode == 1) {
+        if (data != nil && data.mas_init_config != nil && data.ad_network_config != nil) {
+            if (debug) {
+                NSLog(@"get config successful - %@", responseObject);
+            }
+            
+            if ([@"null" isEqualToString:data.bundle_id] || [weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
+                // 如果不需要匹配BundleId或者BundleId匹配成功
+                weakSelf.masInitConfig = data.mas_init_config;
+                weakSelf.masNetworkConfig = data.ad_network_config;
+                weakSelf.test_mode = data.test_mode;
+                
+                if (data.test_mode == 1) {
                     [Yodo1AdsManager.sharedInstance initAdvert];
-                }
-                
-                if (data.test_mode == 1) {
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestMode];
-                } else {
-                    [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
-                }
-                
-                if (data.test_mode == 1) {
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestDevice];
                 } else {
+                    [weakSelf doInitAdapter];
+                    [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestDevice];
                 }
+                weakSelf.isInit = YES;
                 [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
-                if ([weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
-                    
-                    [weakSelf doInitAdapter];
-                    weakSelf.isInit = YES;
-                    [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
-                    
-                    if (successful) {
-                        successful();
-                    }
-                } else {
-                    NSString *msg = [NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)];
-                    [weakSelf.appInfo setValue:msg forKey:kYodo1MasInitMsg];
-                    
-                    if (fail) {
-                        fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:msg]);
-                    }
+                [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
+                if (successful) {
+                    successful();
                 }
-                [weakSelf printInitLog];
             } else {
-                if (fail) {
-                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Data parsing failed"]);
-                }
-                
                 [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-                [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
-                [weakSelf printInitLog];
+                NSString *msg = [NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)];
+                [weakSelf.appInfo setValue:msg forKey:kYodo1MasInitMsg];
+                if (fail) {
+                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:msg]);
+                }
             }
         } else {
             if (fail) {
@@ -278,9 +261,9 @@
             }
             [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
             [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
-            [weakSelf printInitLog];
         }
         
+        [weakSelf printInitLog];
         weakSelf.isRequesting = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         weakSelf.isRequesting = NO;
@@ -292,7 +275,6 @@
         [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
         [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,%@)", @(Yodo1MasErrorCodeConfigNetwork), error.localizedDescription] forKey:kYodo1MasInitMsg];
         [weakSelf printInitLog];
-
     }];
 }
 
