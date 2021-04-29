@@ -237,10 +237,10 @@
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestMode];
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestDevice];
                 } else {
-                    [weakSelf doInitAdapter];
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestDevice];
                 }
+                [weakSelf doInitAdapter];
                 weakSelf.isInit = YES;
                 [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
                 [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
