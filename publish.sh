@@ -60,7 +60,8 @@ do
     done < ${podfile}
 done
 
-上传Cocoapods
+# 上传Cocoapods
+echo "开始上传Cocoapods..."
 cocoapodsSpecs="https://github.com/CocoaPods/Specs.git,https://github.com/Yodo1Games/Yodo1Spec.git"
 repositoryName="Yodo1Mas-${env}"
 repositoryToken=""
@@ -109,6 +110,7 @@ pod repo push $repositoryName build/Yodo1MasStandard.podspec --verbose --use-lib
 pod repo push $repositoryName build/Yodo1MasFull.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}"
 
 #  修改Yodo1MasMediationFacebook
+echo "修改Yodo1MasMediationFacebook.podspec ..."
 name='Yodo1MasMediationFacebook'
 version=''
 while read line
@@ -121,11 +123,12 @@ do
     fi
 done < build/${name}.podspec
 
-cd ~/.cocoapods/repos/${repositoryName}/${name}/${version}
-sed -i "" '39c\'$'\n  # s.dependency \'FBAudienceNetwork\', \'6.2.1\'\n' ${name}.podspec
-sed -i "" '39a\'$'\n  s.vendored_frameworks = s.name + \'/Lib/**/*.framework\'\n' ${name}.podspec
-git add ${name}.podspec
-git commit -m "[Update] ${name} (${version})"
-git push origin main
+cd ~/.cocoapods/repos/${repositoryName}/
+sed -i "" '39c\'$'\n  # s.dependency \'FBAudienceNetwork\', \'6.2.1\'\n' ${name}/${version}/${name}.podspec
+sed -i "" '39a\'$'\n  s.vendored_frameworks = s.name + \'/Lib/**/*.framework\'\n' ${name}/${version}/${name}.podspec
+git add .
+git commit -m "[Fix] ${name} (${version})"
+git remote add origin ${privateSpecs}
+git push -u origin main
 
 echo 上传Cocoapods结束:$(date +%Y-%m-%d\ %H:%M:%S) 
