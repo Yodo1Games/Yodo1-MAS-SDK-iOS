@@ -54,7 +54,6 @@ jobs:
         with:
           path: ~/.cocoapods
           key: ${{ runner.os }}-cocoapods
-          restore-keys: ${{ runner.os }}-cocoapods
 
       - name: init oss
         run: |
