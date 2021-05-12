@@ -129,8 +129,8 @@ if [[ ${dingtalkToken} == '' ]]
 then
     echo "Token为空，无法发送钉钉机器人消息"
 else
-    msgTitle="Yodo1Mas iOS发布完成"
-    msgContent=""
+    msgTitle="Actions:Yodo1Mas iOS发布完成"
+    msgContent="#### ${msgTitle}"
     for podfile in $(find . -maxdepth 1 -name "*.podspec" | sort)
     do
         # 获取文件名和版本号
@@ -163,9 +163,7 @@ else
         fi
     done
     
-    curl "https://oapi.dingtalk.com/robot/send?access_token=${dingtalkToken}" \                    
-        -H "Content-Type: application/json" \                             
-        -d "{\"msgtype\": \"markdown\",\"markdown\": {\"title\":\"Actions:${msgTitle}\",\"text\":\"${msgContent}\",\"at\":{\"isAtAll\":true}}}"
+    curl "https://oapi.dingtalk.com/robot/send?access_token=${dingtalkToken}" -H "Content-Type: application/json" -d "{\"msgtype\": \"markdown\",\"markdown\": {\"title\":\"Actions:${msgTitle}\",\"text\":\"${msgContent}\",\"at\":{\"isAtAll\":true}}}"
 fi
 
 #  修改Yodo1MasMediationFacebook
