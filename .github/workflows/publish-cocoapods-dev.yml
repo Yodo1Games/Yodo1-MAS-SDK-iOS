@@ -48,12 +48,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Cache .cocoapods
-        uses: actions/cache@v2
-        with:
-          path: ~/.cocoapods
-          key: ${{ runner.os }}-cocoapods
+      
+      # 暂时屏蔽 会卡在这一步骤
+      # - name: Cache .cocoapods
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.cocoapods
+      #     key: ${{ runner.os }}-cocoapods
+      #     restore-keys: ${{ runner.os }}-cocoapods
 
       - name: init oss
         run: |
