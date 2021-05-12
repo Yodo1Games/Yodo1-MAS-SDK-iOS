@@ -50,8 +50,7 @@ do
     url="https://mas-artifacts.yodo1.com/${version}/iOS/${filename}"
     echo "上传:${url}"
     echo "上传文件============================" >> ${logFile}
-    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/ -c ~/.ossutilconfig -u >> ${logFile}
-    echo "\n\n" >> ${logFile}
+    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/ -c ~/.ossutilconfig -u
 
     # 修改podspec文件的s.sources
     echo "" > build/${name}.podspec
