@@ -47,10 +47,10 @@ do
     echo "\n\n" >> ${logFile}
 
     # 上传地址
-    url="https://mas-artifacts.yodo1.com/${version}/iOS/${filename}"
+    url="https://mas-artifacts.yodo1.com/${version}/iOS/${env}/${filename}"
     echo "上传:${url}"
     echo "上传文件============================" >> ${logFile}
-    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/ -c ~/.ossutilconfig -u
+    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/${env} -c ~/.ossutilconfig -u
 
     # 修改podspec文件的s.sources
     echo "" > build/${name}.podspec
@@ -179,9 +179,22 @@ do
         break
     fi
 done < build/${name}.podspec
-cd ~/.cocoapods/repos/${repositoryName}/
-sed -i "" '39c\'$'\n  # s.dependency \'FBAudienceNetwork\', \'6.2.1\'\n' ${name}/${version}/${name}.podspec
-sed -i "" '39a\'$'\n  s.vendored_frameworks = s.name + \'/Lib/**/*.framework\'\n' ${name}/${version}/${name}.podspec
+
+cd ~/.cocoapods/repos/${repositoryName}
+
+echo "" > ${name}/${version}/${name}.podspec.temp
+while read line
+do
+    if [[ ${line} == *FBAudienceNetwork* ]]
+    then
+        echo "# s.dependency 'FBAudienceNetwork', '6.2.1'" >> ${name}/${version}/${name}.podspec.temp
+        echo "s.vendored_frameworks = s.name + '/Lib/**/*.framework'" >> ${name}/${version}/${name}.podspec.temp
+    else
+        echo "$line" >> ${name}/${version}/${name}.podspec.temp
+    fi
+done < ${name}/${version}/${name}.podspec
+mv ${name}/${version}/${name}.podspec.temp ${name}/${version}/${name}.podspec
+
 git add .
 git commit -m "[Fix] ${name} (${version})"
 git push -u origin main
