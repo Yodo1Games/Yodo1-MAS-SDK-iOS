@@ -38,7 +38,7 @@
     if (contentView != nil) {
         UIView *superview = contentView.superview;
         if (superview != controller.view) {
-            [superview removeFromSuperview];
+            [contentView removeFromSuperview];
             [controller.view addSubview:contentView];
         }
         
