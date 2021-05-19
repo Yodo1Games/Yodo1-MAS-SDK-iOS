@@ -205,8 +205,14 @@ do
 done < ${name}/${version}/${name}.podspec
 mv ${name}/${version}/${name}.podspec.temp ${name}/${version}/${name}.podspec
 
+originName="main"
+if [[ ${env} == "Dev"]]
+then
+   originName="master"
+fi
+
 git add .
 git commit -m "[Fix] ${name} (${version})"
-git push -u origin main
+git push -u origin ${originName}
 
 echo 上传Cocoapods结束:$(date +%Y-%m-%d\ %H:%M:%S) 
