@@ -176,6 +176,18 @@
 - (void)showAdInWindow:(UIWindow *)window withBottomView:(UIView *)bottomView skipView:(UIView *)skipView;
 
 /**
+ *  发起拉取全屏广告请求，只拉取不展示
+ *  详解：广告素材及广告图片拉取成功后会回调splashAdDidLoad方法，当拉取失败时会回调splashAdFailToPresent方法
+ */
+- (void)loadFullScreenAd;
+
+/**
+ *  展示全屏广告，调用此方法前需调用isAdValid方法判断广告素材是否有效
+ *  详解：广告展示成功时会回调splashAdSuccessPresentScreen方法，展示失败时会回调splashAdFailToPresent方法
+ */
+- (void)showFullScreenAdInWindow:(UIWindow *)window withLogoImage:(UIImage *)logoImage skipView:(UIView *)skipView;
+
+/**
  *  构造方法
  *  详解：appId - 媒体 ID
  *       placementId - 广告位 ID
@@ -209,5 +221,15 @@
            skipView 自定义”跳过“View.
  */
 - (void)loadAdAndShowInWindow:(UIWindow *)window withBottomView:(UIView *)bottomView skipView:(UIView *)skipView GDT_DEPRECATED_MSG_ATTRIBUTE("接口即将废弃，请分别使用loadAd 和 showAdInWindow:接口");
+
+/**
+ *  广告发起请求并展示在Window中, 同时在屏幕底部设置应用自身的Logo页面或是自定义View,skipView是自定义的“跳过”样式
+ *  详解：[可选]发起拉取广告请求,并将获取的广告全屏展示, 可自定义 logo
+ *  skipView
+ *  @param window 展示开屏的容器
+ *         logoImage 自定义logo 展示在屏幕左下角
+           skipView 自定义”跳过“View.
+ */
+- (void)loadAdAndShowFullScreenInWindow:(UIWindow *)window withLogoImage:(UIImage *)logoImage skipView:(UIView *)skipView GDT_DEPRECATED_MSG_ATTRIBUTE("接口即将废弃，请分别使用loadFullScreenAd 和 showFullScreenAdInWindow:接口");
 
 @end
