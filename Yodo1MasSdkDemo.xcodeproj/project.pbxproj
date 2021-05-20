@@ -408,8 +408,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG62393NFU;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = QK52KGCUT2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Yodo1MasSdkDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -417,7 +417,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 3.14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -434,8 +434,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SG62393NFU;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = QK52KGCUT2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Yodo1MasSdkDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -443,7 +443,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.1.0;
+				MARKETING_VERSION = 3.14.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.romank.drawmasters;
 				PRODUCT_NAME = "$(TARGET_NAME)";

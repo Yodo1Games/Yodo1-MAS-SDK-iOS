@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s5c-XF-Bf6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s5c-XF-Bf6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -196,14 +196,22 @@
                                     <action selector="onNextBannerController:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="Re5-vf-k1T"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osZ-zZ-7Wa">
+                                <rect key="frame" x="163" y="635" width="88" height="30"/>
+                                <state key="normal" title="Lucky Wheel"/>
+                                <connections>
+                                    <action selector="onLuckyWheel:" destination="s5c-XF-Bf6" eventType="touchUpInside" id="Nhr-yK-yuS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="74Y-kr-Sam"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="osZ-zZ-7Wa" firstAttribute="centerX" secondItem="SIB-38-4H6" secondAttribute="centerX" id="0X5-So-SB2"/>
                             <constraint firstItem="rWd-xF-H4O" firstAttribute="top" secondItem="DxG-0F-XML" secondAttribute="bottom" constant="79" id="0eh-bb-6Xu"/>
                             <constraint firstItem="vP8-eW-RuD" firstAttribute="top" secondItem="xBk-rv-Hrx" secondAttribute="bottom" constant="10" id="1H9-sz-x7y"/>
+                            <constraint firstItem="SIB-38-4H6" firstAttribute="leading" secondItem="rWd-xF-H4O" secondAttribute="leading" id="1as-yY-0mQ"/>
                             <constraint firstItem="DtV-Lj-H0F" firstAttribute="trailing" secondItem="dzj-8R-cfZ" secondAttribute="trailing" id="27K-yL-tk6"/>
-                            <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="SIB-38-4H6" secondAttribute="trailing" constant="15" id="2eO-gQ-5kt"/>
                             <constraint firstItem="DxG-0F-XML" firstAttribute="leading" secondItem="9KA-Dl-Arx" secondAttribute="leading" id="2r2-mn-qdM"/>
                             <constraint firstItem="qBX-Bt-WWG" firstAttribute="centerY" secondItem="9KA-Dl-Arx" secondAttribute="centerY" id="3Ax-xn-yao"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="tLK-zk-hTd" secondAttribute="trailing" constant="15" id="3Pk-pB-cd8"/>
@@ -228,9 +236,9 @@
                             <constraint firstItem="9KA-Dl-Arx" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="SF5-6H-7BH"/>
                             <constraint firstItem="2BR-Fg-cfL" firstAttribute="top" secondItem="tLK-zk-hTd" secondAttribute="bottom" constant="10" id="V9R-XF-77J"/>
                             <constraint firstItem="DtV-Lj-H0F" firstAttribute="top" secondItem="8V8-wJ-AsR" secondAttribute="bottom" constant="10" id="VnG-rU-Lb4"/>
-                            <constraint firstItem="SIB-38-4H6" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="W7K-dv-CTl"/>
                             <constraint firstItem="hEb-wW-xUK" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="X5M-bA-LKt"/>
                             <constraint firstItem="xBk-rv-Hrx" firstAttribute="top" secondItem="KII-W4-NV3" secondAttribute="bottom" constant="10" id="Zs4-E6-3x2"/>
+                            <constraint firstItem="SIB-38-4H6" firstAttribute="trailing" secondItem="eip-RV-By3" secondAttribute="trailing" id="Zzl-7r-BVM"/>
                             <constraint firstItem="eip-RV-By3" firstAttribute="centerY" secondItem="rWd-xF-H4O" secondAttribute="centerY" id="aly-z6-kAn"/>
                             <constraint firstItem="DxG-0F-XML" firstAttribute="top" secondItem="DtV-Lj-H0F" secondAttribute="bottom" constant="26" id="dDz-eb-XET"/>
                             <constraint firstItem="74Y-kr-Sam" firstAttribute="trailing" secondItem="2BR-Fg-cfL" secondAttribute="trailing" constant="15" id="dw0-3Z-C77"/>
@@ -241,6 +249,7 @@
                             <constraint firstItem="2BR-Fg-cfL" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="j3z-DK-BSo"/>
                             <constraint firstItem="UTj-Do-9Qg" firstAttribute="top" secondItem="74Y-kr-Sam" secondAttribute="top" constant="10" id="jAN-az-79g"/>
                             <constraint firstItem="KII-W4-NV3" firstAttribute="top" secondItem="UTj-Do-9Qg" secondAttribute="bottom" constant="5" id="jEh-w3-6w9"/>
+                            <constraint firstItem="osZ-zZ-7Wa" firstAttribute="top" secondItem="SIB-38-4H6" secondAttribute="bottom" constant="34" id="kAL-II-2DV"/>
                             <constraint firstItem="xBk-rv-Hrx" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="mEr-Rd-ShX"/>
                             <constraint firstItem="tLK-zk-hTd" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="nVT-oy-4B2"/>
                             <constraint firstItem="UTj-Do-9Qg" firstAttribute="leading" secondItem="74Y-kr-Sam" secondAttribute="leading" constant="15" id="pju-Vn-k8M"/>

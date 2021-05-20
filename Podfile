@@ -18,6 +18,7 @@ pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasCN', :path => './'
 pod 'Yodo1MasStandard', :path => './'
 pod 'Yodo1MasFull', :path => './'
+pod 'Yodo1MasLuckyWheel', :path => './'
 
 # Mediation
 pod 'Yodo1MasMediationAdMob', :path => './'

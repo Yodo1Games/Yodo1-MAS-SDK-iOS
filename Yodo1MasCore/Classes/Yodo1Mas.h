@@ -38,6 +38,10 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 
 @end
 
+@protocol Yodo1MasLuckyWheelAdDelegate <NSObject, Yodo1MasRewardAdDelegate>
+
+@end
+
 @interface Yodo1Mas : NSObject
 
 @property (nonatomic, assign) BOOL isGDPRUserConsent;
@@ -46,6 +50,7 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 @property (nonatomic, weak) id<Yodo1MasRewardAdDelegate> rewardAdDelegate;
 @property (nonatomic, weak) id<Yodo1MasInterstitialAdDelegate> interstitialAdDelegate;
 @property (nonatomic, weak) id<Yodo1MasBannerAdDelegate> bannerAdDelegate;
+@property (nonatomic, weak) id<Yodo1MasLuckyWheelAdDelegate> luckyWheelAdDelegate;
 
 + (Yodo1Mas *)sharedInstance;
 + (NSString *)sdkVersion;

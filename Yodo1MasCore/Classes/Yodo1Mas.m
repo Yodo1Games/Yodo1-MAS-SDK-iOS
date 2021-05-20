@@ -44,6 +44,7 @@
 @property (nonatomic, assign) int test_mode;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
+@property (nonatomic, strong) NSString *currentPlacement;
 
 @end
 
@@ -818,6 +819,40 @@
 - (void)callbackWithEvent:(Yodo1MasAdEvent *)event {
     switch (event.type) {
         case Yodo1MasAdTypeReward: {
+            if ([self.currentPlacement isEqualToString:@"mas_lucky_wheel"]) {
+                id<Yodo1MasLuckyWheelAdDelegate> luckyDelegate = self.luckyWheelAdDelegate;
+                if (luckyDelegate != nil) {
+                    switch (event.code) {
+                        case Yodo1MasAdEventCodeOpened: {
+                            if ([luckyDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                                [luckyDelegate onAdOpened:event];
+                            }
+                            break;
+                        }
+                        case Yodo1MasAdEventCodeClosed: {
+                            if ([luckyDelegate respondsToSelector:@selector(onAdClosed:)]) {
+                                [luckyDelegate onAdClosed:event];
+                            }
+                            break;
+                        }
+                        case Yodo1MasAdEventCodeError: {
+                            if ([luckyDelegate respondsToSelector:@selector(onAdError:error:)]) {
+                                [luckyDelegate onAdError:event error:event.error];
+                            }
+                            break;
+                        }
+                        case Yodo1MasAdEventCodeRewardEarned: {
+                            if ([luckyDelegate respondsToSelector:@selector(onAdRewardEarned:)]) {
+                                [luckyDelegate onAdRewardEarned:event];
+                            }
+                            break;
+                        }
+                    }
+                }
+                
+                return;
+            }
+            
             id<Yodo1MasRewardAdDelegate> delegate = self.rewardAdDelegate;
             if (delegate != nil) {
                 switch (event.code) {
@@ -930,6 +965,7 @@
     NSMutableDictionary *object = [NSMutableDictionary dictionary];
     if (placement != nil && placement.length > 0) {
         object[kArgumentPlacement] = placement;
+        self.currentPlacement = placement;
     }
     [self showAdvert:Yodo1MasAdTypeReward object:object];
 }

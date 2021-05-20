@@ -14,7 +14,20 @@
 #import "BannerController.h"
 #import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
 
-@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate, GMTSMediationTestSuiteDelegate>
+#import "Yodo1LuckyWheelHelper.h"
+
+@interface DemoViewController ()
+<
+Yodo1MasRewardAdDelegate,
+Yodo1MasInterstitialAdDelegate,
+Yodo1MasBannerAdDelegate,
+GMTSMediationTestSuiteDelegate,
+Yodo1MasLuckyWheelInitializeDelegate,
+Yodo1MasLuckyWheelRewardDelegate
+>
+{
+    BOOL isAvailable;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *rewardField;
 @property (weak, nonatomic) IBOutlet UITextField *intersititialField;
@@ -45,6 +58,8 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
+    
+    [Yodo1LuckyWheelHelper.shared initWithAppKey:@"WTO6s43cNCo" delegate:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -115,6 +130,13 @@
     [self showViewController:controller sender:nil];
 }
 
+- (IBAction)onLuckyWheel:(id)sender {
+    if (isAvailable) {
+        [Yodo1LuckyWheelHelper.shared show:self delegate:self];
+    }else{
+        NSLog(@"showLuckyWheel available:%d ",isAvailable);
+    }
+}
 #pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
     
@@ -144,5 +166,24 @@
     
 }
 
+- (void)onSuccess:(BOOL)available {
+    NSLog(@"%s,%d",__PRETTY_FUNCTION__,available);
+    isAvailable = available;
+}
+
+- (void)onFailure:(NSError *)error {
+    NSLog(@"%s,%@",__PRETTY_FUNCTION__,error);
+}
+
+- (void)onDisplayFailure:(NSString *)error {
+    
+    NSLog(@"%s,%@",__PRETTY_FUNCTION__,error);
+
+}
+
+- (void)onRewardEarned:(NSString *)reward {
+    NSLog(@"%s,%@",__PRETTY_FUNCTION__,reward);
+
+}
 
 @end
