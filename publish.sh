@@ -50,7 +50,7 @@ do
     url="https://mas-artifacts.yodo1.com/${version}/iOS/${env}/${filename}"
     echo "上传:${url}"
     echo "上传文件============================" >> ${logFile}
-    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/${env} -c ~/.ossutilconfig -u
+    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/${env}/ -c ~/.ossutilconfig -u
 
     # 修改podspec文件的s.sources
     echo "" > build/${name}.podspec
@@ -124,12 +124,22 @@ pod repo push $repositoryName build/Yodo1MasStandard.podspec --verbose --use-lib
 echo "上传Cocoapods============================" >> build/log/Yodo1MasFull.txt
 pod repo push $repositoryName build/Yodo1MasFull.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> build/log/Yodo1MasStandard.txt
 
+sdkVersion=''
+while read line
+do
+    if [[ ${line} == s.version* ]]
+    then
+        sdkVersion="$(echo ${line} | tr -d '[:space:]' | tr -d \')"
+        sdkVersion="${version:10}"
+        break
+    fi
+done < build/Yodo1MasFull.podspec
 # 发送钉钉机器人消息
 if [[ ${dingtalkToken} == '' ]]
 then
     echo "Token为空，无法发送钉钉机器人消息"
 else
-    msgTitle="Actions:Yodo1Mas iOS发布完成"
+    msgTitle="Actions:Yodo1Mas iOS ${env} ${sdkVersion}发布完成"
     msgContent="#### ${msgTitle}"
     for podfile in $(find . -maxdepth 1 -name "*.podspec" | sort)
     do
@@ -195,8 +205,14 @@ do
 done < ${name}/${version}/${name}.podspec
 mv ${name}/${version}/${name}.podspec.temp ${name}/${version}/${name}.podspec
 
+originName="main"
+if [[ ${env} == Dev ]]
+then
+   originName="master"
+fi
+
 git add .
 git commit -m "[Fix] ${name} (${version})"
-git push -u origin main
+git push -u origin ${originName}
 
 echo 上传Cocoapods结束:$(date +%Y-%m-%d\ %H:%M:%S) 
