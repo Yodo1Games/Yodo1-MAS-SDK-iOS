@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasLuckyWheel'
-  s.version          = '4.1.0'
+  s.version          = '4.1.1-alpha-6132234'
   s.summary          = 'Yodo1MasLuckyWheel'
   s.swift_version    = '5.0'
 
@@ -36,6 +36,6 @@ TODO: Add long description of the pod here.
   #s.vendored_frameworks = s.name + '/Lib/**/*.framework'
   # s.resource = s.name + '/Assets/**/*'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '4.1.0'
+  s.dependency 'Yodo1MasCore', '4.1.1-alpha-6132234'
   s.dependency 'YYCache', '1.0.4'
 end

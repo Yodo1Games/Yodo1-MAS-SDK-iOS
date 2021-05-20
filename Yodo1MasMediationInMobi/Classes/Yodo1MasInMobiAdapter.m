@@ -31,7 +31,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.1.1-alpha-6132234";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {

@@ -532,3 +532,17 @@ jobs:
           pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec-Pre.git
       - name: publish full
         run: pod repo push Yodo1Mas Yodo1MasFull.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec-Pre.git'
+
+  job_publish_lucky_wheel:
+    name: Publish Lucky Wheel
+    runs-on: macos-latest
+    if: always()
+    needs: job_publish_core
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: add yodo1mas repo
+        run: 
+          pod repo add Yodo1Mas https://x-access-token:${{ secrets.TOKEN }}@github.com/Yodo1Games/MAS-Spec-Pre.git
+      - name: publish full
+        run: pod repo push Yodo1Mas Yodo1MasLuckyWheel.podspec --verbose --use-libraries --allow-warnings --sources='https://cdn.cocoapods.org,https://github.com/Yodo1Games/Yodo1Spec.git,https://github.com/Yodo1Games/MAS-Spec-Pre.git'

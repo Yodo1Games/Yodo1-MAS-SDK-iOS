@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationTencent'
-  s.version          = '4.1.0'
+  s.version          = '4.1.1-alpha-6132234'
   s.summary          = 'Yodo1MasMediationTencent'
   s.swift_version    = '5.0'
 
@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
   s.weak_frameworks = 'WebKit'
   s.libraries = 'xml2', 'z'
   s.vendored_libraries = s.name + '/Lib/*.a'
-  s.dependency 'Yodo1MasCore', '4.1.0'
+  s.dependency 'Yodo1MasCore', '4.1.1-alpha-6132234'
   
 end

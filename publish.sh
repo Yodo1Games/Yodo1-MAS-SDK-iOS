@@ -115,6 +115,9 @@ do
     fi
 done
 
+echo "上传Cocoapods============================" >> build/log/Yodo1MasLuckyWheel.txt
+pod repo push $repositoryName build/Yodo1MasLuckyWheel.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> build/log/Yodo1MasLuckyWheel.txt
+
 echo "上传Cocoapods============================" >> build/log/Yodo1MasCN.txt
 pod repo push $repositoryName build/Yodo1MasCN.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> build/log/Yodo1MasCN.txt
 
