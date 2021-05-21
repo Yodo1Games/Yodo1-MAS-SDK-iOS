@@ -36,6 +36,6 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore', '4.2.0'
-  s.dependency 'AppLovinSDK', '6.15.2'
+  s.dependency 'AppLovinSDK', '10.2.1'
   
 end

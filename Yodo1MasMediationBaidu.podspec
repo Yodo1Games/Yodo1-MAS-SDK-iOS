@@ -35,6 +35,6 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore', '4.2.0'
-  s.dependency 'BaiduMobAdSDK', '4.761'
+  s.dependency 'BaiduMobAdSDK', '4.77'
   
 end
