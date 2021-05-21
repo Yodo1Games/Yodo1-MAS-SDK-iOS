@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AppLovinSdkKey</key>
-	<string>rNHXebCtrUWyeDeAihKoDCmwM9sL2WfshXTVHs-7N0yUBE4D0KtcycoTQgE7Ha2a9CsCn9WI22ZwsJQ29h6LzI</string>
+	<string>xcGD2fy-GdmiZQapx_kUSy5SMKyLoXBk8RyB5u9MVv34KetGdbl4XrXvAUFy0Qg9scKyVTI0NM4i_yzdXih4XE</string>
 	<key>AppLovinVerboseLoggingOn</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -25,7 +25,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-9340590208017770~7178343794</string>
+	<string>ca-app-pub-7188592076082444~4968329815</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -484,6 +484,7 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -493,13 +494,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>Yodo1MasAppkey</key>
-	<string>qqiOsnhyOie</string>
+	<string>1yLpy8IMte</string>
 	<key>Yodo1MasConfig</key>
 	<dict>
 		<key>Api</key>
 		<string>https://sdk.mas.yodo1.me/v1/init/</string>
 		<key>Debug</key>
-		<true/>
+		<false/>
 		<key>Yodo1Config</key>
 		<dict>
 			<key>ad_network_config</key>

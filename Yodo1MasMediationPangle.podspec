@@ -35,7 +35,7 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.dependency 'Yodo1MasCore', '4.2.0'
-  s.dependency 'Ads-CN/BUAdSDK', '3.5.1.2'
-  s.dependency 'Ads-CN/Domestic', '3.5.1.2'
+  s.dependency 'Ads-Global/BUAdSDK', '3.5.1.0'
+  s.dependency 'Ads-Global/Domestic', '3.5.1.0'
   
 end
