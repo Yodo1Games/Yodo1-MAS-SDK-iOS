@@ -56,7 +56,7 @@ do
     echo "" > build/${name}.podspec
     while read line
     do
-        if [[ ${line} == s.source* ]]
+        if [[ ${line} == *:git* ]]
         then
             echo "s.source           = { :http => '${url}' }" >> build/${name}.podspec
         else
