@@ -129,8 +129,8 @@
     if (error.code != Yodo1MasErrorCodeAdLoadFail) {
         [[Yodo1MasAdapterBase getTopWindow] makeToast:[NSString stringWithFormat:@"Error: %@", error.userInfo[NSLocalizedDescriptionKey]]];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alert show];
     }
 }
 
