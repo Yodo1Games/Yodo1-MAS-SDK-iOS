@@ -24,13 +24,13 @@
 @implementation Yodo1MasYandexAdapter
 
 - (YMAAdView *)adBanner {
-    if (!_adBanner) {
+    if (!_adBanner && [self getBannerAdId].adId) {
         CGSize size = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? YMAAdSizeBanner_320x50 : YMAAdSizeBanner_728x90;
         YMAAdSize * adSize = [YMAAdSize flexibleSizeWithCGSize:size];
 //API Version 3.x
-//        _adBanner = [[YMAAdView alloc] initWithBlockID:[self getBannerAdId].adId ? : @"" adSize:adSize];
+//        _adBanner = [[YMAAdView alloc] initWithBlockID:[self getBannerAdId].adId adSize:adSize];
 //API Version 2.x
-        _adBanner = [[YMAAdView alloc] initWithBlockID:[self getBannerAdId].adId ? : @"" adSize:adSize delegate:self];
+        _adBanner = [[YMAAdView alloc] initWithBlockID:[self getBannerAdId].adId adSize:adSize delegate:self];
         _adBanner.delegate = self;
     }
     return _adBanner;
@@ -39,8 +39,8 @@
 //API Version 3.x
 //
 //-(YMAInterstitialAd *)interstitialAd {
-//    if (!_interstitialAd) {
-//        _interstitialAd = [[YMAInterstitialAd alloc] initWithBlockID:[self getInterstitialAdId].adId ? : @""];
+//    if (!_interstitialAd && [self getInterstitialAdId].adId) {
+//        _interstitialAd = [[YMAInterstitialAd alloc] initWithBlockID:[self getInterstitialAdId].adId];
 //        _interstitialAd.delegate = self;
 //    }
 //    return _interstitialAd;
@@ -49,16 +49,16 @@
 
 //API Version 2.x
 -(YMAInterstitialController *)interstitialAd {
-    if (!_interstitialAd) {
-        _interstitialAd = [[YMAInterstitialController alloc] initWithBlockID:[self getInterstitialAdId].adId ? : @""];
+    if (!_interstitialAd && [self getInterstitialAdId].adId) {
+        _interstitialAd = [[YMAInterstitialController alloc] initWithBlockID:[self getInterstitialAdId].adId];
         _interstitialAd.delegate = self;
     }
     return _interstitialAd;
 }
 
 -(YMARewardedAd *)rewardVideoAd {
-    if (!_rewardVideoAd) {
-        _rewardVideoAd = [[YMARewardedAd alloc] initWithBlockID:[self getRewardAdId].adId ? : @""];
+    if (!_rewardVideoAd && [self getRewardAdId].adId) {
+        _rewardVideoAd = [[YMARewardedAd alloc] initWithBlockID:[self getRewardAdId].adId];
         _rewardVideoAd.delegate = self;
     }
     return _rewardVideoAd;

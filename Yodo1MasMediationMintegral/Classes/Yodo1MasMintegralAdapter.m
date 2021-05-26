@@ -74,9 +74,8 @@ MTGInterstitialVideoDelegate>
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
     Yodo1MasAdId *adId = [self getRewardAdId];
-    BOOL isReady = [MTGRewardAdManager.sharedInstance isVideoReadyToPlayWithPlacementId:adId.adId ? : @""
-                                                                                 unitId:adId.adId ? : @""];
-    return isReady;
+    if (!adId) {return NO;}
+    return [MTGRewardAdManager.sharedInstance isVideoReadyToPlayWithPlacementId:adId.adId unitId:adId.adId];;
 }
 
 - (void)loadRewardAd {
@@ -84,9 +83,9 @@ MTGInterstitialVideoDelegate>
     if (![self isInitSDK]) return;
     
     Yodo1MasAdId *adId = [self getRewardAdId];
-    [MTGRewardAdManager.sharedInstance loadVideoWithPlacementId:adId.adId ? : @""
-                                                         unitId:adId.adId ? : @""
-                                                       delegate:self];
+    if (adId) {
+        [MTGRewardAdManager.sharedInstance loadVideoWithPlacementId:adId.adId unitId:adId.adId delegate:self];
+    }
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -114,9 +113,8 @@ MTGInterstitialVideoDelegate>
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
     Yodo1MasAdId *adId = [self getInterstitialAdId];
-    BOOL isReady = [self.interstitialAd isVideoReadyToPlayWithPlacementId:adId.adId ? : @""
-                                                                   unitId:adId.adId ? : @""];
-    return isReady;
+    if (!adId) { return NO; }
+    return [self.interstitialAd isVideoReadyToPlayWithPlacementId:adId.adId unitId:adId.adId];;
 }
 
 - (void)loadInterstitialAd {
@@ -144,7 +142,7 @@ MTGInterstitialVideoDelegate>
 }
 
 - (MTGInterstitialVideoAdManager *)interstitialAd {
-    if (!_interstitialAd) {
+    if (!_interstitialAd && [self getRewardAdId]) {
         Yodo1MasAdId *adId = [self getRewardAdId];
         _interstitialAd = [[MTGInterstitialVideoAdManager alloc]initWithPlacementId:adId.adId unitId:adId.adId ? : @"" delegate:self];
     }
@@ -159,7 +157,7 @@ MTGInterstitialVideoDelegate>
 - (void)loadBannerAd {
     [super loadBannerAd];
     if (![self isInitSDK]) return;
-    Yodo1MasAdId *adId = [self getBannerAdId];
+//    Yodo1MasAdId *adId = [self getBannerAdId];
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {

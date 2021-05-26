@@ -79,12 +79,11 @@ BUNativeExpressBannerViewDelegate
 #pragma mark - 激励广告
 
 - (BURewardedVideoAd *)rewardAd {
-    if (!_rewardAd) {
+    if (!_rewardAd && [self getRewardAdId]) {
         _rewardModel = [[BURewardedVideoModel alloc] init];
         _rewardModel.userId = @"";
         Yodo1MasAdId *adId = [self getRewardAdId];
-        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId ? : @""
-                                           rewardedVideoModel:_rewardModel];
+        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId rewardedVideoModel:_rewardModel];
         _rewardAd.delegate = self;
     }
     return _rewardAd;
@@ -119,9 +118,9 @@ BUNativeExpressBannerViewDelegate
 #pragma mark - 插屏广告
 
 - (BUFullscreenVideoAd *)interstitialAd {
-    if (!_interstitialAd) {
+    if (!_interstitialAd && [self getInterstitialAdId]) {
         Yodo1MasAdId *adId = [self getInterstitialAdId];
-        _interstitialAd = [[BUFullscreenVideoAd alloc] initWithSlotID:adId.adId ? : @""];
+        _interstitialAd = [[BUFullscreenVideoAd alloc] initWithSlotID:adId.adId];
         _interstitialAd.delegate = self;
     }
     return _interstitialAd;

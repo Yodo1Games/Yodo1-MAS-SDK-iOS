@@ -52,16 +52,16 @@ GDTRewardedVideoAdDelegate>
 }
 
 -(GDTUnifiedInterstitialAd *)interstitialAd {
-    if (!_interstitialAd) {
-        _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:[self getInterstitialAdId].adId ? : @""];
+    if (!_interstitialAd && [self getInterstitialAdId]) {
+        _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:[self getInterstitialAdId].adId];
         _interstitialAd.delegate = self;
     }
     return _interstitialAd;
 }
 
 -(GDTRewardVideoAd *)rewardVideoAd {
-    if (!_rewardVideoAd) {
-        _rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:[self getRewardAdId].adId ? : @""];
+    if (!_rewardVideoAd && [self getRewardAdId]) {
+        _rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:[self getRewardAdId].adId];
         _rewardVideoAd.delegate = self;
     }
     return _rewardVideoAd;

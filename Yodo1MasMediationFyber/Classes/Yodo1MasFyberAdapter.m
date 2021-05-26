@@ -74,8 +74,10 @@
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     Yodo1MasAdId *adId = [self getRewardAdId];
-    FYBRewarded.delegate = self;
-    [FYBRewarded request:adId.adId ? : @""];
+    if (adId) {
+        FYBRewarded.delegate = self;
+        [FYBRewarded request:adId.adId];
+    }
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -104,8 +106,10 @@
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     Yodo1MasAdId *adId = [self getInterstitialAdId];
-    FYBInterstitial.delegate = self;
-    [FYBInterstitial request:adId.adId ? : @""];
+    if (adId) {
+        FYBInterstitial.delegate = self;
+        [FYBInterstitial request:adId.adId];
+    }
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
