@@ -67,7 +67,7 @@
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
-    return [FYBRewarded isAvailable:[self getRewardAdId].adId];
+    return [FYBRewarded isAvailable:[self getRewardAdId].adId ? : @""];
 }
 
 - (void)loadRewardAd {
@@ -75,7 +75,7 @@
     if (![self isInitSDK]) return;
     Yodo1MasAdId *adId = [self getRewardAdId];
     FYBRewarded.delegate = self;
-    [FYBRewarded request:adId.adId];
+    [FYBRewarded request:adId.adId ? : @""];
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -97,7 +97,7 @@
 
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return [FYBInterstitial isAvailable:[self getInterstitialAdId].adId];
+    return [FYBInterstitial isAvailable:[self getInterstitialAdId].adId ? : @""];
 }
 
 - (void)loadInterstitialAd {
@@ -105,7 +105,7 @@
     if (![self isInitSDK]) return;
     Yodo1MasAdId *adId = [self getInterstitialAdId];
     FYBInterstitial.delegate = self;
-    [FYBInterstitial request:adId.adId];
+    [FYBInterstitial request:adId.adId ? : @""];
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -117,7 +117,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method:showInterstitialAd:, show interstitial ad...}", self.TAG];
             NSLog(@"%@", message);
-            [FYBInterstitial show:[self getInterstitialAdId].adId];
+            [FYBInterstitial show:[self getInterstitialAdId].adId ? : @""];
         }
     }
 }

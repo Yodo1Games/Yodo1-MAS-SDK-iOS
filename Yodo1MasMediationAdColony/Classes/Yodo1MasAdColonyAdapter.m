@@ -63,7 +63,7 @@
         Yodo1MasAdId *rewardAdId = [self getRewardAdId];
         Yodo1MasAdId *intersAdId = [self getRewardAdId];
         [AdColony configureWithAppID:config.appId
-                             zoneIDs:@[rewardAdId.adId,intersAdId.adId]
+                             zoneIDs:@[rewardAdId.adId ? : @"",intersAdId.adId ? : @""]
                              options:options
                           completion:^(NSArray<AdColonyZone *> * zones) {
             for (AdColonyZone* zone in zones) {
@@ -111,7 +111,7 @@
     if (![self isInitSDK]) return;
     isRewardAdReady = NO;
     Yodo1MasAdId *adId = [self getRewardAdId];
-    [AdColony requestInterstitialInZone:adId.adId options:nil andDelegate:self];
+    [AdColony requestInterstitialInZone:adId.adId ? : @"" options:nil andDelegate:self];
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -139,7 +139,7 @@
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     Yodo1MasAdId *adId = [self getInterstitialAdId];
-    [AdColony requestInterstitialInZone:adId.adId options:nil andDelegate:self];
+    [AdColony requestInterstitialInZone:adId.adId ? : @"" options:nil andDelegate:self];
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {

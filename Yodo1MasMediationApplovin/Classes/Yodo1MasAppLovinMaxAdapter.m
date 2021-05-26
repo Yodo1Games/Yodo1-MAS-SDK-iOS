@@ -136,7 +136,7 @@
     [super loadInterstitialAd];
     if (![self isInitSDK]) return;
     if ([self getInterstitialAdId]) {
-        self.interstitialAd = [[MAInterstitialAd alloc] initWithAdUnitIdentifier:[self getInterstitialAdId].adId];
+        self.interstitialAd = [[MAInterstitialAd alloc] initWithAdUnitIdentifier:[self getInterstitialAdId].adId ? : @""];
         self.interstitialAd.delegate = self;
     }
     

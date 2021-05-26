@@ -121,7 +121,7 @@
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return [self getInterstitialAdId] != nil && [UnityAds isReady:[self getInterstitialAdId].adId];
+    return [self getInterstitialAdId] != nil && [UnityAds isReady:[self getInterstitialAdId].adId ? : @""];
 }
 
 - (void)loadInterstitialAd {
@@ -141,7 +141,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd, show interstitial ad...}", self.TAG];
             NSLog(@"%@", message);
-            [UnityAds show:controller placementId:[self getInterstitialAdId].adId];
+            [UnityAds show:controller placementId:[self getInterstitialAdId].adId ? : @""];
         }
     }
 }

@@ -155,7 +155,7 @@
     if (![self isInitSDK]) return;
     
     if ([self getInterstitialAdId] != nil) {
-        self.interstitialAd = [[FBInterstitialAd alloc] initWithPlacementID:[self getInterstitialAdId].adId];
+        self.interstitialAd = [[FBInterstitialAd alloc] initWithPlacementID:[self getInterstitialAdId].adId ? : @""];
         self.interstitialAd.delegate = self;
     }
     

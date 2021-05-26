@@ -83,7 +83,7 @@ BUNativeExpressBannerViewDelegate
         _rewardModel = [[BURewardedVideoModel alloc] init];
         _rewardModel.userId = @"";
         Yodo1MasAdId *adId = [self getRewardAdId];
-        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId
+        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId ? : @""
                                            rewardedVideoModel:_rewardModel];
         _rewardAd.delegate = self;
     }
@@ -121,7 +121,7 @@ BUNativeExpressBannerViewDelegate
 - (BUFullscreenVideoAd *)interstitialAd {
     if (!_interstitialAd) {
         Yodo1MasAdId *adId = [self getInterstitialAdId];
-        _interstitialAd = [[BUFullscreenVideoAd alloc] initWithSlotID:adId.adId];
+        _interstitialAd = [[BUFullscreenVideoAd alloc] initWithSlotID:adId.adId ? : @""];
         _interstitialAd.delegate = self;
     }
     return _interstitialAd;

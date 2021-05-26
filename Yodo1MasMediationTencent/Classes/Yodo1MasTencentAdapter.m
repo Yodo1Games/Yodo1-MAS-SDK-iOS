@@ -43,7 +43,7 @@ GDTRewardedVideoAdDelegate>
 -(GDTUnifiedBannerView *)adBanner {
     if (!_adBanner) {
         CGRect rect = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
-        _adBanner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:[self getBannerAdId].adId viewController:[Yodo1MasTencentAdapter getTopViewController]];
+        _adBanner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:[self getBannerAdId].adId ? : @"" viewController:[Yodo1MasTencentAdapter getTopViewController]];
         _adBanner.animated = YES;
         _adBanner.delegate = self;
         _adBanner.autoSwitchInterval = 15;
@@ -53,7 +53,7 @@ GDTRewardedVideoAdDelegate>
 
 -(GDTUnifiedInterstitialAd *)interstitialAd {
     if (!_interstitialAd) {
-        _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:[self getInterstitialAdId].adId];
+        _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:[self getInterstitialAdId].adId ? : @""];
         _interstitialAd.delegate = self;
     }
     return _interstitialAd;
@@ -61,7 +61,7 @@ GDTRewardedVideoAdDelegate>
 
 -(GDTRewardVideoAd *)rewardVideoAd {
     if (!_rewardVideoAd) {
-        _rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:[self getRewardAdId].adId];
+        _rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:[self getRewardAdId].adId ? : @""];
         _rewardVideoAd.delegate = self;
     }
     return _rewardVideoAd;

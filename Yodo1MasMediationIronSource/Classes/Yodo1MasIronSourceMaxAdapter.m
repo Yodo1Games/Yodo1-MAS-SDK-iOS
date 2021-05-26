@@ -263,7 +263,7 @@
     if ([self getBannerAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", self.TAG];
         NSLog(@"%@", message);
-        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceMaxAdapter getTopViewController] size:ISBannerSize_BANNER placement:[self getBannerAdId].adId];
+        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceMaxAdapter getTopViewController] size:ISBannerSize_BANNER placement:[self getBannerAdId].adId ? : @""];
     }
 }
 

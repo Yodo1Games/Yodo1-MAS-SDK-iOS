@@ -74,8 +74,8 @@ MTGInterstitialVideoDelegate>
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
     Yodo1MasAdId *adId = [self getRewardAdId];
-    BOOL isReady = [MTGRewardAdManager.sharedInstance isVideoReadyToPlayWithPlacementId:adId.adId
-                                                                                 unitId:adId.adId];
+    BOOL isReady = [MTGRewardAdManager.sharedInstance isVideoReadyToPlayWithPlacementId:adId.adId ? : @""
+                                                                                 unitId:adId.adId ? : @""];
     return isReady;
 }
 
@@ -84,8 +84,8 @@ MTGInterstitialVideoDelegate>
     if (![self isInitSDK]) return;
     
     Yodo1MasAdId *adId = [self getRewardAdId];
-    [MTGRewardAdManager.sharedInstance loadVideoWithPlacementId:adId.adId
-                                                         unitId:adId.adId
+    [MTGRewardAdManager.sharedInstance loadVideoWithPlacementId:adId.adId ? : @""
+                                                         unitId:adId.adId ? : @""
                                                        delegate:self];
 }
 
@@ -96,8 +96,8 @@ MTGInterstitialVideoDelegate>
         if (controller != nil) {
             NSLog(@"%@:{method: showRewardAd, show reward ad...}", self.TAG);
             Yodo1MasAdId *adId = [self getRewardAdId];
-            [MTGRewardAdManager.sharedInstance showVideoWithPlacementId:adId.adId
-                                                                 unitId:adId.adId
+            [MTGRewardAdManager.sharedInstance showVideoWithPlacementId:adId.adId ? : @""
+                                                                 unitId:adId.adId ? : @""
                                                            withRewardId:@"1"
                                                                  userId:@""
                                                                delegate:self
@@ -114,8 +114,8 @@ MTGInterstitialVideoDelegate>
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
     Yodo1MasAdId *adId = [self getInterstitialAdId];
-    BOOL isReady = [self.interstitialAd isVideoReadyToPlayWithPlacementId:adId.adId
-                                                                   unitId:adId.adId];
+    BOOL isReady = [self.interstitialAd isVideoReadyToPlayWithPlacementId:adId.adId ? : @""
+                                                                   unitId:adId.adId ? : @""];
     return isReady;
 }
 
@@ -146,7 +146,7 @@ MTGInterstitialVideoDelegate>
 - (MTGInterstitialVideoAdManager *)interstitialAd {
     if (!_interstitialAd) {
         Yodo1MasAdId *adId = [self getRewardAdId];
-        _interstitialAd = [[MTGInterstitialVideoAdManager alloc]initWithPlacementId:adId.adId unitId:adId.adId delegate:self];
+        _interstitialAd = [[MTGInterstitialVideoAdManager alloc]initWithPlacementId:adId.adId unitId:adId.adId ? : @"" delegate:self];
     }
     return _interstitialAd;
 }
