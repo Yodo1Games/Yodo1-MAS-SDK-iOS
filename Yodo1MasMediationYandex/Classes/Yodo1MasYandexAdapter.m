@@ -80,6 +80,7 @@
     [super initWithConfig:config successful:successful fail:fail];
 
     if (![self isInitSDK]) {
+        self.isYMSDKInit = YES;
         [self updatePrivacy];
         [self loadBannerAd];
         [self loadInterstitialAd];
@@ -87,7 +88,6 @@
         if (!successful) {
             successful(self.advertCode);
         }
-        self.isYMSDKInit = YES;
     } else {
         if (successful != nil) {
             successful(self.advertCode);
@@ -113,12 +113,11 @@
 }
 
 - (void)loadRewardAd {
-    if ([self isRewardAdLoaded]) {
-        [super loadRewardAd];
-        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG];
-        NSLog(@"%@", message);
-        [self.rewardVideoAd load];
-    }
+    [super loadRewardAd];
+    if (![self isInitSDK]) return;
+    NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG];
+    NSLog(@"%@", message);
+    [self.rewardVideoAd load];
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -143,10 +142,9 @@
 }
 
 - (void)loadInterstitialAd {
-    if (![self isInterstitialAdLoaded]) {
-        [super loadInterstitialAd];
-        [self.interstitialAd load];
-    }
+    [super loadInterstitialAd];
+    if (![self isInitSDK]) return;
+    [self.interstitialAd load];
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
