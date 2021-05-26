@@ -121,7 +121,7 @@
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
     
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)rewardedVideoAdVideoComplete:(FBRewardedVideoAd *)rewardedVideoAd {
@@ -211,7 +211,7 @@
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
     
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)interstitialAdWillLogImpression:(FBInterstitialAd *)interstitialAd {
