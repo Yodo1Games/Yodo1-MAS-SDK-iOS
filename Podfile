@@ -58,7 +58,7 @@ pod 'Yodo1MasMediationBaidu', :path => './'
 #pod 'Yodo1MasUnityBridge', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasStandard', '~> 4.2.0'
-#pod 'Yodo1MasFull', '~> 4.2.0'
+#pod 'Yodo1MasStandard', '~> 4.2.0-beta-e8851dd'
+#pod 'Yodo1MasFull', '~> 4.2.0-beta-e8851dd'
 
 end
