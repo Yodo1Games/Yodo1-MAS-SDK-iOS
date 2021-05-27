@@ -41,7 +41,7 @@ GDTRewardedVideoAdDelegate>
 }
 
 -(GDTUnifiedBannerView *)adBanner {
-    if (!_adBanner) {
+    if (!_adBanner && [self getBannerAdId]) {
         CGRect rect = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
         _adBanner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:[self getBannerAdId].adId ? : @"" viewController:[Yodo1MasTencentAdapter getTopViewController]];
         _adBanner.animated = YES;
@@ -150,7 +150,7 @@ GDTRewardedVideoAdDelegate>
     [self callbackWithError:rewardError type:Yodo1MasAdTypeReward];
     self.rewardVideoAd = nil;
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)gdt_rewardVideoAdWillVisible:(GDTRewardVideoAd *)rewardedVideoAd {
@@ -211,7 +211,7 @@ GDTRewardedVideoAdDelegate>
     [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
     self.interstitialAd = nil;
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)unifiedInterstitialDidPresentScreen:(GDTUnifiedInterstitialAd *)unifiedInterstitial {
@@ -223,6 +223,8 @@ GDTRewardedVideoAdDelegate>
     NSLog(@"%@", message);
     Yodo1MasError *tencentError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:tencentError type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
+    [self loadInterstitialAd];
 }
 
 - (void)unifiedInterstitialDidDismissScreen:(GDTUnifiedInterstitialAd *)unifiedInterstitial {

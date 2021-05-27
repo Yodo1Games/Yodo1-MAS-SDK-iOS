@@ -166,7 +166,7 @@
 - (void)loadBannerAd {
     [super loadBannerAd];
     if (![self isInitSDK]) return;
-    Yodo1MasAdId *adId = [self getBannerAdId];
+//    Yodo1MasAdId *adId = [self getBannerAdId];
 }
 
 - (void)showBannerAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {

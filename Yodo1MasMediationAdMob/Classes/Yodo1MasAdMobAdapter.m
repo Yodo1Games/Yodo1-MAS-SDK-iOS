@@ -105,10 +105,10 @@
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
                 [self callbackWithError:error type:Yodo1MasAdTypeReward];
                 [self loadRewardAdDelayed];
-                [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
             }else{
                 self.rewardAd = rewardedAd;
                 self.rewardAd.fullScreenContentDelegate = self;
+                [self callbackWithAdLoadSuccess:Yodo1MasAdTypeReward];
             }
         }];
     }

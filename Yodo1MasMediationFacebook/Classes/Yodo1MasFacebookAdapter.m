@@ -292,7 +292,7 @@
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     self.bannerState = Yodo1MasBannerStateNone;
     [self nextBanner];
-    [self loadBannerAd];
+    [self loadBannerAdDelayed];
 }
 
 - (void)adViewWillLogImpression:(FBAdView *)adView {

@@ -24,7 +24,7 @@
 @implementation Yodo1MasYandexAdapter
 
 - (YMAAdView *)adBanner {
-    if (!_adBanner && [self getBannerAdId].adId) {
+    if (!_adBanner && [self getBannerAdId]) {
         CGSize size = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? YMAAdSizeBanner_320x50 : YMAAdSizeBanner_728x90;
         YMAAdSize * adSize = [YMAAdSize flexibleSizeWithCGSize:size];
 //API Version 3.x

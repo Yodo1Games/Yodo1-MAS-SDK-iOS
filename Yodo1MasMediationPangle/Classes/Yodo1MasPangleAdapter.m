@@ -157,7 +157,7 @@ BUNativeExpressBannerViewDelegate
 #pragma mark - 横幅广告
 
 - (BUNativeExpressBannerView *)bannerAd {
-    if (!_bannerAd) {
+    if (!_bannerAd && [self getBannerAdId]) {
         Yodo1MasAdId *adId = [self getBannerAdId];
         UIViewController *controller = [Yodo1MasPangleAdapter getTopViewController];
         _bannerAd = [[BUNativeExpressBannerView alloc] initWithSlotID:adId.adId rootViewController:controller adSize:self.adSize interval:15];
@@ -215,7 +215,7 @@ BUNativeExpressBannerViewDelegate
     Yodo1MasError *rewardError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:rewardError type:Yodo1MasAdTypeReward];
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
@@ -262,7 +262,7 @@ BUNativeExpressBannerViewDelegate
     Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {
