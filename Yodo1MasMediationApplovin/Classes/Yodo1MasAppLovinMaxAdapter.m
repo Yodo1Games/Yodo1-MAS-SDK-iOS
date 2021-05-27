@@ -176,13 +176,22 @@
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.currentBannerUnitId == nil || ![adId.adId isEqualToString:self.currentBannerUnitId])) {
         self.bannerAd = [[MAAdView alloc] initWithAdUnitIdentifier:[self getBannerAdId].adId];
-        self.bannerAd.frame = CGRectMake(0, 0, self.adSize.width, self.adSize.height);
         self.bannerAd.delegate = self;
         self.currentBannerUnitId = adId.adId;
     }
     if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSLog(@"%@: {method:loadBannerAd, loading banner ad...}", self.TAG);
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:[Yodo1MasAppLovinMaxAdapter getTopViewController]];
+        Yodo1MasBannerConfig * config = [Yodo1MasBannerConfig instance];
+        if (config.isAdaptiveBanner) {
+            CGFloat width = UIScreen.mainScreen.bounds.size.width;
+            CGFloat height = MAAdFormat.banner.adaptiveSize.height;
+            [self.bannerAd setExtraParameterForKey: @"adaptive_banner" value: @"true"];
+            self.bannerAd.frame = CGRectMake(0, 0, width, height);
+            [Yodo1MasBanner updateContentView:self.bannerAd frame:CGRectMake(0, 0, width, height)];
+        }else{
+            self.bannerAd.frame = CGRectMake(0, 0, self.adSize.width, self.adSize.height);
+        }
         [self.bannerAd loadAd];
         self.bannerState = Yodo1MasBannerStateLoading;
     }

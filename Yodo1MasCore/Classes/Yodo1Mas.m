@@ -44,6 +44,7 @@
 @property (nonatomic, assign) int test_mode;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
+@property (nonatomic, assign) BOOL currentIsAdaptiveBanner;
 
 @end
 
@@ -154,6 +155,10 @@
     if (![@"00000000-0000-0000-0000-000000000000" isEqualToString:idfa]) {
         [_appInfo setValue:idfa forKey:kYodo1MasIDFA];
     }
+    
+    Yodo1MasBannerConfig * config = [[Yodo1MasBannerConfig alloc] init];
+    config.isAdaptiveBanner = YES;
+    [[Yodo1Mas sharedInstance] bannerConfig:config];
     
     // request config
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -968,6 +973,16 @@
 }
 
 #pragma mark - 横幅广告
+- (void)bannerConfig:(Yodo1MasBannerConfig *)bannerConfig {
+    [Yodo1MasBannerConfig updateConfig:bannerConfig];
+    if (self.currentIsAdaptiveBanner == bannerConfig.isAdaptiveBanner) {return;}
+    self.currentIsAdaptiveBanner = bannerConfig.isAdaptiveBanner;
+    if ([self isInit]) {
+        [self dismissBannerAdWithDestroy:YES];
+        [self loadBannerAdvert];
+    }
+}
+
 - (BOOL)isBannerAdLoaded {
     return [self isAdvertLoaded:self.masNetworkConfig.banner type:Yodo1MasAdTypeBanner];
 }
