@@ -222,6 +222,7 @@
             data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
         }
         if (data != nil && data.mas_init_config != nil && data.ad_network_config != nil) {
+            data.test_mode = 1;
             if (debug) {
                 NSLog(@"get config successful - %@", responseObject);
             }
@@ -390,7 +391,7 @@
                 }
             }
                 break;
-            case kYODO1BannerStateClicked:
+            case kYODO1BannerStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -751,6 +752,10 @@
             {
                 UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
                 [Yodo1MasBanner showBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
+                if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                    [self.bannerAdDelegate onAdOpened:event];
+                }
             }
                 break;
         }

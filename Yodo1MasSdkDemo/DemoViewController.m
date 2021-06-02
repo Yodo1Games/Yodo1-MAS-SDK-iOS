@@ -118,11 +118,11 @@
 
 #pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
-    
+    NSLog(@"The ad is opened: %@", @(event.type));
 }
 
 - (void)onAdClosed:(Yodo1MasAdEvent *)event {
-    
+    NSLog(@"The ad is closed: %@", @(event.type));
 }
 
 - (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
