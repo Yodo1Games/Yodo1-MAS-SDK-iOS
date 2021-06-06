@@ -45,7 +45,7 @@
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
 @property (nonatomic, assign) BOOL currentIsAdaptiveBanner;
-@property (nonatomic, weak) NSTimer *_timer;
+@property (nonatomic, assign) BOOL keepChecking;
 
 @end
 
@@ -787,6 +787,14 @@
                     [weakSelf callbackWithEvent:event];
                     break;
                 }
+                case Yodo1MasAdEventCodeLoaded: {
+                    [adapters removeAllObjects];
+                    if (event.type == Yodo1MasAdTypeBanner && self.keepChecking) {
+                        [self showAdvert:Yodo1MasAdTypeBanner object:object];
+                        self.keepChecking = NO;
+                    }
+                    break;
+                }
                 case Yodo1MasAdEventCodeError: {
                     if (adapters.count > 0) {
                         [adapters removeObjectAtIndex:0];
@@ -1016,43 +1024,12 @@
     object[kArgumentBannerAlign] = @(align);
     object[kArgumentBannerOffset] = [NSValue valueWithCGPoint:offset];
     
-    if ([self isBannerAdLoaded] == YES) {
-        [self showAdvert:Yodo1MasAdTypeBanner object:object];
-    } else {
-        [self startTimer:object];
-    }
-}
-
-- (void)onTimer:(NSTimer *)timer {
-    if (timer == nil) {
-        return;
-    }
-    
-    NSDictionary *object = [[timer userInfo] objectForKey:@"object"];
-    if ([self isBannerAdLoaded] == YES) {
-        [self showAdvert:Yodo1MasAdTypeBanner object:object];
-        [self stopTimer];
-    }
-}
-
-- (void)startTimer:(NSDictionary*)object {
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    if(object != nil) {
-        [dict setObject:object forKey:@"object"];
-    }
-    self._timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(onTimer:) userInfo:dict repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self._timer forMode:NSDefaultRunLoopMode];
-}
-
-- (void)stopTimer {
-    if (self._timer != nil) {
-        [self._timer invalidate];
-        self._timer = nil;
-    }
+    self.keepChecking = YES;
+    [self showAdvert:Yodo1MasAdTypeBanner object:object];
 }
 
 - (void)dismissBannerAd {
-    [self stopTimer];
+    self.keepChecking = NO;
 
     if (self.test_mode == 1) {
         [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
@@ -1063,8 +1040,8 @@
 }
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
-    [self stopTimer];
-
+    self.keepChecking = NO;
+    
     if (self.test_mode == 1) {
         [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }

@@ -195,6 +195,7 @@
     UIViewController *controller = [Yodo1MasYandexAdapter getTopViewController];
     [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)adViewDidFailLoading:(YMAAdView *)adView error:(NSError *)error {

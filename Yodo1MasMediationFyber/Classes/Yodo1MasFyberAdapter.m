@@ -248,6 +248,7 @@
 - (void)bannerDidLoad:(FYBBannerAdView *)banner {
     self.bannerAd = banner;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidFailToLoad:(NSString *)placementId withError:(NSError *)error {
