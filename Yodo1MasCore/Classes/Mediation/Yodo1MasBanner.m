@@ -7,6 +7,7 @@
 
 #import "Yodo1MasBanner.h"
 #import "Yodo1MasAdapterBase.h"
+#import "Yodo1MasBannerConfig.h"
 
 @implementation Yodo1MasBanner
 
@@ -15,10 +16,17 @@
     return isPad ? BANNER_SIZE_728_90 : BANNER_SIZE_320_50;
 }
 
++ (void)updateContentView:(UIView *)banner frame:(CGRect)frame {
+    UIView * contentView = banner.superview;
+    contentView.frame = frame;
+}
+
 + (void)addBanner:(UIView *)banner tag:(NSInteger)tag controller:(UIViewController *)controller {
     UIView *contentView = [controller.view viewWithTag:tag];
     if (contentView == nil) {
-        contentView = [[UIView alloc] initWithFrame:CGRectMake((controller.view.bounds.size.width - [self adSize].width) / 2, controller.view.bounds.size.height - [self adSize].height, [self adSize].width, [self adSize].height)];
+        contentView = [[UIView alloc] init];
+        contentView.frame = CGRectMake((controller.view.bounds.size.width - [self adSize].width) / 2, controller.view.bounds.size.height - [self adSize].height, [self adSize].width, [self adSize].height);
+        
         contentView.tag = tag;
         contentView.alpha = 0;
         [controller.view addSubview:contentView];
@@ -38,7 +46,7 @@
     if (contentView != nil) {
         UIView *superview = contentView.superview;
         if (superview != controller.view) {
-            [contentView removeFromSuperview];
+            [superview removeFromSuperview];
             [controller.view addSubview:contentView];
         }
         
@@ -54,7 +62,12 @@
             }
         }
         
-        CGRect frame = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
+        CGRect frame = CGRectZero;
+        if ([Yodo1MasBannerConfig instance].isAdaptiveBanner) {
+            frame = contentView.bounds;
+        }else{
+            frame = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
+        }
         // horizontal
         if ((align & Yodo1MasAdBannerAlignLeft) == Yodo1MasAdBannerAlignLeft) {
             frame.origin.x = 0;
@@ -86,6 +99,7 @@
         frame.origin.y += offset.y;
         
         contentView.frame = frame;
+        banner.frame = contentView.bounds;
         contentView.alpha = 1;
     }
 }

@@ -40,7 +40,7 @@ BUNativeExpressBannerViewDelegate
 }
 
 - (NSString *)mediationVersion {
-    return @"4.2.0";
+    return @"4.2.0-beta-73ae621";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -278,6 +278,7 @@ BUNativeExpressBannerViewDelegate
     self.bannerAd.frame = CGRectMake(0,0,self.adSize.width,self.adSize.height);
     isBanerAdReady = YES;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {

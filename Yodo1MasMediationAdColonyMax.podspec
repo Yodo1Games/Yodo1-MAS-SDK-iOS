@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationAdColonyMax'
-  s.version          = '4.2.0'
+  s.version          = '4.2.0-beta-73ae621'
   s.summary          = 'Yodo1MasMediationAdColonyMax'
   s.swift_version    = '5.0'
 
@@ -33,9 +33,9 @@ TODO: Add long description of the pod here.
   s.static_framework = true
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
-  s.dependency 'Yodo1MasMediationAdColony', '4.2.0'
-  s.dependency 'Yodo1MasMediationAdMob', '4.2.0'
-  s.dependency 'Yodo1MasMediationApplovin', '4.2.0'
-  s.dependency 'Yodo1MasMediationIronSource', '4.2.0'
+  s.dependency 'Yodo1MasMediationAdColony', '4.2.0-beta-73ae621'
+  s.dependency 'Yodo1MasMediationAdMob', '4.2.0-beta-73ae621'
+  s.dependency 'Yodo1MasMediationApplovin', '4.2.0-beta-73ae621'
+  s.dependency 'Yodo1MasMediationIronSource', '4.2.0-beta-73ae621'
   
 end

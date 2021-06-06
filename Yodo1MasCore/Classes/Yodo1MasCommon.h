@@ -18,6 +18,7 @@ typedef enum {
     Yodo1MasAdEventCodeError = -1,
     Yodo1MasAdEventCodeOpened = 1001,
     Yodo1MasAdEventCodeClosed = 1002,
+    Yodo1MasAdEventCodeLoaded = 1003,
     Yodo1MasAdEventCodeRewardEarned = 2001
 } Yodo1MasAdEventCode;
 

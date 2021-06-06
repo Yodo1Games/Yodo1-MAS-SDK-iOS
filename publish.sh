@@ -197,7 +197,7 @@ while read line
 do
     if [[ ${line} == *FBAudienceNetwork* ]]
     then
-        echo "# s.dependency 'FBAudienceNetwork', '6.2.1'" >> ${name}/${version}/${name}.podspec.temp
+        echo "# s.dependency 'FBAudienceNetwork', '6.5.0'" >> ${name}/${version}/${name}.podspec.temp
         echo "s.vendored_frameworks = s.name + '/Lib/**/*.framework'" >> ${name}/${version}/${name}.podspec.temp
     else
         echo "$line" >> ${name}/${version}/${name}.podspec.temp

@@ -39,7 +39,7 @@ BaiduMobAdRewardVideoDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.2.0";
+    return @"4.2.0-beta-73ae621";
 }
 
 -(BaiduMobAdView *)adBanner {
@@ -311,6 +311,7 @@ BaiduMobAdRewardVideoDelegate>
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)failedDisplayAd:(BaiduMobFailReason)reason {
