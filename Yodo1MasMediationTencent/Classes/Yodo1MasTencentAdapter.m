@@ -37,7 +37,7 @@ GDTRewardedVideoAdDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.2.0-beta-e8851dd";
+    return @"4.2.0-beta-73ae621";
 }
 
 -(GDTUnifiedBannerView *)adBanner {

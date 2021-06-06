@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasCore'
-  s.version          = '4.2.0-beta-e8851dd'
+  s.version          = '4.2.0-beta-73ae621'
   s.summary          = 'Yodo1MasCore for iOS'
   s.swift_version    = '5.0'
 
