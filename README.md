@@ -12,7 +12,7 @@
 #### 1.1 创建`Podfile`文件</br>
 在项目根目录下创建`Podfile`文件
 ```ruby
-touch Podfile
+touch Podfile 
 ```
 
 #### 1.2 将iOS SDK导入项目</br>
