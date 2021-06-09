@@ -1,4 +1,4 @@
-use_frameworks!
+#use_frameworks!
 
 # source 'https://cdn.cocoapods.org/' 
 source 'https://github.com/CocoaPods/Specs.git'
@@ -15,7 +15,7 @@ pod 'Masonry'
 pod 'GoogleMobileAdsMediationTestSuite'
 
 # 开发时打开
-pod 'FBSDKCoreKit'
+#pod 'FBSDKCoreKit'
 pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasCN', :path => './'
 pod 'Yodo1MasStandard', :path => './'
