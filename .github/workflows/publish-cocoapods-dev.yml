@@ -3,7 +3,7 @@ name: iOS starter workflow
 on: 
   push:
     branches:
-      - 4.[0-9]+.[0-9]+
+      - 4.[0-9]+.[0-9]+-[A-Za-z0-9]+
 
 jobs:
   job_publish:
@@ -37,4 +37,4 @@ jobs:
           chmod 755 ./publish.sh
 
       - name: publish
-        run: sh publish.sh Pre ${{ secrets.TOKEN }} ${{ secrets.TING_TOKEN }}
+        run: sh publish.sh Dev ${{ secrets.TOKEN }} ${{ secrets.TING_TOKEN }}

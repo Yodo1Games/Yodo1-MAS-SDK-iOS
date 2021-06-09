@@ -217,6 +217,7 @@ NSString* const kVideoUrl = @"https://docs.yodo1.com/media/ad-test-resource/";
           [self endViewClose];
       }
     }
+    self.isShowing = NO;
 }
 
 - (void)yd1VideoDidLoaded {

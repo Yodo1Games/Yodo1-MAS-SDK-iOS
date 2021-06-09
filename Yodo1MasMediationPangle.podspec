@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationPangle'
-  s.version          = '4.1.0'
+  s.version          = '4.2.0-beta-8996c0f'
   s.summary          = 'Yodo1MasMediationPangle'
   s.swift_version    = '5.0'
 
@@ -34,8 +34,8 @@ TODO: Add long description of the pod here.
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  s.dependency 'Yodo1MasCore'
-  s.dependency 'Ads-Global/BUAdSDK', '3.4.2.3'
-  s.dependency 'Ads-Global/Domestic', '3.4.2.3'
+  s.dependency 'Yodo1MasCore', '4.2.0-beta-8996c0f'
+  s.dependency 'Ads-Global/BUAdSDK', '3.5.1.2'
+  s.dependency 'Ads-Global/Domestic', '3.5.1.2'
   
 end

@@ -27,7 +27,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -140,7 +140,7 @@
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return [self getInterstitialAdId] != nil && [[VungleSDK sharedSDK] isAdCachedForPlacementID:[self getInterstitialAdId].adId];
+    return [self getInterstitialAdId] != nil && [[VungleSDK sharedSDK] isAdCachedForPlacementID:[self getInterstitialAdId].adId ? : @""];
 }
 
 - (void)loadInterstitialAd {
@@ -173,7 +173,7 @@
             NSLog(@"%@: {method: showInterstitialAd:, show interstitial ad...}", self.TAG);
             
             NSError *adError = nil;
-            BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:[self getInterstitialAdId].adId error:&adError];
+            BOOL show = [[VungleSDK sharedSDK] playAd:controller options:nil placementID:[self getInterstitialAdId].adId ? : @"" error:&adError];
             if (!show || adError != nil) {
                 NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:callback:, error: %@}", self.TAG, adError];
                 NSLog(@"%@", message);
@@ -191,7 +191,7 @@
 #pragma mark - 横幅广告
 - (BOOL)isBannerAdLoaded {
     [super isBannerAdLoaded];
-    return [self getBannerAdId] != nil && [[VungleSDK sharedSDK] isAdCachedForPlacementID:[self getBannerAdId].adId withSize:VungleAdSizeBanner] && self.bannerAd != nil;
+    return [self getBannerAdId] != nil && [[VungleSDK sharedSDK] isAdCachedForPlacementID:[self getBannerAdId].adId ? : @"" withSize:VungleAdSizeBanner] && self.bannerAd != nil;
 }
 
 - (void)loadBannerAd {
@@ -205,7 +205,7 @@
     if (adId != nil && adId.adId != nil) {
         NSLog(@"%@: {method:loadBannerAd:, loading banner ad...}", self.TAG);
         NSError *adError;
-        BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:[self getBannerAdId].adId withSize:VungleAdSizeBanner error:&adError];
+        BOOL request = [[VungleSDK sharedSDK] loadPlacementWithID:[self getBannerAdId].adId ? : @"" withSize:VungleAdSizeBanner error:&adError];
         if (!request || adError != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: loadBannerAd, error: %@}", self.TAG, adError];
             NSLog(@"%@", message);
@@ -215,6 +215,7 @@
             [self loadRewardAdDelayed];
         }else{
             [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+            [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
         }
     }
 }
@@ -224,7 +225,7 @@
     if ([self isCanShow:Yodo1MasAdTypeBanner callback:callback]) {
         NSLog(@"%@: {method:showBannerAd:align:, show banner ad...}", self.TAG);
         NSError *adError;
-        BOOL show = [[VungleSDK sharedSDK] addAdViewToView:self.bannerAd withOptions:nil placementID:[self getBannerAdId].adId error:&adError];
+        BOOL show = [[VungleSDK sharedSDK] addAdViewToView:self.bannerAd withOptions:nil placementID:[self getBannerAdId].adId ? : @"" error:&adError];
 
         if (!show || adError != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:callback:, error: %@}", self.TAG, adError];
@@ -246,7 +247,7 @@
     [Yodo1MasBanner removeBanner:self.bannerAd tag:BANNER_TAG destroy:destroy];
     if (destroy) {
         if ([self getBannerAdId] != nil) {
-            [[VungleSDK sharedSDK] finishDisplayingAd:[self getBannerAdId].adId];
+            [[VungleSDK sharedSDK] finishDisplayingAd:[self getBannerAdId].adId ? : @""];
         }
         self.bannerAd = nil;
         self.bannerState = Yodo1MasBannerStateNone;

@@ -6,7 +6,7 @@
 
 @interface Yodo1VideoViewController : UIViewController
 
-
+@property (nonatomic,assign) BOOL isShowing;
 @property (nonatomic,copy) YD1VideoCallback callbak;
 @property (nonatomic, strong) Yodo1AVPlayer *videoPlayer;
 @property (nonatomic, strong) Yodo1VideoView *videoView;

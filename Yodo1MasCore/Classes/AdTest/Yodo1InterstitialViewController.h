@@ -5,9 +5,9 @@
 
 @interface Yodo1InterstitialViewController : UIViewController
 
-
+@property (nonatomic,assign) BOOL isShowing;
 @property (nonatomic,copy) YODO1InterstitialCallback callbak;
-@property(nonatomic,strong)NSString* path;
+@property (nonatomic,strong)NSString* path;
 
 - (void)configInterstitial;
 

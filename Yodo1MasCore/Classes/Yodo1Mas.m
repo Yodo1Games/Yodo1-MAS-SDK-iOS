@@ -47,6 +47,8 @@
 @property (nonatomic, assign) int test_mode;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
+@property (nonatomic, assign) BOOL currentIsAdaptiveBanner;
+@property (nonatomic, assign) BOOL keepChecking;
 
 @end
 
@@ -62,7 +64,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 - (instancetype)init {
@@ -158,6 +160,10 @@
         [_appInfo setValue:idfa forKey:kYodo1MasIDFA];
     }
     
+    Yodo1MasBannerConfig * config = [[Yodo1MasBannerConfig alloc] init];
+    config.isAdaptiveBanner = YES;
+    [[Yodo1Mas sharedInstance] bannerConfig:config];
+    
     // request config
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (weakSelf.isInit) return;
@@ -224,56 +230,40 @@
         } else {
             data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
         }
-        if (data != nil) {
-            weakSelf.masInitConfig = data.mas_init_config;
-            weakSelf.masNetworkConfig = data.ad_network_config;
-            weakSelf.test_mode = data.test_mode;
-            if (data.mas_init_config && data.ad_network_config) {
-                if (debug) {
-                    NSLog(@"get config successful - %@", responseObject);
-                }
-                if (weakSelf.test_mode == 1) {
+        if (data != nil && data.mas_init_config != nil && data.ad_network_config != nil) {
+            data.test_mode = 1;
+            if (debug) {
+                NSLog(@"get config successful - %@", responseObject);
+            }
+            
+            if ([@"null" isEqualToString:data.bundle_id] || [weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
+                // 如果不需要匹配BundleId或者BundleId匹配成功
+                weakSelf.masInitConfig = data.mas_init_config;
+                weakSelf.masNetworkConfig = data.ad_network_config;
+                weakSelf.test_mode = data.test_mode;
+                
+                if (data.test_mode == 1) {
                     [Yodo1AdsManager.sharedInstance initAdvert];
-                }
-                
-                if (data.test_mode == 1) {
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestMode];
-                } else {
-                    [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
-                }
-                
-                if (data.test_mode == 1) {
                     [weakSelf.appInfo setValue:@"On" forKey:kYodo1MasTestDevice];
                 } else {
+                    [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestMode];
                     [weakSelf.appInfo setValue:@"Off" forKey:kYodo1MasTestDevice];
                 }
+                [weakSelf doInitAdapter];
+                weakSelf.isInit = YES;
                 [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
-                if ([weakSelf.appInfo[kYodo1MasAppBundleId] isEqualToString:data.bundle_id]) {
-                    
-                    [weakSelf doInitAdapter];
-                    weakSelf.isInit = YES;
-                    [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
-                    
-                    if (successful) {
-                        successful();
-                    }
-                } else {
-                    NSString *msg = [NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)];
-                    [weakSelf.appInfo setValue:msg forKey:kYodo1MasInitMsg];
-                    
-                    if (fail) {
-                        fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:msg]);
-                    }
+                [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
+                if (successful) {
+                    successful();
                 }
-                [weakSelf printInitLog];
             } else {
-                if (fail) {
-                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeConfigGet message:@"Data parsing failed"]);
-                }
-                
                 [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
-                [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
-                [weakSelf printInitLog];
+                NSString *msg = [NSString stringWithFormat:@"Init failed (Error Code: %@, AppKey Bundle ID Admob ID not match please check your app profile)", @(Yodo1MasErrorCodeAppKeyUnverified)];
+                [weakSelf.appInfo setValue:msg forKey:kYodo1MasInitMsg];
+                if (fail) {
+                    fail([[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAppKeyIllegal message:msg]);
+                }
             }
         } else {
             if (fail) {
@@ -281,9 +271,9 @@
             }
             [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
             [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,Data parsing failed)", @(Yodo1MasErrorCodeConfigGet)] forKey:kYodo1MasInitMsg];
-            [weakSelf printInitLog];
         }
         
+        [weakSelf printInitLog];
         weakSelf.isRequesting = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         weakSelf.isRequesting = NO;
@@ -295,7 +285,6 @@
         [weakSelf.appInfo setValue:@(NO) forKey:kYodo1MasInitStatus];
         [weakSelf.appInfo setValue:[NSString stringWithFormat:@"Init failed(Error Code:%@,%@)", @(Yodo1MasErrorCodeConfigNetwork), error.localizedDescription] forKey:kYodo1MasInitMsg];
         [weakSelf printInitLog];
-
     }];
 }
 
@@ -411,7 +400,7 @@
                 }
             }
                 break;
-            case kYODO1BannerStateClicked:
+            case kYODO1BannerStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -772,6 +761,10 @@
             {
                 UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
                 [Yodo1MasBanner showBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
+                if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                    [self.bannerAdDelegate onAdOpened:event];
+                }
             }
                 break;
         }
@@ -800,6 +793,14 @@
                 case Yodo1MasAdEventCodeOpened: {
                     [adapters removeAllObjects];
                     [weakSelf callbackWithEvent:event];
+                    break;
+                }
+                case Yodo1MasAdEventCodeLoaded: {
+                    [adapters removeAllObjects];
+                    if (event.type == Yodo1MasAdTypeBanner && self.keepChecking) {
+                        [self showAdvert:Yodo1MasAdTypeBanner object:object];
+                        self.keepChecking = NO;
+                    }
                     break;
                 }
                 case Yodo1MasAdEventCodeError: {
@@ -989,6 +990,16 @@
 }
 
 #pragma mark - 横幅广告
+- (void)bannerConfig:(Yodo1MasBannerConfig *)bannerConfig {
+    [Yodo1MasBannerConfig updateConfig:bannerConfig];
+    if (self.currentIsAdaptiveBanner == bannerConfig.isAdaptiveBanner) {return;}
+    self.currentIsAdaptiveBanner = bannerConfig.isAdaptiveBanner;
+    if ([self isInit]) {
+        [self dismissBannerAdWithDestroy:YES];
+        [self loadBannerAdvert];
+    }
+}
+
 - (BOOL)isBannerAdLoaded {
     return [self isAdvertLoaded:self.masNetworkConfig.banner type:Yodo1MasAdTypeBanner];
 }
@@ -1020,10 +1031,14 @@
     }
     object[kArgumentBannerAlign] = @(align);
     object[kArgumentBannerOffset] = [NSValue valueWithCGPoint:offset];
+    
+    self.keepChecking = YES;
     [self showAdvert:Yodo1MasAdTypeBanner object:object];
 }
 
 - (void)dismissBannerAd {
+    self.keepChecking = NO;
+
     if (self.test_mode == 1) {
         [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }
@@ -1033,6 +1048,8 @@
 }
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
+    self.keepChecking = NO;
+    
     if (self.test_mode == 1) {
         [Yodo1MasBanner removeBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 destroy:NO];
     }

@@ -26,6 +26,11 @@
 		EC2EC7AA263658070031E03A /* Yodo1AdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC7A0263658070031E03A /* Yodo1AdsManager.m */; };
 		EC2EC7AB263658070031E03A /* UIView+Yodo1LayoutMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = EC2EC7A1263658070031E03A /* UIView+Yodo1LayoutMethods.m */; };
 		EC31FA722670702200627588 /* BannerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FA702670702200627588 /* BannerController.m */; };
+		EC31FA752670B86C00627588 /* Yodo1MasBannerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FA732670B86C00627588 /* Yodo1MasBannerConfig.m */; };
+		EC31FA7E2670BE9900627588 /* Yodo1MasAdColonyAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FA7D2670BE9900627588 /* Yodo1MasAdColonyAdapter.m */; };
+		EC31FA832670BEB400627588 /* Yodo1MasFyberAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FA812670BEB400627588 /* Yodo1MasFyberAdapter.m */; };
+		EC31FA882670BEC600627588 /* Yodo1MasPangleAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FA862670BEC600627588 /* Yodo1MasPangleAdapter.m */; };
+		EC31FAA92670BEE800627588 /* Yodo1MasTencentAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FA8C2670BEE800627588 /* Yodo1MasTencentAdapter.m */; };
 		ECB98D7325F5F4A90050D7C5 /* Yodo1Ads.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D5025F5F4A90050D7C5 /* Yodo1Ads.m */; };
 		ECB98D7425F5F4A90050D7C5 /* Yodo1MasAdapterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D5525F5F4A90050D7C5 /* Yodo1MasAdapterBase.m */; };
 		ECB98D7525F5F4A90050D7C5 /* Yodo1MasBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D5625F5F4A90050D7C5 /* Yodo1MasBanner.m */; };
@@ -42,50 +47,18 @@
 		ECB98D8025F5F4A90050D7C5 /* Yodo1MasError.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D6E25F5F4A90050D7C5 /* Yodo1MasError.m */; };
 		ECB98D8125F5F4A90050D7C5 /* Yodo1MasAdEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D7125F5F4A90050D7C5 /* Yodo1MasAdEvent.m */; };
 		ECB98DE225F5F4C90050D7C5 /* Yodo1MasInMobiAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D8925F5F4C90050D7C5 /* Yodo1MasInMobiAdapter.m */; };
-		ECB98DE325F5F4C90050D7C5 /* AppLovinMediationInMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D8B25F5F4C90050D7C5 /* AppLovinMediationInMobiAdapter.framework */; };
-		ECB98DE425F5F4C90050D7C5 /* InMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D8C25F5F4C90050D7C5 /* InMobiAdapter.framework */; };
-		ECB98DE525F5F4C90050D7C5 /* ISInMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D8D25F5F4C90050D7C5 /* ISInMobiAdapter.framework */; };
 		ECB98DE625F5F4C90050D7C5 /* Yodo1MasVungleAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D9125F5F4C90050D7C5 /* Yodo1MasVungleAdapter.m */; };
-		ECB98DE725F5F4C90050D7C5 /* AppLovinMediationVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D9325F5F4C90050D7C5 /* AppLovinMediationVungleAdapter.framework */; };
-		ECB98DE825F5F4C90050D7C5 /* ISVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D9425F5F4C90050D7C5 /* ISVungleAdapter.framework */; };
-		ECB98DE925F5F4C90050D7C5 /* VungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D9525F5F4C90050D7C5 /* VungleAdapter.framework */; };
 		ECB98DEA25F5F4C90050D7C5 /* Yodo1MasYandexAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D9925F5F4C90050D7C5 /* Yodo1MasYandexAdapter.m */; };
-		ECB98DEB25F5F4C90050D7C5 /* AppLovinMediationYandexAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98D9B25F5F4C90050D7C5 /* AppLovinMediationYandexAdapter.framework */; };
 		ECB98DEC25F5F4C90050D7C5 /* Yodo1MasTapjoyAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98D9F25F5F4C90050D7C5 /* Yodo1MasTapjoyAdapter.m */; };
-		ECB98DED25F5F4C90050D7C5 /* ISTapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DA125F5F4C90050D7C5 /* ISTapjoyAdapter.framework */; };
-		ECB98DEE25F5F4C90050D7C5 /* TapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DA225F5F4C90050D7C5 /* TapjoyAdapter.framework */; };
-		ECB98DEF25F5F4C90050D7C5 /* AppLovinMediationTapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DA325F5F4C90050D7C5 /* AppLovinMediationTapjoyAdapter.framework */; };
 		ECB98DF025F5F4C90050D7C5 /* Yodo1MasUnityAdsAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DA925F5F4C90050D7C5 /* Yodo1MasUnityAdsAdapter.m */; };
-		ECB98DF125F5F4C90050D7C5 /* AppLovinMediationUnityAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DAB25F5F4C90050D7C5 /* AppLovinMediationUnityAdsAdapter.framework */; };
-		ECB98DF225F5F4C90050D7C5 /* ISUnityAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DAC25F5F4C90050D7C5 /* ISUnityAdsAdapter.framework */; };
-		ECB98DF325F5F4C90050D7C5 /* UnityAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DAD25F5F4C90050D7C5 /* UnityAdapter.framework */; };
-		ECB98DF425F5F4C90050D7C5 /* UnityAdsYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DAE25F5F4C90050D7C5 /* UnityAdsYandexMobileAdsAdapters.framework */; };
 		ECB98DF525F5F4C90050D7C5 /* Yodo1MasIronSourceMaxAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DB225F5F4C90050D7C5 /* Yodo1MasIronSourceMaxAdapter.m */; };
 		ECB98DF625F5F4C90050D7C5 /* Yodo1MasIronSourceAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DB325F5F4C90050D7C5 /* Yodo1MasIronSourceAdapter.m */; };
-		ECB98DF725F5F4C90050D7C5 /* IronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DB625F5F4C90050D7C5 /* IronSourceAdapter.framework */; };
-		ECB98DF825F5F4C90050D7C5 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DB725F5F4C90050D7C5 /* AppLovinMediationIronSourceAdapter.framework */; };
-		ECB98DF925F5F4C90050D7C5 /* IronSourceYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DB825F5F4C90050D7C5 /* IronSourceYandexMobileAdsAdapters.framework */; };
 		ECB98DFA25F5F4C90050D7C5 /* Yodo1MasFacebookAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DBB25F5F4C90050D7C5 /* Yodo1MasFacebookAdapter.m */; };
-		ECB98DFB25F5F4C90050D7C5 /* FacebookYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DBE25F5F4C90050D7C5 /* FacebookYandexMobileAdsAdapters.framework */; };
-		ECB98DFC25F5F4C90050D7C5 /* FacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DBF25F5F4C90050D7C5 /* FacebookAdapter.framework */; };
-		ECB98DFD25F5F4C90050D7C5 /* ISFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DC025F5F4C90050D7C5 /* ISFacebookAdapter.framework */; };
-		ECB98DFE25F5F4C90050D7C5 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DC125F5F4C90050D7C5 /* FBAudienceNetwork.framework */; };
-		ECB98DFF25F5F4C90050D7C5 /* AppLovinMediationFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DC225F5F4C90050D7C5 /* AppLovinMediationFacebookAdapter.framework */; };
 		ECB98E0025F5F4C90050D7C5 /* Yodo1MasAdMobAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DC525F5F4C90050D7C5 /* Yodo1MasAdMobAdapter.m */; };
 		ECB98E0125F5F4C90050D7C5 /* Yodo1MasAdMobMaxAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DC825F5F4C90050D7C5 /* Yodo1MasAdMobMaxAdapter.m */; };
-		ECB98E0225F5F4C90050D7C5 /* AppLovinMediationGoogleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DCA25F5F4C90050D7C5 /* AppLovinMediationGoogleAdapter.framework */; };
-		ECB98E0325F5F4C90050D7C5 /* AdMobYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DCB25F5F4C90050D7C5 /* AdMobYandexMobileAdsAdapters.framework */; };
-		ECB98E0425F5F4C90050D7C5 /* ISAdMobAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DCC25F5F4C90050D7C5 /* ISAdMobAdapter.framework */; };
 		ECB98E0525F5F4C90050D7C5 /* Yodo1MasAppLovinAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DD125F5F4C90050D7C5 /* Yodo1MasAppLovinAdapter.m */; };
 		ECB98E0625F5F4C90050D7C5 /* Yodo1MasAppLovinMaxAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DD225F5F4C90050D7C5 /* Yodo1MasAppLovinMaxAdapter.m */; };
-		ECB98E0725F5F4C90050D7C5 /* AppLovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DD425F5F4C90050D7C5 /* AppLovinAdapter.framework */; };
-		ECB98E0825F5F4C90050D7C5 /* AppLovinYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DD525F5F4C90050D7C5 /* AppLovinYandexMobileAdsAdapters.framework */; };
-		ECB98E0925F5F4C90050D7C5 /* ISAppLovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DD625F5F4C90050D7C5 /* ISAppLovinAdapter.framework */; };
 		ECB98E0A25F5F4C90050D7C5 /* Yodo1MasMyTargetAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98DDB25F5F4C90050D7C5 /* Yodo1MasMyTargetAdapter.m */; };
-		ECB98E0B25F5F4C90050D7C5 /* MyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DDE25F5F4C90050D7C5 /* MyTargetAdapter.framework */; };
-		ECB98E0C25F5F4C90050D7C5 /* ISMyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DDF25F5F4C90050D7C5 /* ISMyTargetAdapter.framework */; };
-		ECB98E0D25F5F4C90050D7C5 /* MyTargetYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DE025F5F4C90050D7C5 /* MyTargetYandexMobileAdsAdapters.framework */; };
-		ECB98E0E25F5F4C90050D7C5 /* AppLovinMediationMyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB98DE125F5F4C90050D7C5 /* AppLovinMediationMyTargetAdapter.framework */; };
 		ECB98E1325F5F6D40050D7C5 /* Yodo1Ads.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECB98D5125F5F4A90050D7C5 /* Yodo1Ads.h */; };
 		ECB98E4E25F5F7000050D7C5 /* Yodo1MasCommon.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECB98D5325F5F4A90050D7C5 /* Yodo1MasCommon.h */; };
 		ECB98E5325F5F7020050D7C5 /* Yodo1MasError.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = ECB98D6F25F5F4A90050D7C5 /* Yodo1MasError.h */; };
@@ -153,6 +126,16 @@
 		EC31FA6F26706D4000627588 /* Yodo1Mas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1Mas.h; sourceTree = "<group>"; };
 		EC31FA702670702200627588 /* BannerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerController.m; sourceTree = "<group>"; };
 		EC31FA712670702200627588 /* BannerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerController.h; sourceTree = "<group>"; };
+		EC31FA732670B86C00627588 /* Yodo1MasBannerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasBannerConfig.m; sourceTree = "<group>"; };
+		EC31FA742670B86C00627588 /* Yodo1MasBannerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasBannerConfig.h; sourceTree = "<group>"; };
+		EC31FA7C2670BE9900627588 /* Yodo1MasAdColonyAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAdColonyAdapter.h; sourceTree = "<group>"; };
+		EC31FA7D2670BE9900627588 /* Yodo1MasAdColonyAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasAdColonyAdapter.m; sourceTree = "<group>"; };
+		EC31FA812670BEB400627588 /* Yodo1MasFyberAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasFyberAdapter.m; sourceTree = "<group>"; };
+		EC31FA822670BEB400627588 /* Yodo1MasFyberAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasFyberAdapter.h; sourceTree = "<group>"; };
+		EC31FA862670BEC600627588 /* Yodo1MasPangleAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasPangleAdapter.m; sourceTree = "<group>"; };
+		EC31FA872670BEC600627588 /* Yodo1MasPangleAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasPangleAdapter.h; sourceTree = "<group>"; };
+		EC31FA8B2670BEE800627588 /* Yodo1MasTencentAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasTencentAdapter.h; sourceTree = "<group>"; };
+		EC31FA8C2670BEE800627588 /* Yodo1MasTencentAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasTencentAdapter.m; sourceTree = "<group>"; };
 		ECB98CC925F5F1CA0050D7C5 /* libMasStandard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMasStandard.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB98D5025F5F4A90050D7C5 /* Yodo1Ads.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1Ads.m; sourceTree = "<group>"; };
 		ECB98D5125F5F4A90050D7C5 /* Yodo1Ads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1Ads.h; sourceTree = "<group>"; };
@@ -186,64 +169,30 @@
 		ECB98D7225F5F4A90050D7C5 /* Yodo1MasAdEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAdEvent.h; sourceTree = "<group>"; };
 		ECB98D8825F5F4C90050D7C5 /* Yodo1MasInMobiAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasInMobiAdapter.h; sourceTree = "<group>"; };
 		ECB98D8925F5F4C90050D7C5 /* Yodo1MasInMobiAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasInMobiAdapter.m; sourceTree = "<group>"; };
-		ECB98D8B25F5F4C90050D7C5 /* AppLovinMediationInMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationInMobiAdapter.framework; sourceTree = "<group>"; };
-		ECB98D8C25F5F4C90050D7C5 /* InMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InMobiAdapter.framework; sourceTree = "<group>"; };
-		ECB98D8D25F5F4C90050D7C5 /* ISInMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISInMobiAdapter.framework; sourceTree = "<group>"; };
 		ECB98D9025F5F4C90050D7C5 /* Yodo1MasVungleAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasVungleAdapter.h; sourceTree = "<group>"; };
 		ECB98D9125F5F4C90050D7C5 /* Yodo1MasVungleAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasVungleAdapter.m; sourceTree = "<group>"; };
-		ECB98D9325F5F4C90050D7C5 /* AppLovinMediationVungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationVungleAdapter.framework; sourceTree = "<group>"; };
-		ECB98D9425F5F4C90050D7C5 /* ISVungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISVungleAdapter.framework; sourceTree = "<group>"; };
-		ECB98D9525F5F4C90050D7C5 /* VungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleAdapter.framework; sourceTree = "<group>"; };
 		ECB98D9825F5F4C90050D7C5 /* Yodo1MasYandexAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasYandexAdapter.h; sourceTree = "<group>"; };
 		ECB98D9925F5F4C90050D7C5 /* Yodo1MasYandexAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasYandexAdapter.m; sourceTree = "<group>"; };
-		ECB98D9B25F5F4C90050D7C5 /* AppLovinMediationYandexAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationYandexAdapter.framework; sourceTree = "<group>"; };
 		ECB98D9E25F5F4C90050D7C5 /* Yodo1MasTapjoyAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasTapjoyAdapter.h; sourceTree = "<group>"; };
 		ECB98D9F25F5F4C90050D7C5 /* Yodo1MasTapjoyAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasTapjoyAdapter.m; sourceTree = "<group>"; };
-		ECB98DA125F5F4C90050D7C5 /* ISTapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISTapjoyAdapter.framework; sourceTree = "<group>"; };
-		ECB98DA225F5F4C90050D7C5 /* TapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TapjoyAdapter.framework; sourceTree = "<group>"; };
-		ECB98DA325F5F4C90050D7C5 /* AppLovinMediationTapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationTapjoyAdapter.framework; sourceTree = "<group>"; };
-		ECB98DA525F5F4C90050D7C5 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
 		ECB98DA825F5F4C90050D7C5 /* Yodo1MasUnityAdsAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasUnityAdsAdapter.h; sourceTree = "<group>"; };
 		ECB98DA925F5F4C90050D7C5 /* Yodo1MasUnityAdsAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasUnityAdsAdapter.m; sourceTree = "<group>"; };
-		ECB98DAB25F5F4C90050D7C5 /* AppLovinMediationUnityAdsAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationUnityAdsAdapter.framework; sourceTree = "<group>"; };
-		ECB98DAC25F5F4C90050D7C5 /* ISUnityAdsAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISUnityAdsAdapter.framework; sourceTree = "<group>"; };
-		ECB98DAD25F5F4C90050D7C5 /* UnityAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAdapter.framework; sourceTree = "<group>"; };
-		ECB98DAE25F5F4C90050D7C5 /* UnityAdsYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAdsYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
 		ECB98DB125F5F4C90050D7C5 /* Yodo1MasIronSourceAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasIronSourceAdapter.h; sourceTree = "<group>"; };
 		ECB98DB225F5F4C90050D7C5 /* Yodo1MasIronSourceMaxAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasIronSourceMaxAdapter.m; sourceTree = "<group>"; };
 		ECB98DB325F5F4C90050D7C5 /* Yodo1MasIronSourceAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasIronSourceAdapter.m; sourceTree = "<group>"; };
 		ECB98DB425F5F4C90050D7C5 /* Yodo1MasIronSourceMaxAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasIronSourceMaxAdapter.h; sourceTree = "<group>"; };
-		ECB98DB625F5F4C90050D7C5 /* IronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSourceAdapter.framework; sourceTree = "<group>"; };
-		ECB98DB725F5F4C90050D7C5 /* AppLovinMediationIronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationIronSourceAdapter.framework; sourceTree = "<group>"; };
-		ECB98DB825F5F4C90050D7C5 /* IronSourceYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSourceYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
 		ECB98DBB25F5F4C90050D7C5 /* Yodo1MasFacebookAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasFacebookAdapter.m; sourceTree = "<group>"; };
 		ECB98DBC25F5F4C90050D7C5 /* Yodo1MasFacebookAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasFacebookAdapter.h; sourceTree = "<group>"; };
-		ECB98DBE25F5F4C90050D7C5 /* FacebookYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECB98DBF25F5F4C90050D7C5 /* FacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookAdapter.framework; sourceTree = "<group>"; };
-		ECB98DC025F5F4C90050D7C5 /* ISFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISFacebookAdapter.framework; sourceTree = "<group>"; };
-		ECB98DC125F5F4C90050D7C5 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
-		ECB98DC225F5F4C90050D7C5 /* AppLovinMediationFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationFacebookAdapter.framework; sourceTree = "<group>"; };
 		ECB98DC525F5F4C90050D7C5 /* Yodo1MasAdMobAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasAdMobAdapter.m; sourceTree = "<group>"; };
 		ECB98DC625F5F4C90050D7C5 /* Yodo1MasAdMobMaxAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAdMobMaxAdapter.h; sourceTree = "<group>"; };
 		ECB98DC725F5F4C90050D7C5 /* Yodo1MasAdMobAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAdMobAdapter.h; sourceTree = "<group>"; };
 		ECB98DC825F5F4C90050D7C5 /* Yodo1MasAdMobMaxAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasAdMobMaxAdapter.m; sourceTree = "<group>"; };
-		ECB98DCA25F5F4C90050D7C5 /* AppLovinMediationGoogleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationGoogleAdapter.framework; sourceTree = "<group>"; };
-		ECB98DCB25F5F4C90050D7C5 /* AdMobYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdMobYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECB98DCC25F5F4C90050D7C5 /* ISAdMobAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAdMobAdapter.framework; sourceTree = "<group>"; };
 		ECB98DCF25F5F4C90050D7C5 /* Yodo1MasAppLovinMaxAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAppLovinMaxAdapter.h; sourceTree = "<group>"; };
 		ECB98DD025F5F4C90050D7C5 /* Yodo1MasAppLovinAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAppLovinAdapter.h; sourceTree = "<group>"; };
 		ECB98DD125F5F4C90050D7C5 /* Yodo1MasAppLovinAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasAppLovinAdapter.m; sourceTree = "<group>"; };
 		ECB98DD225F5F4C90050D7C5 /* Yodo1MasAppLovinMaxAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasAppLovinMaxAdapter.m; sourceTree = "<group>"; };
-		ECB98DD425F5F4C90050D7C5 /* AppLovinAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinAdapter.framework; sourceTree = "<group>"; };
-		ECB98DD525F5F4C90050D7C5 /* AppLovinYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECB98DD625F5F4C90050D7C5 /* ISAppLovinAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAppLovinAdapter.framework; sourceTree = "<group>"; };
-		ECB98DD825F5F4C90050D7C5 /* AppLovinSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppLovinSDKResources.bundle; sourceTree = "<group>"; };
 		ECB98DDB25F5F4C90050D7C5 /* Yodo1MasMyTargetAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yodo1MasMyTargetAdapter.m; sourceTree = "<group>"; };
 		ECB98DDC25F5F4C90050D7C5 /* Yodo1MasMyTargetAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasMyTargetAdapter.h; sourceTree = "<group>"; };
-		ECB98DDE25F5F4C90050D7C5 /* MyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetAdapter.framework; sourceTree = "<group>"; };
-		ECB98DDF25F5F4C90050D7C5 /* ISMyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISMyTargetAdapter.framework; sourceTree = "<group>"; };
-		ECB98DE025F5F4C90050D7C5 /* MyTargetYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECB98DE125F5F4C90050D7C5 /* AppLovinMediationMyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationMyTargetAdapter.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,38 +208,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECB98DFD25F5F4C90050D7C5 /* ISFacebookAdapter.framework in Frameworks */,
-				ECB98DFC25F5F4C90050D7C5 /* FacebookAdapter.framework in Frameworks */,
-				ECB98DE525F5F4C90050D7C5 /* ISInMobiAdapter.framework in Frameworks */,
-				ECB98E0825F5F4C90050D7C5 /* AppLovinYandexMobileAdsAdapters.framework in Frameworks */,
-				ECB98DF825F5F4C90050D7C5 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */,
-				ECB98DF725F5F4C90050D7C5 /* IronSourceAdapter.framework in Frameworks */,
-				ECB98DFF25F5F4C90050D7C5 /* AppLovinMediationFacebookAdapter.framework in Frameworks */,
-				ECB98E0B25F5F4C90050D7C5 /* MyTargetAdapter.framework in Frameworks */,
-				ECB98DF925F5F4C90050D7C5 /* IronSourceYandexMobileAdsAdapters.framework in Frameworks */,
-				ECB98DEB25F5F4C90050D7C5 /* AppLovinMediationYandexAdapter.framework in Frameworks */,
-				ECB98DFE25F5F4C90050D7C5 /* FBAudienceNetwork.framework in Frameworks */,
-				ECB98DFB25F5F4C90050D7C5 /* FacebookYandexMobileAdsAdapters.framework in Frameworks */,
-				ECB98DED25F5F4C90050D7C5 /* ISTapjoyAdapter.framework in Frameworks */,
-				ECB98DF225F5F4C90050D7C5 /* ISUnityAdsAdapter.framework in Frameworks */,
-				ECB98DEE25F5F4C90050D7C5 /* TapjoyAdapter.framework in Frameworks */,
-				ECB98E0E25F5F4C90050D7C5 /* AppLovinMediationMyTargetAdapter.framework in Frameworks */,
-				ECB98DEF25F5F4C90050D7C5 /* AppLovinMediationTapjoyAdapter.framework in Frameworks */,
-				ECB98DF425F5F4C90050D7C5 /* UnityAdsYandexMobileAdsAdapters.framework in Frameworks */,
-				ECB98DF325F5F4C90050D7C5 /* UnityAdapter.framework in Frameworks */,
-				ECB98E0425F5F4C90050D7C5 /* ISAdMobAdapter.framework in Frameworks */,
-				ECB98DE925F5F4C90050D7C5 /* VungleAdapter.framework in Frameworks */,
-				ECB98E0325F5F4C90050D7C5 /* AdMobYandexMobileAdsAdapters.framework in Frameworks */,
-				ECB98DE425F5F4C90050D7C5 /* InMobiAdapter.framework in Frameworks */,
-				ECB98DF125F5F4C90050D7C5 /* AppLovinMediationUnityAdsAdapter.framework in Frameworks */,
-				ECB98DE725F5F4C90050D7C5 /* AppLovinMediationVungleAdapter.framework in Frameworks */,
-				ECB98DE325F5F4C90050D7C5 /* AppLovinMediationInMobiAdapter.framework in Frameworks */,
-				ECB98E0925F5F4C90050D7C5 /* ISAppLovinAdapter.framework in Frameworks */,
-				ECB98E0725F5F4C90050D7C5 /* AppLovinAdapter.framework in Frameworks */,
-				ECB98E0225F5F4C90050D7C5 /* AppLovinMediationGoogleAdapter.framework in Frameworks */,
-				ECB98DE825F5F4C90050D7C5 /* ISVungleAdapter.framework in Frameworks */,
-				ECB98E0C25F5F4C90050D7C5 /* ISMyTargetAdapter.framework in Frameworks */,
-				ECB98E0D25F5F4C90050D7C5 /* MyTargetYandexMobileAdsAdapters.framework in Frameworks */,
 				8FA6C0D72CB1B89214870FFE /* libPods-MasStandard.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,9 +302,81 @@
 			path = AdTest;
 			sourceTree = "<group>";
 		};
+		EC31FA7A2670BE9900627588 /* Yodo1MasMediationAdColony */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA7B2670BE9900627588 /* Classes */,
+			);
+			path = Yodo1MasMediationAdColony;
+			sourceTree = SOURCE_ROOT;
+		};
+		EC31FA7B2670BE9900627588 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA7C2670BE9900627588 /* Yodo1MasAdColonyAdapter.h */,
+				EC31FA7D2670BE9900627588 /* Yodo1MasAdColonyAdapter.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EC31FA7F2670BEB400627588 /* Yodo1MasMediationFyber */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA802670BEB400627588 /* Classes */,
+			);
+			path = Yodo1MasMediationFyber;
+			sourceTree = SOURCE_ROOT;
+		};
+		EC31FA802670BEB400627588 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA812670BEB400627588 /* Yodo1MasFyberAdapter.m */,
+				EC31FA822670BEB400627588 /* Yodo1MasFyberAdapter.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EC31FA842670BEC600627588 /* Yodo1MasMediationPangle */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA852670BEC600627588 /* Classes */,
+			);
+			path = Yodo1MasMediationPangle;
+			sourceTree = SOURCE_ROOT;
+		};
+		EC31FA852670BEC600627588 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA862670BEC600627588 /* Yodo1MasPangleAdapter.m */,
+				EC31FA872670BEC600627588 /* Yodo1MasPangleAdapter.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EC31FA892670BEE800627588 /* Yodo1MasMediationTencent */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA8A2670BEE800627588 /* Classes */,
+			);
+			path = Yodo1MasMediationTencent;
+			sourceTree = SOURCE_ROOT;
+		};
+		EC31FA8A2670BEE800627588 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FA8B2670BEE800627588 /* Yodo1MasTencentAdapter.h */,
+				EC31FA8C2670BEE800627588 /* Yodo1MasTencentAdapter.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		ECB98CCA25F5F1CA0050D7C5 /* MasStandard */ = {
 			isa = PBXGroup;
 			children = (
+				EC31FA892670BEE800627588 /* Yodo1MasMediationTencent */,
+				EC31FA842670BEC600627588 /* Yodo1MasMediationPangle */,
+				EC31FA7F2670BEB400627588 /* Yodo1MasMediationFyber */,
+				EC31FA7A2670BE9900627588 /* Yodo1MasMediationAdColony */,
 				ECB98DC325F5F4C90050D7C5 /* Yodo1MasMediationAdMob */,
 				ECB98DCD25F5F4C90050D7C5 /* Yodo1MasMediationApplovin */,
 				ECB98DB925F5F4C90050D7C5 /* Yodo1MasMediationFacebook */,
@@ -440,6 +429,8 @@
 			isa = PBXGroup;
 			children = (
 				ECB98D5525F5F4A90050D7C5 /* Yodo1MasAdapterBase.m */,
+				EC31FA742670B86C00627588 /* Yodo1MasBannerConfig.h */,
+				EC31FA732670B86C00627588 /* Yodo1MasBannerConfig.m */,
 				ECB98D5625F5F4A90050D7C5 /* Yodo1MasBanner.m */,
 				ECB98D5725F5F4A90050D7C5 /* Yodo1MasAdapterBase.h */,
 				ECB98D5825F5F4A90050D7C5 /* Yodo1MasBanner.h */,
@@ -494,7 +485,6 @@
 			isa = PBXGroup;
 			children = (
 				ECB98D8725F5F4C90050D7C5 /* Classes */,
-				ECB98D8A25F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationInMobi;
 			sourceTree = SOURCE_ROOT;
@@ -508,21 +498,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98D8A25F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98D8B25F5F4C90050D7C5 /* AppLovinMediationInMobiAdapter.framework */,
-				ECB98D8C25F5F4C90050D7C5 /* InMobiAdapter.framework */,
-				ECB98D8D25F5F4C90050D7C5 /* ISInMobiAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98D8E25F5F4C90050D7C5 /* Yodo1MasMediationVungle */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98D8F25F5F4C90050D7C5 /* Classes */,
-				ECB98D9225F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationVungle;
 			sourceTree = SOURCE_ROOT;
@@ -536,21 +515,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98D9225F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98D9325F5F4C90050D7C5 /* AppLovinMediationVungleAdapter.framework */,
-				ECB98D9425F5F4C90050D7C5 /* ISVungleAdapter.framework */,
-				ECB98D9525F5F4C90050D7C5 /* VungleAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98D9625F5F4C90050D7C5 /* Yodo1MasMediationYandex */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98D9725F5F4C90050D7C5 /* Classes */,
-				ECB98D9A25F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationYandex;
 			sourceTree = SOURCE_ROOT;
@@ -564,20 +532,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98D9A25F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98D9B25F5F4C90050D7C5 /* AppLovinMediationYandexAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98D9C25F5F4C90050D7C5 /* Yodo1MasMediationTapjoy */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98D9D25F5F4C90050D7C5 /* Classes */,
-				ECB98DA025F5F4C90050D7C5 /* Lib */,
-				ECB98DA425F5F4C90050D7C5 /* Assets */,
 			);
 			path = Yodo1MasMediationTapjoy;
 			sourceTree = SOURCE_ROOT;
@@ -591,29 +549,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98DA025F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DA125F5F4C90050D7C5 /* ISTapjoyAdapter.framework */,
-				ECB98DA225F5F4C90050D7C5 /* TapjoyAdapter.framework */,
-				ECB98DA325F5F4C90050D7C5 /* AppLovinMediationTapjoyAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		ECB98DA425F5F4C90050D7C5 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DA525F5F4C90050D7C5 /* TapjoyResources.bundle */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
 		ECB98DA625F5F4C90050D7C5 /* Yodo1MasMediationUnityAds */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98DA725F5F4C90050D7C5 /* Classes */,
-				ECB98DAA25F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationUnityAds;
 			sourceTree = SOURCE_ROOT;
@@ -627,22 +566,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98DAA25F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DAB25F5F4C90050D7C5 /* AppLovinMediationUnityAdsAdapter.framework */,
-				ECB98DAC25F5F4C90050D7C5 /* ISUnityAdsAdapter.framework */,
-				ECB98DAD25F5F4C90050D7C5 /* UnityAdapter.framework */,
-				ECB98DAE25F5F4C90050D7C5 /* UnityAdsYandexMobileAdsAdapters.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98DAF25F5F4C90050D7C5 /* Yodo1MasMediationIronSource */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98DB025F5F4C90050D7C5 /* Classes */,
-				ECB98DB525F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationIronSource;
 			sourceTree = SOURCE_ROOT;
@@ -658,21 +585,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98DB525F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DB625F5F4C90050D7C5 /* IronSourceAdapter.framework */,
-				ECB98DB725F5F4C90050D7C5 /* AppLovinMediationIronSourceAdapter.framework */,
-				ECB98DB825F5F4C90050D7C5 /* IronSourceYandexMobileAdsAdapters.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98DB925F5F4C90050D7C5 /* Yodo1MasMediationFacebook */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98DBA25F5F4C90050D7C5 /* Classes */,
-				ECB98DBD25F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationFacebook;
 			sourceTree = SOURCE_ROOT;
@@ -686,23 +602,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98DBD25F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DBE25F5F4C90050D7C5 /* FacebookYandexMobileAdsAdapters.framework */,
-				ECB98DBF25F5F4C90050D7C5 /* FacebookAdapter.framework */,
-				ECB98DC025F5F4C90050D7C5 /* ISFacebookAdapter.framework */,
-				ECB98DC125F5F4C90050D7C5 /* FBAudienceNetwork.framework */,
-				ECB98DC225F5F4C90050D7C5 /* AppLovinMediationFacebookAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98DC325F5F4C90050D7C5 /* Yodo1MasMediationAdMob */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98DC425F5F4C90050D7C5 /* Classes */,
-				ECB98DC925F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationAdMob;
 			sourceTree = SOURCE_ROOT;
@@ -718,22 +621,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98DC925F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DCA25F5F4C90050D7C5 /* AppLovinMediationGoogleAdapter.framework */,
-				ECB98DCB25F5F4C90050D7C5 /* AdMobYandexMobileAdsAdapters.framework */,
-				ECB98DCC25F5F4C90050D7C5 /* ISAdMobAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		ECB98DCD25F5F4C90050D7C5 /* Yodo1MasMediationApplovin */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98DCE25F5F4C90050D7C5 /* Classes */,
-				ECB98DD325F5F4C90050D7C5 /* Lib */,
-				ECB98DD725F5F4C90050D7C5 /* Assets */,
 			);
 			path = Yodo1MasMediationApplovin;
 			sourceTree = SOURCE_ROOT;
@@ -749,29 +640,10 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		ECB98DD325F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DD425F5F4C90050D7C5 /* AppLovinAdapter.framework */,
-				ECB98DD525F5F4C90050D7C5 /* AppLovinYandexMobileAdsAdapters.framework */,
-				ECB98DD625F5F4C90050D7C5 /* ISAppLovinAdapter.framework */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		ECB98DD725F5F4C90050D7C5 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DD825F5F4C90050D7C5 /* AppLovinSDKResources.bundle */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
 		ECB98DD925F5F4C90050D7C5 /* Yodo1MasMediationMyTarget */ = {
 			isa = PBXGroup;
 			children = (
 				ECB98DDA25F5F4C90050D7C5 /* Classes */,
-				ECB98DDD25F5F4C90050D7C5 /* Lib */,
 			);
 			path = Yodo1MasMediationMyTarget;
 			sourceTree = SOURCE_ROOT;
@@ -783,17 +655,6 @@
 				ECB98DDC25F5F4C90050D7C5 /* Yodo1MasMyTargetAdapter.h */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		ECB98DDD25F5F4C90050D7C5 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				ECB98DDE25F5F4C90050D7C5 /* MyTargetAdapter.framework */,
-				ECB98DDF25F5F4C90050D7C5 /* ISMyTargetAdapter.framework */,
-				ECB98DE025F5F4C90050D7C5 /* MyTargetYandexMobileAdsAdapters.framework */,
-				ECB98DE125F5F4C90050D7C5 /* AppLovinMediationMyTargetAdapter.framework */,
-			);
-			path = Lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -988,8 +849,10 @@
 				EC2EC7A4263658070031E03A /* Yodo1InterstitialViewController.m in Sources */,
 				ECB98D7D25F5F4A90050D7C5 /* Yodo1MasNetworkWaterfall.m in Sources */,
 				ECB98DEC25F5F4C90050D7C5 /* Yodo1MasTapjoyAdapter.m in Sources */,
+				EC31FAA92670BEE800627588 /* Yodo1MasTencentAdapter.m in Sources */,
 				ECB98E0025F5F4C90050D7C5 /* Yodo1MasAdMobAdapter.m in Sources */,
 				EC2EC7AB263658070031E03A /* UIView+Yodo1LayoutMethods.m in Sources */,
+				EC31FA7E2670BE9900627588 /* Yodo1MasAdColonyAdapter.m in Sources */,
 				ECB98D7B25F5F4A90050D7C5 /* Yodo1MasInitData.m in Sources */,
 				ECB98DF625F5F4C90050D7C5 /* Yodo1MasIronSourceAdapter.m in Sources */,
 				ECB98D7925F5F4A90050D7C5 /* Yodo1MasInitNetworkInfo.m in Sources */,
@@ -1006,6 +869,8 @@
 				ECB98D7625F5F4A90050D7C5 /* Yodo1MasInitMediationInfo.m in Sources */,
 				ECB98D8125F5F4A90050D7C5 /* Yodo1MasAdEvent.m in Sources */,
 				ECB98D7725F5F4A90050D7C5 /* Yodo1MasNetworkMediation.m in Sources */,
+				EC31FA832670BEB400627588 /* Yodo1MasFyberAdapter.m in Sources */,
+				EC31FA882670BEC600627588 /* Yodo1MasPangleAdapter.m in Sources */,
 				ECB98DF025F5F4C90050D7C5 /* Yodo1MasUnityAdsAdapter.m in Sources */,
 				ECB98D7E25F5F4A90050D7C5 /* Yodo1MasNetworkAdvert.m in Sources */,
 				ECB98D7825F5F4A90050D7C5 /* Yodo1MasNetworkConfig.m in Sources */,
@@ -1017,6 +882,7 @@
 				EC2EC7AA263658070031E03A /* Yodo1AdsManager.m in Sources */,
 				ECB98DE225F5F4C90050D7C5 /* Yodo1MasInMobiAdapter.m in Sources */,
 				ECB98E0125F5F4C90050D7C5 /* Yodo1MasAdMobMaxAdapter.m in Sources */,
+				EC31FA752670B86C00627588 /* Yodo1MasBannerConfig.m in Sources */,
 				ECB98D7425F5F4A90050D7C5 /* Yodo1MasAdapterBase.m in Sources */,
 				EC2EC7A6263658070031E03A /* Yodo1ImageHelp.m in Sources */,
 				ECB98DF525F5F4C90050D7C5 /* Yodo1MasIronSourceMaxAdapter.m in Sources */,
@@ -1246,6 +1112,10 @@
 					"$(PROJECT_DIR)/Yodo1MasMediationMyTarget/Lib",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Yodo1MasMediationTencent/Lib",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1279,6 +1149,10 @@
 					"$(PROJECT_DIR)/Yodo1MasMediationMyTarget/Lib",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Yodo1MasMediationTencent/Lib",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

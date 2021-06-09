@@ -29,7 +29,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -121,7 +121,7 @@
     [self callbackWithError:error type:Yodo1MasAdTypeReward];
     
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)rewardedVideoAdVideoComplete:(FBRewardedVideoAd *)rewardedVideoAd {
@@ -155,7 +155,7 @@
     if (![self isInitSDK]) return;
     
     if ([self getInterstitialAdId] != nil) {
-        self.interstitialAd = [[FBInterstitialAd alloc] initWithPlacementID:[self getInterstitialAdId].adId];
+        self.interstitialAd = [[FBInterstitialAd alloc] initWithPlacementID:[self getInterstitialAdId].adId ? : @""];
         self.interstitialAd.delegate = self;
     }
     
@@ -211,7 +211,7 @@
     [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
     
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)interstitialAdWillLogImpression:(FBInterstitialAd *)interstitialAd {
@@ -282,6 +282,7 @@
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)facebookError {
@@ -292,7 +293,7 @@
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     self.bannerState = Yodo1MasBannerStateNone;
     [self nextBanner];
-    [self loadBannerAd];
+    [self loadBannerAdDelayed];
 }
 
 - (void)adViewWillLogImpression:(FBAdView *)adView {

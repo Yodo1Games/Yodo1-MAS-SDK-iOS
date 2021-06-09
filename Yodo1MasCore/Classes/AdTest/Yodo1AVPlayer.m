@@ -127,6 +127,7 @@ static void *kYD1ItemStatusChangeToken = &kYD1ItemStatusChangeToken;
 - (void)onCompletionListener:(NSNotification *)notification {
     self.isPlaying = false;
     [self stopVideoProgressTimer];
+    [self stopObserving];
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.delegate != nil &&[self.delegate respondsToSelector:@selector(yd1VideoDidFinish)]) {
             [self.delegate yd1VideoDidFinish];
@@ -153,6 +154,7 @@ static void *kYD1ItemStatusChangeToken = &kYD1ItemStatusChangeToken;
 }
 
 - (void)play {
+    [self startObserving];
     if (!self.isObservingCompletion) {
         self.isObservingCompletion = true;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCompletionListener:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.currentItem];

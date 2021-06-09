@@ -12,9 +12,10 @@
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
 #import "BannerController.h"
-#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
+//#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
+//@import GoogleMobileAdsMediationTestSuite;
 
-@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate, GMTSMediationTestSuiteDelegate>
+@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>//, GMTSMediationTestSuiteDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *rewardField;
 @property (weak, nonatomic) IBOutlet UITextField *intersititialField;
@@ -90,7 +91,7 @@
 }
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
-    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
+//    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
@@ -117,11 +118,11 @@
 
 #pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
-    
+    NSLog(@"The ad is opened: %@", @(event.type));
 }
 
 - (void)onAdClosed:(Yodo1MasAdEvent *)event {
-    
+    NSLog(@"The ad is closed: %@", @(event.type));
 }
 
 - (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
