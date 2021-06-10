@@ -1,6 +1,6 @@
 //
 //  MTRGAdView.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 // Created by Timur on 3/22/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak, nullable) id <MTRGAdViewDelegate> delegate;
 @property(nonatomic, weak, nullable) UIViewController *viewController;
 @property(nonatomic, readonly) MTRGCustomParams *customParams;
-@property(nonatomic) BOOL trackLocationEnabled;
 @property(nonatomic) BOOL mediationEnabled;
 @property(nonatomic) MTRGAdSize *adSize;
 @property(nonatomic, readonly) NSUInteger slotId;
@@ -47,15 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, nullable) NSString *adSource;
 @property(nonatomic, readonly) float adSourcePriority;
 
-+ (void)setDebugMode:(BOOL)enabled;
-
-+ (BOOL)isDebugMode;
-
 + (instancetype)adViewWithSlotId:(NSUInteger)slotId;
 
 + (instancetype)adViewWithSlotId:(NSUInteger)slotId shouldRefreshAd:(BOOL)shouldRefreshAd;
-
-- (instancetype)withTestDevices:(nullable NSArray<NSString *> *)testDevices NS_SWIFT_NAME(withTestDevices(_:));
 
 - (void)load;
 

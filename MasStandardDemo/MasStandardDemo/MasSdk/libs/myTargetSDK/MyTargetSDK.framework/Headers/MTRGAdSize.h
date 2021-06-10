@@ -1,6 +1,6 @@
 //
 //  MTRGAdSize.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 //  Created by Andrey Seredkin on 01.07.2020.
 //  Copyright © 2020 Mail.ru Group. All rights reserved.
@@ -28,6 +28,7 @@ typedef enum : NSUInteger
 + (instancetype)adSize728x90;
 + (instancetype)adSizeForCurrentOrientation;
 + (instancetype)adSizeForCurrentOrientationForWidth:(CGFloat)width;
++ (instancetype)adSizeForCurrentOrientationForWidth:(CGFloat)width maxHeight:(CGFloat)maxHeight;
 
 @end
 

@@ -35,8 +35,14 @@ NS_ASSUME_NONNULL_BEGIN
 #define IS_OFFERWALL @"offerwall"
 #define IS_BANNER @"banner"
 
-static NSString * const MEDIATION_SDK_VERSION     = @"7.1.1";
-static NSString * GitHash = @"08507a6de";
+static NSString * const MEDIATION_SDK_VERSION     = @"7.1.5";
+static NSString * GitHash = @"21f4ef8a2";
+
+/*
+    This constant is for sending an external impression data from mopub
+*/
+static NSString * const DataSource_MOPUB     = @"MoPub";
+
 
 @interface IronSource : NSObject
 
@@ -494,6 +500,18 @@ static NSString * GitHash = @"08507a6de";
 + (void)addImpressionDataDelegate:(id<ISImpressionDataDelegate>)delegate;
 
 /**
+ @abstract Ad revenue data
+ 
+ @param dataSource the external source id from which the impression data is sent.
+ @param impressionData the impression data
+
+ */
++ (void)setAdRevenueDataWithDataSource:(NSString *)dataSource
+                        impressionData:(NSData *)impressionData;
+
+
+
+/**
  @abstract Removes  the delegate from impression data callbacks.
 
  @param delegate The 'ISImpressionDataDelegate' for IronSource to send callbacks to.
@@ -525,6 +543,7 @@ static NSString * GitHash = @"08507a6de";
  */
 + (void)showConsentViewWithViewController:(UIViewController *)viewController andType:(NSString *)consentViewType;
 
+
 #pragma mark - Conversion Value (CV)
 
 /**
@@ -535,5 +554,6 @@ static NSString * GitHash = @"08507a6de";
 @end
 
 NS_ASSUME_NONNULL_END
+
 
 #endif

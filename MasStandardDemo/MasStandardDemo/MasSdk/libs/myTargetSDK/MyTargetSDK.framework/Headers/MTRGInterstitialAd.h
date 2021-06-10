@@ -1,6 +1,6 @@
 //
 //  MTRGInterstitialAd.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 // Created by Timur on 3/5/18.
 // Copyright (c) 2018 MailRu Group. All rights reserved.

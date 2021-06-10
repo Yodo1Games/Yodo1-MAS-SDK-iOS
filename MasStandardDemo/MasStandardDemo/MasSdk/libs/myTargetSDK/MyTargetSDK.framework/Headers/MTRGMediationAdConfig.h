@@ -1,6 +1,6 @@
 //
 //  MTRGMediationAdConfig.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 // Copyright (c) 2019 Mail.Ru Group. All rights reserved.
 //
@@ -20,15 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, nullable) NSNumber *age;
 @property(nonatomic, readonly) MTRGGender gender;
 @property(nonatomic, readonly) MTRGPrivacy *privacy;
-@property(nonatomic, readonly) BOOL trackLocationEnabled;
 
 + (instancetype)configWithPlacementId:(NSString *)placementId
 							  payload:(nullable NSString *)payload
 						 serverParams:(NSDictionary<NSString *, NSString *> *)serverParams
 								  age:(nullable NSNumber *)age
 							   gender:(MTRGGender)gender
-							  privacy:(MTRGPrivacy *)privacy
-				 trackLocationEnabled:(BOOL)trackLocationEnabled;
+							  privacy:(MTRGPrivacy *)privacy;
 
 - (instancetype)init NS_UNAVAILABLE;
 

@@ -67,6 +67,8 @@ dylibs = [
 'libicucore.dylib',
 'libresolv.9.dylib',
 'libc++.dylib',
+'libbz2.dylib',
+'libc++abi.dylib',
 ]
 
 tbds = [
@@ -77,6 +79,8 @@ tbds = [
 'libicucore.tbd',
 'libresolv.9.tbd',
 'libc++.tbd',
+'libbz2.tbd',
+'libc++abi.tbd',
 ]
 
 #Other linker Flags.

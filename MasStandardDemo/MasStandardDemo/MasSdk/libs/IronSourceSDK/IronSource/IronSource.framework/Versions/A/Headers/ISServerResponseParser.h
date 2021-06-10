@@ -15,7 +15,8 @@
 #import "ISTokenSettings.h"
 #import "ISCrashReporterSettings.h"
 #import "ISApplicationSettings.h"
-
+#import "ISExternalSettings.h"
+ 
 @interface ISServerResponseParser : NSObject
 
 /* ProvidersConfig Array's Hold 'ISAdapterConfig' obj */
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) ISTokenSettings                     *tokenSettings;
 @property (nonatomic, strong) ISCrashReporterSettings             *crashReporterSettings;
 @property (nonatomic, strong) ISApplicationSettings               *applicationSettings;
+@property (nonatomic, strong) ISExternalSettings                  *externalSettings;
 
 @property (nonatomic, strong) NSString                            *segmentName;
 @property (nonatomic, strong) NSString                            *segmentId;

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,119 @@
 		CF34448AA3E5A5E73DDC4839 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A5524C2F92A2E2FBAC5C9232 /* libicucore.tbd */; };
 		D1F2468D97C8E2CCDE9B91F0 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4D4750A4FE501D7BD10B99 /* libz.1.2.5.tbd */; };
 		D5C1467A8AB87F2A670AB94D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E740AF881BDDF6BE7EE427 /* AssetsLibrary.framework */; };
+		EC31FC072671C3C300627588 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC062671C3C300627588 /* libbz2.tbd */; };
+		EC31FC092671C42800627588 /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC082671C42800627588 /* libc++abi.tbd */; };
+		EC31FD162671FC4700627588 /* apply2xcode.sh in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC2D2671FC4600627588 /* apply2xcode.sh */; };
+		EC31FD172671FC4700627588 /* mod_pbxproj.py in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC2E2671FC4600627588 /* mod_pbxproj.py */; };
+		EC31FD182671FC4700627588 /* apply2xcode.py in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC2F2671FC4600627588 /* apply2xcode.py */; };
+		EC31FD192671FC4700627588 /* AppLovinMediationUnityAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC322671FC4600627588 /* AppLovinMediationUnityAdsAdapter.framework */; };
+		EC31FD1A2671FC4700627588 /* ISUnityAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC332671FC4600627588 /* ISUnityAdsAdapter.framework */; };
+		EC31FD1B2671FC4700627588 /* UnityAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC342671FC4600627588 /* UnityAdapter.framework */; };
+		EC31FD1C2671FC4700627588 /* AppLovinMediationVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC362671FC4600627588 /* AppLovinMediationVungleAdapter.framework */; };
+		EC31FD1D2671FC4700627588 /* ISVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC372671FC4600627588 /* ISVungleAdapter.framework */; };
+		EC31FD1E2671FC4700627588 /* VungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC382671FC4600627588 /* VungleAdapter.framework */; };
+		EC31FD1F2671FC4700627588 /* AppLovinMediationInMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC3A2671FC4600627588 /* AppLovinMediationInMobiAdapter.framework */; };
+		EC31FD202671FC4700627588 /* InMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC3B2671FC4600627588 /* InMobiAdapter.framework */; };
+		EC31FD212671FC4700627588 /* ISInMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC3C2671FC4600627588 /* ISInMobiAdapter.framework */; };
+		EC31FD222671FC4700627588 /* ISFyberAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC3E2671FC4600627588 /* ISFyberAdapter.framework */; };
+		EC31FD232671FC4700627588 /* AppLovinMediationFyberAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC3F2671FC4600627588 /* AppLovinMediationFyberAdapter.framework */; };
+		EC31FD242671FC4700627588 /* FyberAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC402671FC4600627588 /* FyberAdapter.framework */; };
+		EC31FD252671FC4700627588 /* ISTapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC422671FC4600627588 /* ISTapjoyAdapter.framework */; };
+		EC31FD262671FC4700627588 /* TapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC432671FC4600627588 /* TapjoyAdapter.framework */; };
+		EC31FD272671FC4700627588 /* AppLovinMediationTapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC442671FC4600627588 /* AppLovinMediationTapjoyAdapter.framework */; };
+		EC31FD282671FC4700627588 /* AppLovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC462671FC4600627588 /* AppLovinAdapter.framework */; };
+		EC31FD292671FC4700627588 /* ISAppLovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC472671FC4600627588 /* ISAppLovinAdapter.framework */; };
+		EC31FD2A2671FC4700627588 /* AppLovinMediationAdColonyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC492671FC4600627588 /* AppLovinMediationAdColonyAdapter.framework */; };
+		EC31FD2B2671FC4800627588 /* ISAdColonyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC4A2671FC4600627588 /* ISAdColonyAdapter.framework */; };
+		EC31FD2C2671FC4800627588 /* AdColonyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC4B2671FC4600627588 /* AdColonyAdapter.framework */; };
+		EC31FD2D2671FC4800627588 /* AppLovinMediationByteDanceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC4D2671FC4600627588 /* AppLovinMediationByteDanceAdapter.framework */; };
+		EC31FD2E2671FC4800627588 /* ISPangleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC4E2671FC4600627588 /* ISPangleAdapter.framework */; };
+		EC31FD2F2671FC4800627588 /* AppLovinMediationGoogleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC502671FC4600627588 /* AppLovinMediationGoogleAdapter.framework */; };
+		EC31FD302671FC4800627588 /* ISAdMobAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC512671FC4600627588 /* ISAdMobAdapter.framework */; };
+		EC31FD312671FC4800627588 /* MyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC532671FC4600627588 /* MyTargetAdapter.framework */; };
+		EC31FD322671FC4800627588 /* AppLovinMediationMyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC542671FC4600627588 /* AppLovinMediationMyTargetAdapter.framework */; };
+		EC31FD332671FC4800627588 /* FacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC562671FC4600627588 /* FacebookAdapter.framework */; };
+		EC31FD342671FC4800627588 /* ISFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC572671FC4600627588 /* ISFacebookAdapter.framework */; };
+		EC31FD352671FC4800627588 /* AppLovinMediationFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC582671FC4600627588 /* AppLovinMediationFacebookAdapter.framework */; };
+		EC31FD362671FC4800627588 /* AppLovinMediationYandexAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC5A2671FC4600627588 /* AppLovinMediationYandexAdapter.framework */; };
+		EC31FD372671FC4800627588 /* AppLovinMediationTencentGDTAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC5C2671FC4600627588 /* AppLovinMediationTencentGDTAdapter.framework */; };
+		EC31FD382671FC4800627588 /* IronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC5E2671FC4600627588 /* IronSourceAdapter.framework */; };
+		EC31FD392671FC4800627588 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC5F2671FC4600627588 /* AppLovinMediationIronSourceAdapter.framework */; };
+		EC31FD3A2671FC4800627588 /* MyTargetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC622671FC4600627588 /* MyTargetSDK.framework */; };
+		EC31FD3B2671FC4800627588 /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC642671FC4600627588 /* UnityAds.framework */; };
+		EC31FD3C2671FC4800627588 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC662671FC4600627588 /* FacebookSDKStrings.bundle */; };
+		EC31FD3D2671FC4800627588 /* FBSDKLibAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC692671FC4600627588 /* FBSDKLibAnalyzer.m */; };
+		EC31FD3E2671FC4800627588 /* FBSDKCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC6A2671FC4600627588 /* FBSDKCrashHandler.m */; };
+		EC31FD3F2671FC4800627588 /* FBSDKJSONValue.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC6B2671FC4600627588 /* FBSDKJSONValue.m */; };
+		EC31FD402671FC4800627588 /* FBSDKBasicUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC6C2671FC4600627588 /* FBSDKBasicUtility.m */; };
+		EC31FD412671FC4800627588 /* FBSDKURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC802671FC4600627588 /* FBSDKURLSession.m */; };
+		EC31FD422671FC4800627588 /* FBSDKTypeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC812671FC4600627588 /* FBSDKTypeUtility.m */; };
+		EC31FD432671FC4800627588 /* FBSDKURLSessionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC822671FC4600627588 /* FBSDKURLSessionTask.m */; };
+		EC31FD442671FC4800627588 /* FBSDKSafeCast.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC832671FC4600627588 /* FBSDKSafeCast.m */; };
+		EC31FD452671FC4800627588 /* FBSDKUserDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FC842671FC4600627588 /* FBSDKUserDataStore.m */; };
+		EC31FD462671FC4800627588 /* Yodo1SensorsAnalyticsSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC862671FC4600627588 /* Yodo1SensorsAnalyticsSDK.bundle */; };
+		EC31FD472671FC4800627588 /* Yodo1SaAnalyticsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC872671FC4600627588 /* Yodo1SaAnalyticsSDK.framework */; };
+		EC31FD482671FC4800627588 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC8B2671FC4600627588 /* Tapjoy.framework */; };
+		EC31FD492671FC4800627588 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC8D2671FC4600627588 /* GoogleAppMeasurement.framework */; };
+		EC31FD4A2671FC4800627588 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC8E2671FC4600627588 /* GoogleUtilities.framework */; };
+		EC31FD4B2671FC4800627588 /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC8F2671FC4600627588 /* PromisesObjC.framework */; };
+		EC31FD4C2671FC4800627588 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC902671FC4600627588 /* nanopb.framework */; };
+		EC31FD4D2671FC4800627588 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC912671FC4600627588 /* GoogleMobileAds.framework */; };
+		EC31FD4E2671FC4800627588 /* UserMessagingPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FC922671FC4600627588 /* UserMessagingPlatform.framework */; };
+		EC31FD4F2671FC4800627588 /* _index.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC982671FC4600627588 /* _index.scss */; };
+		EC31FD502671FC4800627588 /* _variables.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC992671FC4600627588 /* _variables.scss */; };
+		EC31FD512671FC4800627588 /* _xcode.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC9A2671FC4600627588 /* _xcode.scss */; };
+		EC31FD522671FC4800627588 /* _print.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC9B2671FC4600627588 /* _print.scss */; };
+		EC31FD532671FC4800627588 /* _layout.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC9C2671FC4600627588 /* _layout.scss */; };
+		EC31FD542671FC4800627588 /* _object.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC9D2671FC4600627588 /* _object.scss */; };
+		EC31FD552671FC4800627588 /* style.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC9E2671FC4600627588 /* style.scss */; };
+		EC31FD562671FC4800627588 /* _normalize.scss in Resources */ = {isa = PBXBuildFile; fileRef = EC31FC9F2671FC4600627588 /* _normalize.scss */; };
+		EC31FD572671FC4800627588 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA02671FC4600627588 /* style.css */; };
+		EC31FD582671FC4800627588 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA22671FC4600627588 /* script.js */; };
+		EC31FD592671FC4800627588 /* library_background.png in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA42671FC4600627588 /* library_background.png */; };
+		EC31FD5A2671FC4800627588 /* disclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA52671FC4600627588 /* disclosure.png */; };
+		EC31FD5B2671FC4800627588 /* disclosure_open.png in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA62671FC4600627588 /* disclosure_open.png */; };
+		EC31FD5C2671FC4800627588 /* button_bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA72671FC4600627588 /* button_bar_background.png */; };
+		EC31FD5D2671FC4800627588 /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCA82671FC4600627588 /* title_background.png */; };
+		EC31FD5E2671FC4800627588 /* AppLovinSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCA92671FC4600627588 /* AppLovinSDK.framework */; };
+		EC31FD5F2671FC4800627588 /* AppLovinSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCAA2671FC4600627588 /* AppLovinSDKResources.bundle */; };
+		EC31FD602671FC4800627588 /* YandexMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCAD2671FC4600627588 /* YandexMobileAds.framework */; };
+		EC31FD612671FC4800627588 /* FairBidSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCAF2671FC4600627588 /* FairBidSDK.framework */; };
+		EC31FD622671FC4800627588 /* InMobiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCB12671FC4600627588 /* InMobiSDK.framework */; };
+		EC31FD632671FC4800627588 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCB32671FC4600627588 /* README.md */; };
+		EC31FD642671FC4800627588 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCB42671FC4600627588 /* AdColony.framework */; };
+		EC31FD652671FC4800627588 /* VungleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCB62671FC4600627588 /* VungleSDK.framework */; };
+		EC31FD662671FC4800627588 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCBA2671FC4600627588 /* NSObject+YYModel.m */; };
+		EC31FD672671FC4800627588 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCBB2671FC4600627588 /* YYClassInfo.m */; };
+		EC31FD682671FC4800627588 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCBF2671FC4700627588 /* FBAudienceNetwork.framework */; };
+		EC31FD692671FC4800627588 /* BUAdSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCC22671FC4700627588 /* BUAdSDK.framework */; };
+		EC31FD6A2671FC4800627588 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCC32671FC4700627588 /* LICENSE */; };
+		EC31FD6B2671FC4800627588 /* BUCNAuxiliary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCC42671FC4700627588 /* BUCNAuxiliary.framework */; };
+		EC31FD6C2671FC4800627588 /* BUVAAuxiliary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCC52671FC4700627588 /* BUVAAuxiliary.framework */; };
+		EC31FD6D2671FC4800627588 /* BUFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCC62671FC4700627588 /* BUFoundation.framework */; };
+		EC31FD6E2671FC4800627588 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC31FCC72671FC4700627588 /* BUAdSDK.bundle */; };
+		EC31FD6F2671FC4800627588 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCCB2671FC4700627588 /* UIProgressView+AFNetworking.m */; };
+		EC31FD702671FC4800627588 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCCD2671FC4700627588 /* UIRefreshControl+AFNetworking.m */; };
+		EC31FD712671FC4800627588 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCD02671FC4700627588 /* AFNetworkActivityIndicatorManager.m */; };
+		EC31FD722671FC4800627588 /* WKWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCD32671FC4700627588 /* WKWebView+AFNetworking.m */; };
+		EC31FD732671FC4800627588 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCD52671FC4700627588 /* UIImageView+AFNetworking.m */; };
+		EC31FD742671FC4800627588 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCD82671FC4700627588 /* UIButton+AFNetworking.m */; };
+		EC31FD752671FC4800627588 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCD92671FC4700627588 /* UIActivityIndicatorView+AFNetworking.m */; };
+		EC31FD762671FC4800627588 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCDA2671FC4700627588 /* AFAutoPurgingImageCache.m */; };
+		EC31FD772671FC4800627588 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCDC2671FC4700627588 /* AFImageDownloader.m */; };
+		EC31FD782671FC4800627588 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCE22671FC4700627588 /* AFURLResponseSerialization.m */; };
+		EC31FD792671FC4800627588 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCE32671FC4700627588 /* AFHTTPSessionManager.m */; };
+		EC31FD7A2671FC4800627588 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCE52671FC4700627588 /* AFURLSessionManager.m */; };
+		EC31FD7B2671FC4800627588 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCE62671FC4700627588 /* AFURLRequestSerialization.m */; };
+		EC31FD7C2671FC4800627588 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCE82671FC4700627588 /* AFNetworkReachabilityManager.m */; };
+		EC31FD7D2671FC4800627588 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = EC31FCE92671FC4700627588 /* AFSecurityPolicy.m */; };
+		EC31FD7E2671FC4800627588 /* libGDTMobSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FD002671FC4700627588 /* libGDTMobSDK.a */; };
+		EC31FD7F2671FC4800627588 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FD0A2671FC4700627588 /* IronSource.framework */; };
+		EC31FD802671FC4800627588 /* YandexMobileMetrica.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FD0E2671FC4700627588 /* YandexMobileMetrica.framework */; };
+		EC31FD812671FC4800627588 /* YandexMobileMetricaCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FD0F2671FC4700627588 /* YandexMobileMetricaCrashes.framework */; };
+		EC31FD822671FC4800627588 /* helper in Resources */ = {isa = PBXBuildFile; fileRef = EC31FD102671FC4700627588 /* helper */; };
+		EC31FD832671FC4800627588 /* libMasStandard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FD142671FC4700627588 /* libMasStandard.a */; };
+		EC31FD842671FDC300627588 /* FairBidSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC31FCAF2671FC4600627588 /* FairBidSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ECB98EC525F5FE280050D7C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98EC425F5FE280050D7C5 /* AppDelegate.m */; };
 		ECB98EC825F5FE280050D7C5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98EC725F5FE280050D7C5 /* SceneDelegate.m */; };
 		ECB98ECB25F5FE280050D7C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98ECA25F5FE280050D7C5 /* ViewController.m */; };
@@ -53,143 +166,21 @@
 		ECB98ED025F5FE2A0050D7C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECB98ECF25F5FE2A0050D7C5 /* Assets.xcassets */; };
 		ECB98ED325F5FE2A0050D7C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB98ED125F5FE2A0050D7C5 /* LaunchScreen.storyboard */; };
 		ECB98ED625F5FE2A0050D7C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB98ED525F5FE2A0050D7C5 /* main.m */; };
-		ECEE842F25F6028900D8EEF5 /* MyTargetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE834B25F6028800D8EEF5 /* MyTargetSDK.framework */; };
-		ECEE843125F6028900D8EEF5 /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE834E25F6028800D8EEF5 /* UnityAds.framework */; };
-		ECEE843325F6028900D8EEF5 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECEE837225F6028800D8EEF5 /* FacebookSDKStrings.bundle */; };
-		ECEE843425F6028900D8EEF5 /* FBSDKLibAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE837525F6028800D8EEF5 /* FBSDKLibAnalyzer.m */; };
-		ECEE843525F6028900D8EEF5 /* FBSDKCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE837625F6028800D8EEF5 /* FBSDKCrashHandler.m */; };
-		ECEE843625F6028900D8EEF5 /* FBSDKJSONValue.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE837725F6028800D8EEF5 /* FBSDKJSONValue.m */; };
-		ECEE843725F6028900D8EEF5 /* FBSDKBasicUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE837825F6028800D8EEF5 /* FBSDKBasicUtility.m */; };
-		ECEE843825F6028900D8EEF5 /* FBSDKURLSession.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE838625F6028800D8EEF5 /* FBSDKURLSession.m */; };
-		ECEE843925F6028900D8EEF5 /* FBSDKTypeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE838725F6028800D8EEF5 /* FBSDKTypeUtility.m */; };
-		ECEE843A25F6028900D8EEF5 /* FBSDKURLSessionTask.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE838825F6028800D8EEF5 /* FBSDKURLSessionTask.m */; };
-		ECEE843B25F6028900D8EEF5 /* FBSDKSafeCast.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE838925F6028800D8EEF5 /* FBSDKSafeCast.m */; };
-		ECEE843C25F6028900D8EEF5 /* FBSDKUserDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE838A25F6028800D8EEF5 /* FBSDKUserDataStore.m */; };
-		ECEE843D25F6028900D8EEF5 /* Yodo1SensorsAnalyticsSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECEE838C25F6028800D8EEF5 /* Yodo1SensorsAnalyticsSDK.bundle */; };
-		ECEE843F25F6028900D8EEF5 /* Yodo1SaAnalyticsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE838E25F6028800D8EEF5 /* Yodo1SaAnalyticsSDK.framework */; };
-		ECEE844025F6028900D8EEF5 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839325F6028800D8EEF5 /* Tapjoy.framework */; };
-		ECEE844125F6028900D8EEF5 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839525F6028800D8EEF5 /* GoogleAppMeasurement.framework */; };
-		ECEE844225F6028900D8EEF5 /* PersonalizedAdConsent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839625F6028800D8EEF5 /* PersonalizedAdConsent.framework */; };
-		ECEE844325F6028900D8EEF5 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839725F6028800D8EEF5 /* GoogleUtilities.framework */; };
-		ECEE844425F6028900D8EEF5 /* PersonalizedAdConsent.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECEE839825F6028800D8EEF5 /* PersonalizedAdConsent.bundle */; };
-		ECEE844525F6028900D8EEF5 /* PromisesObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839925F6028800D8EEF5 /* PromisesObjC.framework */; };
-		ECEE844625F6028900D8EEF5 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839A25F6028800D8EEF5 /* nanopb.framework */; };
-		ECEE844725F6028900D8EEF5 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839B25F6028800D8EEF5 /* GoogleMobileAds.framework */; };
-		ECEE844925F6028900D8EEF5 /* UserMessagingPlatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE839D25F6028800D8EEF5 /* UserMessagingPlatform.framework */; };
-		ECEE844A25F6028900D8EEF5 /* ALSdkInitializationCompletionHandler.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83A225F6028800D8EEF5 /* ALSdkInitializationCompletionHandler.html */; };
-		ECEE844B25F6028900D8EEF5 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83A325F6028800D8EEF5 /* index.html */; };
-		ECEE844C25F6028900D8EEF5 /* _index.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83A625F6028800D8EEF5 /* _index.scss */; };
-		ECEE844D25F6028900D8EEF5 /* _variables.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83A725F6028800D8EEF5 /* _variables.scss */; };
-		ECEE844E25F6028900D8EEF5 /* _xcode.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83A825F6028800D8EEF5 /* _xcode.scss */; };
-		ECEE844F25F6028900D8EEF5 /* _print.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83A925F6028800D8EEF5 /* _print.scss */; };
-		ECEE845025F6028900D8EEF5 /* _layout.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83AA25F6028800D8EEF5 /* _layout.scss */; };
-		ECEE845125F6028900D8EEF5 /* _object.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83AB25F6028800D8EEF5 /* _object.scss */; };
-		ECEE845225F6028900D8EEF5 /* style.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83AC25F6028800D8EEF5 /* style.scss */; };
-		ECEE845325F6028900D8EEF5 /* _normalize.scss in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83AD25F6028800D8EEF5 /* _normalize.scss */; };
-		ECEE845425F6028900D8EEF5 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83AE25F6028800D8EEF5 /* style.css */; };
-		ECEE845525F6028900D8EEF5 /* MARewardedAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B025F6028800D8EEF5 /* MARewardedAd.html */; };
-		ECEE845625F6028900D8EEF5 /* MAAdView.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B125F6028800D8EEF5 /* MAAdView.html */; };
-		ECEE845725F6028900D8EEF5 /* ALRewardedInterstitialAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B225F6028800D8EEF5 /* ALRewardedInterstitialAd.html */; };
-		ECEE845825F6028900D8EEF5 /* ALSdkSettings.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B325F6028800D8EEF5 /* ALSdkSettings.html */; };
-		ECEE845925F6028900D8EEF5 /* MAAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B425F6028800D8EEF5 /* MAAd.html */; };
-		ECEE845A25F6028900D8EEF5 /* MAAdFormat.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B525F6028800D8EEF5 /* MAAdFormat.html */; };
-		ECEE845B25F6028900D8EEF5 /* ALAdView.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B625F6028800D8EEF5 /* ALAdView.html */; };
-		ECEE845C25F6028900D8EEF5 /* ALPostbackService.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B725F6028800D8EEF5 /* ALPostbackService.html */; };
-		ECEE845D25F6028900D8EEF5 /* ALEventService.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B825F6028800D8EEF5 /* ALEventService.html */; };
-		ECEE845E25F6028900D8EEF5 /* ALCCommunicator.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83B925F6028800D8EEF5 /* ALCCommunicator.html */; };
-		ECEE845F25F6028900D8EEF5 /* ALSdk.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83BA25F6028800D8EEF5 /* ALSdk.html */; };
-		ECEE846025F6028900D8EEF5 /* ALUserService.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83BB25F6028800D8EEF5 /* ALUserService.html */; };
-		ECEE846125F6028900D8EEF5 /* ALAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83BC25F6028800D8EEF5 /* ALAd.html */; };
-		ECEE846225F6028900D8EEF5 /* ALCMessage.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83BD25F6028800D8EEF5 /* ALCMessage.html */; };
-		ECEE846325F6028900D8EEF5 /* ALAdService.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83BE25F6028800D8EEF5 /* ALAdService.html */; };
-		ECEE846425F6028900D8EEF5 /* ALCMessagingService.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83BF25F6028800D8EEF5 /* ALCMessagingService.html */; };
-		ECEE846525F6028900D8EEF5 /* ALVariableService.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C025F6028800D8EEF5 /* ALVariableService.html */; };
-		ECEE846625F6028900D8EEF5 /* ALAdSize.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C125F6028800D8EEF5 /* ALAdSize.html */; };
-		ECEE846725F6028900D8EEF5 /* MARewardedInterstitialAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C225F6028800D8EEF5 /* MARewardedInterstitialAd.html */; };
-		ECEE846825F6028900D8EEF5 /* ALSdkConfiguration.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C325F6028800D8EEF5 /* ALSdkConfiguration.html */; };
-		ECEE846925F6028900D8EEF5 /* ALAdType.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C425F6028800D8EEF5 /* ALAdType.html */; };
-		ECEE846A25F6028900D8EEF5 /* MAInterstitialAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C525F6028800D8EEF5 /* MAInterstitialAd.html */; };
-		ECEE846B25F6028900D8EEF5 /* ALPrivacySettings.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C625F6028800D8EEF5 /* ALPrivacySettings.html */; };
-		ECEE846C25F6028900D8EEF5 /* ALUserSegment.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C725F6028800D8EEF5 /* ALUserSegment.html */; };
-		ECEE846D25F6028900D8EEF5 /* ALInterstitialAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C825F6028800D8EEF5 /* ALInterstitialAd.html */; };
-		ECEE846E25F6028900D8EEF5 /* ALIncentivizedInterstitialAd.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83C925F6028800D8EEF5 /* ALIncentivizedInterstitialAd.html */; };
-		ECEE846F25F6028900D8EEF5 /* MAReward.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83CA25F6028800D8EEF5 /* MAReward.html */; };
-		ECEE847025F6028900D8EEF5 /* hierarchy.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83CB25F6028800D8EEF5 /* hierarchy.html */; };
-		ECEE847125F6028900D8EEF5 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83CD25F6028800D8EEF5 /* script.js */; };
-		ECEE847225F6028900D8EEF5 /* ALAdViewDisplayErrorCode.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83CF25F6028800D8EEF5 /* ALAdViewDisplayErrorCode.html */; };
-		ECEE847325F6028900D8EEF5 /* library_background.png in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D125F6028800D8EEF5 /* library_background.png */; };
-		ECEE847425F6028900D8EEF5 /* disclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D225F6028800D8EEF5 /* disclosure.png */; };
-		ECEE847525F6028900D8EEF5 /* disclosure_open.png in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D325F6028800D8EEF5 /* disclosure_open.png */; };
-		ECEE847625F6028900D8EEF5 /* button_bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D425F6028800D8EEF5 /* button_bar_background.png */; };
-		ECEE847725F6028900D8EEF5 /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D525F6028800D8EEF5 /* title_background.png */; };
-		ECEE847825F6028900D8EEF5 /* MAAdDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D725F6028800D8EEF5 /* MAAdDelegate.html */; };
-		ECEE847925F6028900D8EEF5 /* MARewardedAdDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D825F6028800D8EEF5 /* MARewardedAdDelegate.html */; };
-		ECEE847A25F6028900D8EEF5 /* ALCSubscriber.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83D925F6028800D8EEF5 /* ALCSubscriber.html */; };
-		ECEE847B25F6028900D8EEF5 /* ALCPublisher.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83DA25F6028800D8EEF5 /* ALCPublisher.html */; };
-		ECEE847C25F6028900D8EEF5 /* ALPostbackDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83DB25F6028800D8EEF5 /* ALPostbackDelegate.html */; };
-		ECEE847D25F6028900D8EEF5 /* ALAdDisplayDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83DC25F6028800D8EEF5 /* ALAdDisplayDelegate.html */; };
-		ECEE847E25F6028900D8EEF5 /* MAAdViewAdDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83DD25F6028800D8EEF5 /* MAAdViewAdDelegate.html */; };
-		ECEE847F25F6028900D8EEF5 /* ALAdVideoPlaybackDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83DE25F6028800D8EEF5 /* ALAdVideoPlaybackDelegate.html */; };
-		ECEE848025F6028900D8EEF5 /* ALAdLoadDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83DF25F6028800D8EEF5 /* ALAdLoadDelegate.html */; };
-		ECEE848125F6028900D8EEF5 /* ALAdRewardDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83E025F6028800D8EEF5 /* ALAdRewardDelegate.html */; };
-		ECEE848225F6028900D8EEF5 /* ALCEntity.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83E125F6028800D8EEF5 /* ALCEntity.html */; };
-		ECEE848325F6028900D8EEF5 /* ALAdViewEventDelegate.html in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83E225F6028800D8EEF5 /* ALAdViewEventDelegate.html */; };
-		ECEE848425F6028900D8EEF5 /* AppLovinSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE83E325F6028800D8EEF5 /* AppLovinSDK.framework */; };
-		ECEE848525F6028900D8EEF5 /* AppLovinSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECEE83E425F6028800D8EEF5 /* AppLovinSDKResources.bundle */; };
-		ECEE848625F6028900D8EEF5 /* YandexMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE83E725F6028900D8EEF5 /* YandexMobileAds.framework */; };
-		ECEE848A25F6028900D8EEF5 /* InMobiSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE83ED25F6028900D8EEF5 /* InMobiSDK.xcframework */; };
-		ECEE848B25F6028900D8EEF5 /* INMMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE83EE25F6028900D8EEF5 /* INMMoatMobileAppKit.framework */; };
-		ECEE848C25F6028900D8EEF5 /* VungleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE83F025F6028900D8EEF5 /* VungleSDK.framework */; };
-		ECEE848D25F6028900D8EEF5 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE83F425F6028900D8EEF5 /* NSObject+YYModel.m */; };
-		ECEE848E25F6028900D8EEF5 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE83F525F6028900D8EEF5 /* YYClassInfo.m */; };
-		ECEE849025F6028900D8EEF5 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE83FB25F6028900D8EEF5 /* UIProgressView+AFNetworking.m */; };
-		ECEE849125F6028900D8EEF5 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE83FD25F6028900D8EEF5 /* UIRefreshControl+AFNetworking.m */; };
-		ECEE849225F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840025F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.m */; };
-		ECEE849325F6028900D8EEF5 /* WKWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840325F6028900D8EEF5 /* WKWebView+AFNetworking.m */; };
-		ECEE849425F6028900D8EEF5 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840525F6028900D8EEF5 /* UIImageView+AFNetworking.m */; };
-		ECEE849525F6028900D8EEF5 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840825F6028900D8EEF5 /* UIButton+AFNetworking.m */; };
-		ECEE849625F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840925F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.m */; };
-		ECEE849725F6028900D8EEF5 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840A25F6028900D8EEF5 /* AFAutoPurgingImageCache.m */; };
-		ECEE849825F6028900D8EEF5 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE840C25F6028900D8EEF5 /* AFImageDownloader.m */; };
-		ECEE849925F6028900D8EEF5 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE841225F6028900D8EEF5 /* AFURLResponseSerialization.m */; };
-		ECEE849A25F6028900D8EEF5 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE841325F6028900D8EEF5 /* AFHTTPSessionManager.m */; };
-		ECEE849B25F6028900D8EEF5 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE841525F6028900D8EEF5 /* AFURLSessionManager.m */; };
-		ECEE849C25F6028900D8EEF5 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE841625F6028900D8EEF5 /* AFURLRequestSerialization.m */; };
-		ECEE849D25F6028900D8EEF5 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE841825F6028900D8EEF5 /* AFNetworkReachabilityManager.m */; };
-		ECEE849E25F6028900D8EEF5 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEE841925F6028900D8EEF5 /* AFSecurityPolicy.m */; };
-		ECEE849F25F6028900D8EEF5 /* IronSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE841E25F6028900D8EEF5 /* IronSource.framework */; };
-		ECEE84A025F6028900D8EEF5 /* YandexMobileMetrica.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE842325F6028900D8EEF5 /* YandexMobileMetrica.framework */; };
-		ECEE84A125F6028900D8EEF5 /* YandexMobileMetricaCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE842425F6028900D8EEF5 /* YandexMobileMetricaCrashes.framework */; };
-		ECEE84A225F6028900D8EEF5 /* helper in Resources */ = {isa = PBXBuildFile; fileRef = ECEE842525F6028900D8EEF5 /* helper */; };
-		ECEE84A325F6028900D8EEF5 /* libMasStandard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE842825F6028900D8EEF5 /* libMasStandard.a */; };
-		ECEE84AB25F6033500D8EEF5 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84AA25F6033500D8EEF5 /* FBAudienceNetwork.framework */; };
-		ECEE851C25F60DA900D8EEF5 /* AppLovinMediationUnityAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84F225F60DA900D8EEF5 /* AppLovinMediationUnityAdsAdapter.framework */; };
-		ECEE851D25F60DA900D8EEF5 /* ISUnityAdsAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84F325F60DA900D8EEF5 /* ISUnityAdsAdapter.framework */; };
-		ECEE851E25F60DA900D8EEF5 /* UnityAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84F425F60DA900D8EEF5 /* UnityAdapter.framework */; };
-		ECEE851F25F60DA900D8EEF5 /* AppLovinMediationVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84F625F60DA900D8EEF5 /* AppLovinMediationVungleAdapter.framework */; };
-		ECEE852025F60DA900D8EEF5 /* ISVungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84F725F60DA900D8EEF5 /* ISVungleAdapter.framework */; };
-		ECEE852125F60DA900D8EEF5 /* VungleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84F825F60DA900D8EEF5 /* VungleAdapter.framework */; };
-		ECEE852225F60DA900D8EEF5 /* AppLovinMediationInMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84FA25F60DA900D8EEF5 /* AppLovinMediationInMobiAdapter.framework */; };
-		ECEE852325F60DA900D8EEF5 /* InMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84FB25F60DA900D8EEF5 /* InMobiAdapter.framework */; };
-		ECEE852425F60DA900D8EEF5 /* ISInMobiAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84FC25F60DA900D8EEF5 /* ISInMobiAdapter.framework */; };
-		ECEE852525F60DA900D8EEF5 /* ISTapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE84FE25F60DA900D8EEF5 /* ISTapjoyAdapter.framework */; };
-		ECEE852725F60DA900D8EEF5 /* TapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850025F60DA900D8EEF5 /* TapjoyAdapter.framework */; };
-		ECEE852825F60DA900D8EEF5 /* AppLovinMediationTapjoyAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850125F60DA900D8EEF5 /* AppLovinMediationTapjoyAdapter.framework */; };
-		ECEE852925F60DA900D8EEF5 /* AppLovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850325F60DA900D8EEF5 /* AppLovinAdapter.framework */; };
-		ECEE852A25F60DA900D8EEF5 /* ISAppLovinAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850425F60DA900D8EEF5 /* ISAppLovinAdapter.framework */; };
-		ECEE852C25F60DA900D8EEF5 /* AppLovinMediationGoogleAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850725F60DA900D8EEF5 /* AppLovinMediationGoogleAdapter.framework */; };
-		ECEE852D25F60DA900D8EEF5 /* AdMobYandexMobileAdsAdapters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850825F60DA900D8EEF5 /* AdMobYandexMobileAdsAdapters.framework */; };
-		ECEE852E25F60DA900D8EEF5 /* ISAdMobAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850925F60DA900D8EEF5 /* ISAdMobAdapter.framework */; };
-		ECEE852F25F60DA900D8EEF5 /* MyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850B25F60DA900D8EEF5 /* MyTargetAdapter.framework */; };
-		ECEE853025F60DA900D8EEF5 /* ISMyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850C25F60DA900D8EEF5 /* ISMyTargetAdapter.framework */; };
-		ECEE853125F60DA900D8EEF5 /* AppLovinMediationMyTargetAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850D25F60DA900D8EEF5 /* AppLovinMediationMyTargetAdapter.framework */; };
-		ECEE853225F60DA900D8EEF5 /* FacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE850F25F60DA900D8EEF5 /* FacebookAdapter.framework */; };
-		ECEE853325F60DA900D8EEF5 /* ISFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851025F60DA900D8EEF5 /* ISFacebookAdapter.framework */; };
-		ECEE853425F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851125F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework */; };
-		ECEE853A25F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851825F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework */; };
-		ECEE853B25F60DA900D8EEF5 /* IronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851A25F60DA900D8EEF5 /* IronSourceAdapter.framework */; };
-		ECEE853C25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEE851B25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EC31FC212671ECBD00627588 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EC31FD842671FDC300627588 /* FairBidSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04264DF09161A8F2728B1891 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -229,6 +220,189 @@
 		E7474DE6857E76C580D7F722 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libresolv.9.tbd; sourceTree = "<absolute>"; };
 		E9124CA98E3F71A09F295EE3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libc++.tbd"; sourceTree = "<absolute>"; };
 		E9914CFE9E36875989D819D7 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		EC31FC062671C3C300627588 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		EC31FC082671C42800627588 /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
+		EC31FC2A2671FC4600627588 /* Yodo1Mas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1Mas.h; sourceTree = "<group>"; };
+		EC31FC2B2671FC4600627588 /* Yodo1MasCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasCommon.h; sourceTree = "<group>"; };
+		EC31FC2D2671FC4600627588 /* apply2xcode.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = apply2xcode.sh; sourceTree = "<group>"; };
+		EC31FC2E2671FC4600627588 /* mod_pbxproj.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = mod_pbxproj.py; sourceTree = "<group>"; };
+		EC31FC2F2671FC4600627588 /* apply2xcode.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = apply2xcode.py; sourceTree = "<group>"; };
+		EC31FC322671FC4600627588 /* AppLovinMediationUnityAdsAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationUnityAdsAdapter.framework; sourceTree = "<group>"; };
+		EC31FC332671FC4600627588 /* ISUnityAdsAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISUnityAdsAdapter.framework; sourceTree = "<group>"; };
+		EC31FC342671FC4600627588 /* UnityAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAdapter.framework; sourceTree = "<group>"; };
+		EC31FC362671FC4600627588 /* AppLovinMediationVungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationVungleAdapter.framework; sourceTree = "<group>"; };
+		EC31FC372671FC4600627588 /* ISVungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISVungleAdapter.framework; sourceTree = "<group>"; };
+		EC31FC382671FC4600627588 /* VungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleAdapter.framework; sourceTree = "<group>"; };
+		EC31FC3A2671FC4600627588 /* AppLovinMediationInMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationInMobiAdapter.framework; sourceTree = "<group>"; };
+		EC31FC3B2671FC4600627588 /* InMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InMobiAdapter.framework; sourceTree = "<group>"; };
+		EC31FC3C2671FC4600627588 /* ISInMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISInMobiAdapter.framework; sourceTree = "<group>"; };
+		EC31FC3E2671FC4600627588 /* ISFyberAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISFyberAdapter.framework; sourceTree = "<group>"; };
+		EC31FC3F2671FC4600627588 /* AppLovinMediationFyberAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationFyberAdapter.framework; sourceTree = "<group>"; };
+		EC31FC402671FC4600627588 /* FyberAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FyberAdapter.framework; sourceTree = "<group>"; };
+		EC31FC422671FC4600627588 /* ISTapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISTapjoyAdapter.framework; sourceTree = "<group>"; };
+		EC31FC432671FC4600627588 /* TapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TapjoyAdapter.framework; sourceTree = "<group>"; };
+		EC31FC442671FC4600627588 /* AppLovinMediationTapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationTapjoyAdapter.framework; sourceTree = "<group>"; };
+		EC31FC462671FC4600627588 /* AppLovinAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinAdapter.framework; sourceTree = "<group>"; };
+		EC31FC472671FC4600627588 /* ISAppLovinAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAppLovinAdapter.framework; sourceTree = "<group>"; };
+		EC31FC492671FC4600627588 /* AppLovinMediationAdColonyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationAdColonyAdapter.framework; sourceTree = "<group>"; };
+		EC31FC4A2671FC4600627588 /* ISAdColonyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAdColonyAdapter.framework; sourceTree = "<group>"; };
+		EC31FC4B2671FC4600627588 /* AdColonyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColonyAdapter.framework; sourceTree = "<group>"; };
+		EC31FC4D2671FC4600627588 /* AppLovinMediationByteDanceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationByteDanceAdapter.framework; sourceTree = "<group>"; };
+		EC31FC4E2671FC4600627588 /* ISPangleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISPangleAdapter.framework; sourceTree = "<group>"; };
+		EC31FC502671FC4600627588 /* AppLovinMediationGoogleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationGoogleAdapter.framework; sourceTree = "<group>"; };
+		EC31FC512671FC4600627588 /* ISAdMobAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAdMobAdapter.framework; sourceTree = "<group>"; };
+		EC31FC532671FC4600627588 /* MyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetAdapter.framework; sourceTree = "<group>"; };
+		EC31FC542671FC4600627588 /* AppLovinMediationMyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationMyTargetAdapter.framework; sourceTree = "<group>"; };
+		EC31FC562671FC4600627588 /* FacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookAdapter.framework; sourceTree = "<group>"; };
+		EC31FC572671FC4600627588 /* ISFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISFacebookAdapter.framework; sourceTree = "<group>"; };
+		EC31FC582671FC4600627588 /* AppLovinMediationFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationFacebookAdapter.framework; sourceTree = "<group>"; };
+		EC31FC5A2671FC4600627588 /* AppLovinMediationYandexAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationYandexAdapter.framework; sourceTree = "<group>"; };
+		EC31FC5C2671FC4600627588 /* AppLovinMediationTencentGDTAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationTencentGDTAdapter.framework; sourceTree = "<group>"; };
+		EC31FC5E2671FC4600627588 /* IronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSourceAdapter.framework; sourceTree = "<group>"; };
+		EC31FC5F2671FC4600627588 /* AppLovinMediationIronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationIronSourceAdapter.framework; sourceTree = "<group>"; };
+		EC31FC622671FC4600627588 /* MyTargetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetSDK.framework; sourceTree = "<group>"; };
+		EC31FC642671FC4600627588 /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = "<group>"; };
+		EC31FC662671FC4600627588 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
+		EC31FC692671FC4600627588 /* FBSDKLibAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKLibAnalyzer.m; sourceTree = "<group>"; };
+		EC31FC6A2671FC4600627588 /* FBSDKCrashHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKCrashHandler.m; sourceTree = "<group>"; };
+		EC31FC6B2671FC4600627588 /* FBSDKJSONValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKJSONValue.m; sourceTree = "<group>"; };
+		EC31FC6C2671FC4600627588 /* FBSDKBasicUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKBasicUtility.m; sourceTree = "<group>"; };
+		EC31FC6E2671FC4600627588 /* FBSDKTypeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKTypeUtility.h; sourceTree = "<group>"; };
+		EC31FC6F2671FC4600627588 /* FBSDKFileManaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKFileManaging.h; sourceTree = "<group>"; };
+		EC31FC702671FC4600627588 /* FBSDKInfoDictionaryProviding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKInfoDictionaryProviding.h; sourceTree = "<group>"; };
+		EC31FC712671FC4600627588 /* NSBundle+InfoDictionaryProviding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+InfoDictionaryProviding.h"; sourceTree = "<group>"; };
+		EC31FC722671FC4600627588 /* FBSDKURLSessionTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKURLSessionTask.h; sourceTree = "<group>"; };
+		EC31FC732671FC4600627588 /* FBSDKFileDataExtracting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKFileDataExtracting.h; sourceTree = "<group>"; };
+		EC31FC742671FC4600627588 /* FBSDKCrashHandlerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCrashHandlerProtocol.h; sourceTree = "<group>"; };
+		EC31FC752671FC4600627588 /* FBSDKUserDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKUserDataStore.h; sourceTree = "<group>"; };
+		EC31FC762671FC4600627588 /* FBSDKSafeCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKSafeCast.h; sourceTree = "<group>"; };
+		EC31FC772671FC4600627588 /* FBSDKCrashHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCrashHandler.h; sourceTree = "<group>"; };
+		EC31FC782671FC4600627588 /* FBSDKLibAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKLibAnalyzer.h; sourceTree = "<group>"; };
+		EC31FC792671FC4600627588 /* FBSDKCrashHandler+CrashHandlerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBSDKCrashHandler+CrashHandlerProtocol.h"; sourceTree = "<group>"; };
+		EC31FC7A2671FC4600627588 /* FBSDKBasicUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKBasicUtility.h; sourceTree = "<group>"; };
+		EC31FC7B2671FC4600627588 /* FBSDKJSONValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKJSONValue.h; sourceTree = "<group>"; };
+		EC31FC7C2671FC4600627588 /* FBSDKURLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKURLSession.h; sourceTree = "<group>"; };
+		EC31FC7D2671FC4600627588 /* FBSDKCoreKit_Basics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCoreKit_Basics.h; sourceTree = "<group>"; };
+		EC31FC7E2671FC4600627588 /* FBSDKCrashObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCrashObserving.h; sourceTree = "<group>"; };
+		EC31FC7F2671FC4600627588 /* FBSDKSessionProviding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKSessionProviding.h; sourceTree = "<group>"; };
+		EC31FC802671FC4600627588 /* FBSDKURLSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKURLSession.m; sourceTree = "<group>"; };
+		EC31FC812671FC4600627588 /* FBSDKTypeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKTypeUtility.m; sourceTree = "<group>"; };
+		EC31FC822671FC4600627588 /* FBSDKURLSessionTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKURLSessionTask.m; sourceTree = "<group>"; };
+		EC31FC832671FC4600627588 /* FBSDKSafeCast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKSafeCast.m; sourceTree = "<group>"; };
+		EC31FC842671FC4600627588 /* FBSDKUserDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKUserDataStore.m; sourceTree = "<group>"; };
+		EC31FC862671FC4600627588 /* Yodo1SensorsAnalyticsSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Yodo1SensorsAnalyticsSDK.bundle; sourceTree = "<group>"; };
+		EC31FC872671FC4600627588 /* Yodo1SaAnalyticsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Yodo1SaAnalyticsSDK.framework; sourceTree = "<group>"; };
+		EC31FC8B2671FC4600627588 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
+		EC31FC8D2671FC4600627588 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		EC31FC8E2671FC4600627588 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		EC31FC8F2671FC4600627588 /* PromisesObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PromisesObjC.framework; sourceTree = "<group>"; };
+		EC31FC902671FC4600627588 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
+		EC31FC912671FC4600627588 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		EC31FC922671FC4600627588 /* UserMessagingPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserMessagingPlatform.framework; sourceTree = "<group>"; };
+		EC31FC982671FC4600627588 /* _index.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _index.scss; sourceTree = "<group>"; };
+		EC31FC992671FC4600627588 /* _variables.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _variables.scss; sourceTree = "<group>"; };
+		EC31FC9A2671FC4600627588 /* _xcode.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _xcode.scss; sourceTree = "<group>"; };
+		EC31FC9B2671FC4600627588 /* _print.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _print.scss; sourceTree = "<group>"; };
+		EC31FC9C2671FC4600627588 /* _layout.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _layout.scss; sourceTree = "<group>"; };
+		EC31FC9D2671FC4600627588 /* _object.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _object.scss; sourceTree = "<group>"; };
+		EC31FC9E2671FC4600627588 /* style.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = style.scss; sourceTree = "<group>"; };
+		EC31FC9F2671FC4600627588 /* _normalize.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _normalize.scss; sourceTree = "<group>"; };
+		EC31FCA02671FC4600627588 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		EC31FCA22671FC4600627588 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		EC31FCA42671FC4600627588 /* library_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library_background.png; sourceTree = "<group>"; };
+		EC31FCA52671FC4600627588 /* disclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure.png; sourceTree = "<group>"; };
+		EC31FCA62671FC4600627588 /* disclosure_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure_open.png; sourceTree = "<group>"; };
+		EC31FCA72671FC4600627588 /* button_bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bar_background.png; sourceTree = "<group>"; };
+		EC31FCA82671FC4600627588 /* title_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_background.png; sourceTree = "<group>"; };
+		EC31FCA92671FC4600627588 /* AppLovinSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinSDK.framework; sourceTree = "<group>"; };
+		EC31FCAA2671FC4600627588 /* AppLovinSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppLovinSDKResources.bundle; sourceTree = "<group>"; };
+		EC31FCAD2671FC4600627588 /* YandexMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexMobileAds.framework; sourceTree = "<group>"; };
+		EC31FCAF2671FC4600627588 /* FairBidSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FairBidSDK.framework; sourceTree = "<group>"; };
+		EC31FCB12671FC4600627588 /* InMobiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InMobiSDK.framework; sourceTree = "<group>"; };
+		EC31FCB32671FC4600627588 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EC31FCB42671FC4600627588 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
+		EC31FCB62671FC4600627588 /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleSDK.framework; sourceTree = "<group>"; };
+		EC31FCB82671FC4600627588 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		EC31FCB92671FC4600627588 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
+		EC31FCBA2671FC4600627588 /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		EC31FCBB2671FC4600627588 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		EC31FCBC2671FC4600627588 /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		EC31FCBF2671FC4700627588 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		EC31FCC22671FC4700627588 /* BUAdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUAdSDK.framework; sourceTree = "<group>"; };
+		EC31FCC32671FC4700627588 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EC31FCC42671FC4700627588 /* BUCNAuxiliary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUCNAuxiliary.framework; sourceTree = "<group>"; };
+		EC31FCC52671FC4700627588 /* BUVAAuxiliary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUVAAuxiliary.framework; sourceTree = "<group>"; };
+		EC31FCC62671FC4700627588 /* BUFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BUFoundation.framework; sourceTree = "<group>"; };
+		EC31FCC72671FC4700627588 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
+		EC31FCCA2671FC4700627588 /* WKWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCCB2671FC4700627588 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		EC31FCCC2671FC4700627588 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCCD2671FC4700627588 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
+		EC31FCCE2671FC4700627588 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCCF2671FC4700627588 /* AFImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageDownloader.h; sourceTree = "<group>"; };
+		EC31FCD02671FC4700627588 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		EC31FCD12671FC4700627588 /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
+		EC31FCD22671FC4700627588 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCD32671FC4700627588 /* WKWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		EC31FCD42671FC4700627588 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCD52671FC4700627588 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		EC31FCD62671FC4700627588 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCD72671FC4700627588 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
+		EC31FCD82671FC4700627588 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
+		EC31FCD92671FC4700627588 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
+		EC31FCDA2671FC4700627588 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
+		EC31FCDB2671FC4700627588 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		EC31FCDC2671FC4700627588 /* AFImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageDownloader.m; sourceTree = "<group>"; };
+		EC31FCDE2671FC4700627588 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		EC31FCDF2671FC4700627588 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		EC31FCE02671FC4700627588 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		EC31FCE12671FC4700627588 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		EC31FCE22671FC4700627588 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		EC31FCE32671FC4700627588 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		EC31FCE42671FC4700627588 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		EC31FCE52671FC4700627588 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		EC31FCE62671FC4700627588 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		EC31FCE72671FC4700627588 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		EC31FCE82671FC4700627588 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		EC31FCE92671FC4700627588 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		EC31FCEA2671FC4700627588 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
+		EC31FCEB2671FC4700627588 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		EC31FCED2671FC4700627588 /* GDTRewardVideoAdNetworkAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTRewardVideoAdNetworkAdapterProtocol.h; sourceTree = "<group>"; };
+		EC31FCEE2671FC4700627588 /* GDTNativeExpressAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressAdView.h; sourceTree = "<group>"; };
+		EC31FCEF2671FC4700627588 /* GDTAdParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTAdParams.h; sourceTree = "<group>"; };
+		EC31FCF02671FC4700627588 /* GDTAdTestSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTAdTestSetting.h; sourceTree = "<group>"; };
+		EC31FCF12671FC4700627588 /* GDTUnifiedBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTUnifiedBannerView.h; sourceTree = "<group>"; };
+		EC31FCF22671FC4700627588 /* GDTServerSideVerificationOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTServerSideVerificationOptions.h; sourceTree = "<group>"; };
+		EC31FCF32671FC4700627588 /* GDTSDKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTSDKConfig.h; sourceTree = "<group>"; };
+		EC31FCF42671FC4700627588 /* GDTBaseAdNetworkAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTBaseAdNetworkAdapterProtocol.h; sourceTree = "<group>"; };
+		EC31FCF52671FC4700627588 /* GDTRewardVideoAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTRewardVideoAd.h; sourceTree = "<group>"; };
+		EC31FCF62671FC4700627588 /* GDTSplashAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTSplashAd.h; sourceTree = "<group>"; };
+		EC31FCF72671FC4700627588 /* GDTNativeExpressAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressAd.h; sourceTree = "<group>"; };
+		EC31FCF82671FC4700627588 /* GDTLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTLogoView.h; sourceTree = "<group>"; };
+		EC31FCF92671FC4700627588 /* GDTMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTMediaView.h; sourceTree = "<group>"; };
+		EC31FCFA2671FC4700627588 /* GDTUnifiedNativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTUnifiedNativeAdView.h; sourceTree = "<group>"; };
+		EC31FCFB2671FC4700627588 /* GDTNativeExpressRewardVideoAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressRewardVideoAd.h; sourceTree = "<group>"; };
+		EC31FCFC2671FC4700627588 /* GDTHybridAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTHybridAd.h; sourceTree = "<group>"; };
+		EC31FCFD2671FC4700627588 /* GDTUnifiedNativeAdDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTUnifiedNativeAdDataObject.h; sourceTree = "<group>"; };
+		EC31FCFE2671FC4700627588 /* GDTSDKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTSDKDefines.h; sourceTree = "<group>"; };
+		EC31FCFF2671FC4700627588 /* GDTUnifiedInterstitialAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTUnifiedInterstitialAd.h; sourceTree = "<group>"; };
+		EC31FD002671FC4700627588 /* libGDTMobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGDTMobSDK.a; sourceTree = "<group>"; };
+		EC31FD012671FC4700627588 /* GDTNativeExpressProAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressProAdView.h; sourceTree = "<group>"; };
+		EC31FD022671FC4700627588 /* GDTLoadAdParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTLoadAdParams.h; sourceTree = "<group>"; };
+		EC31FD032671FC4700627588 /* GDTSplashZoomOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTSplashZoomOutView.h; sourceTree = "<group>"; };
+		EC31FD042671FC4700627588 /* GDTRewardVideoAdNetworkConnectorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTRewardVideoAdNetworkConnectorProtocol.h; sourceTree = "<group>"; };
+		EC31FD052671FC4700627588 /* GDTNativeExpressProAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressProAdManager.h; sourceTree = "<group>"; };
+		EC31FD062671FC4700627588 /* GDTUnifiedNativeAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTUnifiedNativeAd.h; sourceTree = "<group>"; };
+		EC31FD072671FC4700627588 /* GDTVideoConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTVideoConfig.h; sourceTree = "<group>"; };
+		EC31FD0A2671FC4700627588 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSource.framework; sourceTree = "<group>"; };
+		EC31FD0E2671FC4700627588 /* YandexMobileMetrica.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexMobileMetrica.framework; sourceTree = "<group>"; };
+		EC31FD0F2671FC4700627588 /* YandexMobileMetricaCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexMobileMetricaCrashes.framework; sourceTree = "<group>"; };
+		EC31FD102671FC4700627588 /* helper */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = helper; sourceTree = "<group>"; };
+		EC31FD112671FC4700627588 /* Yodo1MasBannerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasBannerConfig.h; sourceTree = "<group>"; };
+		EC31FD122671FC4700627588 /* Yodo1MasError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasError.h; sourceTree = "<group>"; };
+		EC31FD132671FC4700627588 /* Yodo1MasAdEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAdEvent.h; sourceTree = "<group>"; };
+		EC31FD142671FC4700627588 /* libMasStandard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMasStandard.a; sourceTree = "<group>"; };
+		EC31FD152671FC4700627588 /* Yodo1Ads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1Ads.h; sourceTree = "<group>"; };
 		ECB98EC025F5FE280050D7C5 /* MasStandardDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MasStandardDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB98EC325F5FE280050D7C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ECB98EC425F5FE280050D7C5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -241,180 +415,6 @@
 		ECB98ED225F5FE2A0050D7C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECB98ED425F5FE2A0050D7C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECB98ED525F5FE2A0050D7C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		ECEE834125F6028800D8EEF5 /* Yodo1Mas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1Mas.h; sourceTree = "<group>"; };
-		ECEE834225F6028800D8EEF5 /* Yodo1MasCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasCommon.h; sourceTree = "<group>"; };
-		ECEE834B25F6028800D8EEF5 /* MyTargetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetSDK.framework; sourceTree = "<group>"; };
-		ECEE834E25F6028800D8EEF5 /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = "<group>"; };
-		ECEE837225F6028800D8EEF5 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
-		ECEE837525F6028800D8EEF5 /* FBSDKLibAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKLibAnalyzer.m; sourceTree = "<group>"; };
-		ECEE837625F6028800D8EEF5 /* FBSDKCrashHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKCrashHandler.m; sourceTree = "<group>"; };
-		ECEE837725F6028800D8EEF5 /* FBSDKJSONValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKJSONValue.m; sourceTree = "<group>"; };
-		ECEE837825F6028800D8EEF5 /* FBSDKBasicUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKBasicUtility.m; sourceTree = "<group>"; };
-		ECEE837A25F6028800D8EEF5 /* FBSDKTypeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKTypeUtility.h; sourceTree = "<group>"; };
-		ECEE837B25F6028800D8EEF5 /* FBSDKUserDataStore+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBSDKUserDataStore+Internal.h"; sourceTree = "<group>"; };
-		ECEE837C25F6028800D8EEF5 /* FBSDKURLSessionTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKURLSessionTask.h; sourceTree = "<group>"; };
-		ECEE837D25F6028800D8EEF5 /* FBSDKUserDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKUserDataStore.h; sourceTree = "<group>"; };
-		ECEE837E25F6028800D8EEF5 /* FBSDKSafeCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKSafeCast.h; sourceTree = "<group>"; };
-		ECEE837F25F6028800D8EEF5 /* FBSDKCrashHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCrashHandler.h; sourceTree = "<group>"; };
-		ECEE838025F6028800D8EEF5 /* FBSDKLibAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKLibAnalyzer.h; sourceTree = "<group>"; };
-		ECEE838125F6028800D8EEF5 /* FBSDKBasicUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKBasicUtility.h; sourceTree = "<group>"; };
-		ECEE838225F6028800D8EEF5 /* FBSDKJSONValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKJSONValue.h; sourceTree = "<group>"; };
-		ECEE838325F6028800D8EEF5 /* FBSDKURLSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKURLSession.h; sourceTree = "<group>"; };
-		ECEE838425F6028800D8EEF5 /* FBSDKCoreKit_Basics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCoreKit_Basics.h; sourceTree = "<group>"; };
-		ECEE838525F6028800D8EEF5 /* FBSDKCrashObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSDKCrashObserving.h; sourceTree = "<group>"; };
-		ECEE838625F6028800D8EEF5 /* FBSDKURLSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKURLSession.m; sourceTree = "<group>"; };
-		ECEE838725F6028800D8EEF5 /* FBSDKTypeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKTypeUtility.m; sourceTree = "<group>"; };
-		ECEE838825F6028800D8EEF5 /* FBSDKURLSessionTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKURLSessionTask.m; sourceTree = "<group>"; };
-		ECEE838925F6028800D8EEF5 /* FBSDKSafeCast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKSafeCast.m; sourceTree = "<group>"; };
-		ECEE838A25F6028800D8EEF5 /* FBSDKUserDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSDKUserDataStore.m; sourceTree = "<group>"; };
-		ECEE838C25F6028800D8EEF5 /* Yodo1SensorsAnalyticsSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Yodo1SensorsAnalyticsSDK.bundle; sourceTree = "<group>"; };
-		ECEE838E25F6028800D8EEF5 /* Yodo1SaAnalyticsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Yodo1SaAnalyticsSDK.framework; sourceTree = "<group>"; };
-		ECEE839325F6028800D8EEF5 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
-		ECEE839525F6028800D8EEF5 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
-		ECEE839625F6028800D8EEF5 /* PersonalizedAdConsent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PersonalizedAdConsent.framework; sourceTree = "<group>"; };
-		ECEE839725F6028800D8EEF5 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
-		ECEE839825F6028800D8EEF5 /* PersonalizedAdConsent.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PersonalizedAdConsent.bundle; sourceTree = "<group>"; };
-		ECEE839925F6028800D8EEF5 /* PromisesObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PromisesObjC.framework; sourceTree = "<group>"; };
-		ECEE839A25F6028800D8EEF5 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
-		ECEE839B25F6028800D8EEF5 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
-		ECEE839D25F6028800D8EEF5 /* UserMessagingPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserMessagingPlatform.framework; sourceTree = "<group>"; };
-		ECEE83A225F6028800D8EEF5 /* ALSdkInitializationCompletionHandler.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALSdkInitializationCompletionHandler.html; sourceTree = "<group>"; };
-		ECEE83A325F6028800D8EEF5 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		ECEE83A625F6028800D8EEF5 /* _index.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _index.scss; sourceTree = "<group>"; };
-		ECEE83A725F6028800D8EEF5 /* _variables.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _variables.scss; sourceTree = "<group>"; };
-		ECEE83A825F6028800D8EEF5 /* _xcode.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _xcode.scss; sourceTree = "<group>"; };
-		ECEE83A925F6028800D8EEF5 /* _print.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _print.scss; sourceTree = "<group>"; };
-		ECEE83AA25F6028800D8EEF5 /* _layout.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _layout.scss; sourceTree = "<group>"; };
-		ECEE83AB25F6028800D8EEF5 /* _object.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _object.scss; sourceTree = "<group>"; };
-		ECEE83AC25F6028800D8EEF5 /* style.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = style.scss; sourceTree = "<group>"; };
-		ECEE83AD25F6028800D8EEF5 /* _normalize.scss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _normalize.scss; sourceTree = "<group>"; };
-		ECEE83AE25F6028800D8EEF5 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		ECEE83B025F6028800D8EEF5 /* MARewardedAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MARewardedAd.html; sourceTree = "<group>"; };
-		ECEE83B125F6028800D8EEF5 /* MAAdView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAAdView.html; sourceTree = "<group>"; };
-		ECEE83B225F6028800D8EEF5 /* ALRewardedInterstitialAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALRewardedInterstitialAd.html; sourceTree = "<group>"; };
-		ECEE83B325F6028800D8EEF5 /* ALSdkSettings.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALSdkSettings.html; sourceTree = "<group>"; };
-		ECEE83B425F6028800D8EEF5 /* MAAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAAd.html; sourceTree = "<group>"; };
-		ECEE83B525F6028800D8EEF5 /* MAAdFormat.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAAdFormat.html; sourceTree = "<group>"; };
-		ECEE83B625F6028800D8EEF5 /* ALAdView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdView.html; sourceTree = "<group>"; };
-		ECEE83B725F6028800D8EEF5 /* ALPostbackService.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALPostbackService.html; sourceTree = "<group>"; };
-		ECEE83B825F6028800D8EEF5 /* ALEventService.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALEventService.html; sourceTree = "<group>"; };
-		ECEE83B925F6028800D8EEF5 /* ALCCommunicator.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALCCommunicator.html; sourceTree = "<group>"; };
-		ECEE83BA25F6028800D8EEF5 /* ALSdk.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALSdk.html; sourceTree = "<group>"; };
-		ECEE83BB25F6028800D8EEF5 /* ALUserService.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALUserService.html; sourceTree = "<group>"; };
-		ECEE83BC25F6028800D8EEF5 /* ALAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAd.html; sourceTree = "<group>"; };
-		ECEE83BD25F6028800D8EEF5 /* ALCMessage.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALCMessage.html; sourceTree = "<group>"; };
-		ECEE83BE25F6028800D8EEF5 /* ALAdService.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdService.html; sourceTree = "<group>"; };
-		ECEE83BF25F6028800D8EEF5 /* ALCMessagingService.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALCMessagingService.html; sourceTree = "<group>"; };
-		ECEE83C025F6028800D8EEF5 /* ALVariableService.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALVariableService.html; sourceTree = "<group>"; };
-		ECEE83C125F6028800D8EEF5 /* ALAdSize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdSize.html; sourceTree = "<group>"; };
-		ECEE83C225F6028800D8EEF5 /* MARewardedInterstitialAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MARewardedInterstitialAd.html; sourceTree = "<group>"; };
-		ECEE83C325F6028800D8EEF5 /* ALSdkConfiguration.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALSdkConfiguration.html; sourceTree = "<group>"; };
-		ECEE83C425F6028800D8EEF5 /* ALAdType.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdType.html; sourceTree = "<group>"; };
-		ECEE83C525F6028800D8EEF5 /* MAInterstitialAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAInterstitialAd.html; sourceTree = "<group>"; };
-		ECEE83C625F6028800D8EEF5 /* ALPrivacySettings.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALPrivacySettings.html; sourceTree = "<group>"; };
-		ECEE83C725F6028800D8EEF5 /* ALUserSegment.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALUserSegment.html; sourceTree = "<group>"; };
-		ECEE83C825F6028800D8EEF5 /* ALInterstitialAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALInterstitialAd.html; sourceTree = "<group>"; };
-		ECEE83C925F6028800D8EEF5 /* ALIncentivizedInterstitialAd.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALIncentivizedInterstitialAd.html; sourceTree = "<group>"; };
-		ECEE83CA25F6028800D8EEF5 /* MAReward.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAReward.html; sourceTree = "<group>"; };
-		ECEE83CB25F6028800D8EEF5 /* hierarchy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = hierarchy.html; sourceTree = "<group>"; };
-		ECEE83CD25F6028800D8EEF5 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
-		ECEE83CF25F6028800D8EEF5 /* ALAdViewDisplayErrorCode.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdViewDisplayErrorCode.html; sourceTree = "<group>"; };
-		ECEE83D125F6028800D8EEF5 /* library_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library_background.png; sourceTree = "<group>"; };
-		ECEE83D225F6028800D8EEF5 /* disclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure.png; sourceTree = "<group>"; };
-		ECEE83D325F6028800D8EEF5 /* disclosure_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure_open.png; sourceTree = "<group>"; };
-		ECEE83D425F6028800D8EEF5 /* button_bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bar_background.png; sourceTree = "<group>"; };
-		ECEE83D525F6028800D8EEF5 /* title_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_background.png; sourceTree = "<group>"; };
-		ECEE83D725F6028800D8EEF5 /* MAAdDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAAdDelegate.html; sourceTree = "<group>"; };
-		ECEE83D825F6028800D8EEF5 /* MARewardedAdDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MARewardedAdDelegate.html; sourceTree = "<group>"; };
-		ECEE83D925F6028800D8EEF5 /* ALCSubscriber.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALCSubscriber.html; sourceTree = "<group>"; };
-		ECEE83DA25F6028800D8EEF5 /* ALCPublisher.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALCPublisher.html; sourceTree = "<group>"; };
-		ECEE83DB25F6028800D8EEF5 /* ALPostbackDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALPostbackDelegate.html; sourceTree = "<group>"; };
-		ECEE83DC25F6028800D8EEF5 /* ALAdDisplayDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdDisplayDelegate.html; sourceTree = "<group>"; };
-		ECEE83DD25F6028800D8EEF5 /* MAAdViewAdDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MAAdViewAdDelegate.html; sourceTree = "<group>"; };
-		ECEE83DE25F6028800D8EEF5 /* ALAdVideoPlaybackDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdVideoPlaybackDelegate.html; sourceTree = "<group>"; };
-		ECEE83DF25F6028800D8EEF5 /* ALAdLoadDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdLoadDelegate.html; sourceTree = "<group>"; };
-		ECEE83E025F6028800D8EEF5 /* ALAdRewardDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdRewardDelegate.html; sourceTree = "<group>"; };
-		ECEE83E125F6028800D8EEF5 /* ALCEntity.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALCEntity.html; sourceTree = "<group>"; };
-		ECEE83E225F6028800D8EEF5 /* ALAdViewEventDelegate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ALAdViewEventDelegate.html; sourceTree = "<group>"; };
-		ECEE83E325F6028800D8EEF5 /* AppLovinSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinSDK.framework; sourceTree = "<group>"; };
-		ECEE83E425F6028800D8EEF5 /* AppLovinSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AppLovinSDKResources.bundle; sourceTree = "<group>"; };
-		ECEE83E725F6028900D8EEF5 /* YandexMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexMobileAds.framework; sourceTree = "<group>"; };
-		ECEE83ED25F6028900D8EEF5 /* InMobiSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = InMobiSDK.xcframework; sourceTree = "<group>"; };
-		ECEE83EE25F6028900D8EEF5 /* INMMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = INMMoatMobileAppKit.framework; sourceTree = "<group>"; };
-		ECEE83F025F6028900D8EEF5 /* VungleSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleSDK.framework; sourceTree = "<group>"; };
-		ECEE83F225F6028900D8EEF5 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
-		ECEE83F325F6028900D8EEF5 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
-		ECEE83F425F6028900D8EEF5 /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
-		ECEE83F525F6028900D8EEF5 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
-		ECEE83F625F6028900D8EEF5 /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
-		ECEE83FA25F6028900D8EEF5 /* WKWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE83FB25F6028900D8EEF5 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
-		ECEE83FC25F6028900D8EEF5 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE83FD25F6028900D8EEF5 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
-		ECEE83FE25F6028900D8EEF5 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE83FF25F6028900D8EEF5 /* AFImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageDownloader.h; sourceTree = "<group>"; };
-		ECEE840025F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		ECEE840125F6028900D8EEF5 /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
-		ECEE840225F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE840325F6028900D8EEF5 /* WKWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		ECEE840425F6028900D8EEF5 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE840525F6028900D8EEF5 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		ECEE840625F6028900D8EEF5 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE840725F6028900D8EEF5 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
-		ECEE840825F6028900D8EEF5 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
-		ECEE840925F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
-		ECEE840A25F6028900D8EEF5 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
-		ECEE840B25F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		ECEE840C25F6028900D8EEF5 /* AFImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageDownloader.m; sourceTree = "<group>"; };
-		ECEE840E25F6028900D8EEF5 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		ECEE840F25F6028900D8EEF5 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		ECEE841025F6028900D8EEF5 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		ECEE841125F6028900D8EEF5 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		ECEE841225F6028900D8EEF5 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		ECEE841325F6028900D8EEF5 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		ECEE841425F6028900D8EEF5 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		ECEE841525F6028900D8EEF5 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		ECEE841625F6028900D8EEF5 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		ECEE841725F6028900D8EEF5 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		ECEE841825F6028900D8EEF5 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		ECEE841925F6028900D8EEF5 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		ECEE841A25F6028900D8EEF5 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
-		ECEE841B25F6028900D8EEF5 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		ECEE841E25F6028900D8EEF5 /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSource.framework; sourceTree = "<group>"; };
-		ECEE842325F6028900D8EEF5 /* YandexMobileMetrica.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexMobileMetrica.framework; sourceTree = "<group>"; };
-		ECEE842425F6028900D8EEF5 /* YandexMobileMetricaCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YandexMobileMetricaCrashes.framework; sourceTree = "<group>"; };
-		ECEE842525F6028900D8EEF5 /* helper */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = helper; sourceTree = "<group>"; };
-		ECEE842625F6028900D8EEF5 /* Yodo1MasError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasError.h; sourceTree = "<group>"; };
-		ECEE842725F6028900D8EEF5 /* Yodo1MasAdEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1MasAdEvent.h; sourceTree = "<group>"; };
-		ECEE842825F6028900D8EEF5 /* libMasStandard.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMasStandard.a; sourceTree = "<group>"; };
-		ECEE842925F6028900D8EEF5 /* Yodo1Ads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yodo1Ads.h; sourceTree = "<group>"; };
-		ECEE84AA25F6033500D8EEF5 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
-		ECEE84F225F60DA900D8EEF5 /* AppLovinMediationUnityAdsAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationUnityAdsAdapter.framework; sourceTree = "<group>"; };
-		ECEE84F325F60DA900D8EEF5 /* ISUnityAdsAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISUnityAdsAdapter.framework; sourceTree = "<group>"; };
-		ECEE84F425F60DA900D8EEF5 /* UnityAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAdapter.framework; sourceTree = "<group>"; };
-		ECEE84F625F60DA900D8EEF5 /* AppLovinMediationVungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationVungleAdapter.framework; sourceTree = "<group>"; };
-		ECEE84F725F60DA900D8EEF5 /* ISVungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISVungleAdapter.framework; sourceTree = "<group>"; };
-		ECEE84F825F60DA900D8EEF5 /* VungleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleAdapter.framework; sourceTree = "<group>"; };
-		ECEE84FA25F60DA900D8EEF5 /* AppLovinMediationInMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationInMobiAdapter.framework; sourceTree = "<group>"; };
-		ECEE84FB25F60DA900D8EEF5 /* InMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InMobiAdapter.framework; sourceTree = "<group>"; };
-		ECEE84FC25F60DA900D8EEF5 /* ISInMobiAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISInMobiAdapter.framework; sourceTree = "<group>"; };
-		ECEE84FE25F60DA900D8EEF5 /* ISTapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISTapjoyAdapter.framework; sourceTree = "<group>"; };
-		ECEE850025F60DA900D8EEF5 /* TapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TapjoyAdapter.framework; sourceTree = "<group>"; };
-		ECEE850125F60DA900D8EEF5 /* AppLovinMediationTapjoyAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationTapjoyAdapter.framework; sourceTree = "<group>"; };
-		ECEE850325F60DA900D8EEF5 /* AppLovinAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinAdapter.framework; sourceTree = "<group>"; };
-		ECEE850425F60DA900D8EEF5 /* ISAppLovinAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAppLovinAdapter.framework; sourceTree = "<group>"; };
-		ECEE850725F60DA900D8EEF5 /* AppLovinMediationGoogleAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationGoogleAdapter.framework; sourceTree = "<group>"; };
-		ECEE850825F60DA900D8EEF5 /* AdMobYandexMobileAdsAdapters.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdMobYandexMobileAdsAdapters.framework; sourceTree = "<group>"; };
-		ECEE850925F60DA900D8EEF5 /* ISAdMobAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISAdMobAdapter.framework; sourceTree = "<group>"; };
-		ECEE850B25F60DA900D8EEF5 /* MyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MyTargetAdapter.framework; sourceTree = "<group>"; };
-		ECEE850C25F60DA900D8EEF5 /* ISMyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISMyTargetAdapter.framework; sourceTree = "<group>"; };
-		ECEE850D25F60DA900D8EEF5 /* AppLovinMediationMyTargetAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationMyTargetAdapter.framework; sourceTree = "<group>"; };
-		ECEE850F25F60DA900D8EEF5 /* FacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookAdapter.framework; sourceTree = "<group>"; };
-		ECEE851025F60DA900D8EEF5 /* ISFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ISFacebookAdapter.framework; sourceTree = "<group>"; };
-		ECEE851125F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationFacebookAdapter.framework; sourceTree = "<group>"; };
-		ECEE851825F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationYandexAdapter.framework; sourceTree = "<group>"; };
-		ECEE851A25F60DA900D8EEF5 /* IronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSourceAdapter.framework; sourceTree = "<group>"; };
-		ECEE851B25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppLovinMediationIronSourceAdapter.framework; sourceTree = "<group>"; };
 		ED2843B990C25022A65174C5 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		FE7749FAB403FA8DBE3532D5 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -424,92 +424,106 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC31FD332671FC4800627588 /* FacebookAdapter.framework in Frameworks */,
+				EC31FC092671C42800627588 /* libc++abi.tbd in Frameworks */,
+				EC31FD1A2671FC4700627588 /* ISUnityAdsAdapter.framework in Frameworks */,
+				EC31FD6B2671FC4800627588 /* BUCNAuxiliary.framework in Frameworks */,
+				EC31FC072671C3C300627588 /* libbz2.tbd in Frameworks */,
+				EC31FD802671FC4800627588 /* YandexMobileMetrica.framework in Frameworks */,
 				B7414265A85064066950104B /* CoreFoundation.framework in Frameworks */,
-				ECEE851C25F60DA900D8EEF5 /* AppLovinMediationUnityAdsAdapter.framework in Frameworks */,
-				ECEE852725F60DA900D8EEF5 /* TapjoyAdapter.framework in Frameworks */,
+				EC31FD212671FC4700627588 /* ISInMobiAdapter.framework in Frameworks */,
+				EC31FD2F2671FC4800627588 /* AppLovinMediationGoogleAdapter.framework in Frameworks */,
 				47E14692941B8AA86A0BEAE6 /* AdSupport.framework in Frameworks */,
-				ECEE844525F6028900D8EEF5 /* PromisesObjC.framework in Frameworks */,
-				ECEE844125F6028900D8EEF5 /* GoogleAppMeasurement.framework in Frameworks */,
+				EC31FD652671FC4800627588 /* VungleSDK.framework in Frameworks */,
+				EC31FD812671FC4800627588 /* YandexMobileMetricaCrashes.framework in Frameworks */,
 				24C94CED954B60836F6BD69C /* EventKit.framework in Frameworks */,
-				ECEE853125F60DA900D8EEF5 /* AppLovinMediationMyTargetAdapter.framework in Frameworks */,
+				EC31FD6D2671FC4800627588 /* BUFoundation.framework in Frameworks */,
 				B0A64B5B96C00D257C9AAAD9 /* EventKitUI.framework in Frameworks */,
+				EC31FD282671FC4700627588 /* AppLovinAdapter.framework in Frameworks */,
+				EC31FD682671FC4800627588 /* FBAudienceNetwork.framework in Frameworks */,
 				12204EC0A2ADA9940D3CD377 /* CoreData.framework in Frameworks */,
-				ECEE849F25F6028900D8EEF5 /* IronSource.framework in Frameworks */,
-				ECEE852125F60DA900D8EEF5 /* VungleAdapter.framework in Frameworks */,
+				EC31FD2A2671FC4700627588 /* AppLovinMediationAdColonyAdapter.framework in Frameworks */,
 				CA9F4492A3E2B18B7368EF70 /* Photos.framework in Frameworks */,
+				EC31FD312671FC4800627588 /* MyTargetAdapter.framework in Frameworks */,
 				B4CB497FA8D475C9274624F6 /* OpenGLES.framework in Frameworks */,
+				EC31FD232671FC4700627588 /* AppLovinMediationFyberAdapter.framework in Frameworks */,
 				8D214FB9924614BF9AF27088 /* UIKit.framework in Frameworks */,
-				ECEE852D25F60DA900D8EEF5 /* AdMobYandexMobileAdsAdapters.framework in Frameworks */,
-				ECEE84A125F6028900D8EEF5 /* YandexMobileMetricaCrashes.framework in Frameworks */,
-				ECEE844625F6028900D8EEF5 /* nanopb.framework in Frameworks */,
-				ECEE853425F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework in Frameworks */,
-				ECEE852525F60DA900D8EEF5 /* ISTapjoyAdapter.framework in Frameworks */,
 				29984A8A83279CCCA9D0082E /* SystemConfiguration.framework in Frameworks */,
 				22FC4F54B9A661436D0EEBA4 /* QuartzCore.framework in Frameworks */,
-				ECEE843F25F6028900D8EEF5 /* Yodo1SaAnalyticsSDK.framework in Frameworks */,
-				ECEE844025F6028900D8EEF5 /* Tapjoy.framework in Frameworks */,
-				ECEE852925F60DA900D8EEF5 /* AppLovinAdapter.framework in Frameworks */,
+				EC31FD372671FC4800627588 /* AppLovinMediationTencentGDTAdapter.framework in Frameworks */,
+				EC31FD272671FC4700627588 /* AppLovinMediationTapjoyAdapter.framework in Frameworks */,
+				EC31FD382671FC4800627588 /* IronSourceAdapter.framework in Frameworks */,
 				102F4CEC94D44A969E289ACE /* MobileCoreServices.framework in Frameworks */,
+				EC31FD222671FC4700627588 /* ISFyberAdapter.framework in Frameworks */,
+				EC31FD2C2671FC4800627588 /* AdColonyAdapter.framework in Frameworks */,
+				EC31FD2E2671FC4800627588 /* ISPangleAdapter.framework in Frameworks */,
 				077949C28E0580877E9C214D /* ImageIO.framework in Frameworks */,
-				ECEE852E25F60DA900D8EEF5 /* ISAdMobAdapter.framework in Frameworks */,
-				ECEE848625F6028900D8EEF5 /* YandexMobileAds.framework in Frameworks */,
+				EC31FD5E2671FC4800627588 /* AppLovinSDK.framework in Frameworks */,
+				EC31FD2D2671FC4800627588 /* AppLovinMediationByteDanceAdapter.framework in Frameworks */,
+				EC31FD602671FC4800627588 /* YandexMobileAds.framework in Frameworks */,
+				EC31FD4B2671FC4800627588 /* PromisesObjC.framework in Frameworks */,
+				EC31FD342671FC4800627588 /* ISFacebookAdapter.framework in Frameworks */,
 				488D41E799750B678B6E26B4 /* Foundation.framework in Frameworks */,
 				C0374684B3D862886D873196 /* CoreGraphics.framework in Frameworks */,
-				ECEE844925F6028900D8EEF5 /* UserMessagingPlatform.framework in Frameworks */,
-				ECEE848425F6028900D8EEF5 /* AppLovinSDK.framework in Frameworks */,
-				ECEE851F25F60DA900D8EEF5 /* AppLovinMediationVungleAdapter.framework in Frameworks */,
-				ECEE848A25F6028900D8EEF5 /* InMobiSDK.xcframework in Frameworks */,
-				ECEE853A25F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework in Frameworks */,
+				EC31FD1C2671FC4700627588 /* AppLovinMediationVungleAdapter.framework in Frameworks */,
 				2B3E4AAB8453D28D57FA70A4 /* CFNetwork.framework in Frameworks */,
+				EC31FD302671FC4800627588 /* ISAdMobAdapter.framework in Frameworks */,
+				EC31FD482671FC4800627588 /* Tapjoy.framework in Frameworks */,
 				5A25407487D43E307B760E04 /* AudioToolbox.framework in Frameworks */,
 				D5C1467A8AB87F2A670AB94D /* AssetsLibrary.framework in Frameworks */,
-				ECEE844725F6028900D8EEF5 /* GoogleMobileAds.framework in Frameworks */,
-				ECEE852425F60DA900D8EEF5 /* ISInMobiAdapter.framework in Frameworks */,
+				EC31FD192671FC4700627588 /* AppLovinMediationUnityAdsAdapter.framework in Frameworks */,
+				EC31FD832671FC4800627588 /* libMasStandard.a in Frameworks */,
+				EC31FD642671FC4800627588 /* AdColony.framework in Frameworks */,
 				71174CF4AC9322669A0B9DF5 /* CoreTelephony.framework in Frameworks */,
 				51084AF7B68A226693B63FCD /* CoreText.framework in Frameworks */,
-				ECEE853C25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */,
 				AC24426CBF90E99C4CA2683C /* MessageUI.framework in Frameworks */,
+				EC31FD262671FC4700627588 /* TapjoyAdapter.framework in Frameworks */,
+				EC31FD4C2671FC4800627588 /* nanopb.framework in Frameworks */,
+				EC31FD1B2671FC4700627588 /* UnityAdapter.framework in Frameworks */,
+				EC31FD252671FC4700627588 /* ISTapjoyAdapter.framework in Frameworks */,
 				7CC1497FA8709DD535467B43 /* CoreLocation.framework in Frameworks */,
-				ECEE842F25F6028900D8EEF5 /* MyTargetSDK.framework in Frameworks */,
-				ECEE851D25F60DA900D8EEF5 /* ISUnityAdsAdapter.framework in Frameworks */,
-				ECEE853025F60DA900D8EEF5 /* ISMyTargetAdapter.framework in Frameworks */,
-				ECEE852225F60DA900D8EEF5 /* AppLovinMediationInMobiAdapter.framework in Frameworks */,
-				ECEE843125F6028900D8EEF5 /* UnityAds.framework in Frameworks */,
+				EC31FD4D2671FC4800627588 /* GoogleMobileAds.framework in Frameworks */,
 				5A6C468D92ECF63DE2C69E99 /* AddressBook.framework in Frameworks */,
 				24FD48DB8145B3DBAB450BDC /* Accounts.framework in Frameworks */,
-				ECEE853325F60DA900D8EEF5 /* ISFacebookAdapter.framework in Frameworks */,
 				040D43B5B897B5BE080A9E90 /* Social.framework in Frameworks */,
-				ECEE852F25F60DA900D8EEF5 /* MyTargetAdapter.framework in Frameworks */,
-				ECEE84AB25F6033500D8EEF5 /* FBAudienceNetwork.framework in Frameworks */,
-				ECEE851E25F60DA900D8EEF5 /* UnityAdapter.framework in Frameworks */,
-				ECEE852A25F60DA900D8EEF5 /* ISAppLovinAdapter.framework in Frameworks */,
-				ECEE844325F6028900D8EEF5 /* GoogleUtilities.framework in Frameworks */,
-				ECEE848C25F6028900D8EEF5 /* VungleSDK.framework in Frameworks */,
-				ECEE84A325F6028900D8EEF5 /* libMasStandard.a in Frameworks */,
 				89574E3094B2B30CA8D39789 /* MediaPlayer.framework in Frameworks */,
-				ECEE848B25F6028900D8EEF5 /* INMMoatMobileAppKit.framework in Frameworks */,
-				ECEE852325F60DA900D8EEF5 /* InMobiAdapter.framework in Frameworks */,
 				B8D0492BAAC306D866534B04 /* AVFoundation.framework in Frameworks */,
 				77A04FC0A64DBD2EF7201FE4 /* CoreMedia.framework in Frameworks */,
 				296D48EC912F657FD39BD651 /* CoreMotion.framework in Frameworks */,
 				A04F48A983D75F8E87823B24 /* WebKit.framework in Frameworks */,
 				383E4C89B717442FDB374D52 /* GameController.framework in Frameworks */,
+				EC31FD362671FC4800627588 /* AppLovinMediationYandexAdapter.framework in Frameworks */,
 				816E4BD88E4814769D1CD5E6 /* WatchConnectivity.framework in Frameworks */,
+				EC31FD1E2671FC4700627588 /* VungleAdapter.framework in Frameworks */,
+				EC31FD4E2671FC4800627588 /* UserMessagingPlatform.framework in Frameworks */,
+				EC31FD3A2671FC4800627588 /* MyTargetSDK.framework in Frameworks */,
+				EC31FD1F2671FC4700627588 /* AppLovinMediationInMobiAdapter.framework in Frameworks */,
+				EC31FD3B2671FC4800627588 /* UnityAds.framework in Frameworks */,
 				ABCA4CCBA7A58434B6E2F2B9 /* GLKit.framework in Frameworks */,
-				ECEE84A025F6028900D8EEF5 /* YandexMobileMetrica.framework in Frameworks */,
-				ECEE853225F60DA900D8EEF5 /* FacebookAdapter.framework in Frameworks */,
-				ECEE853B25F60DA900D8EEF5 /* IronSourceAdapter.framework in Frameworks */,
+				EC31FD392671FC4800627588 /* AppLovinMediationIronSourceAdapter.framework in Frameworks */,
 				BDBB4C6AA3811CE97D4AF93C /* libsqlite3.tbd in Frameworks */,
 				AE754B6B8FE0C46727E3681A /* libz.tbd in Frameworks */,
+				EC31FD6C2671FC4800627588 /* BUVAAuxiliary.framework in Frameworks */,
+				EC31FD622671FC4800627588 /* InMobiSDK.framework in Frameworks */,
+				EC31FD692671FC4800627588 /* BUAdSDK.framework in Frameworks */,
 				D1F2468D97C8E2CCDE9B91F0 /* libz.1.2.5.tbd in Frameworks */,
-				ECEE852025F60DA900D8EEF5 /* ISVungleAdapter.framework in Frameworks */,
+				EC31FD7F2671FC4800627588 /* IronSource.framework in Frameworks */,
+				EC31FD202671FC4700627588 /* InMobiAdapter.framework in Frameworks */,
+				EC31FD242671FC4700627588 /* FyberAdapter.framework in Frameworks */,
+				EC31FD322671FC4800627588 /* AppLovinMediationMyTargetAdapter.framework in Frameworks */,
+				EC31FD7E2671FC4800627588 /* libGDTMobSDK.a in Frameworks */,
+				EC31FD352671FC4800627588 /* AppLovinMediationFacebookAdapter.framework in Frameworks */,
+				EC31FD2B2671FC4800627588 /* ISAdColonyAdapter.framework in Frameworks */,
 				74C0478F958CB2E95D9E7499 /* libresolv.tbd in Frameworks */,
-				ECEE844225F6028900D8EEF5 /* PersonalizedAdConsent.framework in Frameworks */,
+				EC31FD472671FC4800627588 /* Yodo1SaAnalyticsSDK.framework in Frameworks */,
+				EC31FD292671FC4700627588 /* ISAppLovinAdapter.framework in Frameworks */,
 				CF34448AA3E5A5E73DDC4839 /* libicucore.tbd in Frameworks */,
 				B0094E3F988F5E214DB01D28 /* libresolv.9.tbd in Frameworks */,
-				ECEE852C25F60DA900D8EEF5 /* AppLovinMediationGoogleAdapter.framework in Frameworks */,
+				EC31FD492671FC4800627588 /* GoogleAppMeasurement.framework in Frameworks */,
 				452648BFB3166D72B707A03A /* libc++.tbd in Frameworks */,
-				ECEE852825F60DA900D8EEF5 /* AppLovinMediationTapjoyAdapter.framework in Frameworks */,
+				EC31FD4A2671FC4800627588 /* GoogleUtilities.framework in Frameworks */,
+				EC31FD1D2671FC4700627588 /* ISVungleAdapter.framework in Frameworks */,
+				EC31FD612671FC4800627588 /* FairBidSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +533,8 @@
 		44C34A4897EBE23DA5FDC501 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC31FC082671C42800627588 /* libc++abi.tbd */,
+				EC31FC062671C3C300627588 /* libbz2.tbd */,
 				0AD5493F89DE28E737AF5D76 /* CoreFoundation.framework */,
 				C53448FDAAEB7F1E448E6FFF /* AdSupport.framework */,
 				FE7749FAB403FA8DBE3532D5 /* EventKit.framework */,
@@ -562,6 +578,634 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC31FC292671FC4600627588 /* MasSdk */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC2A2671FC4600627588 /* Yodo1Mas.h */,
+				EC31FC2B2671FC4600627588 /* Yodo1MasCommon.h */,
+				EC31FC2C2671FC4600627588 /* Utils */,
+				EC31FC302671FC4600627588 /* adapter */,
+				EC31FC602671FC4600627588 /* libs */,
+				EC31FD112671FC4700627588 /* Yodo1MasBannerConfig.h */,
+				EC31FD122671FC4700627588 /* Yodo1MasError.h */,
+				EC31FD132671FC4700627588 /* Yodo1MasAdEvent.h */,
+				EC31FD142671FC4700627588 /* libMasStandard.a */,
+				EC31FD152671FC4700627588 /* Yodo1Ads.h */,
+			);
+			path = MasSdk;
+			sourceTree = "<group>";
+		};
+		EC31FC2C2671FC4600627588 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC2D2671FC4600627588 /* apply2xcode.sh */,
+				EC31FC2E2671FC4600627588 /* mod_pbxproj.py */,
+				EC31FC2F2671FC4600627588 /* apply2xcode.py */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EC31FC302671FC4600627588 /* adapter */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC312671FC4600627588 /* unity */,
+				EC31FC352671FC4600627588 /* vungle */,
+				EC31FC392671FC4600627588 /* inmobi */,
+				EC31FC3D2671FC4600627588 /* fyber */,
+				EC31FC412671FC4600627588 /* tapjoy */,
+				EC31FC452671FC4600627588 /* applovin */,
+				EC31FC482671FC4600627588 /* adcolony */,
+				EC31FC4C2671FC4600627588 /* pangle */,
+				EC31FC4F2671FC4600627588 /* admob */,
+				EC31FC522671FC4600627588 /* mytarget */,
+				EC31FC552671FC4600627588 /* facebook */,
+				EC31FC592671FC4600627588 /* yandex */,
+				EC31FC5B2671FC4600627588 /* tencent */,
+				EC31FC5D2671FC4600627588 /* ironsource */,
+			);
+			path = adapter;
+			sourceTree = "<group>";
+		};
+		EC31FC312671FC4600627588 /* unity */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC322671FC4600627588 /* AppLovinMediationUnityAdsAdapter.framework */,
+				EC31FC332671FC4600627588 /* ISUnityAdsAdapter.framework */,
+				EC31FC342671FC4600627588 /* UnityAdapter.framework */,
+			);
+			path = unity;
+			sourceTree = "<group>";
+		};
+		EC31FC352671FC4600627588 /* vungle */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC362671FC4600627588 /* AppLovinMediationVungleAdapter.framework */,
+				EC31FC372671FC4600627588 /* ISVungleAdapter.framework */,
+				EC31FC382671FC4600627588 /* VungleAdapter.framework */,
+			);
+			path = vungle;
+			sourceTree = "<group>";
+		};
+		EC31FC392671FC4600627588 /* inmobi */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC3A2671FC4600627588 /* AppLovinMediationInMobiAdapter.framework */,
+				EC31FC3B2671FC4600627588 /* InMobiAdapter.framework */,
+				EC31FC3C2671FC4600627588 /* ISInMobiAdapter.framework */,
+			);
+			path = inmobi;
+			sourceTree = "<group>";
+		};
+		EC31FC3D2671FC4600627588 /* fyber */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC3E2671FC4600627588 /* ISFyberAdapter.framework */,
+				EC31FC3F2671FC4600627588 /* AppLovinMediationFyberAdapter.framework */,
+				EC31FC402671FC4600627588 /* FyberAdapter.framework */,
+			);
+			path = fyber;
+			sourceTree = "<group>";
+		};
+		EC31FC412671FC4600627588 /* tapjoy */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC422671FC4600627588 /* ISTapjoyAdapter.framework */,
+				EC31FC432671FC4600627588 /* TapjoyAdapter.framework */,
+				EC31FC442671FC4600627588 /* AppLovinMediationTapjoyAdapter.framework */,
+			);
+			path = tapjoy;
+			sourceTree = "<group>";
+		};
+		EC31FC452671FC4600627588 /* applovin */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC462671FC4600627588 /* AppLovinAdapter.framework */,
+				EC31FC472671FC4600627588 /* ISAppLovinAdapter.framework */,
+			);
+			path = applovin;
+			sourceTree = "<group>";
+		};
+		EC31FC482671FC4600627588 /* adcolony */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC492671FC4600627588 /* AppLovinMediationAdColonyAdapter.framework */,
+				EC31FC4A2671FC4600627588 /* ISAdColonyAdapter.framework */,
+				EC31FC4B2671FC4600627588 /* AdColonyAdapter.framework */,
+			);
+			path = adcolony;
+			sourceTree = "<group>";
+		};
+		EC31FC4C2671FC4600627588 /* pangle */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC4D2671FC4600627588 /* AppLovinMediationByteDanceAdapter.framework */,
+				EC31FC4E2671FC4600627588 /* ISPangleAdapter.framework */,
+			);
+			path = pangle;
+			sourceTree = "<group>";
+		};
+		EC31FC4F2671FC4600627588 /* admob */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC502671FC4600627588 /* AppLovinMediationGoogleAdapter.framework */,
+				EC31FC512671FC4600627588 /* ISAdMobAdapter.framework */,
+			);
+			path = admob;
+			sourceTree = "<group>";
+		};
+		EC31FC522671FC4600627588 /* mytarget */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC532671FC4600627588 /* MyTargetAdapter.framework */,
+				EC31FC542671FC4600627588 /* AppLovinMediationMyTargetAdapter.framework */,
+			);
+			path = mytarget;
+			sourceTree = "<group>";
+		};
+		EC31FC552671FC4600627588 /* facebook */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC562671FC4600627588 /* FacebookAdapter.framework */,
+				EC31FC572671FC4600627588 /* ISFacebookAdapter.framework */,
+				EC31FC582671FC4600627588 /* AppLovinMediationFacebookAdapter.framework */,
+			);
+			path = facebook;
+			sourceTree = "<group>";
+		};
+		EC31FC592671FC4600627588 /* yandex */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC5A2671FC4600627588 /* AppLovinMediationYandexAdapter.framework */,
+			);
+			path = yandex;
+			sourceTree = "<group>";
+		};
+		EC31FC5B2671FC4600627588 /* tencent */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC5C2671FC4600627588 /* AppLovinMediationTencentGDTAdapter.framework */,
+			);
+			path = tencent;
+			sourceTree = "<group>";
+		};
+		EC31FC5D2671FC4600627588 /* ironsource */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC5E2671FC4600627588 /* IronSourceAdapter.framework */,
+				EC31FC5F2671FC4600627588 /* AppLovinMediationIronSourceAdapter.framework */,
+			);
+			path = ironsource;
+			sourceTree = "<group>";
+		};
+		EC31FC602671FC4600627588 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC612671FC4600627588 /* myTargetSDK */,
+				EC31FC632671FC4600627588 /* UnityAds */,
+				EC31FC652671FC4600627588 /* FBSDKCoreKit */,
+				EC31FC852671FC4600627588 /* Yodo1SaAnalytics */,
+				EC31FC882671FC4600627588 /* TapjoySDK */,
+				EC31FC8C2671FC4600627588 /* Yodo1Admob */,
+				EC31FC932671FC4600627588 /* AppLovinSDK */,
+				EC31FCAB2671FC4600627588 /* YandexMobileAds */,
+				EC31FCAE2671FC4600627588 /* FairBidSDK */,
+				EC31FCB02671FC4600627588 /* InMobiSDK */,
+				EC31FCB22671FC4600627588 /* AdColony */,
+				EC31FCB52671FC4600627588 /* VungleSDK-iOS */,
+				EC31FCB72671FC4600627588 /* YYModel */,
+				EC31FCBD2671FC4600627588 /* FBAudienceNetwork */,
+				EC31FCC02671FC4700627588 /* Ads-Global */,
+				EC31FCC82671FC4700627588 /* AFNetworking */,
+				EC31FCEC2671FC4700627588 /* Tencent */,
+				EC31FD082671FC4700627588 /* IronSourceSDK */,
+				EC31FD0B2671FC4700627588 /* YandexMobileMetrica */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		EC31FC612671FC4600627588 /* myTargetSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC622671FC4600627588 /* MyTargetSDK.framework */,
+			);
+			path = myTargetSDK;
+			sourceTree = "<group>";
+		};
+		EC31FC632671FC4600627588 /* UnityAds */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC642671FC4600627588 /* UnityAds.framework */,
+			);
+			path = UnityAds;
+			sourceTree = "<group>";
+		};
+		EC31FC652671FC4600627588 /* FBSDKCoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC662671FC4600627588 /* FacebookSDKStrings.bundle */,
+				EC31FC672671FC4600627588 /* Sources */,
+			);
+			path = FBSDKCoreKit;
+			sourceTree = "<group>";
+		};
+		EC31FC672671FC4600627588 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC682671FC4600627588 /* FBSDKCoreKit_Basics */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		EC31FC682671FC4600627588 /* FBSDKCoreKit_Basics */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC692671FC4600627588 /* FBSDKLibAnalyzer.m */,
+				EC31FC6A2671FC4600627588 /* FBSDKCrashHandler.m */,
+				EC31FC6B2671FC4600627588 /* FBSDKJSONValue.m */,
+				EC31FC6C2671FC4600627588 /* FBSDKBasicUtility.m */,
+				EC31FC6D2671FC4600627588 /* include */,
+				EC31FC802671FC4600627588 /* FBSDKURLSession.m */,
+				EC31FC812671FC4600627588 /* FBSDKTypeUtility.m */,
+				EC31FC822671FC4600627588 /* FBSDKURLSessionTask.m */,
+				EC31FC832671FC4600627588 /* FBSDKSafeCast.m */,
+				EC31FC842671FC4600627588 /* FBSDKUserDataStore.m */,
+			);
+			path = FBSDKCoreKit_Basics;
+			sourceTree = "<group>";
+		};
+		EC31FC6D2671FC4600627588 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC6E2671FC4600627588 /* FBSDKTypeUtility.h */,
+				EC31FC6F2671FC4600627588 /* FBSDKFileManaging.h */,
+				EC31FC702671FC4600627588 /* FBSDKInfoDictionaryProviding.h */,
+				EC31FC712671FC4600627588 /* NSBundle+InfoDictionaryProviding.h */,
+				EC31FC722671FC4600627588 /* FBSDKURLSessionTask.h */,
+				EC31FC732671FC4600627588 /* FBSDKFileDataExtracting.h */,
+				EC31FC742671FC4600627588 /* FBSDKCrashHandlerProtocol.h */,
+				EC31FC752671FC4600627588 /* FBSDKUserDataStore.h */,
+				EC31FC762671FC4600627588 /* FBSDKSafeCast.h */,
+				EC31FC772671FC4600627588 /* FBSDKCrashHandler.h */,
+				EC31FC782671FC4600627588 /* FBSDKLibAnalyzer.h */,
+				EC31FC792671FC4600627588 /* FBSDKCrashHandler+CrashHandlerProtocol.h */,
+				EC31FC7A2671FC4600627588 /* FBSDKBasicUtility.h */,
+				EC31FC7B2671FC4600627588 /* FBSDKJSONValue.h */,
+				EC31FC7C2671FC4600627588 /* FBSDKURLSession.h */,
+				EC31FC7D2671FC4600627588 /* FBSDKCoreKit_Basics.h */,
+				EC31FC7E2671FC4600627588 /* FBSDKCrashObserving.h */,
+				EC31FC7F2671FC4600627588 /* FBSDKSessionProviding.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		EC31FC852671FC4600627588 /* Yodo1SaAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC862671FC4600627588 /* Yodo1SensorsAnalyticsSDK.bundle */,
+				EC31FC872671FC4600627588 /* Yodo1SaAnalyticsSDK.framework */,
+			);
+			path = Yodo1SaAnalytics;
+			sourceTree = "<group>";
+		};
+		EC31FC882671FC4600627588 /* TapjoySDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC892671FC4600627588 /* TapjoySDK_iOS_v12.8.0 */,
+			);
+			path = TapjoySDK;
+			sourceTree = "<group>";
+		};
+		EC31FC892671FC4600627588 /* TapjoySDK_iOS_v12.8.0 */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC8A2671FC4600627588 /* Libraries */,
+			);
+			path = TapjoySDK_iOS_v12.8.0;
+			sourceTree = "<group>";
+		};
+		EC31FC8A2671FC4600627588 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC8B2671FC4600627588 /* Tapjoy.framework */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		EC31FC8C2671FC4600627588 /* Yodo1Admob */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC8D2671FC4600627588 /* GoogleAppMeasurement.framework */,
+				EC31FC8E2671FC4600627588 /* GoogleUtilities.framework */,
+				EC31FC8F2671FC4600627588 /* PromisesObjC.framework */,
+				EC31FC902671FC4600627588 /* nanopb.framework */,
+				EC31FC912671FC4600627588 /* GoogleMobileAds.framework */,
+				EC31FC922671FC4600627588 /* UserMessagingPlatform.framework */,
+			);
+			path = Yodo1Admob;
+			sourceTree = "<group>";
+		};
+		EC31FC932671FC4600627588 /* AppLovinSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC942671FC4600627588 /* applovin-ios-sdk-10.2.1 */,
+			);
+			path = AppLovinSDK;
+			sourceTree = "<group>";
+		};
+		EC31FC942671FC4600627588 /* applovin-ios-sdk-10.2.1 */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC952671FC4600627588 /* appledoc */,
+				EC31FCA92671FC4600627588 /* AppLovinSDK.framework */,
+				EC31FCAA2671FC4600627588 /* AppLovinSDKResources.bundle */,
+			);
+			path = "applovin-ios-sdk-10.2.1";
+			sourceTree = "<group>";
+		};
+		EC31FC952671FC4600627588 /* appledoc */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC962671FC4600627588 /* css */,
+				EC31FCA12671FC4600627588 /* js */,
+				EC31FCA32671FC4600627588 /* img */,
+			);
+			path = appledoc;
+			sourceTree = "<group>";
+		};
+		EC31FC962671FC4600627588 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC972671FC4600627588 /* scss */,
+				EC31FCA02671FC4600627588 /* style.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		EC31FC972671FC4600627588 /* scss */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FC982671FC4600627588 /* _index.scss */,
+				EC31FC992671FC4600627588 /* _variables.scss */,
+				EC31FC9A2671FC4600627588 /* _xcode.scss */,
+				EC31FC9B2671FC4600627588 /* _print.scss */,
+				EC31FC9C2671FC4600627588 /* _layout.scss */,
+				EC31FC9D2671FC4600627588 /* _object.scss */,
+				EC31FC9E2671FC4600627588 /* style.scss */,
+				EC31FC9F2671FC4600627588 /* _normalize.scss */,
+			);
+			path = scss;
+			sourceTree = "<group>";
+		};
+		EC31FCA12671FC4600627588 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCA22671FC4600627588 /* script.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		EC31FCA32671FC4600627588 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCA42671FC4600627588 /* library_background.png */,
+				EC31FCA52671FC4600627588 /* disclosure.png */,
+				EC31FCA62671FC4600627588 /* disclosure_open.png */,
+				EC31FCA72671FC4600627588 /* button_bar_background.png */,
+				EC31FCA82671FC4600627588 /* title_background.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		EC31FCAB2671FC4600627588 /* YandexMobileAds */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCAC2671FC4600627588 /* static */,
+			);
+			path = YandexMobileAds;
+			sourceTree = "<group>";
+		};
+		EC31FCAC2671FC4600627588 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCAD2671FC4600627588 /* YandexMobileAds.framework */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		EC31FCAE2671FC4600627588 /* FairBidSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCAF2671FC4600627588 /* FairBidSDK.framework */,
+			);
+			path = FairBidSDK;
+			sourceTree = "<group>";
+		};
+		EC31FCB02671FC4600627588 /* InMobiSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCB12671FC4600627588 /* InMobiSDK.framework */,
+			);
+			path = InMobiSDK;
+			sourceTree = "<group>";
+		};
+		EC31FCB22671FC4600627588 /* AdColony */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCB32671FC4600627588 /* README.md */,
+				EC31FCB42671FC4600627588 /* AdColony.framework */,
+			);
+			path = AdColony;
+			sourceTree = "<group>";
+		};
+		EC31FCB52671FC4600627588 /* VungleSDK-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCB62671FC4600627588 /* VungleSDK.framework */,
+			);
+			path = "VungleSDK-iOS";
+			sourceTree = "<group>";
+		};
+		EC31FCB72671FC4600627588 /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCB82671FC4600627588 /* YYClassInfo.h */,
+				EC31FCB92671FC4600627588 /* YYModel.h */,
+				EC31FCBA2671FC4600627588 /* NSObject+YYModel.m */,
+				EC31FCBB2671FC4600627588 /* YYClassInfo.m */,
+				EC31FCBC2671FC4600627588 /* NSObject+YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
+		EC31FCBD2671FC4600627588 /* FBAudienceNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCBE2671FC4700627588 /* Static */,
+			);
+			path = FBAudienceNetwork;
+			sourceTree = "<group>";
+		};
+		EC31FCBE2671FC4700627588 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCBF2671FC4700627588 /* FBAudienceNetwork.framework */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
+		EC31FCC02671FC4700627588 /* Ads-Global */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCC12671FC4700627588 /* PangleSDK */,
+			);
+			path = "Ads-Global";
+			sourceTree = "<group>";
+		};
+		EC31FCC12671FC4700627588 /* PangleSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCC22671FC4700627588 /* BUAdSDK.framework */,
+				EC31FCC32671FC4700627588 /* LICENSE */,
+				EC31FCC42671FC4700627588 /* BUCNAuxiliary.framework */,
+				EC31FCC52671FC4700627588 /* BUVAAuxiliary.framework */,
+				EC31FCC62671FC4700627588 /* BUFoundation.framework */,
+				EC31FCC72671FC4700627588 /* BUAdSDK.bundle */,
+			);
+			path = PangleSDK;
+			sourceTree = "<group>";
+		};
+		EC31FCC82671FC4700627588 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCC92671FC4700627588 /* UIKit+AFNetworking */,
+				EC31FCDD2671FC4700627588 /* AFNetworking */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		EC31FCC92671FC4700627588 /* UIKit+AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCCA2671FC4700627588 /* WKWebView+AFNetworking.h */,
+				EC31FCCB2671FC4700627588 /* UIProgressView+AFNetworking.m */,
+				EC31FCCC2671FC4700627588 /* UIButton+AFNetworking.h */,
+				EC31FCCD2671FC4700627588 /* UIRefreshControl+AFNetworking.m */,
+				EC31FCCE2671FC4700627588 /* UIImageView+AFNetworking.h */,
+				EC31FCCF2671FC4700627588 /* AFImageDownloader.h */,
+				EC31FCD02671FC4700627588 /* AFNetworkActivityIndicatorManager.m */,
+				EC31FCD12671FC4700627588 /* AFAutoPurgingImageCache.h */,
+				EC31FCD22671FC4700627588 /* UIActivityIndicatorView+AFNetworking.h */,
+				EC31FCD32671FC4700627588 /* WKWebView+AFNetworking.m */,
+				EC31FCD42671FC4700627588 /* UIProgressView+AFNetworking.h */,
+				EC31FCD52671FC4700627588 /* UIImageView+AFNetworking.m */,
+				EC31FCD62671FC4700627588 /* UIKit+AFNetworking.h */,
+				EC31FCD72671FC4700627588 /* UIRefreshControl+AFNetworking.h */,
+				EC31FCD82671FC4700627588 /* UIButton+AFNetworking.m */,
+				EC31FCD92671FC4700627588 /* UIActivityIndicatorView+AFNetworking.m */,
+				EC31FCDA2671FC4700627588 /* AFAutoPurgingImageCache.m */,
+				EC31FCDB2671FC4700627588 /* AFNetworkActivityIndicatorManager.h */,
+				EC31FCDC2671FC4700627588 /* AFImageDownloader.m */,
+			);
+			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		EC31FCDD2671FC4700627588 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCDE2671FC4700627588 /* AFSecurityPolicy.h */,
+				EC31FCDF2671FC4700627588 /* AFNetworkReachabilityManager.h */,
+				EC31FCE02671FC4700627588 /* AFURLSessionManager.h */,
+				EC31FCE12671FC4700627588 /* AFURLRequestSerialization.h */,
+				EC31FCE22671FC4700627588 /* AFURLResponseSerialization.m */,
+				EC31FCE32671FC4700627588 /* AFHTTPSessionManager.m */,
+				EC31FCE42671FC4700627588 /* AFURLResponseSerialization.h */,
+				EC31FCE52671FC4700627588 /* AFURLSessionManager.m */,
+				EC31FCE62671FC4700627588 /* AFURLRequestSerialization.m */,
+				EC31FCE72671FC4700627588 /* AFNetworking.h */,
+				EC31FCE82671FC4700627588 /* AFNetworkReachabilityManager.m */,
+				EC31FCE92671FC4700627588 /* AFSecurityPolicy.m */,
+				EC31FCEA2671FC4700627588 /* AFCompatibilityMacros.h */,
+				EC31FCEB2671FC4700627588 /* AFHTTPSessionManager.h */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		EC31FCEC2671FC4700627588 /* Tencent */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FCED2671FC4700627588 /* GDTRewardVideoAdNetworkAdapterProtocol.h */,
+				EC31FCEE2671FC4700627588 /* GDTNativeExpressAdView.h */,
+				EC31FCEF2671FC4700627588 /* GDTAdParams.h */,
+				EC31FCF02671FC4700627588 /* GDTAdTestSetting.h */,
+				EC31FCF12671FC4700627588 /* GDTUnifiedBannerView.h */,
+				EC31FCF22671FC4700627588 /* GDTServerSideVerificationOptions.h */,
+				EC31FCF32671FC4700627588 /* GDTSDKConfig.h */,
+				EC31FCF42671FC4700627588 /* GDTBaseAdNetworkAdapterProtocol.h */,
+				EC31FCF52671FC4700627588 /* GDTRewardVideoAd.h */,
+				EC31FCF62671FC4700627588 /* GDTSplashAd.h */,
+				EC31FCF72671FC4700627588 /* GDTNativeExpressAd.h */,
+				EC31FCF82671FC4700627588 /* GDTLogoView.h */,
+				EC31FCF92671FC4700627588 /* GDTMediaView.h */,
+				EC31FCFA2671FC4700627588 /* GDTUnifiedNativeAdView.h */,
+				EC31FCFB2671FC4700627588 /* GDTNativeExpressRewardVideoAd.h */,
+				EC31FCFC2671FC4700627588 /* GDTHybridAd.h */,
+				EC31FCFD2671FC4700627588 /* GDTUnifiedNativeAdDataObject.h */,
+				EC31FCFE2671FC4700627588 /* GDTSDKDefines.h */,
+				EC31FCFF2671FC4700627588 /* GDTUnifiedInterstitialAd.h */,
+				EC31FD002671FC4700627588 /* libGDTMobSDK.a */,
+				EC31FD012671FC4700627588 /* GDTNativeExpressProAdView.h */,
+				EC31FD022671FC4700627588 /* GDTLoadAdParams.h */,
+				EC31FD032671FC4700627588 /* GDTSplashZoomOutView.h */,
+				EC31FD042671FC4700627588 /* GDTRewardVideoAdNetworkConnectorProtocol.h */,
+				EC31FD052671FC4700627588 /* GDTNativeExpressProAdManager.h */,
+				EC31FD062671FC4700627588 /* GDTUnifiedNativeAd.h */,
+				EC31FD072671FC4700627588 /* GDTVideoConfig.h */,
+			);
+			path = Tencent;
+			sourceTree = "<group>";
+		};
+		EC31FD082671FC4700627588 /* IronSourceSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FD092671FC4700627588 /* IronSource */,
+			);
+			path = IronSourceSDK;
+			sourceTree = "<group>";
+		};
+		EC31FD092671FC4700627588 /* IronSource */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FD0A2671FC4700627588 /* IronSource.framework */,
+			);
+			path = IronSource;
+			sourceTree = "<group>";
+		};
+		EC31FD0B2671FC4700627588 /* YandexMobileMetrica */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FD0C2671FC4700627588 /* ios */,
+				EC31FD102671FC4700627588 /* helper */,
+			);
+			path = YandexMobileMetrica;
+			sourceTree = "<group>";
+		};
+		EC31FD0C2671FC4700627588 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FD0D2671FC4700627588 /* static */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		EC31FD0D2671FC4700627588 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				EC31FD0E2671FC4700627588 /* YandexMobileMetrica.framework */,
+				EC31FD0F2671FC4700627588 /* YandexMobileMetricaCrashes.framework */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
 		ECB98EB725F5FE280050D7C5 = {
 			isa = PBXGroup;
 			children = (
@@ -582,7 +1226,7 @@
 		ECB98EC225F5FE280050D7C5 /* MasStandardDemo */ = {
 			isa = PBXGroup;
 			children = (
-				ECEE834025F6028800D8EEF5 /* MasSdk */,
+				EC31FC292671FC4600627588 /* MasSdk */,
 				ECB98EC325F5FE280050D7C5 /* AppDelegate.h */,
 				ECB98EC425F5FE280050D7C5 /* AppDelegate.m */,
 				ECB98EC625F5FE280050D7C5 /* SceneDelegate.h */,
@@ -598,843 +1242,6 @@
 			path = MasStandardDemo;
 			sourceTree = "<group>";
 		};
-		ECEE834025F6028800D8EEF5 /* MasSdk */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE834125F6028800D8EEF5 /* Yodo1Mas.h */,
-				ECEE834225F6028800D8EEF5 /* Yodo1MasCommon.h */,
-				ECEE834825F6028800D8EEF5 /* libs */,
-				ECEE842625F6028900D8EEF5 /* Yodo1MasError.h */,
-				ECEE84F025F60DA900D8EEF5 /* adapter */,
-				ECEE842725F6028900D8EEF5 /* Yodo1MasAdEvent.h */,
-				ECEE842825F6028900D8EEF5 /* libMasStandard.a */,
-				ECEE842925F6028900D8EEF5 /* Yodo1Ads.h */,
-			);
-			path = MasSdk;
-			sourceTree = "<group>";
-		};
-		ECEE834825F6028800D8EEF5 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE84AA25F6033500D8EEF5 /* FBAudienceNetwork.framework */,
-				ECEE834925F6028800D8EEF5 /* myTargetSDK */,
-				ECEE834C25F6028800D8EEF5 /* UnityAds */,
-				ECEE834F25F6028800D8EEF5 /* FBSDKCoreKit */,
-				ECEE838B25F6028800D8EEF5 /* Yodo1SaAnalytics */,
-				ECEE838F25F6028800D8EEF5 /* TapjoySDK */,
-				ECEE839425F6028800D8EEF5 /* Yodo1Admob */,
-				ECEE839E25F6028800D8EEF5 /* AppLovinSDK */,
-				ECEE83E525F6028900D8EEF5 /* YandexMobileAds */,
-				ECEE83EB25F6028900D8EEF5 /* InMobiSDK */,
-				ECEE83EF25F6028900D8EEF5 /* VungleSDK-iOS */,
-				ECEE83F125F6028900D8EEF5 /* YYModel */,
-				ECEE83F725F6028900D8EEF5 /* AFNetworking */,
-				ECEE841C25F6028900D8EEF5 /* IronSourceSDK */,
-				ECEE841F25F6028900D8EEF5 /* nanopb */,
-				ECEE842025F6028900D8EEF5 /* YandexMobileMetrica */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		ECEE834925F6028800D8EEF5 /* myTargetSDK */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE834B25F6028800D8EEF5 /* MyTargetSDK.framework */,
-			);
-			path = myTargetSDK;
-			sourceTree = "<group>";
-		};
-		ECEE834C25F6028800D8EEF5 /* UnityAds */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE834E25F6028800D8EEF5 /* UnityAds.framework */,
-			);
-			path = UnityAds;
-			sourceTree = "<group>";
-		};
-		ECEE834F25F6028800D8EEF5 /* FBSDKCoreKit */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE835025F6028800D8EEF5 /* FBSDKCoreKit */,
-				ECEE837225F6028800D8EEF5 /* FacebookSDKStrings.bundle */,
-				ECEE837325F6028800D8EEF5 /* Sources */,
-			);
-			path = FBSDKCoreKit;
-			sourceTree = "<group>";
-		};
-		ECEE835025F6028800D8EEF5 /* FBSDKCoreKit */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE835125F6028800D8EEF5 /* FBSDKCoreKit */,
-			);
-			path = FBSDKCoreKit;
-			sourceTree = "<group>";
-		};
-		ECEE835125F6028800D8EEF5 /* FBSDKCoreKit */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE835225F6028800D8EEF5 /* Internal */,
-				ECEE836125F6028800D8EEF5 /* Internal_NoARC */,
-				ECEE836225F6028800D8EEF5 /* AppEvents */,
-				ECEE836C25F6028800D8EEF5 /* GraphAPI */,
-				ECEE836D25F6028800D8EEF5 /* Swift */,
-				ECEE836E25F6028800D8EEF5 /* AppLink */,
-			);
-			path = FBSDKCoreKit;
-			sourceTree = "<group>";
-		};
-		ECEE835225F6028800D8EEF5 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE835325F6028800D8EEF5 /* UI */,
-				ECEE835425F6028800D8EEF5 /* ErrorRecovery */,
-				ECEE835525F6028800D8EEF5 /* Instrument */,
-				ECEE835825F6028800D8EEF5 /* Cryptography */,
-				ECEE835925F6028800D8EEF5 /* Network */,
-				ECEE835A25F6028800D8EEF5 /* Base64 */,
-				ECEE835B25F6028800D8EEF5 /* WebDialog */,
-				ECEE835C25F6028800D8EEF5 /* TokenCaching */,
-				ECEE835D25F6028800D8EEF5 /* BridgeAPI */,
-				ECEE835F25F6028800D8EEF5 /* Device */,
-				ECEE836025F6028800D8EEF5 /* ServerConfiguration */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		ECEE835325F6028800D8EEF5 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		ECEE835425F6028800D8EEF5 /* ErrorRecovery */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ErrorRecovery;
-			sourceTree = "<group>";
-		};
-		ECEE835525F6028800D8EEF5 /* Instrument */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE835625F6028800D8EEF5 /* CrashReport */,
-				ECEE835725F6028800D8EEF5 /* ErrorReport */,
-			);
-			path = Instrument;
-			sourceTree = "<group>";
-		};
-		ECEE835625F6028800D8EEF5 /* CrashReport */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CrashReport;
-			sourceTree = "<group>";
-		};
-		ECEE835725F6028800D8EEF5 /* ErrorReport */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ErrorReport;
-			sourceTree = "<group>";
-		};
-		ECEE835825F6028800D8EEF5 /* Cryptography */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cryptography;
-			sourceTree = "<group>";
-		};
-		ECEE835925F6028800D8EEF5 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		ECEE835A25F6028800D8EEF5 /* Base64 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Base64;
-			sourceTree = "<group>";
-		};
-		ECEE835B25F6028800D8EEF5 /* WebDialog */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WebDialog;
-			sourceTree = "<group>";
-		};
-		ECEE835C25F6028800D8EEF5 /* TokenCaching */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TokenCaching;
-			sourceTree = "<group>";
-		};
-		ECEE835D25F6028800D8EEF5 /* BridgeAPI */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE835E25F6028800D8EEF5 /* ProtocolVersions */,
-			);
-			path = BridgeAPI;
-			sourceTree = "<group>";
-		};
-		ECEE835E25F6028800D8EEF5 /* ProtocolVersions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ProtocolVersions;
-			sourceTree = "<group>";
-		};
-		ECEE835F25F6028800D8EEF5 /* Device */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Device;
-			sourceTree = "<group>";
-		};
-		ECEE836025F6028800D8EEF5 /* ServerConfiguration */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ServerConfiguration;
-			sourceTree = "<group>";
-		};
-		ECEE836125F6028800D8EEF5 /* Internal_NoARC */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Internal_NoARC;
-			sourceTree = "<group>";
-		};
-		ECEE836225F6028800D8EEF5 /* AppEvents */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE836325F6028800D8EEF5 /* Internal */,
-			);
-			path = AppEvents;
-			sourceTree = "<group>";
-		};
-		ECEE836325F6028800D8EEF5 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE836425F6028800D8EEF5 /* EventDeactivation */,
-				ECEE836525F6028800D8EEF5 /* AAM */,
-				ECEE836625F6028800D8EEF5 /* Codeless */,
-				ECEE836725F6028800D8EEF5 /* SKAdNetwork */,
-				ECEE836825F6028800D8EEF5 /* SuggestedEvents */,
-				ECEE836925F6028800D8EEF5 /* ML */,
-				ECEE836A25F6028800D8EEF5 /* Integrity */,
-				ECEE836B25F6028800D8EEF5 /* ViewHierarchy */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		ECEE836425F6028800D8EEF5 /* EventDeactivation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EventDeactivation;
-			sourceTree = "<group>";
-		};
-		ECEE836525F6028800D8EEF5 /* AAM */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AAM;
-			sourceTree = "<group>";
-		};
-		ECEE836625F6028800D8EEF5 /* Codeless */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Codeless;
-			sourceTree = "<group>";
-		};
-		ECEE836725F6028800D8EEF5 /* SKAdNetwork */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SKAdNetwork;
-			sourceTree = "<group>";
-		};
-		ECEE836825F6028800D8EEF5 /* SuggestedEvents */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SuggestedEvents;
-			sourceTree = "<group>";
-		};
-		ECEE836925F6028800D8EEF5 /* ML */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ML;
-			sourceTree = "<group>";
-		};
-		ECEE836A25F6028800D8EEF5 /* Integrity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Integrity;
-			sourceTree = "<group>";
-		};
-		ECEE836B25F6028800D8EEF5 /* ViewHierarchy */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewHierarchy;
-			sourceTree = "<group>";
-		};
-		ECEE836C25F6028800D8EEF5 /* GraphAPI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GraphAPI;
-			sourceTree = "<group>";
-		};
-		ECEE836D25F6028800D8EEF5 /* Swift */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Swift;
-			sourceTree = "<group>";
-		};
-		ECEE836E25F6028800D8EEF5 /* AppLink */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE836F25F6028800D8EEF5 /* Internal */,
-				ECEE837025F6028800D8EEF5 /* Resolver */,
-			);
-			path = AppLink;
-			sourceTree = "<group>";
-		};
-		ECEE836F25F6028800D8EEF5 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		ECEE837025F6028800D8EEF5 /* Resolver */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resolver;
-			sourceTree = "<group>";
-		};
-		ECEE837325F6028800D8EEF5 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE837425F6028800D8EEF5 /* FBSDKCoreKit_Basics */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		ECEE837425F6028800D8EEF5 /* FBSDKCoreKit_Basics */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE837525F6028800D8EEF5 /* FBSDKLibAnalyzer.m */,
-				ECEE837625F6028800D8EEF5 /* FBSDKCrashHandler.m */,
-				ECEE837725F6028800D8EEF5 /* FBSDKJSONValue.m */,
-				ECEE837825F6028800D8EEF5 /* FBSDKBasicUtility.m */,
-				ECEE837925F6028800D8EEF5 /* include */,
-				ECEE838625F6028800D8EEF5 /* FBSDKURLSession.m */,
-				ECEE838725F6028800D8EEF5 /* FBSDKTypeUtility.m */,
-				ECEE838825F6028800D8EEF5 /* FBSDKURLSessionTask.m */,
-				ECEE838925F6028800D8EEF5 /* FBSDKSafeCast.m */,
-				ECEE838A25F6028800D8EEF5 /* FBSDKUserDataStore.m */,
-			);
-			path = FBSDKCoreKit_Basics;
-			sourceTree = "<group>";
-		};
-		ECEE837925F6028800D8EEF5 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE837A25F6028800D8EEF5 /* FBSDKTypeUtility.h */,
-				ECEE837B25F6028800D8EEF5 /* FBSDKUserDataStore+Internal.h */,
-				ECEE837C25F6028800D8EEF5 /* FBSDKURLSessionTask.h */,
-				ECEE837D25F6028800D8EEF5 /* FBSDKUserDataStore.h */,
-				ECEE837E25F6028800D8EEF5 /* FBSDKSafeCast.h */,
-				ECEE837F25F6028800D8EEF5 /* FBSDKCrashHandler.h */,
-				ECEE838025F6028800D8EEF5 /* FBSDKLibAnalyzer.h */,
-				ECEE838125F6028800D8EEF5 /* FBSDKBasicUtility.h */,
-				ECEE838225F6028800D8EEF5 /* FBSDKJSONValue.h */,
-				ECEE838325F6028800D8EEF5 /* FBSDKURLSession.h */,
-				ECEE838425F6028800D8EEF5 /* FBSDKCoreKit_Basics.h */,
-				ECEE838525F6028800D8EEF5 /* FBSDKCrashObserving.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		ECEE838B25F6028800D8EEF5 /* Yodo1SaAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE838C25F6028800D8EEF5 /* Yodo1SensorsAnalyticsSDK.bundle */,
-				ECEE838E25F6028800D8EEF5 /* Yodo1SaAnalyticsSDK.framework */,
-			);
-			path = Yodo1SaAnalytics;
-			sourceTree = "<group>";
-		};
-		ECEE838F25F6028800D8EEF5 /* TapjoySDK */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE839025F6028800D8EEF5 /* TapjoySDK_iOS_v12.7.1 */,
-			);
-			path = TapjoySDK;
-			sourceTree = "<group>";
-		};
-		ECEE839025F6028800D8EEF5 /* TapjoySDK_iOS_v12.7.1 */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE839125F6028800D8EEF5 /* Libraries */,
-			);
-			path = TapjoySDK_iOS_v12.7.1;
-			sourceTree = "<group>";
-		};
-		ECEE839125F6028800D8EEF5 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE839225F6028800D8EEF5 /* Tapjoy.embeddedframework */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		ECEE839225F6028800D8EEF5 /* Tapjoy.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE839325F6028800D8EEF5 /* Tapjoy.framework */,
-			);
-			path = Tapjoy.embeddedframework;
-			sourceTree = "<group>";
-		};
-		ECEE839425F6028800D8EEF5 /* Yodo1Admob */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE839525F6028800D8EEF5 /* GoogleAppMeasurement.framework */,
-				ECEE839625F6028800D8EEF5 /* PersonalizedAdConsent.framework */,
-				ECEE839725F6028800D8EEF5 /* GoogleUtilities.framework */,
-				ECEE839825F6028800D8EEF5 /* PersonalizedAdConsent.bundle */,
-				ECEE839925F6028800D8EEF5 /* PromisesObjC.framework */,
-				ECEE839A25F6028800D8EEF5 /* nanopb.framework */,
-				ECEE839B25F6028800D8EEF5 /* GoogleMobileAds.framework */,
-				ECEE839D25F6028800D8EEF5 /* UserMessagingPlatform.framework */,
-			);
-			path = Yodo1Admob;
-			sourceTree = "<group>";
-		};
-		ECEE839E25F6028800D8EEF5 /* AppLovinSDK */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE839F25F6028800D8EEF5 /* applovin-ios-sdk-6.15.2 */,
-			);
-			path = AppLovinSDK;
-			sourceTree = "<group>";
-		};
-		ECEE839F25F6028800D8EEF5 /* applovin-ios-sdk-6.15.2 */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83A025F6028800D8EEF5 /* appledoc */,
-				ECEE83E325F6028800D8EEF5 /* AppLovinSDK.framework */,
-				ECEE83E425F6028800D8EEF5 /* AppLovinSDKResources.bundle */,
-			);
-			path = "applovin-ios-sdk-6.15.2";
-			sourceTree = "<group>";
-		};
-		ECEE83A025F6028800D8EEF5 /* appledoc */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83A125F6028800D8EEF5 /* Blocks */,
-				ECEE83A325F6028800D8EEF5 /* index.html */,
-				ECEE83A425F6028800D8EEF5 /* css */,
-				ECEE83AF25F6028800D8EEF5 /* Classes */,
-				ECEE83CB25F6028800D8EEF5 /* hierarchy.html */,
-				ECEE83CC25F6028800D8EEF5 /* js */,
-				ECEE83CE25F6028800D8EEF5 /* Constants */,
-				ECEE83D025F6028800D8EEF5 /* img */,
-				ECEE83D625F6028800D8EEF5 /* Protocols */,
-			);
-			path = appledoc;
-			sourceTree = "<group>";
-		};
-		ECEE83A125F6028800D8EEF5 /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83A225F6028800D8EEF5 /* ALSdkInitializationCompletionHandler.html */,
-			);
-			path = Blocks;
-			sourceTree = "<group>";
-		};
-		ECEE83A425F6028800D8EEF5 /* css */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83A525F6028800D8EEF5 /* scss */,
-				ECEE83AE25F6028800D8EEF5 /* style.css */,
-			);
-			path = css;
-			sourceTree = "<group>";
-		};
-		ECEE83A525F6028800D8EEF5 /* scss */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83A625F6028800D8EEF5 /* _index.scss */,
-				ECEE83A725F6028800D8EEF5 /* _variables.scss */,
-				ECEE83A825F6028800D8EEF5 /* _xcode.scss */,
-				ECEE83A925F6028800D8EEF5 /* _print.scss */,
-				ECEE83AA25F6028800D8EEF5 /* _layout.scss */,
-				ECEE83AB25F6028800D8EEF5 /* _object.scss */,
-				ECEE83AC25F6028800D8EEF5 /* style.scss */,
-				ECEE83AD25F6028800D8EEF5 /* _normalize.scss */,
-			);
-			path = scss;
-			sourceTree = "<group>";
-		};
-		ECEE83AF25F6028800D8EEF5 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83B025F6028800D8EEF5 /* MARewardedAd.html */,
-				ECEE83B125F6028800D8EEF5 /* MAAdView.html */,
-				ECEE83B225F6028800D8EEF5 /* ALRewardedInterstitialAd.html */,
-				ECEE83B325F6028800D8EEF5 /* ALSdkSettings.html */,
-				ECEE83B425F6028800D8EEF5 /* MAAd.html */,
-				ECEE83B525F6028800D8EEF5 /* MAAdFormat.html */,
-				ECEE83B625F6028800D8EEF5 /* ALAdView.html */,
-				ECEE83B725F6028800D8EEF5 /* ALPostbackService.html */,
-				ECEE83B825F6028800D8EEF5 /* ALEventService.html */,
-				ECEE83B925F6028800D8EEF5 /* ALCCommunicator.html */,
-				ECEE83BA25F6028800D8EEF5 /* ALSdk.html */,
-				ECEE83BB25F6028800D8EEF5 /* ALUserService.html */,
-				ECEE83BC25F6028800D8EEF5 /* ALAd.html */,
-				ECEE83BD25F6028800D8EEF5 /* ALCMessage.html */,
-				ECEE83BE25F6028800D8EEF5 /* ALAdService.html */,
-				ECEE83BF25F6028800D8EEF5 /* ALCMessagingService.html */,
-				ECEE83C025F6028800D8EEF5 /* ALVariableService.html */,
-				ECEE83C125F6028800D8EEF5 /* ALAdSize.html */,
-				ECEE83C225F6028800D8EEF5 /* MARewardedInterstitialAd.html */,
-				ECEE83C325F6028800D8EEF5 /* ALSdkConfiguration.html */,
-				ECEE83C425F6028800D8EEF5 /* ALAdType.html */,
-				ECEE83C525F6028800D8EEF5 /* MAInterstitialAd.html */,
-				ECEE83C625F6028800D8EEF5 /* ALPrivacySettings.html */,
-				ECEE83C725F6028800D8EEF5 /* ALUserSegment.html */,
-				ECEE83C825F6028800D8EEF5 /* ALInterstitialAd.html */,
-				ECEE83C925F6028800D8EEF5 /* ALIncentivizedInterstitialAd.html */,
-				ECEE83CA25F6028800D8EEF5 /* MAReward.html */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		ECEE83CC25F6028800D8EEF5 /* js */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83CD25F6028800D8EEF5 /* script.js */,
-			);
-			path = js;
-			sourceTree = "<group>";
-		};
-		ECEE83CE25F6028800D8EEF5 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83CF25F6028800D8EEF5 /* ALAdViewDisplayErrorCode.html */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		ECEE83D025F6028800D8EEF5 /* img */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83D125F6028800D8EEF5 /* library_background.png */,
-				ECEE83D225F6028800D8EEF5 /* disclosure.png */,
-				ECEE83D325F6028800D8EEF5 /* disclosure_open.png */,
-				ECEE83D425F6028800D8EEF5 /* button_bar_background.png */,
-				ECEE83D525F6028800D8EEF5 /* title_background.png */,
-			);
-			path = img;
-			sourceTree = "<group>";
-		};
-		ECEE83D625F6028800D8EEF5 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83D725F6028800D8EEF5 /* MAAdDelegate.html */,
-				ECEE83D825F6028800D8EEF5 /* MARewardedAdDelegate.html */,
-				ECEE83D925F6028800D8EEF5 /* ALCSubscriber.html */,
-				ECEE83DA25F6028800D8EEF5 /* ALCPublisher.html */,
-				ECEE83DB25F6028800D8EEF5 /* ALPostbackDelegate.html */,
-				ECEE83DC25F6028800D8EEF5 /* ALAdDisplayDelegate.html */,
-				ECEE83DD25F6028800D8EEF5 /* MAAdViewAdDelegate.html */,
-				ECEE83DE25F6028800D8EEF5 /* ALAdVideoPlaybackDelegate.html */,
-				ECEE83DF25F6028800D8EEF5 /* ALAdLoadDelegate.html */,
-				ECEE83E025F6028800D8EEF5 /* ALAdRewardDelegate.html */,
-				ECEE83E125F6028800D8EEF5 /* ALCEntity.html */,
-				ECEE83E225F6028800D8EEF5 /* ALAdViewEventDelegate.html */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		ECEE83E525F6028900D8EEF5 /* YandexMobileAds */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83E625F6028900D8EEF5 /* static */,
-			);
-			path = YandexMobileAds;
-			sourceTree = "<group>";
-		};
-		ECEE83E625F6028900D8EEF5 /* static */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83E725F6028900D8EEF5 /* YandexMobileAds.framework */,
-			);
-			path = static;
-			sourceTree = "<group>";
-		};
-		ECEE83EB25F6028900D8EEF5 /* InMobiSDK */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83ED25F6028900D8EEF5 /* InMobiSDK.xcframework */,
-				ECEE83EE25F6028900D8EEF5 /* INMMoatMobileAppKit.framework */,
-			);
-			path = InMobiSDK;
-			sourceTree = "<group>";
-		};
-		ECEE83EF25F6028900D8EEF5 /* VungleSDK-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83F025F6028900D8EEF5 /* VungleSDK.framework */,
-			);
-			path = "VungleSDK-iOS";
-			sourceTree = "<group>";
-		};
-		ECEE83F125F6028900D8EEF5 /* YYModel */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83F225F6028900D8EEF5 /* YYClassInfo.h */,
-				ECEE83F325F6028900D8EEF5 /* YYModel.h */,
-				ECEE83F425F6028900D8EEF5 /* NSObject+YYModel.m */,
-				ECEE83F525F6028900D8EEF5 /* YYClassInfo.m */,
-				ECEE83F625F6028900D8EEF5 /* NSObject+YYModel.h */,
-			);
-			path = YYModel;
-			sourceTree = "<group>";
-		};
-		ECEE83F725F6028900D8EEF5 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83F925F6028900D8EEF5 /* UIKit+AFNetworking */,
-				ECEE840D25F6028900D8EEF5 /* AFNetworking */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		ECEE83F925F6028900D8EEF5 /* UIKit+AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE83FA25F6028900D8EEF5 /* WKWebView+AFNetworking.h */,
-				ECEE83FB25F6028900D8EEF5 /* UIProgressView+AFNetworking.m */,
-				ECEE83FC25F6028900D8EEF5 /* UIButton+AFNetworking.h */,
-				ECEE83FD25F6028900D8EEF5 /* UIRefreshControl+AFNetworking.m */,
-				ECEE83FE25F6028900D8EEF5 /* UIImageView+AFNetworking.h */,
-				ECEE83FF25F6028900D8EEF5 /* AFImageDownloader.h */,
-				ECEE840025F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.m */,
-				ECEE840125F6028900D8EEF5 /* AFAutoPurgingImageCache.h */,
-				ECEE840225F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.h */,
-				ECEE840325F6028900D8EEF5 /* WKWebView+AFNetworking.m */,
-				ECEE840425F6028900D8EEF5 /* UIProgressView+AFNetworking.h */,
-				ECEE840525F6028900D8EEF5 /* UIImageView+AFNetworking.m */,
-				ECEE840625F6028900D8EEF5 /* UIKit+AFNetworking.h */,
-				ECEE840725F6028900D8EEF5 /* UIRefreshControl+AFNetworking.h */,
-				ECEE840825F6028900D8EEF5 /* UIButton+AFNetworking.m */,
-				ECEE840925F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.m */,
-				ECEE840A25F6028900D8EEF5 /* AFAutoPurgingImageCache.m */,
-				ECEE840B25F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.h */,
-				ECEE840C25F6028900D8EEF5 /* AFImageDownloader.m */,
-			);
-			path = "UIKit+AFNetworking";
-			sourceTree = "<group>";
-		};
-		ECEE840D25F6028900D8EEF5 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE840E25F6028900D8EEF5 /* AFSecurityPolicy.h */,
-				ECEE840F25F6028900D8EEF5 /* AFNetworkReachabilityManager.h */,
-				ECEE841025F6028900D8EEF5 /* AFURLSessionManager.h */,
-				ECEE841125F6028900D8EEF5 /* AFURLRequestSerialization.h */,
-				ECEE841225F6028900D8EEF5 /* AFURLResponseSerialization.m */,
-				ECEE841325F6028900D8EEF5 /* AFHTTPSessionManager.m */,
-				ECEE841425F6028900D8EEF5 /* AFURLResponseSerialization.h */,
-				ECEE841525F6028900D8EEF5 /* AFURLSessionManager.m */,
-				ECEE841625F6028900D8EEF5 /* AFURLRequestSerialization.m */,
-				ECEE841725F6028900D8EEF5 /* AFNetworking.h */,
-				ECEE841825F6028900D8EEF5 /* AFNetworkReachabilityManager.m */,
-				ECEE841925F6028900D8EEF5 /* AFSecurityPolicy.m */,
-				ECEE841A25F6028900D8EEF5 /* AFCompatibilityMacros.h */,
-				ECEE841B25F6028900D8EEF5 /* AFHTTPSessionManager.h */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		ECEE841C25F6028900D8EEF5 /* IronSourceSDK */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE841D25F6028900D8EEF5 /* IronSource */,
-			);
-			path = IronSourceSDK;
-			sourceTree = "<group>";
-		};
-		ECEE841D25F6028900D8EEF5 /* IronSource */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE841E25F6028900D8EEF5 /* IronSource.framework */,
-			);
-			path = IronSource;
-			sourceTree = "<group>";
-		};
-		ECEE841F25F6028900D8EEF5 /* nanopb */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = nanopb;
-			sourceTree = "<group>";
-		};
-		ECEE842025F6028900D8EEF5 /* YandexMobileMetrica */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE842125F6028900D8EEF5 /* ios */,
-				ECEE842525F6028900D8EEF5 /* helper */,
-			);
-			path = YandexMobileMetrica;
-			sourceTree = "<group>";
-		};
-		ECEE842125F6028900D8EEF5 /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE842225F6028900D8EEF5 /* static */,
-			);
-			path = ios;
-			sourceTree = "<group>";
-		};
-		ECEE842225F6028900D8EEF5 /* static */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE842325F6028900D8EEF5 /* YandexMobileMetrica.framework */,
-				ECEE842425F6028900D8EEF5 /* YandexMobileMetricaCrashes.framework */,
-			);
-			path = static;
-			sourceTree = "<group>";
-		};
-		ECEE84F025F60DA900D8EEF5 /* adapter */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE84F125F60DA900D8EEF5 /* unity */,
-				ECEE84F525F60DA900D8EEF5 /* vungle */,
-				ECEE84F925F60DA900D8EEF5 /* inmobi */,
-				ECEE84FD25F60DA900D8EEF5 /* tapjoy */,
-				ECEE850225F60DA900D8EEF5 /* applovin */,
-				ECEE850625F60DA900D8EEF5 /* admob */,
-				ECEE850A25F60DA900D8EEF5 /* mytarget */,
-				ECEE850E25F60DA900D8EEF5 /* facebook */,
-				ECEE851225F60DA900D8EEF5 /* yandex */,
-				ECEE851925F60DA900D8EEF5 /* ironsource */,
-			);
-			path = adapter;
-			sourceTree = "<group>";
-		};
-		ECEE84F125F60DA900D8EEF5 /* unity */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE84F225F60DA900D8EEF5 /* AppLovinMediationUnityAdsAdapter.framework */,
-				ECEE84F325F60DA900D8EEF5 /* ISUnityAdsAdapter.framework */,
-				ECEE84F425F60DA900D8EEF5 /* UnityAdapter.framework */,
-			);
-			path = unity;
-			sourceTree = "<group>";
-		};
-		ECEE84F525F60DA900D8EEF5 /* vungle */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE84F625F60DA900D8EEF5 /* AppLovinMediationVungleAdapter.framework */,
-				ECEE84F725F60DA900D8EEF5 /* ISVungleAdapter.framework */,
-				ECEE84F825F60DA900D8EEF5 /* VungleAdapter.framework */,
-			);
-			path = vungle;
-			sourceTree = "<group>";
-		};
-		ECEE84F925F60DA900D8EEF5 /* inmobi */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE84FA25F60DA900D8EEF5 /* AppLovinMediationInMobiAdapter.framework */,
-				ECEE84FB25F60DA900D8EEF5 /* InMobiAdapter.framework */,
-				ECEE84FC25F60DA900D8EEF5 /* ISInMobiAdapter.framework */,
-			);
-			path = inmobi;
-			sourceTree = "<group>";
-		};
-		ECEE84FD25F60DA900D8EEF5 /* tapjoy */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE84FE25F60DA900D8EEF5 /* ISTapjoyAdapter.framework */,
-				ECEE850025F60DA900D8EEF5 /* TapjoyAdapter.framework */,
-				ECEE850125F60DA900D8EEF5 /* AppLovinMediationTapjoyAdapter.framework */,
-			);
-			path = tapjoy;
-			sourceTree = "<group>";
-		};
-		ECEE850225F60DA900D8EEF5 /* applovin */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE850325F60DA900D8EEF5 /* AppLovinAdapter.framework */,
-				ECEE850425F60DA900D8EEF5 /* ISAppLovinAdapter.framework */,
-			);
-			path = applovin;
-			sourceTree = "<group>";
-		};
-		ECEE850625F60DA900D8EEF5 /* admob */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE850725F60DA900D8EEF5 /* AppLovinMediationGoogleAdapter.framework */,
-				ECEE850825F60DA900D8EEF5 /* AdMobYandexMobileAdsAdapters.framework */,
-				ECEE850925F60DA900D8EEF5 /* ISAdMobAdapter.framework */,
-			);
-			path = admob;
-			sourceTree = "<group>";
-		};
-		ECEE850A25F60DA900D8EEF5 /* mytarget */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE850B25F60DA900D8EEF5 /* MyTargetAdapter.framework */,
-				ECEE850C25F60DA900D8EEF5 /* ISMyTargetAdapter.framework */,
-				ECEE850D25F60DA900D8EEF5 /* AppLovinMediationMyTargetAdapter.framework */,
-			);
-			path = mytarget;
-			sourceTree = "<group>";
-		};
-		ECEE850E25F60DA900D8EEF5 /* facebook */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE850F25F60DA900D8EEF5 /* FacebookAdapter.framework */,
-				ECEE851025F60DA900D8EEF5 /* ISFacebookAdapter.framework */,
-				ECEE851125F60DA900D8EEF5 /* AppLovinMediationFacebookAdapter.framework */,
-			);
-			path = facebook;
-			sourceTree = "<group>";
-		};
-		ECEE851225F60DA900D8EEF5 /* yandex */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE851825F60DA900D8EEF5 /* AppLovinMediationYandexAdapter.framework */,
-			);
-			path = yandex;
-			sourceTree = "<group>";
-		};
-		ECEE851925F60DA900D8EEF5 /* ironsource */ = {
-			isa = PBXGroup;
-			children = (
-				ECEE851A25F60DA900D8EEF5 /* IronSourceAdapter.framework */,
-				ECEE851B25F60DA900D8EEF5 /* AppLovinMediationIronSourceAdapter.framework */,
-			);
-			path = ironsource;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1442,9 +1249,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECB98ED925F5FE2A0050D7C5 /* Build configuration list for PBXNativeTarget "MasStandardDemo" */;
 			buildPhases = (
+				EC31FC212671ECBD00627588 /* Embed Frameworks */,
+				ECB98EBE25F5FE280050D7C5 /* Resources */,
 				ECB98EBC25F5FE280050D7C5 /* Sources */,
 				ECB98EBD25F5FE280050D7C5 /* Frameworks */,
-				ECB98EBE25F5FE280050D7C5 /* Resources */,
+				EC31FC262671F29000627588 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1491,112 +1300,94 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECEE847225F6028900D8EEF5 /* ALAdViewDisplayErrorCode.html in Resources */,
-				ECEE847325F6028900D8EEF5 /* library_background.png in Resources */,
-				ECEE846425F6028900D8EEF5 /* ALCMessagingService.html in Resources */,
-				ECEE848025F6028900D8EEF5 /* ALAdLoadDelegate.html in Resources */,
-				ECEE847625F6028900D8EEF5 /* button_bar_background.png in Resources */,
-				ECEE845E25F6028900D8EEF5 /* ALCCommunicator.html in Resources */,
-				ECEE848225F6028900D8EEF5 /* ALCEntity.html in Resources */,
-				ECEE846E25F6028900D8EEF5 /* ALIncentivizedInterstitialAd.html in Resources */,
-				ECEE848325F6028900D8EEF5 /* ALAdViewEventDelegate.html in Resources */,
+				EC31FD542671FC4800627588 /* _object.scss in Resources */,
+				EC31FD5F2671FC4800627588 /* AppLovinSDKResources.bundle in Resources */,
+				EC31FD6A2671FC4800627588 /* LICENSE in Resources */,
+				EC31FD5C2671FC4800627588 /* button_bar_background.png in Resources */,
+				EC31FD5D2671FC4800627588 /* title_background.png in Resources */,
+				EC31FD592671FC4800627588 /* library_background.png in Resources */,
+				EC31FD582671FC4800627588 /* script.js in Resources */,
 				ECB98ED325F5FE2A0050D7C5 /* LaunchScreen.storyboard in Resources */,
-				ECEE847B25F6028900D8EEF5 /* ALCPublisher.html in Resources */,
-				ECEE845625F6028900D8EEF5 /* MAAdView.html in Resources */,
-				ECEE846625F6028900D8EEF5 /* ALAdSize.html in Resources */,
-				ECEE845825F6028900D8EEF5 /* ALSdkSettings.html in Resources */,
-				ECEE847425F6028900D8EEF5 /* disclosure.png in Resources */,
-				ECEE845925F6028900D8EEF5 /* MAAd.html in Resources */,
-				ECEE846D25F6028900D8EEF5 /* ALInterstitialAd.html in Resources */,
-				ECEE848525F6028900D8EEF5 /* AppLovinSDKResources.bundle in Resources */,
-				ECEE845D25F6028900D8EEF5 /* ALEventService.html in Resources */,
-				ECEE846925F6028900D8EEF5 /* ALAdType.html in Resources */,
+				EC31FD3C2671FC4800627588 /* FacebookSDKStrings.bundle in Resources */,
+				EC31FD552671FC4800627588 /* style.scss in Resources */,
+				EC31FD462671FC4800627588 /* Yodo1SensorsAnalyticsSDK.bundle in Resources */,
+				EC31FD532671FC4800627588 /* _layout.scss in Resources */,
+				EC31FD502671FC4800627588 /* _variables.scss in Resources */,
+				EC31FD632671FC4800627588 /* README.md in Resources */,
+				EC31FD4F2671FC4800627588 /* _index.scss in Resources */,
+				EC31FD5A2671FC4800627588 /* disclosure.png in Resources */,
 				ECB98ED025F5FE2A0050D7C5 /* Assets.xcassets in Resources */,
-				ECEE845125F6028900D8EEF5 /* _object.scss in Resources */,
-				ECEE846325F6028900D8EEF5 /* ALAdService.html in Resources */,
-				ECEE846825F6028900D8EEF5 /* ALSdkConfiguration.html in Resources */,
-				ECEE847E25F6028900D8EEF5 /* MAAdViewAdDelegate.html in Resources */,
-				ECEE846725F6028900D8EEF5 /* MARewardedInterstitialAd.html in Resources */,
-				ECEE846025F6028900D8EEF5 /* ALUserService.html in Resources */,
-				ECEE847A25F6028900D8EEF5 /* ALCSubscriber.html in Resources */,
-				ECEE844D25F6028900D8EEF5 /* _variables.scss in Resources */,
-				ECEE846F25F6028900D8EEF5 /* MAReward.html in Resources */,
-				ECEE846C25F6028900D8EEF5 /* ALUserSegment.html in Resources */,
-				ECEE845325F6028900D8EEF5 /* _normalize.scss in Resources */,
-				ECEE846B25F6028900D8EEF5 /* ALPrivacySettings.html in Resources */,
-				ECEE846125F6028900D8EEF5 /* ALAd.html in Resources */,
-				ECEE843D25F6028900D8EEF5 /* Yodo1SensorsAnalyticsSDK.bundle in Resources */,
-				ECEE845A25F6028900D8EEF5 /* MAAdFormat.html in Resources */,
+				EC31FD562671FC4800627588 /* _normalize.scss in Resources */,
+				EC31FD162671FC4700627588 /* apply2xcode.sh in Resources */,
+				EC31FD6E2671FC4800627588 /* BUAdSDK.bundle in Resources */,
+				EC31FD512671FC4800627588 /* _xcode.scss in Resources */,
 				ECB98ECE25F5FE280050D7C5 /* Main.storyboard in Resources */,
-				ECEE845025F6028900D8EEF5 /* _layout.scss in Resources */,
-				ECEE848125F6028900D8EEF5 /* ALAdRewardDelegate.html in Resources */,
-				ECEE845F25F6028900D8EEF5 /* ALSdk.html in Resources */,
-				ECEE846225F6028900D8EEF5 /* ALCMessage.html in Resources */,
-				ECEE847125F6028900D8EEF5 /* script.js in Resources */,
-				ECEE845525F6028900D8EEF5 /* MARewardedAd.html in Resources */,
-				ECEE84A225F6028900D8EEF5 /* helper in Resources */,
-				ECEE844E25F6028900D8EEF5 /* _xcode.scss in Resources */,
-				ECEE845725F6028900D8EEF5 /* ALRewardedInterstitialAd.html in Resources */,
-				ECEE844A25F6028900D8EEF5 /* ALSdkInitializationCompletionHandler.html in Resources */,
-				ECEE844C25F6028900D8EEF5 /* _index.scss in Resources */,
-				ECEE844425F6028900D8EEF5 /* PersonalizedAdConsent.bundle in Resources */,
-				ECEE845C25F6028900D8EEF5 /* ALPostbackService.html in Resources */,
-				ECEE847C25F6028900D8EEF5 /* ALPostbackDelegate.html in Resources */,
-				ECEE846A25F6028900D8EEF5 /* MAInterstitialAd.html in Resources */,
-				ECEE847F25F6028900D8EEF5 /* ALAdVideoPlaybackDelegate.html in Resources */,
-				ECEE847525F6028900D8EEF5 /* disclosure_open.png in Resources */,
-				ECEE843325F6028900D8EEF5 /* FacebookSDKStrings.bundle in Resources */,
-				ECEE845B25F6028900D8EEF5 /* ALAdView.html in Resources */,
-				ECEE847925F6028900D8EEF5 /* MARewardedAdDelegate.html in Resources */,
-				ECEE844F25F6028900D8EEF5 /* _print.scss in Resources */,
-				ECEE845225F6028900D8EEF5 /* style.scss in Resources */,
-				ECEE847725F6028900D8EEF5 /* title_background.png in Resources */,
-				ECEE845425F6028900D8EEF5 /* style.css in Resources */,
-				ECEE846525F6028900D8EEF5 /* ALVariableService.html in Resources */,
-				ECEE847D25F6028900D8EEF5 /* ALAdDisplayDelegate.html in Resources */,
-				ECEE847025F6028900D8EEF5 /* hierarchy.html in Resources */,
-				ECEE847825F6028900D8EEF5 /* MAAdDelegate.html in Resources */,
-				ECEE844B25F6028900D8EEF5 /* index.html in Resources */,
+				EC31FD822671FC4800627588 /* helper in Resources */,
+				EC31FD572671FC4800627588 /* style.css in Resources */,
+				EC31FD522671FC4800627588 /* _print.scss in Resources */,
+				EC31FD182671FC4700627588 /* apply2xcode.py in Resources */,
+				EC31FD5B2671FC4800627588 /* disclosure_open.png in Resources */,
+				EC31FD172671FC4700627588 /* mod_pbxproj.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EC31FC262671F29000627588 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/FairBidSDK.framework/strip-frameworks.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ECB98EBC25F5FE280050D7C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECEE849025F6028900D8EEF5 /* UIProgressView+AFNetworking.m in Sources */,
-				ECEE843C25F6028900D8EEF5 /* FBSDKUserDataStore.m in Sources */,
-				ECEE849525F6028900D8EEF5 /* UIButton+AFNetworking.m in Sources */,
+				EC31FD6F2671FC4800627588 /* UIProgressView+AFNetworking.m in Sources */,
+				EC31FD452671FC4800627588 /* FBSDKUserDataStore.m in Sources */,
+				EC31FD742671FC4800627588 /* UIButton+AFNetworking.m in Sources */,
 				ECB98ECB25F5FE280050D7C5 /* ViewController.m in Sources */,
-				ECEE843625F6028900D8EEF5 /* FBSDKJSONValue.m in Sources */,
-				ECEE843B25F6028900D8EEF5 /* FBSDKSafeCast.m in Sources */,
-				ECEE843525F6028900D8EEF5 /* FBSDKCrashHandler.m in Sources */,
-				ECEE849725F6028900D8EEF5 /* AFAutoPurgingImageCache.m in Sources */,
-				ECEE843425F6028900D8EEF5 /* FBSDKLibAnalyzer.m in Sources */,
-				ECEE849125F6028900D8EEF5 /* UIRefreshControl+AFNetworking.m in Sources */,
-				ECEE849225F6028900D8EEF5 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				EC31FD3F2671FC4800627588 /* FBSDKJSONValue.m in Sources */,
+				EC31FD442671FC4800627588 /* FBSDKSafeCast.m in Sources */,
+				EC31FD3E2671FC4800627588 /* FBSDKCrashHandler.m in Sources */,
+				EC31FD762671FC4800627588 /* AFAutoPurgingImageCache.m in Sources */,
+				EC31FD3D2671FC4800627588 /* FBSDKLibAnalyzer.m in Sources */,
+				EC31FD702671FC4800627588 /* UIRefreshControl+AFNetworking.m in Sources */,
+				EC31FD712671FC4800627588 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				ECB98EC525F5FE280050D7C5 /* AppDelegate.m in Sources */,
-				ECEE843925F6028900D8EEF5 /* FBSDKTypeUtility.m in Sources */,
-				ECEE849425F6028900D8EEF5 /* UIImageView+AFNetworking.m in Sources */,
-				ECEE849925F6028900D8EEF5 /* AFURLResponseSerialization.m in Sources */,
-				ECEE849325F6028900D8EEF5 /* WKWebView+AFNetworking.m in Sources */,
-				ECEE849E25F6028900D8EEF5 /* AFSecurityPolicy.m in Sources */,
-				ECEE849625F6028900D8EEF5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				EC31FD422671FC4800627588 /* FBSDKTypeUtility.m in Sources */,
+				EC31FD732671FC4800627588 /* UIImageView+AFNetworking.m in Sources */,
+				EC31FD782671FC4800627588 /* AFURLResponseSerialization.m in Sources */,
+				EC31FD722671FC4800627588 /* WKWebView+AFNetworking.m in Sources */,
+				EC31FD7D2671FC4800627588 /* AFSecurityPolicy.m in Sources */,
+				EC31FD752671FC4800627588 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				ECB98ED625F5FE2A0050D7C5 /* main.m in Sources */,
-				ECEE849D25F6028900D8EEF5 /* AFNetworkReachabilityManager.m in Sources */,
-				ECEE849B25F6028900D8EEF5 /* AFURLSessionManager.m in Sources */,
-				ECEE849C25F6028900D8EEF5 /* AFURLRequestSerialization.m in Sources */,
-				ECEE848D25F6028900D8EEF5 /* NSObject+YYModel.m in Sources */,
-				ECEE843725F6028900D8EEF5 /* FBSDKBasicUtility.m in Sources */,
-				ECEE843825F6028900D8EEF5 /* FBSDKURLSession.m in Sources */,
+				EC31FD7C2671FC4800627588 /* AFNetworkReachabilityManager.m in Sources */,
+				EC31FD7A2671FC4800627588 /* AFURLSessionManager.m in Sources */,
+				EC31FD7B2671FC4800627588 /* AFURLRequestSerialization.m in Sources */,
+				EC31FD662671FC4800627588 /* NSObject+YYModel.m in Sources */,
+				EC31FD402671FC4800627588 /* FBSDKBasicUtility.m in Sources */,
+				EC31FD412671FC4800627588 /* FBSDKURLSession.m in Sources */,
 				ECB98EC825F5FE280050D7C5 /* SceneDelegate.m in Sources */,
-				ECEE848E25F6028900D8EEF5 /* YYClassInfo.m in Sources */,
-				ECEE843A25F6028900D8EEF5 /* FBSDKURLSessionTask.m in Sources */,
-				ECEE849825F6028900D8EEF5 /* AFImageDownloader.m in Sources */,
-				ECEE849A25F6028900D8EEF5 /* AFHTTPSessionManager.m in Sources */,
+				EC31FD672671FC4800627588 /* YYClassInfo.m in Sources */,
+				EC31FD432671FC4800627588 /* FBSDKURLSessionTask.m in Sources */,
+				EC31FD772671FC4800627588 /* AFImageDownloader.m in Sources */,
+				EC31FD792671FC4800627588 /* AFHTTPSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1753,29 +1544,35 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/myTargetSDK",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/UnityAds",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1SaAnalytics",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/TapjoySDK/TapjoySDK_iOS_v12.7.1/Libraries/Tapjoy.embeddedframework",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1Admob",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/AppLovinSDK/applovin-ios-sdk-6.15.2",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileAds/static",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/FairBidSDK",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/InMobiSDK",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/VungleSDK-iOS",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/IronSourceSDK/IronSource",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileMetrica/ios/static",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/unity",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/vungle",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/inmobi",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/fyber",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/tapjoy",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/applovin",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/adcolony",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/pangle",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/admob",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/mytarget",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/facebook",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/yandex",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/tencent",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/ironsource",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/myTargetSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/UnityAds",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1SaAnalytics",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/TapjoySDK/TapjoySDK_iOS_v12.8.0/Libraries",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1Admob",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/AppLovinSDK/applovin-ios-sdk-10.2.1",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileAds/static",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/FairBidSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/InMobiSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/AdColony",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/VungleSDK-iOS",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/FBAudienceNetwork/Static",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Ads-Global/PangleSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/IronSourceSDK/IronSource",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileMetrica/ios/static",
 				);
 				INFOPLIST_FILE = MasStandardDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1785,6 +1582,7 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Tencent",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk",
 				);
 				MARKETING_VERSION = 4.0.1.1;
@@ -1809,29 +1607,35 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/myTargetSDK",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/UnityAds",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1SaAnalytics",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/TapjoySDK/TapjoySDK_iOS_v12.7.1/Libraries/Tapjoy.embeddedframework",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1Admob",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/AppLovinSDK/applovin-ios-sdk-6.15.2",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileAds/static",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/FairBidSDK",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/InMobiSDK",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/VungleSDK-iOS",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/IronSourceSDK/IronSource",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileMetrica/ios/static",
-					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/unity",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/vungle",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/inmobi",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/fyber",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/tapjoy",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/applovin",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/adcolony",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/pangle",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/admob",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/mytarget",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/facebook",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/yandex",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/tencent",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/adapter/ironsource",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/myTargetSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/UnityAds",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1SaAnalytics",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/TapjoySDK/TapjoySDK_iOS_v12.8.0/Libraries",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Yodo1Admob",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/AppLovinSDK/applovin-ios-sdk-10.2.1",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileAds/static",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/FairBidSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/InMobiSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/AdColony",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/VungleSDK-iOS",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/FBAudienceNetwork/Static",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Ads-Global/PangleSDK",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/IronSourceSDK/IronSource",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/YandexMobileMetrica/ios/static",
 				);
 				INFOPLIST_FILE = MasStandardDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1841,9 +1645,11 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/MasStandardDemo/MasSdk/libs/Tencent",
 					"$(PROJECT_DIR)/MasStandardDemo/MasSdk",
 				);
 				MARKETING_VERSION = 4.0.1.1;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",

@@ -1,6 +1,6 @@
 //
 //  MTRGNativeBanner.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 //  Created by Andrey Seredkin on 10/02/2020.
 //  Copyright © 2020 Mail.Ru Group. All rights reserved.
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, copy, nullable) NSString *advertisingLabel;
 @property(nonatomic, readonly, copy, nullable) NSString *ageRestrictions;
 @property(nonatomic, readonly, copy, nullable) NSString *title;
+@property(nonatomic, readonly, copy, nullable) NSString *descriptionText;
 @property(nonatomic, readonly, copy, nullable) NSString *disclaimer;
 @property(nonatomic, readonly, copy, nullable) NSString *domain;
 @property(nonatomic, readonly, copy, nullable) NSString *ctaText;

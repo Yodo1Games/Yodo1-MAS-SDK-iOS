@@ -1,6 +1,6 @@
 //
 //  MTRGNativePromoBanner.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 // Created by Timur on 2/12/18.
 // Copyright (c) 2018 Mail.Ru Group. All rights reserved.
@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MTRGNativePromoBanner : MTRGNativeBanner
 
-@property(nonatomic, readonly, copy, nullable) NSString *descriptionText;
 @property(nonatomic, readonly, copy, nullable) NSString *category;
 @property(nonatomic, readonly, copy, nullable) NSString *subcategory;
 @property(nonatomic, readonly, nullable) MTRGImageData *image;

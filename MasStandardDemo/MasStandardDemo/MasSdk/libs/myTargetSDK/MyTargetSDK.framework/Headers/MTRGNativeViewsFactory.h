@@ -1,6 +1,6 @@
 //
 //  MTRGNativeViewsFactory.h
-//  myTargetSDK 5.9.11
+//  myTargetSDK 5.11.1
 //
 //  Created by Anton Bulankin on 17.11.14.
 //  Copyright (c) 2014 Mail.ru Group. All rights reserved.
@@ -14,6 +14,7 @@
 @class MTRGIconAdView;
 @class MTRGNativeCardAdView;
 @class MTRGPromoCardCollectionView;
+@class MTRGAdChoicesView;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (MTRGNativeCardAdView *)createNativeCardAdView;
 
 + (MTRGPromoCardCollectionView *)createPromoCardCollectionView;
+
++ (MTRGAdChoicesView *)createAdChoicesView;
 
 @end
 

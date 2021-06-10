@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Yodo1MasAdEvent.h"
+#import "Yodo1MasBannerConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -53,7 +54,8 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;
+- (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail DEPRECATED_MSG_ATTRIBUTE("Please use initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail");
+- (void)initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;
 
 - (BOOL)isRewardAdLoaded;
 - (void)showRewardAd;
@@ -67,10 +69,10 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 
 - (BOOL)isBannerAdLoaded;
 - (void)showBannerAd;
-- (void)showBannerAdWithPlacement:(NSString *)placement;
+- (void)showBannerAdWithPlacement:(NSString * __nullable)placement;
 - (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align;
 - (void)showBannerAdWithAlign:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
-- (void)showBannerAdWithPlacement:(NSString *)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
+- (void)showBannerAdWithPlacement:(NSString * __nullable)placement align:(Yodo1MasAdBannerAlign)align offset:(CGPoint)offset;
 - (void)dismissBannerAd;
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy;
 

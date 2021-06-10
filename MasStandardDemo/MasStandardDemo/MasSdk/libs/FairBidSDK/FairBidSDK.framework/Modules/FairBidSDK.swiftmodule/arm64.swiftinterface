@@ -1,0 +1,55 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FairBidSDK
+@_exported import FairBidSDK
+import Foundation
+import Swift
+@objc @objcMembers public class AnalyticsReporterClient : ObjectiveC.NSObject {
+  @objc public init(url: Foundation.URL)
+  @objc public func reportEvent(_ event: Swift.Int, parameters: [Swift.String : Any], completion: @escaping ((FairBidSDK.AnalyticsEventOperationResult) -> Swift.Bool))
+  @objc public func reportEventWhenTimestampReceived(_ event: Swift.Int, parameters: [Swift.String : Any])
+  @objc public func dispatchBlockedEvents(timestamp: Foundation.NSNumber)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class AnalyticsEventOperationResult : ObjectiveC.NSObject {
+  @objc final public let timestamp: Foundation.NSNumber?
+  @objc final public let error: Swift.Error?
+  @objc final public let statusCode: Foundation.NSNumber?
+  @objc final public let success: Swift.Bool
+  @objc public var errorMessage: Swift.String? {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class IntegrationStatusRequestBody : ObjectiveC.NSObject, Swift.Encodable {
+  @objc final public let appId: Swift.String
+  @objc final public let framework: Swift.String
+  @objc final public let osVersion: Swift.String
+  @objc final public let platform: Swift.String
+  @objc final public let skAdNetworkIds: [Swift.String]
+  @objc final public let sdkVersion: Swift.String
+  @objc final public let networks: [[Swift.String : Swift.String]]
+  @objc public init(appId: Swift.String, framework: Swift.String, networks: [[Swift.String : Swift.String]], osVersion: Swift.String, platform: Swift.String, skAdNetworkIds: [Swift.String], sdkVersion: Swift.String)
+  @objc deinit
+  @objc override dynamic public init()
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@objc @objcMembers public class IntegrationStatusResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc final public let success: Swift.Bool
+  @objc final public let message: Swift.String?
+  @objc final public let extendedMessage: Swift.String?
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@objc public protocol IntegrationStatusRequestBuilder {
+  @objc func buildRequestBody() -> FairBidSDK.IntegrationStatusRequestBody
+}
+@objc @objcMembers public class IntegrationStatusApiClient : ObjectiveC.NSObject {
+  @objc final public let requestBuilder: FairBidSDK.IntegrationStatusRequestBuilder
+  @objc public init(requestBuilder: FairBidSDK.IntegrationStatusRequestBuilder)
+  @objc public func fetchIntegrationStatus(success: @escaping (FairBidSDK.IntegrationStatusResponse) -> Swift.Void, failure: @escaping (Swift.Error) -> Swift.Void)
+  @objc deinit
+  @objc override dynamic public init()
+}
