@@ -1,1 +1,7 @@
 libGDTMobSDK.a filter=lfs diff=lfs merge=lfs -text
+MasStandardDemo/MasStandardDemo/MasSdk/libs/Ads-Global/PangleSDK/BUAdSDK.framework/Versions/A/BUAdSDK filter=lfs diff=lfs merge=lfs -text
+MasStandardDemo/MasStandardDemo/MasSdk/libs/Ads-Global/PangleSDK/BUFoundation.framework/Versions/A/BUFoundation filter=lfs diff=lfs merge=lfs -text
+MasStandardDemo/MasStandardDemo/MasSdk/libs/FBAudienceNetwork/Static/FBAudienceNetwork.framework/FBAudienceNetwork filter=lfs diff=lfs merge=lfs -text
+MasStandardDemo/MasStandardDemo/MasSdk/libs/Yodo1Admob/GoogleMobileAds.framework/GoogleMobileAds filter=lfs diff=lfs merge=lfs -text
+MasStandardDemo/MasStandardDemo/MasSdk/libs/IronSourceSDK/IronSource/IronSource.framework/Versions/A/IronSource filter=lfs diff=lfs merge=lfs -text
+MasStandardDemo/MasStandardDemo/MasSdk/libs/AppLovinSDK/applovin-ios-sdk-10.2.1/AppLovinSDK.framework/AppLovinSDK filter=lfs diff=lfs merge=lfs -text
