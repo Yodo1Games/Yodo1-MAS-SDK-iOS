@@ -124,23 +124,29 @@ pod repo push $repositoryName build/Yodo1MasStandard.podspec --verbose --use-lib
 echo "上传Cocoapods============================" >> build/log/Yodo1MasFull.txt
 pod repo push $repositoryName build/Yodo1MasFull.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> build/log/Yodo1MasStandard.txt
 
-sdkVersion=''
-while read line
-do
-    if [[ ${line} == s.version* ]]
-    then
-        sdkVersion="$(echo ${line} | tr -d '[:space:]' | tr -d \')"
-        sdkVersion="${version:10}"
-        break
-    fi
-done < build/Yodo1MasFull.podspec
 # 发送钉钉机器人消息
 if [[ ${dingtalkToken} == '' ]]
 then
     echo "Token为空，无法发送钉钉机器人消息"
 else
-    msgTitle="Actions:Yodo1Mas iOS ${env} ${sdkVersion}发布完成"
+    # 获取SDK版本号
+    sdkVersion=''
+    while read line
+    do
+        if [[ ${line} == s.version* ]]
+        then
+            sdkVersion="$(echo ${line} | tr -d '[:space:]' | tr -d \')"
+            sdkVersion="${sdkVersion:10}"
+            break
+        fi
+    done < build/Yodo1MasFull.podspec
+
+    msgTitle="Actions:Release iOS Yodo1MasSDK"
     msgContent="#### ${msgTitle}"
+    msgContent="\n${msgContent}Result: Actions Completed"
+    msgContent="\n${msgContent}Environment: ${env}"
+    msgContent="\n${msgContent}Version: ${sdkVersion}"
+    msgContent="\n${msgContent}#####Detail:"
     for podfile in $(find . -maxdepth 1 -name "*.podspec" | sort)
     do
         # 获取文件名和版本号
