@@ -143,10 +143,10 @@ else
 
     msgTitle="Actions:Release iOS Yodo1MasSDK"
     msgContent="#### ${msgTitle}"
-    msgContent="\n${msgContent}Result: Actions Completed"
-    msgContent="\n${msgContent}Environment: ${env}"
-    msgContent="\n${msgContent}Version: ${sdkVersion}"
-    msgContent="\n${msgContent}#####Detail:"
+    msgContent="${msgContent}\n Result: Actions Completed"
+    msgContent="${msgContent}\n Environment: ${env}"
+    msgContent="${msgContent}\n Version: ${sdkVersion}"
+    msgContent="${msgContent}\n ##### Detail"
     for podfile in $(find . -maxdepth 1 -name "*.podspec" | sort)
     do
         # 获取文件名和版本号
