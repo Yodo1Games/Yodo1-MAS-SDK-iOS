@@ -493,6 +493,18 @@
 			<key>SKAdNetworkIdentifier</key>
 			<string>7953jerfzd.skadnetwork</string>
 		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>74b6s63p6l.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>8c4e2ghe7u.skadnetwork</string>
+		</dict>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>v4nxqhlyqp.skadnetwork</string>
+		</dict>
 	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
