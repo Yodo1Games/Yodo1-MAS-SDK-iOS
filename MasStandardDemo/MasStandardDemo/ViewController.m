@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "Yodo1Mas.h"
+//#import <AppLovinSDK/AppLovinSDK.h>
 
 @interface ViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>
 
@@ -41,6 +42,8 @@
 - (IBAction)didShowBanner:(id)sender {
     
         [[Yodo1Mas sharedInstance] showBannerAd];
+
+//        [[ALSdk shared] showMediationDebugger];
 }
 
 
