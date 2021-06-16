@@ -275,6 +275,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: onLoadWithAdView:, banner: %@}", self.TAG, adView];
     NSLog(@"%@", message);
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)onNoAdWithReason:(nonnull NSString *)reason adView:(nonnull MTRGAdView *)adView {

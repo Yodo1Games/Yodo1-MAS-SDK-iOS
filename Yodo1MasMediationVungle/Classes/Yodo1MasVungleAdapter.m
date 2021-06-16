@@ -215,6 +215,7 @@
             [self loadRewardAdDelayed];
         }else{
             [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+            [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
         }
     }
 }

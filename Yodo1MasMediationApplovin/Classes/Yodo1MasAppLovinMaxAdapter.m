@@ -230,6 +230,7 @@
         [self callbackWithAdLoadSuccess:Yodo1MasAdTypeInterstitial];
     } else if (ad.format == MAAdFormat.banner) {
         [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+        [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
     }
 }
 

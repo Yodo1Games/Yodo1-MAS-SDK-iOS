@@ -298,6 +298,7 @@
     NSString *message = [NSString stringWithFormat:@"%@: {method: bannerDidLoad:, banner: %@}", self.TAG, bannerView];
     NSLog(@"%@", message);
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerDidFailToLoadWithError:(NSError *)adError {

@@ -279,6 +279,7 @@ BUNativeExpressBannerViewDelegate
     self.bannerAd.frame = CGRectMake(0,0,self.adSize.width,self.adSize.height);
     isBanerAdReady = YES;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)nativeExpressBannerAdView:(BUNativeExpressBannerView *)bannerAdView didLoadFailWithError:(NSError *)error {

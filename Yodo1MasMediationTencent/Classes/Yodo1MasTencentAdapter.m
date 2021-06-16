@@ -278,6 +278,7 @@ GDTRewardedVideoAdDelegate>
 - (void)unifiedBannerViewDidLoad:(GDTUnifiedBannerView *)unifiedBannerView {
     self.bannerState = Yodo1MasBannerStateLoaded;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)unifiedBannerViewFailedToLoad:(GDTUnifiedBannerView *)unifiedBannerView error:(NSError *)error {
