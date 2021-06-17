@@ -16,6 +16,7 @@
 #import <AdSupport/AdSupport.h>
 #import "Yodo1SaManager.h"
 #import "Yodo1AdsManager.h"
+#import <UIKit/UIKit.h>
 
 #define Yodo1MasGDPRUserConsent     @"Yodo1MasGDPRUserConsent"
 #define Yodo1MasCOPPAAgeRestricted  @"Yodo1MasCOPPAAgeRestricted"
@@ -32,6 +33,7 @@
 #define kYodo1MasInitStatus         @"Yodo1MasInitStatus"
 #define kYodo1MasInitMsg            @"Yodo1MasInitMsg"
 #define kYodo1MasInitTime           @"Yodo1MasInitTime"
+#define kYodo1MasMaxBannerViewTag   10030
 
 @interface Yodo1Mas()
 
@@ -46,6 +48,7 @@
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
 @property (nonatomic, assign) BOOL currentIsAdaptiveBanner;
 @property (nonatomic, assign) BOOL keepChecking;
+@property (nonatomic, strong) NSDictionary * showObject;
 
 @end
 
@@ -81,6 +84,18 @@
         _appInfo = [NSMutableDictionary dictionary];
     }
     return self;
+}
+
+- (void)orientationDidChange:(NSNotification *)noti {
+    UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
+    NSInteger i = 10001;
+    UIView * container = nil;
+    do {
+        container = [controller.view viewWithTag:i];
+    } while (!container && i++ < kYodo1MasMaxBannerViewTag);
+    if (container) {
+        [Yodo1MasBanner showBannerWithTag:i controller:controller object:self.showObject];
+    }
 }
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail {
@@ -250,8 +265,8 @@
                 weakSelf.isInit = YES;
                 [weakSelf.appInfo setValue:@(YES) forKey:kYodo1MasInitStatus];
                 [weakSelf.appInfo setValue:@"Init successfully (AppKey & Bundle ID Verified)" forKey:kYodo1MasInitMsg];
-                if (weakSelf.keepChecking && data.test_mode == 1) {
-                    [weakSelf showBannerAd];
+                if (weakSelf.keepChecking) {
+                    [weakSelf showAdvert:Yodo1MasAdTypeBanner object:weakSelf.showObject];
                 }
                 if (successful) {
                     successful();
@@ -387,6 +402,9 @@
             [self doInitAdapter:key value:value appId:info.ad_network_app_id appKey:info.ad_network_app_key];
         }
     }
+    if (self.masNetworkConfig.banner) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+    }
     if (self.test_mode == 1) {
         [Yodo1AdsManager.sharedInstance bannerCallback:^(YODO1BannerState state) {
             switch (state) {
@@ -491,10 +509,9 @@
                     break;
             }
         }];
+        UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
+        [Yodo1MasBanner addBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
     }
-    
-    UIViewController* controller = [Yodo1MasAdapterBase getTopViewController];
-    [Yodo1MasBanner addBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller];
 }
 
 - (void)doInitAdapter:(NSString *)key value:(NSString *)value appId:(NSString *)appId appKey:(NSString *)appKey {
@@ -1037,7 +1054,10 @@
     object[kArgumentBannerOffset] = [NSValue valueWithCGPoint:offset];
     
     self.keepChecking = YES;
-    [self showAdvert:Yodo1MasAdTypeBanner object:object];
+    self.showObject = object;
+    if (self.masNetworkConfig.banner) {
+        [self showAdvert:Yodo1MasAdTypeBanner object:object];
+    }
 }
 
 - (void)dismissBannerAd {
