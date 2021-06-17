@@ -7,7 +7,7 @@
 
 #import "Yodo1MasBanner.h"
 #import "Yodo1MasAdapterBase.h"
-#import "Yodo1MasBannerConfig.h"
+#import "Yodo1MasAdBuildConfig.h"
 
 @implementation Yodo1MasBanner
 
@@ -63,7 +63,7 @@
         }
         
         CGRect frame = CGRectZero;
-        if ([Yodo1MasBannerConfig instance].isAdaptiveBanner) {
+        if ([Yodo1MasAdBuildConfig instance].enableAdaptiveBanner) {
             frame = contentView.bounds;
         }else{
             frame = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
