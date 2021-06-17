@@ -45,6 +45,7 @@
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
 @property (nonatomic, assign) BOOL keepChecking;
+@property (nonatomic, strong) NSDictionary *dict;
 
 @end
 
@@ -486,6 +487,10 @@
                 break;
         }
     }];
+    
+    if(self.keepChecking == YES && self.dict != nil) {
+        [self showAdvert:Yodo1MasAdTypeBanner object:self.dict];
+    }
 }
 
 - (void)doInitAdapter:(NSString *)key value:(NSString *)value appId:(NSString *)appId appKey:(NSString *)appKey {
@@ -785,8 +790,8 @@
                 case Yodo1MasAdEventCodeLoaded: {
                     [adapters removeAllObjects];
                     if (event.type == Yodo1MasAdTypeBanner && self.keepChecking) {
-                        [self showAdvert:Yodo1MasAdTypeBanner object:object];
-                        self.keepChecking = NO;
+                        [weakSelf showAdvert:Yodo1MasAdTypeBanner object:object];
+                        weakSelf.keepChecking = NO;
                     }
                     break;
                 }
@@ -1009,6 +1014,7 @@
     object[kArgumentBannerAlign] = @(align);
     object[kArgumentBannerOffset] = [NSValue valueWithCGPoint:offset];
     self.keepChecking = YES;
+    self.dict = object;
     [self showAdvert:Yodo1MasAdTypeBanner object:object];
 }
 
