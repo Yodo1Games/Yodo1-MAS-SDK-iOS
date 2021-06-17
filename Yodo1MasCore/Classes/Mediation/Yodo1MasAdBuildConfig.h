@@ -10,13 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Yodo1MasBannerConfig : NSObject
+@interface Yodo1MasAdBuildConfig : NSObject
 
-@property (nonatomic, assign) BOOL isAdaptiveBanner;
-@property (nonatomic, assign) CGFloat bannerWidth;
+@property (nonatomic, assign) BOOL enableAdaptiveBanner;
 
 + (instancetype)instance;
-+ (void)updateConfig:(Yodo1MasBannerConfig *)config;
++ (void)updateConfig:(Yodo1MasAdBuildConfig *)config;
 
 @end
 

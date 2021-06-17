@@ -182,8 +182,8 @@
     if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSLog(@"%@: {method:loadBannerAd, loading banner ad...}", self.TAG);
         [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:[Yodo1MasAppLovinMaxAdapter getTopViewController]];
-        Yodo1MasBannerConfig * config = [Yodo1MasBannerConfig instance];
-        if (config.isAdaptiveBanner) {
+        Yodo1MasAdBuildConfig * config = [Yodo1MasAdBuildConfig instance];
+        if (config.enableAdaptiveBanner) {
             CGFloat width = UIScreen.mainScreen.bounds.size.width;
             CGFloat height = MAAdFormat.banner.adaptiveSize.height;
             [self.bannerAd setExtraParameterForKey: @"adaptive_banner" value: @"true"];
