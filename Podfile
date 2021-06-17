@@ -10,7 +10,7 @@ target "Yodo1MasSdkDemo" do
 
 pod 'Toast'
 pod 'Masonry'
-pod 'GoogleMobileAdsMediationTestSuite'
+#pod 'GoogleMobileAdsMediationTestSuite'
 
 # 开发时打开
 pod 'FBSDKCoreKit'
@@ -37,8 +37,8 @@ pod 'Yodo1MasMediationFacebook', :path => './'
 pod 'Yodo1MasMediationFacebookMax', :path => './'
 pod 'Yodo1MasMediationInMobi', :path => './'
 pod 'Yodo1MasMediationInMobiMax', :path => './'
-pod 'Yodo1MasMediationMintegral', :path => './'
-pod 'Yodo1MasMediationMintegralMax', :path => './'
+#pod 'Yodo1MasMediationMintegral', :path => './'
+#pod 'Yodo1MasMediationMintegralMax', :path => './'
 pod 'Yodo1MasMediationMyTarget', :path => './'
 pod 'Yodo1MasMediationMyTargetMax', :path => './'
 pod 'Yodo1MasMediationPangle', :path => './'
@@ -58,7 +58,7 @@ pod 'Yodo1MasMediationBaidu', :path => './'
 #pod 'Yodo1MasUnityBridge', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasStandard', '~> 4.1.0'
-#pod 'Yodo1MasFull', '~> 4.1.0'
+#pod 'Yodo1MasStandard', '~> 4.2.0-beta-8996c0f'
+#pod 'Yodo1MasFull', '~> 4.2.0-beta-8996c0f'
 
 end

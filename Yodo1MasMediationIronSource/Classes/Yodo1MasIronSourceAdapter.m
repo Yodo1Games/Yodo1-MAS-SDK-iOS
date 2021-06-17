@@ -28,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -103,7 +103,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd, show reward ad...}", self.TAG];
             NSLog(@"%@", message);
-            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:[self getRewardAdId].adId];
+            [IronSource showISDemandOnlyRewardedVideo:controller instanceId:[self getRewardAdId].adId ? : @""];
         }
     }
 }
@@ -167,7 +167,7 @@
 
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return [self getInterstitialAdId] != nil && [IronSource hasISDemandOnlyInterstitial: [self getInterstitialAdId].adId];
+    return [self getInterstitialAdId] != nil && [IronSource hasISDemandOnlyInterstitial: [self getInterstitialAdId].adId ? : @""];
 }
 
 - (void)loadInterstitialAd {
@@ -189,7 +189,7 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd:, show interstitial ad...}", self.TAG];
             NSLog(@"%@", message);
-            [IronSource showISDemandOnlyInterstitial:controller instanceId: [self getInterstitialAdId].adId];
+            [IronSource showISDemandOnlyInterstitial:controller instanceId: [self getInterstitialAdId].adId ? : @""];
         }
     }
 }
@@ -257,7 +257,7 @@
     if ([self getBannerAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", self.TAG];
         NSLog(@"%@", message);
-        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceAdapter getTopViewController] size:ISBannerSize_BANNER placement:[self getBannerAdId].adId];
+        [IronSource loadBannerWithViewController:[Yodo1MasIronSourceAdapter getTopViewController] size:ISBannerSize_BANNER placement:[self getBannerAdId].adId ? : @""];
     }
 }
 

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Yodo1MasAdEvent.h"
+#import "Yodo1MasBannerConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -21,11 +21,11 @@ BUNativeExpressBannerViewDelegate
 }
 
 
-@property(nonatomic, assign) BOOL sdkInit;
+@property (nonatomic, assign) BOOL sdkInit;
 @property (nonatomic, strong) BUNativeExpressBannerView *bannerAd;
 @property (nonatomic, strong) BUFullscreenVideoAd *interstitialAd;
 @property (nonatomic, strong) BURewardedVideoAd *rewardAd;
-@property (nonatomic,strong) BURewardedVideoModel *rewardModel;
+@property (nonatomic, strong) BURewardedVideoModel *rewardModel;
 
 @end
 
@@ -40,7 +40,7 @@ BUNativeExpressBannerViewDelegate
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -79,12 +79,11 @@ BUNativeExpressBannerViewDelegate
 #pragma mark - 激励广告
 
 - (BURewardedVideoAd *)rewardAd {
-    if (!_rewardAd) {
+    if (!_rewardAd && [self getRewardAdId]) {
         _rewardModel = [[BURewardedVideoModel alloc] init];
         _rewardModel.userId = @"";
         Yodo1MasAdId *adId = [self getRewardAdId];
-        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId
-                                           rewardedVideoModel:_rewardModel];
+        _rewardAd = [[BURewardedVideoAd alloc] initWithSlotID:adId.adId rewardedVideoModel:_rewardModel];
         _rewardAd.delegate = self;
     }
     return _rewardAd;
@@ -119,7 +118,7 @@ BUNativeExpressBannerViewDelegate
 #pragma mark - 插屏广告
 
 - (BUFullscreenVideoAd *)interstitialAd {
-    if (!_interstitialAd) {
+    if (!_interstitialAd && [self getInterstitialAdId]) {
         Yodo1MasAdId *adId = [self getInterstitialAdId];
         _interstitialAd = [[BUFullscreenVideoAd alloc] initWithSlotID:adId.adId];
         _interstitialAd.delegate = self;
@@ -158,7 +157,7 @@ BUNativeExpressBannerViewDelegate
 #pragma mark - 横幅广告
 
 - (BUNativeExpressBannerView *)bannerAd {
-    if (!_bannerAd) {
+    if (!_bannerAd && [self getBannerAdId]) {
         Yodo1MasAdId *adId = [self getBannerAdId];
         UIViewController *controller = [Yodo1MasPangleAdapter getTopViewController];
         _bannerAd = [[BUNativeExpressBannerView alloc] initWithSlotID:adId.adId rootViewController:controller adSize:self.adSize interval:15];
@@ -216,7 +215,7 @@ BUNativeExpressBannerViewDelegate
     Yodo1MasError *rewardError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:rewardError type:Yodo1MasAdTypeReward];
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)rewardedVideoAdWillVisible:(BURewardedVideoAd *)rewardedVideoAd {
@@ -263,7 +262,7 @@ BUNativeExpressBannerViewDelegate
     Yodo1MasError *pangleError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
     [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)fullscreenVideoAdDidPlayFinish:(BUFullscreenVideoAd *)fullscreenVideoAd didFailWithError:(NSError *)error {

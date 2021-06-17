@@ -44,6 +44,7 @@
 @property (nonatomic, assign) int test_mode;
 @property (nonatomic, copy) Yodo1MasAdCallback adBlock;
 @property (nonatomic, strong) NSMutableDictionary *appInfo;
+@property (nonatomic, assign) BOOL currentIsAdaptiveBanner;
 @property (nonatomic, assign) BOOL keepChecking;
 @property (nonatomic, strong) NSDictionary *dict;
 
@@ -61,7 +62,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 - (instancetype)init {
@@ -157,6 +158,10 @@
         [_appInfo setValue:idfa forKey:kYodo1MasIDFA];
     }
     
+    Yodo1MasBannerConfig * config = [[Yodo1MasBannerConfig alloc] init];
+    config.isAdaptiveBanner = YES;
+    [[Yodo1Mas sharedInstance] bannerConfig:config];
+    
     // request config
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (weakSelf.isInit) return;
@@ -224,6 +229,7 @@
             data = [Yodo1MasInitData yy_modelWithJSON:responseObject];
         }
         if (data != nil && data.mas_init_config != nil && data.ad_network_config != nil) {
+            data.test_mode = 1;
             if (debug) {
                 NSLog(@"get config successful - %@", responseObject);
             }
@@ -392,7 +398,7 @@
                 }
             }
                 break;
-            case kYODO1BannerStateClicked:
+            case kYODO1BannerStateShow:
             {
                 Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
                 if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
@@ -757,6 +763,10 @@
             {
                 UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
                 [Yodo1MasBanner showBanner:Yodo1AdsManager.sharedInstance.bannerView tag:131415 controller:controller object:object];
+                Yodo1MasAdEvent *event = [[Yodo1MasAdEvent alloc] initWithCode:Yodo1MasAdEventCodeOpened type:Yodo1MasAdTypeBanner];
+                if ([self.bannerAdDelegate respondsToSelector:@selector(onAdOpened:)]) {
+                    [self.bannerAdDelegate onAdOpened:event];
+                }
             }
                 break;
         }
@@ -982,6 +992,16 @@
 }
 
 #pragma mark - 横幅广告
+- (void)bannerConfig:(Yodo1MasBannerConfig *)bannerConfig {
+    [Yodo1MasBannerConfig updateConfig:bannerConfig];
+    if (self.currentIsAdaptiveBanner == bannerConfig.isAdaptiveBanner) {return;}
+    self.currentIsAdaptiveBanner = bannerConfig.isAdaptiveBanner;
+    if ([self isInit]) {
+        [self dismissBannerAdWithDestroy:YES];
+        [self loadBannerAdvert];
+    }
+}
+
 - (BOOL)isBannerAdLoaded {
     return [self isAdvertLoaded:self.masNetworkConfig.banner type:Yodo1MasAdTypeBanner];
 }

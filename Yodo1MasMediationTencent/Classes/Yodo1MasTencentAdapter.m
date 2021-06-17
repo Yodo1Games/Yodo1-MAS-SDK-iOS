@@ -37,13 +37,13 @@ GDTRewardedVideoAdDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0-beta-8996c0f";
 }
 
 -(GDTUnifiedBannerView *)adBanner {
-    if (!_adBanner) {
+    if (!_adBanner && [self getBannerAdId]) {
         CGRect rect = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
-        _adBanner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:[self getBannerAdId].adId viewController:[Yodo1MasTencentAdapter getTopViewController]];
+        _adBanner = [[GDTUnifiedBannerView alloc] initWithFrame:rect placementId:[self getBannerAdId].adId ? : @"" viewController:[Yodo1MasTencentAdapter getTopViewController]];
         _adBanner.animated = YES;
         _adBanner.delegate = self;
         _adBanner.autoSwitchInterval = 15;
@@ -52,7 +52,7 @@ GDTRewardedVideoAdDelegate>
 }
 
 -(GDTUnifiedInterstitialAd *)interstitialAd {
-    if (!_interstitialAd) {
+    if (!_interstitialAd && [self getInterstitialAdId]) {
         _interstitialAd = [[GDTUnifiedInterstitialAd alloc] initWithPlacementId:[self getInterstitialAdId].adId];
         _interstitialAd.delegate = self;
     }
@@ -60,7 +60,7 @@ GDTRewardedVideoAdDelegate>
 }
 
 -(GDTRewardVideoAd *)rewardVideoAd {
-    if (!_rewardVideoAd) {
+    if (!_rewardVideoAd && [self getRewardAdId]) {
         _rewardVideoAd = [[GDTRewardVideoAd alloc] initWithPlacementId:[self getRewardAdId].adId];
         _rewardVideoAd.delegate = self;
     }
@@ -150,7 +150,7 @@ GDTRewardedVideoAdDelegate>
     [self callbackWithError:rewardError type:Yodo1MasAdTypeReward];
     self.rewardVideoAd = nil;
     [self nextReward];
-    [self loadRewardAd];
+    [self loadRewardAdDelayed];
 }
 
 - (void)gdt_rewardVideoAdWillVisible:(GDTRewardVideoAd *)rewardedVideoAd {
@@ -211,7 +211,7 @@ GDTRewardedVideoAdDelegate>
     [self callbackWithError:pangleError type:Yodo1MasAdTypeInterstitial];
     self.interstitialAd = nil;
     [self nextInterstitial];
-    [self loadInterstitialAd];
+    [self loadInterstitialAdDelayed];
 }
 
 - (void)unifiedInterstitialDidPresentScreen:(GDTUnifiedInterstitialAd *)unifiedInterstitial {
@@ -223,6 +223,8 @@ GDTRewardedVideoAdDelegate>
     NSLog(@"%@", message);
     Yodo1MasError *tencentError = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
     [self callbackWithError:tencentError type:Yodo1MasAdTypeInterstitial];
+    [self nextInterstitial];
+    [self loadInterstitialAd];
 }
 
 - (void)unifiedInterstitialDidDismissScreen:(GDTUnifiedInterstitialAd *)unifiedInterstitial {
