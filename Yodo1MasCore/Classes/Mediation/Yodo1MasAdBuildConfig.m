@@ -18,8 +18,4 @@
     return _config;
 }
 
-+ (void)updateConfig:(Yodo1MasAdBuildConfig *)config {
-    [Yodo1MasAdBuildConfig instance].enableAdaptiveBanner = config.enableAdaptiveBanner;
-}
-
 @end
