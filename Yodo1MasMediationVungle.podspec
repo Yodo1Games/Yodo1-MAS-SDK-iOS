@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationVungle'
-  s.version          = '4.2.0-beta-86031e2'
+  s.version          = '4.2.0-beta'
   s.summary          = 'Yodo1MasMediationVungle'
   s.swift_version    = '5.0'
 
@@ -36,7 +36,7 @@ TODO: Add long description of the pod here.
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'Yodo1MasCore', '4.2.0-beta-86031e2'
+  s.dependency 'Yodo1MasCore', '4.2.0-beta'
   s.dependency 'VungleSDK-iOS', '6.9.2'
   
 end

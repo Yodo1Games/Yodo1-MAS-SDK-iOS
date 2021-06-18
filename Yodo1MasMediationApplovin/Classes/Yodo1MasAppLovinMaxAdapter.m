@@ -32,7 +32,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.2.0-beta-86031e2";
+    return @"4.2.0-beta";
 }
 
 - (BOOL)isMax {
