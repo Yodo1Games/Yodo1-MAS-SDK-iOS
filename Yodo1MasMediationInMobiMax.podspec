@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationInMobiMax'
-  s.version          = '4.2.0-beta-86031e2'
+  s.version          = '4.2.0-beta'
   s.summary          = 'Yodo1MasMediationInMobiMax'
   s.swift_version    = '5.0'
 
@@ -33,8 +33,8 @@ TODO: Add long description of the pod here.
   
   s.static_framework = true
   s.vendored_frameworks = s.name + '/Lib/**/*.framework'
-  s.dependency 'Yodo1MasMediationInMobi', '4.2.0-beta-86031e2'
-  s.dependency 'Yodo1MasMediationAdMob', '4.2.0-beta-86031e2'
-  s.dependency 'Yodo1MasMediationApplovin', '4.2.0-beta-86031e2'
-  s.dependency 'Yodo1MasMediationIronSource', '4.2.0-beta-86031e2'
+  s.dependency 'Yodo1MasMediationInMobi', '4.2.0-beta'
+  s.dependency 'Yodo1MasMediationAdMob', '4.2.0-beta'
+  s.dependency 'Yodo1MasMediationApplovin', '4.2.0-beta'
+  s.dependency 'Yodo1MasMediationIronSource', '4.2.0-beta'
 end
