@@ -89,6 +89,8 @@ echo "上传Cocoapods============================" >> build/log/Yodo1MasCore.txt
 pod repo add $repositoryName $privateSpecs
 pod repo push $repositoryName build/Yodo1MasCore.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs}" >> build/log/Yodo1MasCore.txt
 
+pod repo update
+
 # 先将非Max的Mediation上传至Cocoapods
 for podfile in $(find . -maxdepth 1 -name "Yodo1MasMediation*.podspec" | sort)
 do
@@ -114,6 +116,8 @@ do
         pod repo push $repositoryName build/$name --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> ${logFile}
     fi
 done
+
+pod repo update
 
 echo "上传Cocoapods============================" >> build/log/Yodo1MasCN.txt
 pod repo push $repositoryName build/Yodo1MasCN.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> build/log/Yodo1MasCN.txt
