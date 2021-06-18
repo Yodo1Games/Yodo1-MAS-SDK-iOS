@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL enableAdaptiveBanner;
 
-+ (instancetype)instance;
-+ (void)updateConfig:(Yodo1MasAdBuildConfig *)config;
-
++(instancetype)instance;
++(instancetype)new __attribute__((unavailable("use class method [Yodo1MasAdBuildConfig instance] instead")));
+-(instancetype)init __attribute__((unavailable("use class method [Yodo1MasAdBuildConfig instance] instead")));
 @end
 
 NS_ASSUME_NONNULL_END

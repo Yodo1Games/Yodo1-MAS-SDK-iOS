@@ -172,10 +172,6 @@
         [_appInfo setValue:idfa forKey:kYodo1MasIDFA];
     }
     
-    Yodo1MasAdBuildConfig * config = [Yodo1MasAdBuildConfig instance];
-    config.enableAdaptiveBanner = YES;
-    [[Yodo1Mas sharedInstance] setAdBuildConfig:config];
-    
     // request config
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         if (weakSelf.isInit) return;
@@ -1012,7 +1008,6 @@
 
 #pragma mark - 横幅广告
 - (void)setAdBuildConfig:(Yodo1MasAdBuildConfig *)buildConfig {
-    [Yodo1MasAdBuildConfig updateConfig:buildConfig];
     if (self.currentIsAdaptiveBanner == buildConfig.enableAdaptiveBanner) {return;}
     self.currentIsAdaptiveBanner = buildConfig.enableAdaptiveBanner;
     if ([self isInit]) {
