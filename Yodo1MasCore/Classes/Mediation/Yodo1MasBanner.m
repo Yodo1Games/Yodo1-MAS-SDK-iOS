@@ -105,7 +105,7 @@
 }
 
 + (void)showBannerWithTag:(NSInteger)tag controller:(UIViewController *)controller object:(NSDictionary *)object {
-    UIView *contentView = [controller.view viewWithTag:tag];
+//    UIView *contentView = [controller.view viewWithTag:tag];
     [self showBanner:nil tag:tag controller:controller object:object];
 }
 
