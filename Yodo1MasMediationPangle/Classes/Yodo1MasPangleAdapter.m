@@ -40,7 +40,7 @@ BUNativeExpressBannerViewDelegate
 }
 
 - (NSString *)mediationVersion {
-    return @"4.2.0-beta";
+    return @"4.2.0.4201";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
