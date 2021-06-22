@@ -64,7 +64,7 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.2.0-beta";
+    return @"4.2.0.4201";
 }
 
 - (instancetype)init {
@@ -88,8 +88,15 @@
 
 - (void)orientationDidChange:(NSNotification *)noti {
     UIViewController *controller = [Yodo1MasAdapterBase getTopViewController];
-    NSInteger i = 10001;
     UIView * container = nil;
+    if (self.test_mode == 1) {
+        container = [controller.view viewWithTag:131415];
+        if (container) {
+            [Yodo1MasBanner showBannerWithTag:131415 controller:controller object:self.showObject];
+        }
+        return;
+    }
+    NSInteger i = 10001;
     do {
         container = [controller.view viewWithTag:i];
     } while (!container && i++ < kYodo1MasMaxBannerViewTag);
@@ -191,7 +198,6 @@
         }
         return;
     }
-    
     
     NSDictionary *yodo1Config = [[NSBundle mainBundle] infoDictionary][@"Yodo1MasConfig"];
     BOOL debug = yodo1Config[@"Debug"] && [yodo1Config[@"Debug"] boolValue];

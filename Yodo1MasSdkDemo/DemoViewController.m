@@ -50,9 +50,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([[Yodo1Mas sharedInstance] isBannerAdLoaded]) {
-        [[Yodo1Mas sharedInstance] showBannerAd];
-    }
+    [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
@@ -128,16 +126,22 @@
 - (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
     if (error.code != Yodo1MasErrorCodeAdLoadFail) {
         [[Yodo1MasAdapterBase getTopWindow] makeToast:[NSString stringWithFormat:@"Error: %@", error.userInfo[NSLocalizedDescriptionKey]]];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
     }
 }
 
 #pragma mark - Yodo1MasRewardAdvertDelegate
 - (void)onAdRewardEarned:(Yodo1MasAdEvent *)event {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Earned" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Earned" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - GMTSMediationTestSuiteDelegate
