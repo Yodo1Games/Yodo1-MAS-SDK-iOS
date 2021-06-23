@@ -517,11 +517,5 @@ BOOL isLoaded = [[Yodo1Mas sharedInstance] isBannerAdLoaded];
 [[Yodo1Mas sharedInstance] showBannerAd:@"MY_BANNER_PLACEMENT"]
 ```
 
-## 更新日志
-|  版本   |  发布日期  | 更新内容 |
-|  ----  | ------- | ------  |
-|           |              |               |
-|           |              |               |
-
 
 ​    
