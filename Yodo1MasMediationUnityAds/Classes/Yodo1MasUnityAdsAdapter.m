@@ -10,10 +10,11 @@
 
 #define BANNER_TAG 10007
 
-@interface Yodo1MasUnityAdsAdapter()<UnityAdsInitializationDelegate, UnityAdsLoadDelegate, UnityAdsDelegate, UADSBannerViewDelegate>
+@interface Yodo1MasUnityAdsAdapter()<UnityAdsInitializationDelegate, UnityAdsLoadDelegate, UnityAdsDelegate, UADSBannerViewDelegate,UnityAdsShowDelegate>
 
 @property (nonatomic, strong) UADSBannerView *bannerAd;
-
+@property(nonatomic,assign) BOOL isInterstitialAdReady;
+@property(nonatomic,assign) BOOL isRewardAdReady;
 @end
 
 @implementation Yodo1MasUnityAdsAdapter
@@ -27,7 +28,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -93,11 +94,12 @@
 #pragma mark - 激励广告
 - (BOOL)isRewardAdLoaded {
     [super isRewardAdLoaded];
-    return [self getRewardAdId] != nil && [UnityAds isReady:[self getRewardAdId].adId];
+    return [self getRewardAdId] != nil && self.isRewardAdReady;
 }
 
 - (void)loadRewardAd {
     [super loadRewardAd];
+    self.isRewardAdReady = NO;
     if (![self isInitSDK]) return;
     if ([self getRewardAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG];
@@ -113,7 +115,8 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showRewardAd, show reward ad...}", self.TAG];
             NSLog(@"%@", message);
-            [UnityAds show:controller placementId:[self getRewardAdId].adId];
+//            [UnityAds show:controller placementId:[self getRewardAdId].adId];
+            [UnityAds show:controller placementId:[self getRewardAdId].adId showDelegate:self];
         }
     }
 }
@@ -121,11 +124,12 @@
 #pragma mark - 插屏广告
 - (BOOL)isInterstitialAdLoaded {
     [super isInterstitialAdLoaded];
-    return [self getInterstitialAdId] != nil && [UnityAds isReady:[self getInterstitialAdId].adId];
+    return [self getInterstitialAdId] != nil && self.isInterstitialAdReady;
 }
 
 - (void)loadInterstitialAd {
     [super loadInterstitialAd];
+    self.isInterstitialAdReady = NO;
     if (![self isInitSDK]) return;
     if ([self getInterstitialAdId] != nil) {
         NSString *message = [NSString stringWithFormat:@"%@: {method: loadInterstitialAd, loading interstitial ad...}", self.TAG];
@@ -141,7 +145,8 @@
         if (controller != nil) {
             NSString *message = [NSString stringWithFormat:@"%@: {method: showInterstitialAd, show interstitial ad...}", self.TAG];
             NSLog(@"%@", message);
-            [UnityAds show:controller placementId:[self getInterstitialAdId].adId];
+//            [UnityAds show:controller placementId:[self getInterstitialAdId].adId ? : @""];
+            [UnityAds show:controller placementId:[self getInterstitialAdId].adId showDelegate:self];
         }
     }
 }
@@ -204,17 +209,17 @@
     }
 }
 
-- (void)unityAdsAdFailedToLoad:(NSString *)placementId {
-    NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsAdFailedToLoad:, placementId: %@}", self.TAG, placementId];
-    NSLog(@"%@", message);
+- (void)unityAdsAdFailedToLoad:(NSString *)placementId withError:(UnityAdsLoadError)error withMessage:(nonnull NSString *)message {
+    NSString *msg = [NSString stringWithFormat:@"%@: {method: unityAdsAdFailedToLoad:withError:withMessage, placementId: %@ ErrorMessage:%@}", self.TAG, placementId,message];
+    NSLog(@"%@", msg);
     
-    Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
+    Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:msg];
     if ([self getRewardAdId] != nil && [placementId isEqualToString:[self getRewardAdId].adId]) {
-        [self callbackWithError:error type:Yodo1MasAdTypeReward];
+        [self callbackWithError:err type:Yodo1MasAdTypeReward];
         [self nextReward];
         [self loadRewardAdDelayed];
     } else if ([self getInterstitialAdId] != nil && [placementId isEqualToString:[self getInterstitialAdId].adId]) {
-        [self callbackWithError:error type:Yodo1MasAdTypeInterstitial];
+        [self callbackWithError:err type:Yodo1MasAdTypeInterstitial];
         [self nextInterstitial];
         [self loadInterstitialAdDelayed];
     }
@@ -224,6 +229,11 @@
 - (void)unityAdsReady:(NSString *)placementId {
     NSString *message = [NSString stringWithFormat:@"%@: {method: unityAdsReady:, placementId: %@}", self.TAG, placementId];
     NSLog(@"%@", message);
+    if ([placementId isEqualToString:[self getInterstitialAdId].adId]) {
+        self.isInterstitialAdReady = YES;
+    }else{
+        self.isRewardAdReady = YES;
+    }
 }
 
 - (void)unityAdsDidError:(UnityAdsError)adError withMessage:(NSString *)adMessage {
@@ -283,6 +293,7 @@
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)bannerViewDidClick:(UADSBannerView *)bannerView {
@@ -304,6 +315,22 @@
     [self callbackWithError:error type:Yodo1MasAdTypeBanner];
     [self nextBanner];
     [self loadBannerAdDelayed];
+}
+
+- (void)unityAdsShowClick:(nonnull NSString *)placementId {
+    
+}
+
+- (void)unityAdsShowComplete:(nonnull NSString *)placementId withFinishState:(UnityAdsShowCompletionState)state {
+    
+}
+
+- (void)unityAdsShowFailed:(nonnull NSString *)placementId withError:(UnityAdsShowError)error withMessage:(nonnull NSString *)message {
+    
+}
+
+- (void)unityAdsShowStart:(nonnull NSString *)placementId {
+    
 }
 
 @end

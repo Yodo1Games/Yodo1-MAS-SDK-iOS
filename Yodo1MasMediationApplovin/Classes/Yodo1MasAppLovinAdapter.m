@@ -176,6 +176,7 @@
     NSLog(@"%@: {method:adService:didLoadAd:, Banner, ad:%@}", _adapter.TAG, ad.adIdNumber);
     _adapter.bannerState = Yodo1MasBannerStateLoaded;
     [_adapter callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [_adapter callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)adService:(ALAdService *)adService didFailToLoadAdWithError:(int)code {
@@ -267,7 +268,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {

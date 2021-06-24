@@ -31,7 +31,7 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
@@ -358,6 +358,7 @@
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)banner:(IMBanner*)banner didReceiveWithMetaInfo:(IMAdMetaInfo *)info {

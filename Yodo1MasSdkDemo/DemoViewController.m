@@ -12,9 +12,10 @@
 #import <Toast/Toast.h>
 #import <AppLovinSDK/AppLovinSDK.h>
 #import "BannerController.h"
-#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
+//#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
+//@import GoogleMobileAdsMediationTestSuite;
 
-@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate, GMTSMediationTestSuiteDelegate>
+@interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>//, GMTSMediationTestSuiteDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *rewardField;
 @property (weak, nonatomic) IBOutlet UITextField *intersititialField;
@@ -49,9 +50,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([[Yodo1Mas sharedInstance] isBannerAdLoaded]) {
-        [[Yodo1Mas sharedInstance] showBannerAd];
-    }
+    [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
@@ -90,7 +89,7 @@
 }
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
-    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
+//    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
@@ -117,26 +116,32 @@
 
 #pragma mark - Yodo1MasAdDelegate
 - (void)onAdOpened:(Yodo1MasAdEvent *)event {
-    
+    NSLog(@"The ad is opened: %@", @(event.type));
 }
 
 - (void)onAdClosed:(Yodo1MasAdEvent *)event {
-    
+    NSLog(@"The ad is closed: %@", @(event.type));
 }
 
 - (void)onAdError:(Yodo1MasAdEvent *)event error:(Yodo1MasError *)error {
     if (error.code != Yodo1MasErrorCodeAdLoadFail) {
         [[Yodo1MasAdapterBase getTopWindow] makeToast:[NSString stringWithFormat:@"Error: %@", error.userInfo[NSLocalizedDescriptionKey]]];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.userInfo[NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
     }
 }
 
 #pragma mark - Yodo1MasRewardAdvertDelegate
 - (void)onAdRewardEarned:(Yodo1MasAdEvent *)event {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Earned" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"Earned" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - GMTSMediationTestSuiteDelegate

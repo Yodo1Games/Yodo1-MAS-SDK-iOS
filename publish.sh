@@ -47,16 +47,16 @@ do
     echo "\n\n" >> ${logFile}
 
     # 上传地址
-    url="https://mas-artifacts.yodo1.com/${version}/iOS/${filename}"
+    url="https://mas-artifacts.yodo1.com/${version}/iOS/${env}/${filename}"
     echo "上传:${url}"
     echo "上传文件============================" >> ${logFile}
-    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/ -c ~/.ossutilconfig -u
+    ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/${env}/ -c ~/.ossutilconfig -u
 
     # 修改podspec文件的s.sources
     echo "" > build/${name}.podspec
     while read line
     do
-        if [[ ${line} == s.source* ]]
+        if [[ ${line} == *:git* ]]
         then
             echo "s.source           = { :http => '${url}' }" >> build/${name}.podspec
         else
@@ -89,6 +89,8 @@ echo "上传Cocoapods============================" >> build/log/Yodo1MasCore.txt
 pod repo add $repositoryName $privateSpecs
 pod repo push $repositoryName build/Yodo1MasCore.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs}" >> build/log/Yodo1MasCore.txt
 
+pod repo update
+
 # 先将非Max的Mediation上传至Cocoapods
 for podfile in $(find . -maxdepth 1 -name "Yodo1MasMediation*.podspec" | sort)
 do
@@ -115,6 +117,8 @@ do
     fi
 done
 
+pod repo update
+
 echo "上传Cocoapods============================" >> build/log/Yodo1MasCN.txt
 pod repo push $repositoryName build/Yodo1MasCN.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> build/log/Yodo1MasCN.txt
 
@@ -129,8 +133,24 @@ if [[ ${dingtalkToken} == '' ]]
 then
     echo "Token为空，无法发送钉钉机器人消息"
 else
-    msgTitle="Actions:Yodo1Mas iOS发布完成"
+    # 获取SDK版本号
+    sdkVersion=''
+    while read line
+    do
+        if [[ ${line} == s.version* ]]
+        then
+            sdkVersion="$(echo ${line} | tr -d '[:space:]' | tr -d \')"
+            sdkVersion="${sdkVersion:10}"
+            break
+        fi
+    done < build/Yodo1MasFull.podspec
+
+    msgTitle="Actions:Release iOS Yodo1MasSDK"
     msgContent="#### ${msgTitle}"
+    msgContent="${msgContent}\n Result: Actions Completed"
+    msgContent="${msgContent}\n Environment: ${env}"
+    msgContent="${msgContent}\n Version: ${sdkVersion}"
+    msgContent="${msgContent}\n ##### Detail"
     for podfile in $(find . -maxdepth 1 -name "*.podspec" | sort)
     do
         # 获取文件名和版本号
@@ -179,11 +199,30 @@ do
         break
     fi
 done < build/${name}.podspec
-cd ~/.cocoapods/repos/${repositoryName}/
-sed -i "" '39c\'$'\n  # s.dependency \'FBAudienceNetwork\', \'6.2.1\'\n' ${name}/${version}/${name}.podspec
-sed -i "" '39a\'$'\n  s.vendored_frameworks = s.name + \'/Lib/**/*.framework\'\n' ${name}/${version}/${name}.podspec
+
+cd ~/.cocoapods/repos/${repositoryName}
+
+echo "" > ${name}/${version}/${name}.podspec.temp
+while read line
+do
+    if [[ ${line} == *FBAudienceNetwork* ]]
+    then
+        echo "# s.dependency 'FBAudienceNetwork', '6.5.0'" >> ${name}/${version}/${name}.podspec.temp
+        echo "s.vendored_frameworks = s.name + '/Lib/**/*.framework'" >> ${name}/${version}/${name}.podspec.temp
+    else
+        echo "$line" >> ${name}/${version}/${name}.podspec.temp
+    fi
+done < ${name}/${version}/${name}.podspec
+mv ${name}/${version}/${name}.podspec.temp ${name}/${version}/${name}.podspec
+
+originName="main"
+if [[ ${env} == Dev ]]
+then
+   originName="master"
+fi
+
 git add .
 git commit -m "[Fix] ${name} (${version})"
-git push -u origin main
+git push -u origin ${originName}
 
 echo 上传Cocoapods结束:$(date +%Y-%m-%d\ %H:%M:%S) 

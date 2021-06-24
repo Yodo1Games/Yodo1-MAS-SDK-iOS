@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Yodo1MasAdEvent.h"
+#import "Yodo1MasAdBuildConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -51,6 +52,7 @@ typedef void (^Yodo1MasAdCallback) (Yodo1MasAdEvent *);
 + (NSString *)sdkVersion;
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
+- (void)setAdBuildConfig:(Yodo1MasAdBuildConfig *)buildConfig;
 
 - (void)initWithAppId:(NSString *)appId successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail DEPRECATED_MSG_ATTRIBUTE("Please use initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail");
 - (void)initWithAppKey:(NSString *)appKey successful:(Yodo1MasInitSuccessful)successful fail:(Yodo1MasInitFail)fail;

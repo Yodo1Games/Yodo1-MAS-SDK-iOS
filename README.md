@@ -12,7 +12,7 @@
 #### 1.1 创建`Podfile`文件</br>
 在项目根目录下创建`Podfile`文件
 ```ruby
-touch Podfile
+touch Podfile 
 ```
 
 #### 1.2 将iOS SDK导入项目</br>
@@ -27,7 +27,7 @@ source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
 pod 'FBSDKCoreKit'
-pod 'Yodo1MasStandard', '~> 4.0.0.6'
+pod 'Yodo1MasStandard', '4.2.0'
 ```
 
 完整集成
@@ -39,7 +39,7 @@ source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
 pod 'FBSDKCoreKit'
-pod 'Yodo1MasFull', '~> 4.0.0.6'
+pod 'Yodo1MasFull', '4.2.0'
 ```
 
 如果标准集成和完整集成无法满足，也可以自由组合
@@ -51,24 +51,24 @@ source 'https://github.com/Yodo1Games/Yodo1Spec.git'
 source 'https://github.com/Yodo1Games/MAS-Spec.git'
 
 pod 'FBSDKCoreKit'
-pod 'Yodo1MasCore', '~> 4.0.0.6' # 必须
+pod 'Yodo1MasCore', '4.2.0' # 必须
 # 以下请根据自己的需求选择，至少选择一个
-pod 'Yodo1MasMediationAdMob', '~> 4.0.0.6'
-pod 'Yodo1MasMediationApplovin', '~> 4.0.0.6'
-pod 'Yodo1MasMediationFyber', '~> 4.0.0.6'
-pod 'Yodo1MasMediationIronSource', '~> 4.0.0.6'
-pod 'Yodo1MasMediationYandex', '~> 4.0.0.6'
-
-pod 'Yodo1MasMediationAdColony', '~> 4.0.0.6'
-pod 'Yodo1MasMediationFacebook', '~> 4.0.0.6'
-pod 'Yodo1MasMediationInMobi', '~> 4.0.0.6'
-pod 'Yodo1MasMediationMintegral', '~> 4.0.0.6'
-pod 'Yodo1MasMediationMyTarget', '~> 4.0.0.6'
-pod 'Yodo1MasMediationPangle', '~> 4.0.0.6'
-pod 'Yodo1MasMediationTapjoy', '~> 4.0.0.6'
-pod 'Yodo1MasMediationTencent', '~> 4.0.0.6'
-pod 'Yodo1MasMediationUnityAds', '~> 4.0.0.6'
-pod 'Yodo1MasMediationVungle', '~> 4.0.0.6'
+pod 'Yodo1MasMediationAdColonyMax', '4.2.0'
+pod 'Yodo1MasMediationAdMobMax', '4.2.0'
+pod 'Yodo1MasMediationApplovinMax', '4.2.0'
+pod 'Yodo1MasMediationBaidu', '4.2.0'
+pod 'Yodo1MasMediationFacebookMax', '4.2.0'
+pod 'Yodo1MasMediationFyberMax', '4.2.0'
+pod 'Yodo1MasMediationInMobiMax', '4.2.0'
+pod 'Yodo1MasMediationIronSourceMax', '4.2.0'
+pod 'Yodo1MasMediationMintegralMax', '4.2.0'
+pod 'Yodo1MasMediationMyTargetMax', '4.2.0'
+pod 'Yodo1MasMediationPangleMax', '4.2.0'
+pod 'Yodo1MasMediationTapjoyMax', '4.2.0'
+pod 'Yodo1MasMediationTencentMax', '4.2.0'
+pod 'Yodo1MasMediationUnityAdsMax', '4.2.0'
+pod 'Yodo1MasMediationVungleMax', '4.2.0'
+pod 'Yodo1MasMediationYandexMax', '4.2.0'
 ```
 
 在`终端`中执行如下命令：</br>
@@ -516,12 +516,6 @@ BOOL isLoaded = [[Yodo1Mas sharedInstance] isBannerAdLoaded];
 ```obj-c
 [[Yodo1Mas sharedInstance] showBannerAd:@"MY_BANNER_PLACEMENT"]
 ```
-
-## 更新日志
-|  版本   |  发布日期  | 更新内容 |
-|  ----  | ------- | ------  |
-|           |              |               |
-|           |              |               |
 
 
 ​    

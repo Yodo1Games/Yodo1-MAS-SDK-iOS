@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationApplovin'
-  s.version          = '4.1.0'
+  s.version          = '4.2.0'
   s.summary          = 'Yodo1MasMediationApplovin'
   s.swift_version    = '5.0'
 
@@ -35,7 +35,7 @@ TODO: Add long description of the pod here.
   s.resource = s.name + '/Assets/**/*.bundle'
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  s.dependency 'Yodo1MasCore', '4.1.0'
-  s.dependency 'AppLovinSDK', '6.15.2'
+  s.dependency 'Yodo1MasCore', '4.2.0'
+  s.dependency 'AppLovinSDK', '10.2.1'
   
 end

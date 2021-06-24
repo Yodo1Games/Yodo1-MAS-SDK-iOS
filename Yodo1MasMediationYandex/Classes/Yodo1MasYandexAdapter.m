@@ -24,7 +24,7 @@
 @implementation Yodo1MasYandexAdapter
 
 - (YMAAdView *)adBanner {
-    if (!_adBanner) {
+    if (!_adBanner && [self getBannerAdId]) {
         CGSize size = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? YMAAdSizeBanner_320x50 : YMAAdSizeBanner_728x90;
         YMAAdSize * adSize = [YMAAdSize flexibleSizeWithCGSize:size];
 //API Version 3.x
@@ -39,7 +39,7 @@
 //API Version 3.x
 //
 //-(YMAInterstitialAd *)interstitialAd {
-//    if (!_interstitialAd) {
+//    if (!_interstitialAd && [self getInterstitialAdId].adId) {
 //        _interstitialAd = [[YMAInterstitialAd alloc] initWithBlockID:[self getInterstitialAdId].adId];
 //        _interstitialAd.delegate = self;
 //    }
@@ -49,7 +49,7 @@
 
 //API Version 2.x
 -(YMAInterstitialController *)interstitialAd {
-    if (!_interstitialAd) {
+    if (!_interstitialAd && [self getInterstitialAdId].adId) {
         _interstitialAd = [[YMAInterstitialController alloc] initWithBlockID:[self getInterstitialAdId].adId];
         _interstitialAd.delegate = self;
     }
@@ -57,7 +57,7 @@
 }
 
 -(YMARewardedAd *)rewardVideoAd {
-    if (!_rewardVideoAd) {
+    if (!_rewardVideoAd && [self getRewardAdId].adId) {
         _rewardVideoAd = [[YMARewardedAd alloc] initWithBlockID:[self getRewardAdId].adId];
         _rewardVideoAd.delegate = self;
     }
@@ -73,13 +73,14 @@
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0";
 }
 
 -(void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail  {
     [super initWithConfig:config successful:successful fail:fail];
 
     if (![self isInitSDK]) {
+        self.isYMSDKInit = YES;
         [self updatePrivacy];
         [self loadBannerAd];
         [self loadInterstitialAd];
@@ -87,7 +88,6 @@
         if (!successful) {
             successful(self.advertCode);
         }
-        self.isYMSDKInit = YES;
     } else {
         if (successful != nil) {
             successful(self.advertCode);
@@ -113,12 +113,11 @@
 }
 
 - (void)loadRewardAd {
-    if ([self isRewardAdLoaded]) {
-        [super loadRewardAd];
-        NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG];
-        NSLog(@"%@", message);
-        [self.rewardVideoAd load];
-    }
+    [super loadRewardAd];
+    if (![self isInitSDK]) return;
+    NSString *message = [NSString stringWithFormat:@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG];
+    NSLog(@"%@", message);
+    [self.rewardVideoAd load];
 }
 
 - (void)showRewardAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -143,10 +142,9 @@
 }
 
 - (void)loadInterstitialAd {
-    if (![self isInterstitialAdLoaded]) {
-        [super loadInterstitialAd];
-        [self.interstitialAd load];
-    }
+    [super loadInterstitialAd];
+    if (![self isInitSDK]) return;
+    [self.interstitialAd load];
 }
 
 - (void)showInterstitialAd:(Yodo1MasAdCallback)callback object:(NSDictionary *)object {
@@ -197,6 +195,7 @@
     UIViewController *controller = [Yodo1MasYandexAdapter getTopViewController];
     [Yodo1MasBanner addBanner:self.adBanner tag:BANNER_TAG controller:controller];
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)adViewDidFailLoading:(YMAAdView *)adView error:(NSError *)error {

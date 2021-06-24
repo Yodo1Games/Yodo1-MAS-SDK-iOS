@@ -39,7 +39,7 @@ BaiduMobAdRewardVideoDelegate>
 }
 
 - (NSString *)mediationVersion {
-    return @"4.1.0";
+    return @"4.2.0";
 }
 
 -(BaiduMobAdView *)adBanner {
@@ -48,7 +48,7 @@ BaiduMobAdRewardVideoDelegate>
         _adBanner = [[BaiduMobAdView alloc] init];
         _adBanner.delegate = self;
         _adBanner.AdType = BaiduMobAdViewTypeBanner;
-        _adBanner.AdUnitTag = [self getBannerAdId].adId;
+        _adBanner.AdUnitTag = [self getBannerAdId].adId ? : @"";
         [_adBanner setFrame:rect];
         [self.adBanner start];
     }
@@ -59,7 +59,7 @@ BaiduMobAdRewardVideoDelegate>
     if (!_interstitialAd) {
         _interstitialAd = [[BaiduMobAdInterstitial alloc] init];
         _interstitialAd.delegate = self;
-        _interstitialAd.AdUnitTag = [self getInterstitialAdId].adId;
+        _interstitialAd.AdUnitTag = [self getInterstitialAdId].adId ? : @"";
         _interstitialAd.interstitialType = BaiduMobAdViewTypeInterstitialOther;
     }
     
@@ -71,7 +71,7 @@ BaiduMobAdRewardVideoDelegate>
         _rewardVideoAd = [[BaiduMobAdRewardVideo alloc]init];
         _rewardVideoAd.delegate = self;
         _rewardVideoAd.publisherId = _publisherId;
-        _rewardVideoAd.AdUnitTag = [self getRewardAdId].adId;
+        _rewardVideoAd.AdUnitTag = [self getRewardAdId].adId ? : @"";
     }
     
     return _rewardVideoAd;
@@ -311,6 +311,7 @@ BaiduMobAdRewardVideoDelegate>
     NSLog(@"%@", message);
     self.bannerState = Yodo1MasBannerStateLoaded;
     [self callbackWithAdLoadSuccess:Yodo1MasAdTypeBanner];
+    [self callbackWithEvent:Yodo1MasAdEventCodeLoaded type:Yodo1MasAdTypeBanner];
 }
 
 - (void)failedDisplayAd:(BaiduMobFailReason)reason {
