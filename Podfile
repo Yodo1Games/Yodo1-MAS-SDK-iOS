@@ -13,7 +13,7 @@ pod 'Masonry'
 #pod 'GoogleMobileAdsMediationTestSuite'
 
 # 开发时打开
-pod 'FBSDKCoreKit'
+pod 'FBSDKCoreKit', '7.0.1'
 pod 'Yodo1MasCore', :path => './'
 pod 'Yodo1MasCN', :path => './'
 pod 'Yodo1MasStandard', :path => './'
@@ -58,7 +58,7 @@ pod 'Yodo1MasMediationBaidu', :path => './'
 #pod 'Yodo1MasUnityBridge', :path => './'
 
 # 开发时注释
-#pod 'Yodo1MasStandard', '~> 4.2.0'
-#pod 'Yodo1MasFull', '~> 4.2.0'
+#pod 'Yodo1MasStandard', '~> 4.3.0'
+#pod 'Yodo1MasFull', '~> 4.3.0'
 
 end

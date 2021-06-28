@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Yodo1MasMediationUnityAds'
-  s.version          = '4.2.0'
+  s.version          = '4.3.0'
   s.summary          = 'Yodo1MasMediationUnityAds'
   s.swift_version    = '5.0'
 
@@ -34,7 +34,7 @@ TODO: Add long description of the pod here.
   s.xcconfig = {"OTHER_LDFLAGS" => "-ObjC", "VALID_ARCHS"=>"arm64 arm64e armv7 armv7s x86_64", "VALID_ARCHS[sdk=iphoneos*]" => "arm64 arm64e armv7 armv7s", "VALID_ARCHS[sdk=iphonesimulator*]" => "x86_64"}
   s.source_files = s.name + '/Classes/**/*'
   s.public_header_files = s.name + '/Classes/**/*.h'
-  s.dependency 'Yodo1MasCore', '4.2.0'
+  s.dependency 'Yodo1MasCore', '4.3.0'
   s.dependency 'UnityAds', '3.7.1'
   
 end
