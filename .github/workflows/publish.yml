@@ -1,10 +1,9 @@
 name: iOS starter workflow
 
-on: workflow_dispatch
-# on: 
-#   push:
-#     branches:
-#       - master
+on: 
+  push:
+    paths:
+      - 'config.txt'
 
 jobs:
   job_build:
@@ -74,4 +73,30 @@ jobs:
           chmod 755 ./Yodo1MasSdk/publish.sh
 
       - name: publish
-        run: sh Yodo1MasSdk/publish.sh Release ${{ secrets.TOKEN }} ${{ secrets.TING_TOKEN }}
+        run: sh Yodo1MasSdk/publish.sh ${{ github.ref }} ${{ secrets.TOKEN }} ${{ secrets.TING_TOKEN }}
+
+      - name: read successful
+        id: successful
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          path: ./Yodo1MasSdk/Yodo1Mas.json
+          property: successful
+
+      - name: read version
+        id: version
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+          path: ./Yodo1MasSdk/Yodo1Mas.json
+          property: version
+
+      - name: tag
+        if: ${{ steps.successful.outputs.value == true && github.ref == 'refs/heads/master' }}
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{steps.version.outputs.value}}
+          release_name: ${{steps.version.outputs.value}}
+          body: ""
+          draft: false
+          prerelease: false
