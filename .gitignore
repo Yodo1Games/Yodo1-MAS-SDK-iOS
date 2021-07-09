@@ -1,7 +1,6 @@
 ## Build generated
 build/
 DerivedData/
-ossutilmac64
 
 ## Various settings
 *.pbxuser
