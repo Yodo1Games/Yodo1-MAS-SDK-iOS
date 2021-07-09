@@ -64,11 +64,10 @@ jobs:
           echo "endpoint=${{ secrets.OSS_ENDPOINT }}" >> ~/.ossutilconfig
           echo "accessKeyID=${{ secrets.OSS_ACCESS_KEY_ID }}" >> ~/.ossutilconfig
           echo "accessKeySecret=${{ secrets.OSS_ACCESS_KEY_SECRET }}" >> ~/.ossutilconfig
-          curl -o ./Yodo1MasSdk/ssutilmac64 http://gosspublic.alicdn.com/ossutil/1.7.3/ossutilmac64
-          chmod 755 ./Yodo1MasSdk/ossutilmac64
-
+          
       - name: chmod publish
         run: |
+          chmod 755 ./Yodo1MasSdk/ossutilmac64
           chmod 755 ./Yodo1MasSdk/publish.sh
           chmod 755 ./Yodo1MasSdk/publish.sh
 
