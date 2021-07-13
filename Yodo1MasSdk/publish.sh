@@ -124,7 +124,7 @@ else
     curl "https://oapi.dingtalk.com/robot/send?access_token=${dingtalkToken}" -H "Content-Type: application/json" -d "{\"msgtype\": \"markdown\",\"markdown\": {\"title\":\"Actions:${msgTitle}\",\"text\":\"${msgContent}\",\"at\":{\"isAtAll\":true}}}"
 fi
 
-if [[ ${successful} == 1 ]]
+if [[ ${successful} == true ]]
 then
     exit 0
 else
