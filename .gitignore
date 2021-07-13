@@ -18,6 +18,7 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 /.idea
+Yodo1Mas.json
 
 ### Xcode Patch ###
 *.xcodeproj/*

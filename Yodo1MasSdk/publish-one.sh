@@ -76,7 +76,7 @@ done < ${name}/${name}${max}.podspec
 
 # 上传Cocoapods
 echo "开始上传Cocoapods..."
-cocoapodsSpecs="https://github.com/CocoaPods/Specs.git,https://github.com/Yodo1Games/Yodo1Spec.git"
+cocoapodsSpecs="https://cdn.cocoapods.org/,https://github.com/Yodo1Games/Yodo1Spec.git" #https://github.com/CocoaPods/Specs.git,
 repositoryName="Yodo1Mas-${env}"
 repositoryToken=""
 privateSpecs=""
@@ -98,6 +98,6 @@ if [ ! -d ~/.cocoapods/repos/${repositoryName} ]
 then
   pod repo add ${repositoryName} ${privateSpecs}
 fi
-pod repo update
+#pod repo update
 echo "pod repo push ${repositoryName} build/${name}${max}.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> ${logFile}"
 pod repo push ${repositoryName} build/${name}${max}.podspec --verbose --use-libraries --allow-warnings --sources="${cocoapodsSpecs},${privateSpecs}" >> ${logFile}
