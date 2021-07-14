@@ -46,7 +46,19 @@
 }
 
 - (NSString *)getMediationVersion {
-    return nil;
+    static NSString *version;
+    if (version == nil) {
+        NSString *name = NSStringFromClass([self class]);
+        if ([name hasSuffix:@"Adapter"]) {
+            name = [name stringByReplacingOccurrencesOfString:@"Adapter" withString:@""];
+        }
+        if ([name hasSuffix:@"Max"]) {
+            name = [name stringByReplacingOccurrencesOfString:@"Max" withString:@""];
+        }
+        NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:name withExtension:@"plist"]];
+        version = plist[@"version"];
+    }
+    return version;
 }
 
 - (NSString *)TAG {
@@ -80,6 +92,8 @@
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {
     _initSuccessfulCallback = successful;
     _initFailCallback = fail;
+    
+    NSLog(@"%@ - %@", self.TAG, [self getMediationVersion]);
 }
 
 - (BOOL)isInitSDK {

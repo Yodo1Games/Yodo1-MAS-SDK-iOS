@@ -23,11 +23,7 @@
 }
 
 - (NSString *)sdkVersion {
-    return @"6.8.1";
-}
-
-- (NSString *)mediationVersion {
-    return @"4.3.0";
+    return @"6.9.2";
 }
 
 - (void)initWithConfig:(Yodo1MasAdapterConfig *)config successful:(Yodo1MasAdapterInitSuccessful)successful fail:(Yodo1MasAdapterInitFail)fail {

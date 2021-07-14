@@ -31,10 +31,6 @@
     return [ALSdk version];
 }
 
-- (NSString *)mediationVersion {
-    return @"4.3.0";
-}
-
 - (BOOL)isMax {
     return YES;
 }

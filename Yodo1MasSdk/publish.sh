@@ -101,7 +101,7 @@ do
         echo "$line" >> ${name}/${version}/${name}.podspec.temp
     fi
 done < ${name}/${version}/${name}.podspec
-mv ${name}/${version}/${name}.podspec.temp ${name}/${version}/${name}.podspec
+mv -f ${name}/${version}/${name}.podspec.temp ${name}/${version}/${name}.podspec
 
 originName="main"
 if [[ ${env} == Dev ]]

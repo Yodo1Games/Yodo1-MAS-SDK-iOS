@@ -38,10 +38,6 @@ BaiduMobAdRewardVideoDelegate>
     return SDK_VERSION_IN_MSSP;
 }
 
-- (NSString *)mediationVersion {
-    return @"4.3.0";
-}
-
 -(BaiduMobAdView *)adBanner {
     if (!_adBanner) {
         CGRect rect = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
