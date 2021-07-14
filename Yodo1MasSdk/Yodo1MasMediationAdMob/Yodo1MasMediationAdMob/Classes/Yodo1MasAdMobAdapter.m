@@ -16,6 +16,7 @@
 @property (nonatomic, strong) GADRewardedAd *rewardAd;
 @property (nonatomic, strong) GADInterstitialAd *interstitialAd;
 @property (nonatomic, strong) GADBannerView *bannerAd;
+@property (nonatomic, assign) BOOL isRewarded;
 
 @end
 
@@ -94,6 +95,8 @@
     [super loadRewardAd];
     if (![self isInitSDK]) return;
     
+    self.isRewarded = NO;
+    
     Yodo1MasAdId *adId = [self getRewardAdId];
     if (adId != nil && adId.adId != nil && (self.rewardAd == nil || ![adId.adId isEqualToString:self.rewardAd.adUnitID])) {
         NSLog(@"%@: {method: loadRewardAd, loading reward ad...}", self.TAG);
@@ -124,7 +127,8 @@
                 NSString *message = [NSString stringWithFormat:@"%@: {method: presentFromRootViewController:userDidEarnRewardHandler:, reward: %@}", self.TAG, self.rewardAd.adReward];
                 NSLog(@"%@", message);
                 
-                [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
+//                [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
+                self.isRewarded = YES;
             }];
         }
     }
@@ -180,12 +184,18 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method: adDidDismissFullScreenContent:, reward: %@}", self.TAG, self.rewardAd.adUnitID];
         NSLog(@"%@", message);
         
+        self.rewardAd = nil;
+        if (self.isRewarded) {
+            [self callbackWithEvent:Yodo1MasAdEventCodeRewardEarned type:Yodo1MasAdTypeReward];
+            self.isRewarded = NO;
+        }
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeReward];
         [self loadRewardAd];
     }else{
         NSString *message = [NSString stringWithFormat:@"%@: {method:adDidDismissFullScreenContent:, ad: %@}", self.TAG, self.interstitialAd.adUnitID];
         NSLog(@"%@", message);
         
+        self.interstitialAd = nil;
         [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeInterstitial];
         [self loadInterstitialAd];
     }
