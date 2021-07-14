@@ -42,10 +42,37 @@ fi
 
 logFile=build/log/${name}${max}.txt
 filename="${name}${max}-${version}.zip"
+dir="${name}${max}"
 echo "压缩${name}${max} -> ${filename} ...."
 echo "压缩文件============================" >> ${logFile}
 cd ${name}
-zip -r ${filename} ${name}${max} LICENSE >> ./../${logFile}
+
+# 修改plist文件
+plist=${name:8}
+if [[ ${plist} == *Mediation* ]]
+then
+    plist=${plist:9}
+fi
+assets="${dir}/Assets/Yodo1Mas${plist}.plist"
+cpAsset="${dir}/Assets/Yodo1Mas${plist}.plist.temp"
+echo "" > ${cpAsset}
+isVersion=false
+while read line
+do
+    if [[ ${isVersion} == true && ${line} == \<string\>*.*.*\</string\> ]]
+    then
+        echo "<string>${version}</string>" >> ${cpAsset}
+    else
+        echo ${line} >> ${cpAsset}
+    fi
+    if [[ ${line} == \<key\>version\</key\> ]]
+    then
+        isVersion=true
+    fi
+done < ${assets}
+mv -f ${cpAsset} ${assets}
+
+zip -r ${filename} ${dir} LICENSE >> ./../${logFile}
 cp ${filename} ./../build/zip/${filename}
 rm ${filename}
 cd ./../
@@ -57,17 +84,21 @@ echo "上传:${url}"
 echo "上传文件============================" >> ${logFile}
 ./ossutilmac64 cp build/zip/${filename} oss://yodo1-mas-sdk/${version}/iOS/${env}/ -c ~/.ossutilconfig -u
 
-# 修改podspec文件的s.sources及版本号，并复制输出到build文件夹中
+# 修改podspec文件的s.sources及版本号，并输出到build文件夹中
 cpPodspec="build/${name}${max}.podspec"
 echo "" > ${cpPodspec}
 while read line
 do
-    if [[ ${line} == *:git* ]]
-    then
-        echo "s.source           = { :http => '${url}' }" >> ${cpPodspec}
-    elif [[ ${line} == *s.version* ]]
+    if [[ ${line} == *s.version* ]]
     then
         echo "s.version          = '${version}'" >> ${cpPodspec}
+    elif [[ ${line} == *:git* ]]
+    then
+        echo "s.source           = { :http => '${url}' }" >> ${cpPodspec}
+    elif [[ ${line} == *s.dependency* && ${line} == *Yodo1Mas* ]]
+    then
+        arr=(${line//,/})
+        echo "${arr[0]} ${arr[1]}, '${version}'" >> ${cpPodspec}
     else
         echo "$line" >> ${cpPodspec}
     fi

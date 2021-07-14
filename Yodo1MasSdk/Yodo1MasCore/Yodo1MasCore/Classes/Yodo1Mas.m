@@ -64,7 +64,13 @@
 }
 
 + (NSString *)sdkVersion {
-    return @"4.3.0";
+    static NSString *version = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSDictionary *plist = [[NSDictionary alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"Yodo1MasCore" withExtension:@"plist"]];
+        version = plist[@"version"];
+    });
+    return version;
 }
 
 - (instancetype)init {

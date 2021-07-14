@@ -36,10 +36,6 @@ GDTRewardedVideoAdDelegate>
     return [GDTSDKConfig sdkVersion];
 }
 
-- (NSString *)mediationVersion {
-    return @"4.3.0";
-}
-
 -(GDTUnifiedBannerView *)adBanner {
     if (!_adBanner && [self getBannerAdId]) {
         CGRect rect = CGRectMake(0, 0, [self adSize].width, [self adSize].height);
