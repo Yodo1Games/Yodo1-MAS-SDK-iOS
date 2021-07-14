@@ -27,6 +27,7 @@ Yodo1Mas.json
 !*/xcuserdata/admin.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlista/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
+*.xcworkspace
 
 ### Cocoapods
 Pods/
