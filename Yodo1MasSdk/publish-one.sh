@@ -89,18 +89,20 @@ cpPodspec="build/${name}${max}.podspec"
 echo "" > ${cpPodspec}
 while read line
 do
-    if [[ ${line} == *s.version* ]]
+    
+    if [[ ${line} == *:git* ]]
     then
-        echo "s.version          = '${version}'" >> ${cpPodspec}
-    elif [[ ${line} == *:git* ]]
+        
+        echo "s.source = { :http => '${url}' }" >> ${cpPodspec}
+    elif [[ ${line} == *s.version*=* ]]
     then
-        echo "s.source           = { :http => '${url}' }" >> ${cpPodspec}
+        echo "s.version = '${version}'" >> ${cpPodspec}
     elif [[ ${line} == *s.dependency* && ${line} == *Yodo1Mas* ]]
     then
         arr=(${line//,/})
         echo "${arr[0]} ${arr[1]}, '${version}'" >> ${cpPodspec}
     else
-        echo "$line" >> ${cpPodspec}
+        echo ${line} >> ${cpPodspec}
     fi
 done < ${name}/${name}${max}.podspec
 
