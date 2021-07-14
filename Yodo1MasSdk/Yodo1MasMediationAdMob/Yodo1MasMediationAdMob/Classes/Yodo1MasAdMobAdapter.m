@@ -105,6 +105,7 @@
                 NSString *message = [NSString stringWithFormat:@"%@:{method: loadWithAdUnitID:request:completionHandler:, error: %@}", self.TAG, error];
                 NSLog(@"%@", message);
                 
+                self.rewardAd = nil;
                 Yodo1MasError *error = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
                 [self callbackWithError:error type:Yodo1MasAdTypeReward];
                 [self loadRewardAdDelayed];
@@ -161,6 +162,8 @@
         NSString *message = [NSString stringWithFormat:@"%@: {method: ad:didFailToPresentFullScreenContentWithError:, reward:%@, error: %@}", self.TAG, self.rewardAd.adUnitID, error];
         NSLog(@"%@", message);
         
+        self.rewardAd = nil;
+        
         Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
         [self callbackWithError:err type:Yodo1MasAdTypeReward];
         
@@ -169,7 +172,8 @@
     }else{
         NSString *message = [NSString stringWithFormat:@"%@: {method:ad:didFailToPresentFullScreenContentWithError, ad: %@, error: %@}", self.TAG, self.interstitialAd.adUnitID, error];
         NSLog(@"%@", message);
-        
+        self.interstitialAd = nil;
+
         Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdShowFail message:message];
         [self callbackWithError:err type:Yodo1MasAdTypeInterstitial];
         
@@ -256,18 +260,38 @@
 - (void)loadBannerAd {
     [super loadBannerAd];
     if (![self isInitSDK]) return;
+    
+    UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
     Yodo1MasAdId *adId = [self getBannerAdId];
     if (adId != nil && adId.adId != nil && (self.bannerAd == nil || ![adId.adId isEqualToString:self.bannerAd.adUnitID])) {
-        UIViewController *controller = [Yodo1MasAdMobAdapter getTopViewController];
         self.bannerAd = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
         self.bannerAd.rootViewController = controller;
         self.bannerAd.adUnitID = adId.adId;
         self.bannerAd.delegate = self;
-        [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
     }
     if (self.bannerAd != nil && self.bannerState != Yodo1MasBannerStateLoading) {
         NSString *message = [NSString stringWithFormat:@"%@: {method:loadBannerAd:, loading banner ad...}", self.TAG];
         NSLog(@"%@", message);
+        [Yodo1MasBanner addBanner:self.bannerAd tag:BANNER_TAG controller:controller];
+
+        Yodo1MasAdBuildConfig * config = [Yodo1MasAdBuildConfig instance];
+        if (config.enableAdaptiveBanner) {
+            CGRect frame = controller.view.frame;
+            // Here safe area is taken into account, hence the view frame is used after
+            // the view has been laid out.
+            if (@available(iOS 11.0, *)) {
+              frame = UIEdgeInsetsInsetRect(controller.view.frame, controller.view.safeAreaInsets);
+            }
+            CGFloat viewWidth = frame.size.width;
+
+            // Step 3 - Get Adaptive GADAdSize and set the ad view.
+            // Here the current interface orientation is used. If the ad is being
+            // preloaded for a future orientation change or different orientation, the
+            // function for the relevant orientation should be used.
+            self.bannerAd.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
+            [Yodo1MasBanner updateContentView:self.bannerAd frame:CGRectMake(0, 0, viewWidth, self.bannerAd.adSize.size.height)];
+        }
+        
         [self.bannerAd loadRequest:[GADRequest request]];
         self.bannerState = Yodo1MasBannerStateLoading;
     }
@@ -289,6 +313,9 @@
 
 - (void)dismissBannerAdWithDestroy:(BOOL)destroy {
     [super dismissBannerAdWithDestroy:destroy];
+    if (self.bannerAd == nil) {
+        return;
+    }
     [Yodo1MasBanner removeBanner:self.bannerAd tag:BANNER_TAG destroy:destroy];
     if (destroy) {
         self.bannerAd = nil;
@@ -309,6 +336,7 @@
 - (void)bannerView:(nonnull GADBannerView *)bannerView didFailToReceiveAdWithError:(nonnull NSError *)error {
     NSString *message = [NSString stringWithFormat:@"%@: {method:adView:didFailToReceiveAdWithError:, banner: %@, error: %@}", self.TAG, bannerView.adUnitID, error];
     NSLog(@"%@", message);
+    self.bannerAd = nil;
     self.bannerState = Yodo1MasBannerStateNone;
     
     Yodo1MasError *err = [[Yodo1MasError alloc] initWitCode:Yodo1MasErrorCodeAdLoadFail message:message];
@@ -326,6 +354,7 @@
 - (void)bannerViewDidDismissScreen:(nonnull GADBannerView *)bannerView {
     NSString *message = [NSString stringWithFormat:@"%@: {method:adViewDidDismissScreen:, banner: %@}", self.TAG, bannerView.adUnitID];
     NSLog(@"%@", message);
+    self.bannerAd = nil;
     self.bannerState = Yodo1MasBannerStateNone;
     [self callbackWithEvent:Yodo1MasAdEventCodeClosed type:Yodo1MasAdTypeBanner];
     [self loadBannerAd];

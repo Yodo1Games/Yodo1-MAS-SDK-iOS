@@ -37,6 +37,10 @@
     [Yodo1Mas sharedInstance].interstitialAdDelegate = self;
     [Yodo1Mas sharedInstance].bannerAdDelegate = self;
     
+    Yodo1MasAdBuildConfig * config = [Yodo1MasAdBuildConfig instance];
+    config.enableAdaptiveBanner = YES;
+    [[Yodo1Mas sharedInstance] setAdBuildConfig:config];
+    
     NSString * appKey = [NSBundle mainBundle].infoDictionary[@"Yodo1MasAppkey"];
     if (!appKey.length) {
         appKey = @"qqiOsnhyOie";
@@ -46,11 +50,11 @@
     } fail:^(NSError * _Nonnull error) {
         
     }];
+    [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[Yodo1Mas sharedInstance] showBannerAd];
 }
 
 - (IBAction)onRewardClicked:(UIButton *)sender {
