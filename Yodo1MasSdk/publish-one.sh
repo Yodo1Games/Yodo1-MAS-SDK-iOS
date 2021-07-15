@@ -72,7 +72,7 @@ do
 done < ${assets}
 mv -f ${cpAsset} ${assets}
 
-zip -r ${filename} ${dir} LICENSE >> ./../${logFile}
+zip -r ${filename} ${dir} >> ./../${logFile} #LICENSE
 cp ${filename} ./../build/zip/${filename}
 rm ${filename}
 cd ./../
