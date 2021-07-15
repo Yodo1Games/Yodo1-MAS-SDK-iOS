@@ -54,25 +54,50 @@ then
     plist=${plist:9}
 fi
 assets="${dir}/Assets/Yodo1Mas${plist}.plist"
-cpAsset="${dir}/Assets/Yodo1Mas${plist}.plist.temp"
-echo "" > ${cpAsset}
-isVersion=false
-while read line
-do
-    if [[ ${isVersion} == true && ${line} == \<string\>*.*.*\</string\> ]]
-    then
-        echo "<string>${version}</string>" >> ${cpAsset}
-    else
-        echo ${line} >> ${cpAsset}
-    fi
-    if [[ ${line} == \<key\>version\</key\> ]]
-    then
-        isVersion=true
-    fi
-done < ${assets}
-mv -f ${cpAsset} ${assets}
+if [ -d ${assets} ]
+then
+    cpAsset="${dir}/Assets/Yodo1Mas${plist}.plist.temp"
+    echo "" > ${cpAsset}
+    isVersion=false
+    while read line
+    do
+        if [[ ${isVersion} == true && ${line} == \<string\>*.*.*\</string\> ]]
+        then
+            echo "<string>${version}</string>" >> ${cpAsset}
+        else
+            echo ${line} >> ${cpAsset}
+        fi
+        if [[ ${line} == \<key\>version\</key\> ]]
+        then
+            isVersion=true
+        fi
+    done < ${assets}
+    mv -f ${cpAsset} ${assets}
+fi
+assets="${dir}/Assets/yodo1mas.plist"
+if [ -d ${assets} ]
+then
+    cpAsset="${dir}/Assets/yodo1mas.plist.temp"
+    echo "" > ${cpAsset}
+    isVersion=false
+    while read line
+    do
+        if [[ ${isVersion} == true && ${line} == \<string\>*.*.*\</string\> ]]
+        then
+            echo "<string>${version}</string>" >> ${cpAsset}
+        else
+            echo ${line} >> ${cpAsset}
+        fi
+        if [[ ${line} == \<key\>sdkVersion\</key\> ]]
+        then
+            isVersion=true
+        fi
+    done < ${assets}
+    mv -f ${cpAsset} ${assets}
+fi
 
-zip -r ${filename} ${dir} >> ./../${logFile} #LICENSE
+
+zip -r ${filename} ${dir} LICENSE >> ./../${logFile}
 cp ${filename} ./../build/zip/${filename}
 rm ${filename}
 cd ./../
