@@ -53,8 +53,8 @@ if [[ ${plist} == *Mediation* ]]
 then
     plist=${plist:9}
 fi
-assets="${dir}/Assets/Yodo1Mas${plist}.plist"
-if [ -d ${assets} ]
+assets=${dir}/Assets/Yodo1Mas${plist}.plist
+if [ -a ${assets} ]
 then
     cpAsset="${dir}/Assets/Yodo1Mas${plist}.plist.temp"
     echo "" > ${cpAsset}
@@ -74,8 +74,8 @@ then
     done < ${assets}
     mv -f ${cpAsset} ${assets}
 fi
-assets="${dir}/Assets/yodo1mas.plist"
-if [ -d ${assets} ]
+assets=${dir}/Assets/yodo1mas.plist
+if [ -a ${assets} ]
 then
     cpAsset="${dir}/Assets/yodo1mas.plist.temp"
     echo "" > ${cpAsset}
