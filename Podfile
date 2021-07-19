@@ -11,6 +11,7 @@ target "Yodo1MasSdkDemo" do
 pod 'Toast'
 pod 'Masonry'
 #pod 'GoogleMobileAdsMediationTestSuite'
+pod 'DoraemonKit/Core', '~> 3.0.4', :configurations => ['Debug']
 
 # 开发时打开
 pod 'FBSDKCoreKit', '7.0.1'
