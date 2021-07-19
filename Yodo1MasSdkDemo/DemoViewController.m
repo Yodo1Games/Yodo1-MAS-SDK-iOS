@@ -14,12 +14,14 @@
 #import "BannerController.h"
 //#import <GoogleMobileAdsMediationTestSuite/GoogleMobileAdsMediationTestSuite.h>
 //@import GoogleMobileAdsMediationTestSuite;
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @interface DemoViewController ()<Yodo1MasRewardAdDelegate, Yodo1MasInterstitialAdDelegate, Yodo1MasBannerAdDelegate>//, GMTSMediationTestSuiteDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *rewardField;
 @property (weak, nonatomic) IBOutlet UITextField *intersititialField;
 @property (weak, nonatomic) IBOutlet UITextField *bannerField;
+@property (weak, nonatomic) IBOutlet UITextField *admobDeviceIdField;
 @property (weak, nonatomic) IBOutlet UISwitch *gdprSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *coppaSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *ccpaSwitch;
@@ -51,6 +53,11 @@
         
     }];
     [[Yodo1Mas sharedInstance] showBannerAd];
+    
+    NSString* deviceId = [self loadDeviceId];
+    if (deviceId != nil && deviceId.length > 0) {
+        _admobDeviceIdField.text = deviceId;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -94,6 +101,33 @@
 
 - (IBAction)onAdMobMediationTestClicked:(UIButton *)sender {
 //    [GoogleMobileAdsMediationTestSuite presentOnViewController:self delegate:self];
+}
+
+- (IBAction)onAdMobAdInpectorClicked:(UIButton *)sender {
+    NSString *admobDeviceId = [_admobDeviceIdField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    // @"07e55d300143d9284135a5de389687e5" Sunmeng's iPhone8 device ID
+    NSMutableArray *deviceIds = [NSMutableArray arrayWithObjects:@"07e55d300143d9284135a5de389687e5", nil];
+    if (admobDeviceId != nil && admobDeviceId.length > 0 && ![deviceIds containsObject:admobDeviceId]) {
+        [deviceIds addObject:admobDeviceId];
+        [self saveDeviceId:admobDeviceId];
+    }
+        
+    GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = deviceIds;
+    [[GADMobileAds sharedInstance] presentAdInspectorFromViewController:self completionHandler:^(NSError *error) {
+        // error will be non-nil if there was an issue and the inspector was not displayed.
+    }];
+}
+
+- (void) saveDeviceId:(NSString *)deviceId {
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    [userDef setObject:deviceId forKey:@"admob_device_id"];
+}
+
+- (NSString*) loadDeviceId {
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    NSString* deviceId = [userDef objectForKey:@"admob_device_id"];
+    return deviceId;
 }
 
 - (IBAction)onAppLovinMediationDebuggerClicked:(UIButton *)sender {
